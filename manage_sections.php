@@ -1,9 +1,32 @@
 <?php
-  if(isset($_POST["section_submit"])) {
+  require_once('includes/sessions.php');
+  require_once('includes/functions.php');
+?>
 
+<?php
+
+  $connection = make_connection();
+
+  if(isset($_POST["section_submit"])) {
+    $sec_nm = mysqli_real_escape_string($connection, $_POST["section_name"]);
+    $sec_shrt_nm = mysqli_real_escape_string($connection, $_POST["section_short_name"]);
+    $sec_area = mysqli_real_escape_string($connection, $_POST["section_area"]);
+    $stats = mysqli_real_escape_string($connection, $_POST["status"]);
+
+    $query = " INSERT INTO sections ";
+    $query .= "(section_name, short_section_name, area, status )";
+    $query .= "VALUES ('{$sec_nm}', '{$sec_shrt_nm}', {$sec_area}, '{$stats}')" ;
+
+    $result = mysqli_query($connection, $query);
+
+    confirm_query($result);
+    echo "Inserted successfully!";
   }
   else {
-
+    $sec_nm = NULL;
+    $sec_shrt_nm = NULL;
+    $sec_area = NULL;
+    $stats = NULL;
   }
 ?>
 
@@ -15,7 +38,7 @@
     </head>
     <body>
 
-        <form class="add_section" action="manage_section.php" method="post">
+        <form class="add_section" action="manage_sections.php" method="post">
                 <input type="text" name="section_name" placeholder="Section Name" required>
                 <input type="text" name="section_short_name" placeholder="Section Short Name" required>
                 <input type="number" name="section_area" placeholder="Section Area" required>
@@ -23,20 +46,38 @@
 
                 <input type="submit" name="section_submit" value="Add a Section">
         </form>
-        <form id="remove_section" action="#" method="post" size="10">
+        <form id="remove_section" action="manage_sections.php" method="post" size="10">
             <select name="section_list" form="remove_section" required>
-                <option value="1EXTA">1 Extension A</option>
-                <option value="1EXTB">1 Extension B</option>
-                <option value="3EXT">3 Extension</option>
-                <option value="4W">4 West</option>
-                <option value="7Y">7 Young</option>
-                <option value="8W">8 West</option>
-                <option value="11N">11 North</option>
-                <option value="12S">12 South</option>
-                <option value="20">20</option>
-                <option value="19">19</option>
+
+                <?php
+                  $q = "SELECT * FROM sections";
+                  $result = mysqli_query($connection, $q);
+
+                  confirm_query($result);
+
+                  while($sec_values = mysqli_fetch_assoc($result)) {
+                ?>
+
+                <option name="sec_shrt_nm" value="<?php echo htmlentities($sec_values['short_section_name']) ?>"><?php echo htmlentities($sec_values['section_name']) ?></option>
+
+                <?php
+                  }
+                ?>
+
             </select>
-                <input type="submit" name="section_submit" value="Remove a Section">
+                <input type="submit" name="rmv_sec_submit" value="Remove a Section">
+
+                <?php if(isset($_POST['rmv_sec_submit'])) {
+                        $ssn = mysqli_real_escape_string($connection, $_POST['sec_shrt_nm']);
+
+                      }
+                      else {
+                        $ssn = NULL;
+                      }
+
+
+                    echo "ssn =".$ssn;
+                ?>
         </form>
     </body>
 </html>
