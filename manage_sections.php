@@ -59,7 +59,7 @@
                     <li><a href="#tab3" data-toggle="tab">Update Section</a></li>
                 </ul>
                 <div class="tab-content"  style="background-color:#0097A7">
-                    <div class="tab-pane active"  id="tab1">
+                    <div class="tab-pane active" id="tab1">
                         <form class="add_section" action="manage_sections.php" method="post">
                             <div class="input-group">
 
@@ -74,7 +74,45 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" name="status" placeholder="Section Status" required><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
                             </div>
-                                <input type="submit" class="btn btn-info" name="section_submit" value="Add a Section">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="jat/clone" placeholder="Jat/Clone" required><span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="shade species" placeholder="Shade Species" required><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="Frame Height" placeholder="Frame Height" required><span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="Bush Height" placeholder="Bush Height" required><span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="Year of planting" placeholder="Year of planting" required><span class="input-group-addon"><i class="glyphicon glyphicon-jpy"></i></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="Plant Spacing" placeholder="Plant Spacing" required><span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="Temporary Shade spacing" placeholder="Temporary Shade spacing" required><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="Permanent Shade spacing" placeholder="Permanent Shade spacing" required><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="Plant Density" placeholder="Plant Density" required><span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="Bush Population" placeholder="Bush Population" required><span class="input-group-addon"><i class="glyphicon glyphicon-cloud-upload"></i></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="Drain Status" placeholder="Drain Status" required><span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="Soil Type and Topography" placeholder="Soil Type and Topography" required><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                            </div>
+
+
+                                <input type="submit" class="btn btn-primary" name="section_submit" value="Add a Section">
                         </form>
                     </div>
                     <div class="tab-pane" id="tab2">
@@ -158,7 +196,7 @@
 
                                 <?php if(isset($_POST['view_submit'])) {
                                         $ssn2 = mysqli_real_escape_string($connection, $_POST['shrt_sec_nm']);
-                                        echo "ssn2=".$ssn2;
+                                        //echo "ssn2=".$ssn2;
                                         $q2 = " SELECT * FROM sections WHERE short_section_name = '{$ssn2}'";
 
                                         $result = mysqli_query($connection, $q2);
@@ -191,24 +229,7 @@
                                       }
 
 
-                                      else {
 
-                                ?>  <div class="input-group">
-                                        <input type="text" name="section_name"  class="form-control" placeholder="Section Name" ><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="text"  class="form-control"
-                                        name="section_short_name" placeholder="Section Short Name" ><span class="input-group-addon"><i class="glyphicon glyphicon-certificate"></i></span>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="text"  class="form-control" name="section_area" placeholder="Section Area" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-conifer"></i></span>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="text"  class="form-control" name="status" placeholder="Section Status" ><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
-                                    </div>
-                                <?php
-                                        $ssn2 = NULL;
-                                      }
 
                                 ?>
                                 <input type="submit" class="btn btn-success" name="update_submit" value="Update Section">
