@@ -10,7 +10,7 @@
   if(isset($_POST["section_submit"])) {
     $sec_nm = mysqli_real_escape_string($connection, $_POST["section_name"]);
     $sec_shrt_nm = mysqli_real_escape_string($connection, $_POST["section_short_name"]);
-    $sec_area = mysqli_real_escape_string($connection, $_POST["section_area"]);
+    $sec_area = (float) mysqli_real_escape_string($connection, $_POST["section_area"]);
     $stats = mysqli_real_escape_string($connection, $_POST["status"]);
 
     $query = " INSERT INTO sections ";
@@ -41,24 +41,26 @@
         <form class="add_section" action="manage_sections.php" method="post">
                 <input type="text" name="section_name" placeholder="Section Name" required>
                 <input type="text" name="section_short_name" placeholder="Section Short Name" required>
-                <input type="number" name="section_area" placeholder="Section Area" required>
+                <input type="text" name="section_area" placeholder="Section Area" required>
                 <input type="text" name="status" placeholder="Section Status" required>
 
                 <input type="submit" name="section_submit" value="Add a Section">
         </form>
         <form id="remove_section" action="manage_sections.php" method="post" size="10">
-            <select name="section_list" form="remove_section" required>
+            <select name="sec_shrt_nm" form="remove_section" required>
 
                 <?php
                   $q = "SELECT * FROM sections";
                   $result = mysqli_query($connection, $q);
 
                   confirm_query($result);
+                  //$_POST['sec_short_nm'] = NULL;
 
+                  echo "<option value=NULL> </option>";
                   while($sec_values = mysqli_fetch_assoc($result)) {
                 ?>
 
-                <option name="sec_shrt_nm" value="<?php echo htmlentities($sec_values['short_section_name']) ?>"><?php echo htmlentities($sec_values['section_name']) ?></option>
+                    <option value="<?php echo htmlentities($sec_values['short_section_name']) ?>" ><?php echo htmlentities($sec_values['section_name']) ?></option>
 
                 <?php
                   }
@@ -70,13 +72,17 @@
                 <?php if(isset($_POST['rmv_sec_submit'])) {
                         $ssn = mysqli_real_escape_string($connection, $_POST['sec_shrt_nm']);
 
+                        $q = "DELETE FROM sections WHERE short_section_name = '{$ssn}'";
+                        $result = mysqli_query($connection, $q);
+
+                        confirm_query($result);
+                        echo "Deleted successfully!";
+
                       }
                       else {
                         $ssn = NULL;
                       }
 
-
-                    echo "ssn =".$ssn;
                 ?>
         </form>
     </body>
