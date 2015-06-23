@@ -85,5 +85,80 @@
 
                 ?>
         </form>
+
+
+
+
+
+
+
+        <form id="view_update_section" action="manage_sections.php" method="post" size="10">
+            <select name="shrt_sec_nm" form="view_update_section" required>
+
+                <?php
+                  $q = "SELECT * FROM sections";
+                  $result = mysqli_query($connection, $q);
+
+                  confirm_query($result);
+                  //$_POST['sec_short_nm'] = NULL;
+
+                  echo "<option value=NULL> </option>";
+                  while($sec_values = mysqli_fetch_assoc($result)) {
+                ?>
+
+                    <option value="<?php echo htmlentities($sec_values['short_section_name']) ?>" ><?php echo htmlentities($sec_values['section_name']) ?></option>
+
+                <?php
+                  }
+                ?>
+
+            </select>
+
+
+
+
+                <input type="submit" name="view_submit" value="View a Section">
+
+                <input type="submit" name="update_submit" value="Update Section">
+
+                <?php if(isset($_POST['view_submit'])) {
+                        $ssn2 = mysqli_real_escape_string($connection, $_POST['shrt_sec_nm']);
+                        echo "ssn2=".$ssn2;
+                        $q2 = " SELECT * FROM sections WHERE short_section_name = '{$ssn2}'";
+
+                        $result = mysqli_query($connection, $q2);
+                        confirm_query($result);
+
+                        $sec = mysqli_fetch_assoc($result);
+
+                ?>
+                        <input type="text" name="section_name" value="<?php echo $sec['section_name'];?>" >
+                        <input type="text" name="section_short_name" value="<?php echo $sec['short_section_name']; ?>" >
+                        <input type="text" name="section_area" value="<?php echo $sec['area']; ?>" >
+                        <input type="text" name="status" value="<?php echo $sec['status']; ?>" >
+
+                        <!-- $sec_nm = mysqli_real_escape_string($connection, $_POST["section_name"]);
+                        $sec_shrt_nm = mysqli_real_escape_string($connection, $_POST["section_short_name"]);
+                        $sec_area = (float) mysqli_real_escape_string($connection, $_POST["section_area"]);
+                        $stats = mysqli_real_escape_string($connection, $_POST["status"]); -->
+
+
+                <?php
+                      }
+
+
+                      else {
+
+                ?>
+                        <input type="text" name="section_name" placeholder="Section Name" >
+                        <input type="text" name="section_short_name" placeholder="Section Short Name" >
+                        <input type="text" name="section_area" placeholder="Section Area" >
+                        <input type="text" name="status" placeholder="Section Status" >
+                <?php
+                        $ssn2 = NULL;
+                      }
+
+                ?>
+        </form>
     </body>
 </html>
