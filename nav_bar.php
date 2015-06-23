@@ -19,7 +19,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li <?php if($page_id == 1) {?> class="active"><a href="#"> <?php } else { ?> ><a href="manage_users.php"> <?php } ?> Manage Users</a></li>
-                        <li <?php if($page_id == 2) {?> class="active"><a href="#"> <?php } else { ?> ><a href="daily_leaf_report.php"> <?php } ?> Daily Green Leaf Record</a></li>
+                        <li <?php if($page_id == 2) {?> class="active"><a href="#"> <?php } else { ?> ><a href="manage_sections.php"> <?php } ?> Manage Sections</a></li>
                         <li <?php if($page_id == 3) {?> class="active"><a href="#"> <?php } else { ?> ><a href="update_profile.php"> <?php } ?> Your Profile</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
