@@ -1,3 +1,4 @@
+
 body{
     background: #dee7e7;
 }
@@ -155,3 +156,9 @@ tfoot {
 .glyphicon-pencil {
     text-decoration:underline;
 }
+#prun_sec{
+    margin-top:10px;
+}
+div.dataTables_wrapper {
+        margin-bottom: 3em;
+    }

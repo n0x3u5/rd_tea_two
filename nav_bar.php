@@ -21,6 +21,7 @@
                         <li <?php if($page_id == 1) {?> class="active"><a href="#"> <?php } else { ?> ><a href="manage_users.php"> <?php } ?> Manage Users</a></li>
                         <li <?php if($page_id == 2) {?> class="active"><a href="#"> <?php } else { ?> ><a href="manage_sections.php"> <?php } ?> Manage Sections</a></li>
                         <li <?php if($page_id == 3) {?> class="active"><a href="#"> <?php } else { ?> ><a href="update_profile.php"> <?php } ?> Your Profile</a></li>
+                        <li <?php if($page_id == 4) {?> class="active"><a href="#"> <?php } else { ?> ><a href="sectional_yearly_review.php"> <?php } ?> Sectional View (Yearly)</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Link</a></li>
