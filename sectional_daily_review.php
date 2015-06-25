@@ -56,66 +56,14 @@
                   </div>
                   <button type="submit" class="btn btn-default" style="margin-top:0px;">Get Data</button>
                 </form>
-                <!-- <form class="form-inline">
-                    <div class="form-group">
-                            <select class="form-control" style="width:50%">
-                              <option>1w</option>
-                              <option>19</option>
-                              <option>5E</option>
-                              <option>6N</option>
-                              <option>7w</option>
-                            </select>
-                            <select class="form-control" style="width:50%">
-                              <option>2015</option>
-                              <option>2016</option>
-                              <option>2017</option>
-                              <option>2018</option>
-                              <option>2019</option>
-                            </select>
-                            <select class="form-control" style="width:50%">
-                              <option>2015</option>
-                              <option>2016</option>
-                              <option>2017</option>
-                              <option>2018</option>
-                              <option>2019</option>
-                            </select>
-
-                    </div>
-                    <button class="btn btn-default" type="submit">Click to Find</button>
-                </form> -->
-            </div>
-
-            <!-- <div class="row" style="background:#bbcdd7;">
-                <div class="col-sm-1"><h4>Section<br/></h4><p> 1west</p></div>
-                <div class="col-sm-1" style="text-align:center;"><h4>Jat/<br>Clone</h4><p> Genus</p></div>
-                <div class="col-sm-2" style="text-align:center;"><h4>Shade(temp)<br/> Species</h4><p>bioregions</p></div>
-                <div class="col-sm-2"><h4>Shade (perm.) Species</h4><p>Acer saccharum</p></div>
-                <div class="col-sm-2"><h4>Frame(in Inch) HEight</h4><p>10"</p></div>
-                <div class="col-sm-2"><h4>Bush(in Inch)<br>Height</h4><p> 7"</p></div>
-                <div class="col-sm-1"><h4>Area</h4>(in Hector)<p> 120</p></div>
-
 
             </div>
-            <p></p>
-            <div class="row" style="background:#bbcdd7;">
-                    <div class="col-sm-1"><h4>Year of Planting</h4><p> 1972</p></div>
-                    <div class="col-sm-1"><h4>Plant spacing</h4><p> 3"</p></div>
-                    <div class="col-sm-2"><h4>Temporary shade spacing</h4><p> 2"</p></div>
-                    <div class="col-sm-2"><h4>Permanent Shade Spacing</h4><p> 3"</p></div>
-                    <div class="col-sm-1"><h4>Ext./<br>Replant</h4><p> Y</p></div>
-                    <div class="col-sm-1"><h4>Plant Density</h4><p> Poor</p></div>
-                    <div class="col-sm-1"><h4>Drain-status</h4><p> medium</p></div>
-                    <div class="col-sm-1" style="text-align:center;"><h4>Bush<br>popolation</h4><p> Poor</p></div>
-                    <div class="col-sm-2" style="text-align:center;"><h4>Soil type and<br>topography</h4><p>rich</p></div>
 
-
-            </div> -->
 
             <div class="tab-container" style="margin-top:10px;">
                 <ul class="nav nav-tabs nav-justified">
                     <li class="active"><a href="#tab1" data-toggle="tab"> Plucking</a></li>
                     <li><a href="#tab2" data-toggle="tab">Spraying</a></li>
-                    <li ><a href="#tab3" data-toggle="tab">Weather</a></li>
                 </ul>
                 <div class="tab-content"  style="background-color:#FFF">
                     <div class="tab-pane active" id="tab1">
@@ -343,159 +291,10 @@
                         </table> -->
                     </div>
 
-                    <div class="tab-pane" id="tab3">
-                        <div class="row" style="width:95%;margin:auto">
-                            <table  id="weather" class="table table-hover" border="1 px solid green">
-                                <thead style="border:solid 2px green">
-                                    <tr>
-                                        <th colspan="2">RainFall(in mm.)</th>
-                                        <th colspan="2">Temparature  (in &degC)</th>
-                                        <th rowspan="2">Sunshine Hour</th>
-                                        <th rowspan="2"> Weather condition</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Day</th>
-                                        <th>Night</th>
-                                        <th>Max</th>
-                                        <th>Min</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>80</td>
-                                        <td>100</td>
-                                        <td>35</td>
-                                        <td>29</td>
-                                        <td>12</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>0</td>
-                                        <td>90</td>
-                                        <td>25</td>
-                                        <td>20</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>00</td>
-                                        <td>00</td>
-                                        <td>31</td>
-                                        <td>29</td>
-                                        <td>10</td>
-                                        <td>11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>80</td>
-                                        <td>100</td>
-                                        <td>35</td>
-                                        <td>29</td>
-                                        <td>7</td>
-                                        <td>11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>80</td>
-                                        <td>100</td>
-                                        <td>35</td>
-                                        <td>29</td>
-                                        <td>12</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>0</td>
-                                        <td>90</td>
-                                        <td>25</td>
-                                        <td>20</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>00</td>
-                                        <td>00</td>
-                                        <td>31</td>
-                                        <td>29</td>
-                                        <td>10</td>
-                                        <td>11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>80</td>
-                                        <td>100</td>
-                                        <td>35</td>
-                                        <td>29</td>
-                                        <td>7</td>
-                                        <td>11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>80</td>
-                                        <td>100</td>
-                                        <td>35</td>
-                                        <td>29</td>
-                                        <td>12</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>0</td>
-                                        <td>90</td>
-                                        <td>25</td>
-                                        <td>20</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>00</td>
-                                        <td>00</td>
-                                        <td>31</td>
-                                        <td>29</td>
-                                        <td>10</td>
-                                        <td>11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>80</td>
-                                        <td>100</td>
-                                        <td>35</td>
-                                        <td>29</td>
-                                        <td>7</td>
-                                        <td>11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>80</td>
-                                        <td>100</td>
-                                        <td>35</td>
-                                        <td>29</td>
-                                        <td>12</td>
-                                        <td>10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>0</td>
-                                        <td>90</td>
-                                        <td>25</td>
-                                        <td>20</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                    </tr>
-                                    <tr>
-                                        <td>00</td>
-                                        <td>00</td>
-                                        <td>31</td>
-                                        <td>29</td>
-                                        <td>10</td>
-                                        <td>11</td>
-                                    </tr>
-                                    <tr>
-                                        <td>80</td>
-                                        <td>100</td>
-                                        <td>35</td>
-                                        <td>29</td>
-                                        <td>7</td>
-                                        <td>11</td>
-                                    </tr>
-                                </tbody>
 
-                            </table>
-                        </div>
-                    </div>
                 </div>
             </div>
+        </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -509,7 +308,6 @@
             $(document).ready(function() {
                     $('#pluck_day').dataTable();
                     $('#spray_day').dataTable();
-                    $('#weather').dataTable();
             });
         </script>
     </body>
