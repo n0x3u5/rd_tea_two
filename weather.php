@@ -18,7 +18,7 @@
         ?>
         <div class="container">
             <div class="jumbotron" style="background:#2A47A3;margin-left:-15px;margin-right: -15px;">
-                <h1>Divisional Weather details </h1>
+                <h1>Divisional Weather Details </h1>
                 <p></p>
                 <p></p>
                 <h3 style="color:#fff">Division
