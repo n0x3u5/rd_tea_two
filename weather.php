@@ -4,11 +4,6 @@
         <meta charset="utf-8">
         <title>R.D. Tea | Manage Sections</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/stylesheet.css">
-        <link rel="icon" href="images/logo_rdtea.png"/>
         <?php $page_id = 6;?>
     </head>
     <body>
