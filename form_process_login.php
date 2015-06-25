@@ -43,10 +43,10 @@
 			//3. use returned data(if any)
 			while($users = mysqli_fetch_assoc($result)) {
 				// var_dump($users);
-				echo "<hr>";
-				echo "<br>". $email. " ". $users["e_mail"] ."<br>";
-										echo "<br>". $password. " ". $users["password"]."<br>";
-				echo "<hr />";
+				//echo "<hr>";
+				//echo "<br>". $email. " ". $users["e_mail"] ."<br>";
+				//echo "<br>". $password. " ". $users["password"]."<br>";
+				//echo "<hr />";
 
 				if($email === $users["e_mail"]){
 					//email exists
@@ -55,7 +55,7 @@
 					if($password === $users["password"]) {
 						//password matches
 
-						echo "<br>". $password. "                     ". $users["password"]."<br>";
+						//echo "<br>". $password. "                     ". $users["password"]."<br>";
 						$flagP=1;
 						break;
 					}
@@ -63,7 +63,7 @@
 
 			}
 
-			echo "<br> <br>". $flagP ."              " .$flagE ."<br>";
+			//echo "<br> <br>". $flagP ."              " .$flagE ."<br>";
 
 			if($flagP === 1 && $flagE === 1) {
 				$_SESSION["message"] = "Hello! " . $users["first_name"] . ($users["middle_name"] == ""? " " : " " . $users["middle_name"] . " ") . $users["last_name"] . ", you are logged in!";
@@ -82,12 +82,12 @@
 
 			//echo "session level = <br> <br>".$_SESSION["user_lvl"]."<br><br>";
 			if($_SESSION["user_lvl"] != 3 ) {
-				// redirect_to("manage_users.php");
-				 echo  session_msg() . "<br>" ;
+				 redirect_to("manage_users.php");
+				// echo  session_msg() . "<br>" ;
 			}
 			else if( $_SESSION["user_lvl"] == 3 ) {
-				echo session_msg() . "<br>"; //. $_SESSION["user_lvl"];
-				//redirect_to("update_profile.php");
+				//echo session_msg() . "<br>"; //. $_SESSION["user_lvl"];
+				redirect_to("update_profile.php");
 			}
 			else {
 				echo  session_msg() . "<br>"; //. $_SESSION["user_lvl"];

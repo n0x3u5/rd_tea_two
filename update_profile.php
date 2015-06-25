@@ -9,21 +9,6 @@
 	$connection = make_connection();
 	$check_flag = 0;
 
-	if(isset($_POST['edit'])){
-		$query = "UPDATE users SET";
-		$query .= " designation='{$_POST['desig']}',";
-		$query .= " first_name='{$_POST['f_name']}',";
-		$query .= " middle_name='{$_POST['m_name']}',";
-		$query .= " last_name='{$_POST['l_name']}',";
-		$query .= " e_mail='{$_POST['email']}',";
-		$query .= " password='{$_POST['npwd']}'";
-		$query .= " WHERE id = '{$_SESSION['user_id']}'";
-		$result = mysqli_query($connection, $query);
-
-		confirm_query($result);
-		//echo "Updated successfully!";
-		$check_flag = 1;
-	}
 
 	if(isset($_SESSION["user_email"])){
 		$email = $_SESSION["user_email"];
@@ -43,9 +28,57 @@
 
 	$users = mysqli_fetch_assoc($result);
 
-	echo "user designation =".$users["designation"]."<br>";
+	//echo "user designation =".$users["designation"]."<br>";
 
 	$_SESSION["user_id"]= $users["id"];
+
+	$old_pwd = $users['password'];
+
+	if(isset($_POST['edit'])){
+		if($old_pwd == $_POST['pwd'] && $_POST['npwd'] == NULL){
+				$query = "UPDATE users SET";
+				$query .= " designation='{$_POST['desig']}',";
+				$query .= " first_name='{$_POST['f_name']}',";
+				$query .= " middle_name='{$_POST['m_name']}',";
+				$query .= " last_name='{$_POST['l_name']}',";
+				$query .= " e_mail='{$_POST['email']}',";
+				$query .= " password='{$_POST['pwd']}'";
+				$query .= " WHERE id = '{$_SESSION['user_id']}'";
+				$result = mysqli_query($connection, $query);
+
+				confirm_query($result);
+				//echo "Updated successfully!";
+				$check_flag = 1;
+		}
+		elseif ($old_pwd === $_POST['pwd'] && $_POST['npwd'] != NULL) {
+			if($_POST['npwd'] === $_POST['cnfpwd']){
+				$query = "UPDATE users SET";
+				$query .= " designation='{$_POST['desig']}',";
+				$query .= " first_name='{$_POST['f_name']}',";
+				$query .= " middle_name='{$_POST['m_name']}',";
+				$query .= " last_name='{$_POST['l_name']}',";
+				$query .= " e_mail='{$_POST['email']}',";
+				$query .= " password='{$_POST['npwd']}'";
+				$query .= " WHERE id = '{$_SESSION['user_id']}'";
+				$result = mysqli_query($connection, $query);
+
+				confirm_query($result);
+				//echo "Updated successfully!";
+				$check_flag = 1;
+			}
+			else {
+				echo "npwd and cnfpwd missmatch!";
+				$check_flag = 0;
+			}
+		}
+		else{
+			echo "old pwd mismatch!";
+			$check_flag = 0;
+		}
+	}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -98,11 +131,11 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
                     </div>
                     <div class="input-group">
-                        <input class="form-control" name="npwd" type="password" placeholder="New Password" required>
+                        <input class="form-control" name="npwd" type="password" placeholder="New Password" >
                         <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
                     </div>
                     <div class="input-group">
-                        <input class="form-control" name="cnfpwd" type="password" placeholder="Confirm New Password" required>
+                        <input class="form-control" name="cnfpwd" type="password" placeholder="Confirm New Password">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
                     </div>
                     <input type="submit" name="edit" value="Save Changes" class="btn btn-primary" style="background:#673ab7">
