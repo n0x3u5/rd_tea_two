@@ -1,12 +1,12 @@
 <?php
-	require_once('../includes/sessions.php');
-	require_once('../includes/functions.php');
+	require_once('/includes/sessions.php'); //starting the session
+	require_once('/includes/functions.php');//including funtion files
 ?>
 
 <?php
 
-	$connection = make_connection();
-		if(isset($_POST['submit'])){ //-----------------------------------------------------
+	$connection = make_connection(); //creating the connection
+		if(isset($_POST['login_submit'])){ //-----------------------------------------------------
 			//2. perform database query
 			$query = "SELECT * ";
 			$query .= "FROM users ";
@@ -16,9 +16,9 @@
 			//$users = mysqli_fetch_assoc($result);
 			//print_r($users);
 
-			//retrieving data from form input
-			$email = $_POST["email"];
-			$password = $_POST["password"];
+			//retrieving data from form input or post request that was sent
+			$email = mysqli_escape_string($connection, $_POST["email"]);
+			$password = mysqli_escape_string($connection, $_POST["password"]);
 		}
 		else {
 			$result = NULL;
@@ -31,7 +31,7 @@
 
 <html lang="en">
 	<head>
-		<title>form_processor</title>
+		<title>LOGIN_form_processor</title>
 	</head>
 	<body>
 
@@ -42,8 +42,8 @@
 
 			//3. use returned data(if any)
 			while($users = mysqli_fetch_assoc($result)) {
-				//var_dump($users);
-
+				// var_dump($users);
+				echo "<hr>";
 				echo "<br>". $email. " ". $users["e_mail"] ."<br>";
 										echo "<br>". $password. " ". $users["password"]."<br>";
 				echo "<hr />";
@@ -82,12 +82,12 @@
 
 			//echo "session level = <br> <br>".$_SESSION["user_lvl"]."<br><br>";
 			if($_SESSION["user_lvl"] != 3 ) {
-				redirect_to("manage_users.php");
-				//echo  session_msg() . "<br>" ;
+				// redirect_to("manage_users.php");
+				 echo  session_msg() . "<br>" ;
 			}
 			else if( $_SESSION["user_lvl"] == 3 ) {
-				//echo session_msg() . "<br>"; //. $_SESSION["user_lvl"];
-				redirect_to("update_profile.php");
+				echo session_msg() . "<br>"; //. $_SESSION["user_lvl"];
+				//redirect_to("update_profile.php");
 			}
 			else {
 				echo  session_msg() . "<br>"; //. $_SESSION["user_lvl"];

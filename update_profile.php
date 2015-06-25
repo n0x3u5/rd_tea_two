@@ -43,6 +43,8 @@
 
 	$users = mysqli_fetch_assoc($result);
 
+	echo "user designation =".$users["designation"]."<br>";
+
 	$_SESSION["user_id"]= $users["id"];
 ?>
 
@@ -70,7 +72,7 @@
             <div class="main-content" style="background-color:#FFFFFF">
                 <form action="update_profile.php" method="post">
 										<div class="input-group">
-											<input class="form-control" name="desig" type="text" value=<?php echo $users["designation"]?> >
+											<input class="form-control" name="desig" type="text" value="<?php echo $users["designation"]?>" >
 											<span class="input-group-addon"><i class="glyphicon glyphicon-star-empty" ></i></span>
 										</div>
                     <div class="input-group">
@@ -110,9 +112,8 @@
 								<?php
 									echo"<script>
 										if(  $check_flag===1 )
-										{	window.alert('Updaed successfully');
-									}
-									</script>";
+										{	window.alert('Updaed successfully');	}
+											</script>";
 									?>
 
             </div>

@@ -1,3 +1,13 @@
+<?php
+	require_once('/includes/sessions.php');
+	require_once('/includes/functions.php');
+
+	if(isset($_SESSION['user'])){
+		redirect_to("update_profile.php");
+	}
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,7 +61,7 @@
                                     </span>
                                 </li>
                                 <li>
-                                    <input type="submit" name="submit" value="SIGN IN" class="btn">
+                                    <input type="submit" name="login_submit" value="SIGN IN" class="btn">
                                 </li>
                             </ul>
                         </form>
