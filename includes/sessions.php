@@ -13,14 +13,3 @@
 	}
  }
 ?>
-
-
-
-<!-- <html lang="en">
-	<head>
-		<title>Sessions</title>
-	</head>
-	<body>
-
-	</body>
-</html> -->

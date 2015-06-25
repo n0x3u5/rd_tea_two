@@ -142,7 +142,7 @@
                                   confirm_query($result);
                                   //$_POST['sec_short_nm'] = NULL;
 
-                                  echo "<option value=NULL> </option>";
+                                  echo "<option id=\"opt0\" value=NULL> </option>";
                                   while($sec_values = mysqli_fetch_assoc($result)) {
                               ?>
                                     <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" ><?php echo htmlentities($sec_values['sec_name']) ?></option>
@@ -168,10 +168,10 @@
                                 ?>
                                 <div class="input-group">
 
-                                    <input type="text" class="form-control" name="sec_nm" value="<?php echo $sec['sec_name']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                    <input id="textbox1" type="text" class="form-control" name="sec_nm" value="<?php echo $sec['sec_name']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
                                 </div>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="sec_short_nm" value="<?php echo $sec['short_sec_name']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-certificate"></i></span>
+                                    <input id="textbox2" type="text" class="form-control" name="sec_short_nm" value="<?php echo $sec['short_sec_name']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-certificate"></i></span>
                                 </div>
                                 <div class="input-group">
                                     <input type="text" class="form-control" name="sec_area" value="<?php echo $sec['total_area']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-tree-conifer"></i></span>
@@ -354,5 +354,14 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            var tb1 = document.getElementById('textbox1');
+            var tb2 = document.getElementById('textbox2');
+            var opt = document.getElementById('opt0');
+            if(tb2!=null) {
+                opt.text = tb1.value;
+                opt.value = tb2.value;
+            }
+        </script>
     </body>
 </html>
