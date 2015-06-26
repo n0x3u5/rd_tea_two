@@ -1,3 +1,7 @@
+<?php
+	require_once('/includes/sessions.php');
+	require_once('/includes/functions.php');
+?>
 <!DOCTYPE html>
 <html>
     <head>

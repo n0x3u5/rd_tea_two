@@ -1,6 +1,7 @@
 <?php
 	require_once('/includes/sessions.php');
 	require_once('/includes/functions.php');
+
 ?>
 
 <?php	$connection = make_connection();	?>
@@ -57,5 +58,6 @@
 	}
 ?>
 	<?php
+		mysqli_free_result($result);
 		end_connection($connection);
 	?>

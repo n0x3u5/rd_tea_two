@@ -63,11 +63,11 @@
 	function password_check($password, $existing_hash) {
 		$hash = crypt($password, $existing_hash);
 		if($hash === $existing_hash) {
-			echo "new hash:".$hash."<br>old hash:".$existing_hash;
+			//echo "new hash:".$hash."<br>old hash:".$existing_hash;
 			return true;
 		}
 		else {
-			echo "new hash:".$hash."<br>old hash:".$existing_hash;
+			//echo "new hash:".$hash."<br>old hash:".$existing_hash;
 			return false;
 		}
 	}
