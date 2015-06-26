@@ -34,8 +34,9 @@
                                 <li><a href="#">Separated link</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#">One more separated link</a></li>
-                            </ul> 
+                            </ul>
                         </li>-->
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Link</a></li>
