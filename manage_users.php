@@ -48,7 +48,7 @@
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
                                 </div>
                                 <div class="input-group">
-                                    <input class="form-control" name="email" type="text" placeholder="Email" required>
+                                    <input class="form-control" name="email" type="email" placeholder="Email" required>
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
                                 </div>
                                 <div class="input-group">
@@ -68,7 +68,7 @@
                         <div>
                             <form action="form_process_delete.php" method="post">
                                 <div class="input-group">
-                                    <input class="form-control" name="email" type="text" placeholder="Email">
+                                    <input class="form-control" name="email" type="email" placeholder="Email">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
                                 </div>
                                 <button type="button"  class="btn btn-danger" data-toggle="modal" data-target="#confirmModal">Remove</button>

@@ -35,14 +35,14 @@
 	$old_pwd = $users['password'];
 
 	if(isset($_POST['edit'])){
-		if($old_pwd == $_POST['pwd'] && $_POST['npwd'] == NULL){
+		if(password_check($_POST['pwd'], $old_pwd) && $_POST['npwd'] == NULL){
 				$query = "UPDATE users SET";
 				$query .= " designation='{$_POST['desig']}',";
 				$query .= " first_name='{$_POST['f_name']}',";
 				$query .= " middle_name='{$_POST['m_name']}',";
 				$query .= " last_name='{$_POST['l_name']}',";
 				$query .= " e_mail='{$_POST['email']}',";
-				$query .= " password='{$_POST['pwd']}'";
+				$query .= " password='{$old_pwd}'";
 				$query .= " WHERE id = '{$_SESSION['user_id']}'";
 				$result = mysqli_query($connection, $query);
 
@@ -50,15 +50,16 @@
 				//echo "Updated successfully!";
 				$check_flag = 1;
 		}
-		elseif ($old_pwd === $_POST['pwd'] && $_POST['npwd'] != NULL) {
+		elseif (password_check($_POST['pwd'], $old_pwd) && $_POST['npwd'] != NULL) {
 			if($_POST['npwd'] === $_POST['cnfpwd']){
+				$hash_passwd = password_encrypt($_POST['npwd']);
 				$query = "UPDATE users SET";
 				$query .= " designation='{$_POST['desig']}',";
 				$query .= " first_name='{$_POST['f_name']}',";
 				$query .= " middle_name='{$_POST['m_name']}',";
 				$query .= " last_name='{$_POST['l_name']}',";
 				$query .= " e_mail='{$_POST['email']}',";
-				$query .= " password='{$_POST['npwd']}'";
+				$query .= " password='{$hash_passwd}'";
 				$query .= " WHERE id = '{$_SESSION['user_id']}'";
 				$result = mysqli_query($connection, $query);
 
@@ -156,3 +157,7 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </body>
 </html>
+
+<?php
+	end_connection($connection);
+?>

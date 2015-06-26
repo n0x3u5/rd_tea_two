@@ -15,10 +15,14 @@
 	$middle_name = $_POST["m_name"];
 	$last_name = $_POST["l_name"];
 	$e_mail = $_POST["email"];
-	$password = $_POST["pwd"];
-	$cnfpwd = $_POST["cnfpwd"];
+	$passwd = $_POST["pwd"];//password_encrypt($_POST["pwd"]);
+	$cnfpwd = $_POST["cnfpwd"];//password_encrypt($_POST["cnfpwd"]);
 
-	if( $password == $cnfpwd){
+	if( $passwd == $cnfpwd){
+
+		$hash_passwd = password_encrypt($passwd);
+		echo "hash password is:".$hash_passwd.", and its length is:".strlen($hash_passwd)."<br>";
+
 		if($designation == "Managing Director" || $designation == "Director") {
 			$level = 1;
 		}
@@ -38,7 +42,7 @@
 		$query .= ") VALUES (";
 		$query .= "'{$designation}', {$level},";
 		$query .= " '{$first_name}', '{$middle_name}', '{$last_name}',";
-		$query .= " '{$e_mail}', '{$password}'";
+		$query .= " '{$e_mail}', '{$hash_passwd}'";
 		$query .= ")";
 
 
@@ -48,7 +52,7 @@
 
 	}
 	else {
-		redirect_to("manage_users.html");
+		redirect_to("manage_users.php");
 
 	}
 ?>

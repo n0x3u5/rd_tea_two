@@ -8,8 +8,8 @@
 		$output .= "</div>";
 
 		$_SESSION["message"] = NULL;
-    //echo $output;
 		return $output;
 	}
  }
+  
 ?>
