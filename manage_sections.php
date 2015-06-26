@@ -1,6 +1,10 @@
 <?php
   require_once('includes/sessions.php');
   require_once('includes/functions.php');
+
+  if(!isset($_SESSION['user'])) {
+    redirect_to("index.php");
+  }
 ?>
 
 <?php
@@ -56,9 +60,9 @@
     $req_result = mysqli_query($connection, $q_req_ssn);
     confirm_query($req_result);
     $req_sec = mysqli_fetch_assoc($req_result);
-    echo "<hr>";
-    var_dump($req_sec);
-    echo "rec_sec_id=".$req_sec['id'];
+    // echo "<hr>";
+    // var_dump($req_sec);
+    // echo "rec_sec_id=".$req_sec['id'];
     $req_ID = $req_sec['id'];
 
     $sec_nm = mysqli_real_escape_string($connection, $_POST["sec_nm"]);
@@ -365,5 +369,9 @@
 </html>
 
 <?php
+  mysqli_free_result($result);
+  mysqli_free_result($req_result);
+  mysqli_free_result($result_up);
+
 	end_connection($connection);
 ?>

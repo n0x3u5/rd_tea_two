@@ -1,6 +1,13 @@
 <?php
 	require_once('/includes/sessions.php');
 	require_once('/includes/functions.php');
+
+	if(!isset($_SESSION['user'])) {
+    redirect_to("index.php");
+  }
+	if(isset($_SESSION['user_lvl']) && $_SESSION['user_lvl'] == 3) {
+		redirect_to("update_profile.php");
+	}
 ?>
 <!DOCTYPE html>
 <html>

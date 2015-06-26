@@ -159,5 +159,6 @@
 </html>
 
 <?php
+	mysqli_free_result($result);
 	end_connection($connection);
 ?>
