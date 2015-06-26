@@ -17,8 +17,8 @@
     </head>
     <body>
          <?php
-        //    include("nav_bar.php");
-        //    nav_echoer($page_id);
+            include("nav_bar.php");
+            nav_echoer($page_id);
         ?>
         <div class="container">
             <div class="jumbotron" style="background:#BF360C;margin-left:-15px;margin-right: -15px;">
