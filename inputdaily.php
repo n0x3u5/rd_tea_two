@@ -16,9 +16,9 @@
         <?php $page_id = 7;?>
     </head>
     <body>
-        <?php
-            include("nav_bar.php");
-            nav_echoer($page_id);
+         <?php
+        //    include("nav_bar.php");
+        //    nav_echoer($page_id);
         ?>
         <div class="container">
             <div class="jumbotron" style="background:#BF360C;margin-left:-15px;margin-right: -15px;">
@@ -32,11 +32,21 @@
                     <input type="submit" placeholder="Entry" class="btn" style="width:auto; margin:5px 0 0 5px;">
                 </form>
             </div>
-            <div class="entry-container" style="backgroud:#FFFFFF">
-                <div class="col-sm-12">
-                </div>
-            </div>
+            <div class="col-sm-12" style="background-color:#FFFFFF">
+				<form>
+					<input type="" class="form-control" placeholder="" style="margin:5px 5px 5px 5px;">
+					<input type="" class="form-control" placeholder="" style="margin:5px 5px 5px 5px;">
+					<input type="" class="form-control" placeholder="" style="margin:5px 5px 5px 5px;">
+					<input type="" class="form-control" placeholder="" style="margin:5px 5px 5px 5px;">
+					<input type="" class="form-control" placeholder="" style="margin:5px 5px 5px 5px;">
+					<input type="" class="form-control" placeholder="" style="margin:5px 5px 5px 5px;">
+					<input type="" class="form-control" placeholder="" style="margin:5px 5px 5px 5px;">
+					<input type="" class="form-control" placeholder="" style="margin:5px 5px 5px 5px;">
+					<input type="" class="form-control" placeholder="" style="margin:5px 5px 5px 5px;">
+					<input type="" class="form-control" placeholder="" style="margin:5px 5px 5px 5px;">
 
-		</div>
+				</form>
+			</div>
+        </div>
     </body>
 </html>
