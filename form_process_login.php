@@ -19,6 +19,7 @@
 			//retrieving data from form input or post request that was sent
 			$email = mysqli_escape_string($connection, $_POST["email"]);
 			$password = mysqli_escape_string($connection, $_POST["password"]);
+
 		}
 		else {
 			$result = NULL;
@@ -51,8 +52,8 @@
 				if($email === $users["e_mail"]){
 					//email exists
 					$flagE=1;
-					echo "<br>". $email. "                       ". $users["e_mail"] ."<br>";
-					if($password === $users["password"]) {
+					//echo "<br>". $email. "                       ". $users["e_mail"] ."<br>";
+					if(password_check($password, $users["password"])) {
 						//password matches
 
 						//echo "<br>". $password. "                     ". $users["password"]."<br>";
@@ -81,9 +82,9 @@
 
 
 			//echo "session level = <br> <br>".$_SESSION["user_lvl"]."<br><br>";
-			if($_SESSION["user_lvl"] != 3 ) {
+			if($_SESSION["user_lvl"]!= NULL && $_SESSION["user_lvl"] != 3 ) {
 				 redirect_to("manage_users.php");
-				// echo  session_msg() . "<br>" ;
+				 //echo  session_msg() . "<br>" ;
 			}
 			else if( $_SESSION["user_lvl"] == 3 ) {
 				//echo session_msg() . "<br>"; //. $_SESSION["user_lvl"];

@@ -1,3 +1,7 @@
+<?php
+	require_once('/includes/sessions.php');
+	require_once('/includes/functions.php');
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -221,12 +225,13 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script src="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-        <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js">
-        </script>
+	    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js">
+		</script>
+		<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script>
             $(document).ready(function() {
-                    $('#weather').dataTable();
+                    $('#weather').dataTable({"scrollX": true});
             });
         </script>
     </body>

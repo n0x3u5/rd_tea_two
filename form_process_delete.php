@@ -37,7 +37,7 @@
 			$email = NULL;
 			$lvl = NULL;
 	}
-	//$password = $_POST["password"];
+
 ?>
 
 

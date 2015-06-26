@@ -1,3 +1,7 @@
+<?php
+	require_once('/includes/sessions.php');
+	require_once('/includes/functions.php');
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,6 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.6/css/dataTables.responsive.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="icon" href="images/logo_rdtea.png"/>
@@ -22,7 +27,18 @@
                 <p style="color:">(Daily)</p>
                 <p></p>
                 <p></p>
-                <h3 style="color:#fff">Section: 45</h3>
+                <h3 style="color:#fff">Section:
+                    <form>
+                        <select id="division" class="form-control input-group">
+                          <option>1w</option>
+                          <option>7east</option>
+                          <option>5n</option>
+                          <option>6w</option>
+                          <option>20n</option>
+                        </select>
+                    </form>
+
+                </h3>
                 <form class="form-inline">
                   <div class="form-group">
                     <!-- <label class="sr-only" for="sec_select">Email address</label> -->
@@ -78,7 +94,7 @@
                                     <th>Plucked Area</th>
                                     <th>Leaf</th>
                                     <th>Hz Quantity</th>
-                                    <th>HJ area</th>
+                                    <th>Hz area</th>
                                     <th>Db Quantity</th>
                                     <th>Db area</th>
                                     <th>Mandays</th>
@@ -286,9 +302,67 @@
                         </table>
                     </div>
                     <div class="tab-pane" id="tab2">
-                        <!-- <table  id="pluck_day" class="table table-hover" border="1">
+                         <table  id="spray_day" class="table table-hover" border="1">
+                             <thead style="border: solid 2px green">
+                                 <tr>
+                                    <th>Date</th>
+                                    <th>section</th>
+                                    <th>Hz Area</th>
+                                    <th>D area</th>
+                                    <th>Mandays</th>
+                                    <th>DR hz<br/>(mixer)</th>
+                                    <th>DR Hz<br/>(paniwala)</th>
+                                    <th>DRUM<br/>(Short)</th>
+                                    <th>Mandays<br/>(MR DBLY)</th>
+                                    <th>NL Mandays<br/>(DR DBLY)</th>
+                                    <th>Mandays<br/>(DR DUbly)</th>
+                                    <th>Mandays<br/>(M/C Dubly)</th>
+                                    <th>DR Dbly<br/>(Mixer)</th>
+                                    <th>DR dbly<br/>(Paniwala)</th>
+                                    <th>Cocktail</th>
+                                    <th>Pest and <br/>Disease</th>
+                                    <th>Intensity Of<br/>Infection</th>
+                                    <th>No Drums<br/>Sprayed</th>
+                                    <th>INS 1</th>
+                                    <th>DOSE</th>
+                                    <th>INS 1<br/> (QTY)</th>
+                                    <th>INS 2</th>
+                                    <th>DOSE</th>
+                                    <th>INS 2<br/>(QTY)</th>
+                                    <th>ACC 3</th>
+                                    <th>DOSE</th>
+                                    <th>ACC 3 <br/>(QTY)</th>
+                                    <th>SYTH 4</th>
+                                    <th>DOSE</th>
+                                    <th>SYTH 4<br/>(QTY)</th>
 
-                        </table> -->
+                                    <th>STR 5</th>
+                                    <th>DOSE</th>
+                                    <th>STR 5<br/>(QTY)</th>
+
+                                    <th>FNG 6</th>
+                                    <th>DOSE</th>
+                                    <th>FNG 6<br/>(QTY)</th>
+
+                                    <th>WDC 7</th>
+                                    <th>DOSE</th>
+                                    <th>WDC 7<br/>(QTY)</th>
+                                    <th>WDC 8</th>
+                                    <th>DOSE</th>
+                                    <th>WDC 8<br/>(QTY)</th>
+                                    <th>UREA</th>
+                                    <th>DOSE</th>
+                                    <th>NTR 9<br/>(QTY)</th>
+                                    <th>ZINC</th>
+                                    <th>DOSE</th>
+                                    <th>NTR 10<br/>(QTY)</th>
+                                    <th>BOORON</th>
+                                    <th>DOSE</th>
+                                    <th>NTR 11<br/>(QTY)</th>
+
+                                </tr>
+                             </thead>
+                        </table>
                     </div>
 
 
@@ -304,10 +378,12 @@
         <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js">
         </script>
+        <script src="https://cdn.datatables.net/responsive/1.0.6/js/dataTables.responsive.js"></script>
         <script>
             $(document).ready(function() {
-                    $('#pluck_day').dataTable();
-                    $('#spray_day').dataTable();
+                    $('#pluck_day').dataTable({"scrollX": true});
+                    $('#spray_day').dataTable({"scrollX": true});
+
             });
         </script>
     </body>

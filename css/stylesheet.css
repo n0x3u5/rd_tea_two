@@ -164,3 +164,9 @@ tfoot {
 div.dataTables_wrapper {
         margin-bottom: 3em;
     }
+
+    th, td { white-space: nowrap; }
+        div.dataTables_wrapper {
+
+            margin: 0 auto;
+        }
