@@ -157,11 +157,12 @@
         <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script src="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js">
         </script>
-        <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+		<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script>
             $(document).ready(function() {
-                    $('#prune_year').dataTable();
-                    $('#soil_year').dataTable();
+                    $('#prune_year').dataTable({"scrollX": true});
+                    $('#soil_year').dataTable({"scrollX": true});
             });
         </script>
     </body>
