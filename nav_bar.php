@@ -23,6 +23,7 @@
                         <li <?php if($page_id == 4) {?> class="active"><a href="#"> <?php } else { ?> ><a href="sectional_yearly_review.php"> <?php } ?> Sectional View (Yearly)</a></li>
                         <li <?php if($page_id == 5) {?> class="active"><a href="#"> <?php } else { ?> ><a href="sectional_daily_review.php"> <?php } ?> Sectional View (Daily)</a></li>
                         <li <?php if($page_id == 6) {?> class="active"><a href="#"> <?php } else { ?> ><a href="weather.php"> <?php } ?>Divisional Weather</a></li>
+                        <li <?php if($page_id == 7) {?> class="active"><a href="#"> <?php } else { ?> ><a href="inputdaily.php"> <?php } ?>Daily Data Entry</a></li>
                         <!-- <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                             <ul class="dropdown-menu">

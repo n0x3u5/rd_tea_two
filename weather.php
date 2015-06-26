@@ -56,7 +56,7 @@
             </div>
 
             <div class="row" style="background-color:#FFF">
-                <div   style="width:90%;margin:auto;">
+                <div style="width:90%;margin:auto;">
                     <table id="weather" class="table table-hover" border="1">
                         <thead style="border: solid 2px black">
                             <tr>
