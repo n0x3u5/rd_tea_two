@@ -70,12 +70,13 @@
 				$query .= " LIMIT 1";
 
 				$result = mysqli_query($connection, $query);
+				var_dump($result);
 				confirm_query($result);
 				echo "Deleted Successfully!";
 				//echo "	level" .$lvl. " and delted lvl = ".$users['level'];
 
 
-				mysqli_free_result($result);
+				//mysqli_free_result($result);
 
 			}
 			else if ($flagE ===1 && $flagLvl ===0 ){
@@ -91,6 +92,7 @@
 </html>
 
 <?php
-	mysqli_free_result($result);
+	// var_dump($result);
+	// mysqli_free_result($result);
 	end_connection($connection);
 ?>
