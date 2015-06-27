@@ -52,10 +52,10 @@
 
   //an effort to run the update
   if(isset($_POST["update_submit"])) {
-    var_dump($_POST);
+    //var_dump($_POST);
     $req_ssn = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
-    $q_req_ssn = "SELECT * FROM sections WHERE short_sec_name = '{$req_ssn}'";\
-    var_dump($q_req_ssn);
+    $q_req_ssn = "SELECT * FROM sections WHERE short_sec_name = '{$req_ssn}'";
+    //var_dump($q_req_ssn);
 
     $req_result = mysqli_query($connection, $q_req_ssn);
     confirm_query($req_result);
@@ -95,7 +95,7 @@
     $q_up .= " WHERE id = $req_ID";
 
     $result_up = mysqli_query($connection, $q_up);
-    var_dump($q_up);
+    //var_dump($q_up);
     //var_dump($result_up);
 
     confirm_query($result_up);
