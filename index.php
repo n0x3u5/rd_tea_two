@@ -17,59 +17,62 @@
         <link href='http://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet'>
         <link type="text/css" rel="stylesheet" href="css/login_style.css" />
         <link rel="icon" href="images/logo_rdtea.png"/>
-        <title>
-            R.D. Tea | Login
-        </title>
+        <title>R.D. Tea | Login</title>
 
     </head>
     <body>
-        <div class="container">
-            <div id="logo">
-                <img src="images/logo_rdtea.png"/><br/>
-            </div>
-            <div id="login-form">
-                <input type="radio" checked id="login" name="switch" class="hide">
-                <div>
-                    <ul class="form-header">
-                        <li>
-                            <label for="login">
-                                <i class="glyphicon glyphicon-lock"></i>
-                                LOGIN
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                    <div class="login">
-                        <form action="form_process_login.php" method="post">
-                            <ul class="ul-list">
-                                <br/><br/>
-                                <li>
-                                    <input type="email" name="email" required class="input" placeholder="Email">
-                                    <span class="icon" style="margin-left: -4px"><i class="glyphicon glyphicon glyphicon-user"></i></span>
-                                </li>
-                                <li>
-                                    <input type="password" name="password" required class="input" placeholder="Password">
-                                    <span class="icon" style="margin-left: -4px"><i class="glyphicon glyphicon-asterisk"></i></span>
-                                </li>
-                                <li>
-                                    <span class="remember">
-                                        <input type="checkbox" id="check">
-                                        <label for="check">Remember Me</label>
-                                    </span>
-                                    <span class="remember">
-                                        <a href="#">Forgot password?</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <input type="submit" name="login_submit" value="SIGN IN" class="btn">
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div class="container">
+			<div id="login" class="signin-card">
+			<div class="logo-image">
+			<img src="images/logo_rdtea.png" alt="Logo" title="Logo" width="138">
+			</div>
+			<h1 class="display1">R.D. Tea Ltd.</h1>
+			<p class="subhead">Hansqua Tea Garden</p>
+				<form action="" method="" class="" role="form">
+					<div id="form-login-username" class="form-group">
+						<input id="username" class="form-control" name="username" type="text" size="18" alt="login" required />
+						<span class="form-highlight"></span>
+						<span class="form-bar"></span>
+						<label for="username" class="float-label">login</label>
+					</div>
+					<div id="form-login-password" class="form-group">
+						<input id="passwd" class="form-control" name="password" type="password" size="18" alt="password" required>
+						<span class="form-highlight"></span>
+						<span class="form-bar"></span>
+						<label for="password" class="float-label">password</label>
+					</div>
+					<div>
+						<button class="btn btn-block btn-raised btn-info ripple" type="submit" name="Submit" alt="sign in">Sign in</button>
+					</div>
+				</form>
+			</div>
+		</div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+		(function (window, $) {
+			$(function() {
+				$('.ripple').on('click', function (event) {
+					event.preventDefault();
+					var $div = $('<div/>'),
+						btnOffset = $(this).offset(),
+						xPos = event.pageX - btnOffset.left,
+						yPos = event.pageY - btnOffset.top;
+					$div.addClass('ripple-effect');
+					var $ripple = $(".ripple-effect");
+					$ripple.css("height", $(this).height());
+					$ripple.css("width", $(this).height());
+					$div.css({
+						top: yPos - ($ripple.height()/2),
+						left: xPos - ($ripple.width()/2),
+						background: $(this).data("ripple-color")
+					}).appendTo($(this));
+					window.setTimeout(function(){
+						$div.remove();
+					}, 2000);
+				});
+			});
+		})(window, jQuery);
+		</script>
     </body>
 </html>
