@@ -10,7 +10,7 @@
 
 	//$query = "SELECT * FROM users";
 
-	$id = mysqli_insert_id($connection) + 1;
+	//$id = mysqli_insert_id($connection) + 1;
 	$designation = $_POST["desig"];
 	$first_name = $_POST["f_name"];
 	$middle_name = $_POST["m_name"];
@@ -20,40 +20,44 @@
 	$cnfpwd = $_POST["cnfpwd"];//password_encrypt($_POST["cnfpwd"]);
 
 	if( $passwd == $cnfpwd){
+		if(strlen($passwd) >= 5 && strlen($passwd) <= 15) {
 
-		$hash_passwd = password_encrypt($passwd);
-		echo "hash password is:".$hash_passwd.", and its length is:".strlen($hash_passwd)."<br>";
+				$hash_passwd = password_encrypt($passwd);
+				//echo "hash password is:".$hash_passwd.", and its length is:".strlen($hash_passwd)."<br>";
 
-		if($designation == "Managing Director" || $designation == "Director") {
-			$level = 1;
-		}
-		else if ($designation == "Manager" || $designation == "Mngr" || $designation == "Man") {
-			$level = 2;
-		}
-		else {
-			$level = 3;
-		}
-
-
-		//2. perform database query
-		$query = "INSERT INTO users (";
-		$query .= "designation, level,";
-		$query .= " first_name, middle_name, last_name,";
-		$query .= " e_mail, password";
-		$query .= ") VALUES (";
-		$query .= "'{$designation}', {$level},";
-		$query .= " '{$first_name}', '{$middle_name}', '{$last_name}',";
-		$query .= " '{$e_mail}', '{$hash_passwd}'";
-		$query .= ")";
+				if($designation == "Managing Director" || $designation == "Director") {
+					$level = 1;
+				}
+				else if ($designation == "Manager" || $designation == "Mngr" || $designation == "Man") {
+					$level = 2;
+				}
+				else {
+					$level = 3;
+				}
 
 
-		$result = mysqli_query($connection, $query);
-		confirm_query($result);
-		echo "Inserted Successfully!";
+				//2. perform database query
+				$query = "INSERT INTO users (";
+				$query .= "designation, level,";
+				$query .= " first_name, middle_name, last_name,";
+				$query .= " e_mail, password";
+				$query .= ") VALUES (";
+				$query .= "'{$designation}', {$level},";
+				$query .= " '{$first_name}', '{$middle_name}', '{$last_name}',";
+				$query .= " '{$e_mail}', '{$hash_passwd}'";
+				$query .= ")";
 
 
-		mysqli_free_result($result);
+				$result = mysqli_query($connection, $query);
+				confirm_query($result);
+				echo "Inserted Successfully!";
 
+
+				//mysqli_free_result($result);
+			}
+			else {
+				echo "Your password lengthe must be of 5 to 15 charecters!";
+			}
 	}
 	else {
 		redirect_to("manage_users.php");
@@ -61,5 +65,6 @@
 	}
 ?>
 	<?php
+		//mysqli_free_result($result);
 		end_connection($connection);
 	?>

@@ -51,27 +51,34 @@
 				$check_flag = 1;
 
 
-				mysqli_free_result($result);
+				//mysqli_free_result($result);
 		}
 		elseif (password_check($_POST['pwd'], $old_pwd) && $_POST['npwd'] != NULL) {
 			if($_POST['npwd'] === $_POST['cnfpwd']){
-				$hash_passwd = password_encrypt($_POST['npwd']);
-				$query = "UPDATE users SET";
-				$query .= " designation='{$_POST['desig']}',";
-				$query .= " first_name='{$_POST['f_name']}',";
-				$query .= " middle_name='{$_POST['m_name']}',";
-				$query .= " last_name='{$_POST['l_name']}',";
-				$query .= " e_mail='{$_POST['email']}',";
-				$query .= " password='{$hash_passwd}'";
-				$query .= " WHERE id = '{$_SESSION['user_id']}'";
-				$result = mysqli_query($connection, $query);
+					if(strlen($_POST['npwd']) >= 5 && strlen($_POST['npwd']) <= 15) {
+							$hash_passwd = password_encrypt($_POST['npwd']);
+							$query = "UPDATE users SET";
+							$query .= " designation='{$_POST['desig']}',";
+							$query .= " first_name='{$_POST['f_name']}',";
+							$query .= " middle_name='{$_POST['m_name']}',";
+							$query .= " last_name='{$_POST['l_name']}',";
+							$query .= " e_mail='{$_POST['email']}',";
+							$query .= " password='{$hash_passwd}'";
+							$query .= " WHERE id = '{$_SESSION['user_id']}'";
+							$result = mysqli_query($connection, $query);
 
-				confirm_query($result);
-				//echo "Updated successfully!";
-				$check_flag = 1;
+							confirm_query($result);
+							//echo "Updated successfully!";
+							$check_flag = 1;
 
 
-				mysqli_free_result($result);
+							//mysqli_free_result($result);
+					}
+					else {
+						echo "Your password lengthe must be of 5 to 15 charecters!";
+
+						$check_flag = 0;
+					}
 			}
 			else {
 				echo "npwd and cnfpwd missmatch!";
@@ -165,6 +172,6 @@
 </html>
 
 <?php
-	mysqli_free_result($result);
+	//mysqli_free_result($result);
 	end_connection($connection);
 ?>
