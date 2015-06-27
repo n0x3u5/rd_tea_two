@@ -20,10 +20,12 @@
                         <li <?php if($page_id == 1) {?> class="active"><a href="#"> <?php } else { ?> ><a href="manage_users.php"> <?php } ?> Manage Users</a></li>
                         <li <?php if($page_id == 2) {?> class="active"><a href="#"> <?php } else { ?> ><a href="manage_sections.php"> <?php } ?> Manage Sections</a></li>
                         <li <?php if($page_id == 3) {?> class="active"><a href="#"> <?php } else { ?> ><a href="update_profile.php"> <?php } ?> Your Profile</a></li>
-                        <li <?php if($page_id == 4) {?> class="active"><a href="#"> <?php } else { ?> ><a href="sectional_yearly_review.php"> <?php } ?> Sectional View (Yearly)</a></li>
-                        <li <?php if($page_id == 5) {?> class="active"><a href="#"> <?php } else { ?> ><a href="sectional_daily_review.php"> <?php } ?> Sectional View (Daily)</a></li>
-                        <li <?php if($page_id == 6) {?> class="active"><a href="#"> <?php } else { ?> ><a href="weather.php"> <?php } ?>Divisional Weather</a></li>
-                        <li <?php if($page_id == 7) {?> class="active"><a href="#"> <?php } else { ?> ><a href="input_daily.php"> <?php } ?>Daily Data Entry</a></li>
+                        <li <?php if($page_id == 4) {?> class="active"><a href="#"> <?php } else { ?> ><a href="sectional_yearly_review.php"> <?php } ?> Yearly Report</a></li>
+                        <li <?php if($page_id == 5) {?> class="active"><a href="#"> <?php } else { ?> ><a href="sectional_daily_review.php"> <?php } ?> Daily Report</a></li>
+                        <li <?php if($page_id == 6) {?> class="active"><a href="#"> <?php } else { ?> ><a href="weather.php"> <?php } ?> Weather Report</a></li>
+                        <li <?php if($page_id == 7) {?> class="active"><a href="#"> <?php } else { ?> ><a href="input_daily.php"> <?php } ?> Plucking Entry</a></li>
+                        <li <?php if($page_id == 8) {?> class="active"><a href="#"> <?php } else { ?> ><a href="weather_input.php"> <?php } ?> Weather Entry</a></li>
+                        <li <?php if($page_id == 9) {?> class="active"><a href="#"> <?php } else { ?> ><a href="daily_spraying_entry.php"> <?php } ?> Spraying Entry</a></li>
                         <!-- <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                             <ul class="dropdown-menu">

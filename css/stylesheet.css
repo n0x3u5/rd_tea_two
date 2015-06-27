@@ -75,7 +75,6 @@ body{
 }
 
 .jumbotron .btn {
-    margin-top: 10px;
     font-weight: bold;
 }
 
@@ -92,8 +91,8 @@ li{
 }
 
 .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:active, .nav-tabs.nav-justified > .active > a:enabled {
-    background-color: #bbcdd7 !important;
-    border-bottom-color: #bbcdd7;
+    background-color: #DEDEDE !important;
+    border-bottom-color: #ffffff;
     color: #000000;
 }
 
@@ -111,13 +110,8 @@ li{
 }
 
 .tab-content {
-    background: #bbcdd7;
+    background: #FFFFFF;
     padding: 20px;
-}
-
-.input-group {
-    width: 90%;
-    margin-bottom: 10px;
 }
 
 th {
@@ -172,11 +166,9 @@ div.dataTables_wrapper {
         }
 
 .card_style{
-    margin-left:7%;
-    margin-top: 2%; 
-     background:#bbcdd7;
-     border-radius:1px;
-     -webkit-box-shadow: 1px 1px 5px 1px rgba(145,145,145,1);
+    background:#FFFFFF;
+    border-radius:2px;
+    -webkit-box-shadow: 1px 1px 5px 1px rgba(145,145,145,1);
     -moz-box-shadow: 1px 1px 5px 1px rgba(145,145,145,1);
     box-shadow: 1px 1px 5px 1px rgba(145,145,145,1);
 }
