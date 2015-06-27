@@ -23,22 +23,23 @@
         <div class="container">
             <div class="jumbotron" style="background:#BF360C;margin-left:-15px;margin-right: -15px;">
                 <h1>Daily Data Entry</h1>
-                <form class="form form-group form-inline" style="margin-top: 30px;">
+                <form action="#" method="post" class="form form-group form-inline" style="margin-top: 30px;">
                     <p></p>
                     <p></p>
-										<select id="division" class="form-control input-group">
-											<option>1w</option>
-											<option>7east</option>
-											<option>5n</option>
-											<option>6w</option>
-											<option>20n</option>
-										</select>
-										<input type="text" name="date_value" class="form-control" id="datepicker" placeholder="Date (dd-mm-yyyy)" onChange="enable_add()">
-
-										<span class="input-group-addon">
-												<i class="glyphicon glyphicon-calendar"></i>
-
-										<input type="submit" placeholder="Entry" class="btn" style="width:auto; margin:  -10px 0 0 5px;">
+						<select id="division" class="form-control input-group">
+							<option>1w</option>
+							<option>7east</option>
+							<option>5n</option>
+							<option>6w</option>
+							<option>20n</option>
+						</select>
+						<div class="input-group">
+	                        <input type="text" name="date_value" class="form-control" id="datepicker" placeholder="Date (dd-mm-yy)" onChange="enable_add()">
+	                        <span class="input-group-addon">
+	                            <i class="glyphicon glyphicon-calendar"></i>
+	                        </span>
+	                    </div>
+						<input type="submit" placeholder="Entry" class="btn" style="width:auto; margin:  -10px 0 0 5px;">
                 </form>
             </div>
             <div class="col-sm-12" style="background-color:#FFFFFF">
