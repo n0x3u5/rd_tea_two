@@ -26,24 +26,27 @@
                 <form class="form form-group form-inline" style="margin-top: 30px;">
                     <p></p>
                     <p></p>
-					<select id="division" class="form-control input-group">
-						<option>1w</option>
-						<option>7east</option>
-						<option>5n</option>
-						<option>6w</option>
-						<option>20n</option>
-					</select>
-					<input type="submit" placeholder="Entry" class="btn" style="width:auto; margin:  -10px 0 0 5px;">
+										<select id="division" class="form-control input-group">
+											<option>1w</option>
+											<option>7east</option>
+											<option>5n</option>
+											<option>6w</option>
+											<option>20n</option>
+										</select>
+										<input type="text" name="date_value" class="form-control" id="datepicker" placeholder="Date (dd-mm-yyyy)" onChange="enable_add()">
+
+										<span class="input-group-addon">
+												<i class="glyphicon glyphicon-calendar"></i>
+
+										<input type="submit" placeholder="Entry" class="btn" style="width:auto; margin:  -10px 0 0 5px;">
                 </form>
             </div>
             <div class="col-sm-12" style="background-color:#FFFFFF">
 				<form>
 					<input type="text" class="form-control" placeholder="Division" style="margin:25px 5px 5px 5px; width:60%;">
-					<input type="text" class="form-control" placeholder="Status" style="margin:5px 5px 5px 5px; width:60%;">
-					<input type="text" class="form-control" placeholder="Area" style="margin:5px 5px 5px 5px; width:60%;">
 					<input type="text" class="form-control" placeholder="Prune" style="margin:5px 5px 5px 5px; width:60%;">
 					<input type="text" class="form-control" placeholder="Plucked Area" style="margin:5px 5px 5px 5px; width:60%;">
-					<input type="text" class="form-control" placeholder="Leaf" style="margin:5px 5px 5px 5px; width:60%;">
+					<input type="text" class="form-control" placeholder="Total Leaf" style="margin:5px 5px 5px 5px; width:60%;">
 					<input type="text" class="form-control" placeholder="Hz Quantity" style="margin:5px 5px 5px 5px; width:60%;">
 					<input type="text" class="form-control" placeholder="Hz Area" style="margin:5px 5px 5px 5px; width:60%;">
 					<input type="text" class="form-control" placeholder="DB quantity" style="margin:5px 5px 5px 5px; width:60%;">
@@ -56,8 +59,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-
-
+		<script>
+				$(function() {
+				$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
+				});
+		</script>
     </body>
 </html>

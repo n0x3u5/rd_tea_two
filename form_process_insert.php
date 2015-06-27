@@ -51,6 +51,9 @@
 		confirm_query($result);
 		echo "Inserted Successfully!";
 
+
+		mysqli_free_result($result);
+
 	}
 	else {
 		redirect_to("manage_users.php");
@@ -58,6 +61,5 @@
 	}
 ?>
 	<?php
-		mysqli_free_result($result);
 		end_connection($connection);
 	?>

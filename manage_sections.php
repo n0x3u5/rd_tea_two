@@ -100,6 +100,10 @@
 
     confirm_query($result_up);
     echo "Updated successfully!";
+
+    mysqli_free_result($req_result);
+
+    mysqli_free_result($result_up);
   }
 ?>
 
@@ -370,8 +374,5 @@
 
 <?php
   mysqli_free_result($result);
-  mysqli_free_result($req_result);
-  mysqli_free_result($result_up);
-
 	end_connection($connection);
 ?>

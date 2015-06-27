@@ -35,7 +35,7 @@
                           <option>5n</option>
                           <option>6w</option>
                           <option>20n</option>
-                        </select>
+                        </select>											
                     </form>
 
                 </h3>
@@ -88,8 +88,7 @@
                                 <tr>
                                     <th>Date</th>
                                     <th>Division</th>
-                                    <th>Section</th>                                                                                                            <th>Status</th>
-                                    <th>Area</th>
+                                    <th>Section</th>
                                     <th>Prune</th>
                                     <th>Plucked Area</th>
                                     <th>Leaf</th>
@@ -106,8 +105,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -121,8 +118,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -136,8 +131,7 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
+
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -151,8 +145,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -166,8 +158,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -181,8 +171,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -196,8 +184,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -211,8 +197,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -226,8 +210,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -241,8 +223,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -256,8 +236,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -271,8 +249,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
@@ -286,8 +262,6 @@
                                     <td style="text-align:center;">10-6-2015</td>
                                     <td>HN</td>
                                     <td>1West</td>
-                                    <td>Medium</td>
-                                    <td>1.89</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>

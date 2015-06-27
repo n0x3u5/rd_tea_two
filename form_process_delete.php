@@ -74,6 +74,9 @@
 				echo "Deleted Successfully!";
 				//echo "	level" .$lvl. " and delted lvl = ".$users['level'];
 
+
+				mysqli_free_result($result);
+
 			}
 			else if ($flagE ===1 && $flagLvl ===0 ){
 				echo "<br>" . "You aren't permited to delete your supirior's records!	level =". $lvl." and delted lvl =". $users['level'];

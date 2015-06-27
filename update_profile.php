@@ -49,6 +49,9 @@
 				confirm_query($result);
 				//echo "Updated successfully!";
 				$check_flag = 1;
+
+
+				mysqli_free_result($result);
 		}
 		elseif (password_check($_POST['pwd'], $old_pwd) && $_POST['npwd'] != NULL) {
 			if($_POST['npwd'] === $_POST['cnfpwd']){
@@ -66,6 +69,9 @@
 				confirm_query($result);
 				//echo "Updated successfully!";
 				$check_flag = 1;
+
+
+				mysqli_free_result($result);
 			}
 			else {
 				echo "npwd and cnfpwd missmatch!";
