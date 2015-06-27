@@ -27,18 +27,7 @@
                 <p style="color:">(Daily)</p>
                 <p></p>
                 <p></p>
-                <h3 style="color:#fff">Section:
-                    <form>
-                        <select id="division" class="form-control input-group">
-                          <option>1w</option>
-                          <option>7east</option>
-                          <option>5n</option>
-                          <option>6w</option>
-                          <option>20n</option>
-                        </select>											
-                    </form>
-
-                </h3>
+                <h3 style="color:#fff">Section:</h3>
                 <form class="form-inline">
                   <div class="form-group">
                     <!-- <label class="sr-only" for="sec_select">Email address</label> -->
@@ -333,7 +322,9 @@
                                     <th>BOORON</th>
                                     <th>DOSE</th>
                                     <th>NTR 11<br/>(QTY)</th>
-
+																		<th>Other</th>
+                                    <th>DOSE</th>
+                                    <th>Other<br/>(QTY)</th>
                                 </tr>
                              </thead>
                         </table>

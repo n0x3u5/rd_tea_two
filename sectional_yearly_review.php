@@ -26,31 +26,31 @@
                 <p style="color:">(Yearly)</p>
             </div>
 
-            <div class="row" style="background:#bbcdd7;">
-                <div class="col-sm-1"><h4>Section Name</h4><p> 1west</p></div>
-                <div class="col-sm-1" style="text-align:center;"><h4>Jat/Clone</h4><p> Genus</p></div>
-                <div class="col-sm-2" style="text-align:center;"><h4>Shade(temp) Species</h4><p>bioregions</p></div>
-                <div class="col-sm-2"><h4>Shade (perm.) Species</h4><p>Acer saccharum</p></div>
-                <div class="col-sm-2"><h4>Frame(in Inch) HEight</h4><p>10"</p></div>
-                <div class="col-sm-2"><h4>Bush(in Inch)<br>Height</h4><p> 7"</p></div>
-                <div class="col-sm-1"><h4>Area</h4>(in Hector)<p> 120</p></div>
-                <div class="col-sm-1"><h4>Year of Planting</h4><p> 1972</p></div>
-
+            <div class="row">
+                <div class="col-sm-2 card_style"><h4>Section Name</h4>
+				<p> 1west</p></div>
+                <div class="col-sm-2 card_style"><h4>Jat/Clone</h4><p> Genus</p></div>
+                <div class="col-sm-2 card_style"><h4>Shade(temp) Species</h4><p>bioregions</p></div>
+                <div class="col-sm-2 card_style"><h4>Shade (perm.) Species</h4><p>Acer saccharum</p></div>
             </div>
-            <p></p>
-            <div class="row" style="background:#bbcdd7;">
-
-                    <div class="col-sm-1"><h4>Plant spacing</h4><p> 3"</p></div>
-                    <div class="col-sm-2"><h4>TEmporary shade spacing</h4><p> 2"</p></div>
-                    <div class="col-sm-2"><h4>Permanent Shade Spacing</h4><p> 3"</p></div>
-                    <div class="col-sm-1"><h4>Ext./<br>Replant</h4><p> Y</p></div>
-                    <div class="col-sm-1"><h4>Plant Density</h4><p> Poor</p></div>
-                    <div class="col-sm-1"><h4>Drain-status</h4><p> medium</p></div>
-                    <div class="col-sm-1" style="text-align:center;"><h4>Bush<br>popolation</h4><p> Poor</p></div>
-                    <div class="col-sm-2" style="text-align:center;"><h4>Soil type and<br>topography</h4><p>rich</p></div>
-
-
-            </div>
+            <div class="row">
+				<div class="col-sm-2 card_style"><h4>Frame(in Inch) HEight</h4><p>10"</p></div>
+				<div class="col-sm-2 card_style"><h4>Bush(in Inch)<br>Height</h4><p> 7"</p></div>
+				<div class="col-sm-2 card_style"><h4>Area</h4>(in Hectare)<p> 120</p></div>
+				<div class="col-sm-2 card_style"><h4>Year of Planting</h4><p> 1972</p></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2 card_style"><h4>Plant spacing</h4><p> 3"</p></div>
+                <div class="col-sm-2 card_style"><h4>TEmporary shade spacing</h4><p> 2"</p></div>
+				<div class="col-sm-2 card_style"><h4>Permanent Shade Spacing</h4><p> 3"</p></div>
+				<div class="col-sm-2 card_style"><h4>Ext./<br>Replant</h4><p> Y</p></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2 card_style"><h4>Plant Density</h4><p> Poor</p></div>
+				<div class="col-sm-2 card_style"><h4>Drain-status</h4><p> medium</p></div>
+				<div class="col-sm-2 card_style"><h4>Bush<br>popolation</h4><p> Poor</p></div>
+				<div class="col-sm-2 card_style" style="margin-top:24px;"><h4>Soil type and<br>topography</h4><p>rich</p></div>
+			</div>
 
             <div class="tab-container" style="margin-top:10px;">
                 <ul class="nav nav-tabs nav-justified">
