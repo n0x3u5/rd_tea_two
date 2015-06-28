@@ -169,7 +169,11 @@
                       <div class="form-group">
                         <label for="left_cocktail" class="col-sm-1 control-label">Cocktail</label>
                         <div class="col-sm-10 col-sm-offset-1">
-                          <input type="text" class="form-control" id="left_cocktail">
+                          <select class="form-control" id="left_cocktail">
+                            <option></option>
+                            <option>Yes</option>
+                            <option>No</option>
+                          </select>
                         </div>
                       </div>
                       <div class="form-group">
