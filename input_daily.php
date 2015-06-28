@@ -1,6 +1,10 @@
 <?php
 	require_once('/includes/sessions.php');
 	require_once('/includes/functions.php');
+
+	if(!isset($_SESSION['user'])) {
+		redirect_to("index.php");
+	}
 ?>
 <?php
 	$connection = make_connection();
@@ -12,7 +16,6 @@
 		$_SESSION['ssn'] = $req_ssn;
 		$_SESSION['date'] = $req_date;
 
-		//$_SESSION['dt_sec_submit'] = TRUE;
 
 		// echo "<br>got date =".$req_date."<br>";
 		// echo "<br>got ssn =" .$req_ssn."<br>";
@@ -132,12 +135,6 @@
                 <h1>Daily Data Entry</h1>
                 <form action="input_daily.php" method="post" class="form form-group form-inline" style="margin-top: 30px;">
 									<select id="division" name ="short_sec_name" class="form-control input-group">
-										<!-- <option>1w</option>
-										<option>7east</option>
-										<option>5n</option>
-										<option>6w</option>
-										<option>20n</option> -->
-
 										<?php
 												$q = "SELECT * FROM sections";
 												$result = mysqli_query($connection, $q);
@@ -149,11 +146,9 @@
 												while($sec_values = mysqli_fetch_assoc($result)) {
 										?>
 													<option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>"><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
-											<?php
+										<?php
 												}
-											?>
-
-
+										?>
 									</select>
 											<div class="input-group">
 	                        <input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()">
@@ -276,3 +271,7 @@
 		</script>
     </body>
 </html>
+<?php
+  mysqli_free_result($result);
+	end_connection($connection);
+?>
