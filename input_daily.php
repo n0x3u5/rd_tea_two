@@ -161,7 +161,7 @@
 	                            <i class="glyphicon glyphicon-calendar"></i>
 	                        </span>
 	                    </div>
-											<input type="submit" name="dt_sec_submit" class="btn btn-default" style="width:auto; margin:  -10px 0 0 5px;">
+											<input type="submit" name="dt_sec_submit" class="btn btn-default">
                 </form>
             </div>
 				<div class="tab-container">
