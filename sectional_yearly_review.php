@@ -11,7 +11,15 @@
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="http://cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/stylesheet.css">
+				<link rel="stylesheet" href="css/stylesheet.css">
+				<style rel="stylesheet">
+					.card_style{
+						margin-left:6%;
+						margin-bottom:1%;
+						background-color:#FFFFFF;
+						border-style: outset;
+					}
+				</style>
         <link rel="icon" href="images/logo_rdtea.png"/>
         <?php $page_id = 4;?>
     </head>
@@ -21,7 +29,7 @@
             nav_echoer($page_id);
         ?>
         <div class="container">
-            <div class="jumbotron" style="background:#272D9B;margin-left:-15px;margin-right: -15px;">
+            <div class="jumbotron" style="background:#303F9F;margin-left:-15px;margin-right: -15px;">
                 <h1>Sectional Review </h1>
                 <p style="color:">(Yearly)</p>
             </div>
@@ -49,7 +57,7 @@
 				<div class="col-sm-2 card_style"><h4>Plant Density</h4><p> Poor</p></div>
 				<div class="col-sm-2 card_style"><h4>Drain-status</h4><p> medium</p></div>
 				<div class="col-sm-2 card_style"><h4>Bush<br>popolation</h4><p> Poor</p></div>
-				<div class="col-sm-2 card_style" style="margin-top:24px;"><h4>Soil type and<br>topography</h4><p>rich</p></div>
+				<div class="col-sm-2 card_style"><h4>Soil type and<br>topography</h4><p>rich</p></div>
 			</div>
 
             <div class="tab-container" style="margin-top:10px;">
@@ -57,10 +65,10 @@
                     <li class="active"><a href="#tab1" data-toggle="tab">Prune </a></li>
                     <li><a href="#tab2" data-toggle="tab">Soil  </a></li>
                 </ul>
-                <div class="tab-content"  style="background-color:">
+                <div class="tab-content" >
                     <div class="tab-pane active" id="tab1">
                             <table  id="prune_year" class="table table-hover" border="1">
-                                <thead>
+                                <thead  style="background-color:#A5D6A7">
                                     <tr>
                                         <th rowspan="2"   style="text-align:center padding:2 0 2 0 ">Year</th>
                                         <th rowspan="2"   style="text-align:center">Prune</th>
@@ -107,7 +115,7 @@
                     </div>
                     <div class="tab-pane" id="tab2">
                         <table  id="soil_year" class="table table-hover" border="1">
-                            <thead>
+                            <thead  style="background-color:#A5D6A7">
                                 <tr>
                                     <th rowspan="2">Year</th>
                                     <th rowspan="2">Made Tea(in Kg/Ha)</th>
