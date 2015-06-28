@@ -11,9 +11,6 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
         <style>
-          /*#dangerous-btn{
-            margin-left:26%;
-          }*/
           @media (min-width: 500px) {
             .btn {
               display: inline;
@@ -36,13 +33,15 @@
                 <p></p>
                 <p></p>
                 <h3 style="color:#fff">Division</h3>
-                <form class="form-inline">
-                        <select id="division" class="form-control input-group">
-                          <option>Balasan</option>
+                <form class="form-group">
+                        <select id="division" class="form-control input-group" style="height:70%;">
+                          <option></option>
+													<option>Balasan</option>
                           <option>Bidhannagar</option>
                           <option>Hansqua</option>
                           <option>Kishoribag</option>
                         </select>
+
                         <div class="input-group">
   	                        <input type="text" name="date_value" class="form-control" id="datepicker" value="" placeholder="" onChange="enable_add()">
   	                        <span class="input-group-addon">
@@ -50,7 +49,7 @@
   	                        </span>
   	                    </div>
 
-                  <input type="submit" name="dt_sec_submit" class="btn btn-default" value="Click to Add" style="width:auto; margin:  -10px 0 0 5px;">
+                  <input type="submit" name="dt_sec_submit" class="btn btn-default" value="Click to Add" style="width:auto; margin:0;">
                 </form>
 
             </div>

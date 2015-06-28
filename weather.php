@@ -26,12 +26,12 @@
                 <p></p>
                 <h3 style="color:#fff">Division
                     <form>
-                        <select id="division" class="form-control input-group">
-                          <option>1w</option>
-                          <option>7east</option>
-                          <option>5n</option>
-                          <option>6w</option>
-                          <option>20n</option>
+                        <select id="division" class="form-control input-group" style="height:60%;">
+                          <option></option>
+                          <option>Balasan</option>
+                          <option>Bidhannagar</option>
+                          <option>Hansqua</option>
+                          <option>Kishoribag</option>
                         </select>
                     </form>
                 </h3>

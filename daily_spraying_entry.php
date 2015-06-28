@@ -20,11 +20,36 @@
           background: #EFEBE9;
           padding: 20px;
         }
-        .col-sm-3 .btn {
+        .col-sm-4 .btn {
           width: auto;
         }
         .main-form {
           padding: 10px 0 10px 0;
+        }
+        @media (min-width: 768px) {
+          .col-sm-2.col-sm-offset-4 .btn-success {
+            float: right;
+          }
+        }
+        @media (max-width: 768px) {
+          .col-sm-2.col-sm-offset-4 .btn-success {
+            float: right;
+          }
+        }
+        @media (max-width: 500px) {
+          .col-sm-2.col-sm-offset-4 .btn-success {
+            float: left;
+          }
+          .btn {
+            margin-left: 40px;
+          }
+        }
+        .col-sm-6 .btn {
+          margin-top: 15px;
+        }
+        .col-sm-2 .btn{
+          margin-top: 10px;
+          margin-bottom: 5px;
         }
       </style>
       <link rel="icon" href="images/logo_rdtea.png"/>
@@ -48,9 +73,9 @@
                   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
               </div>
-            <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success" style="margin-top:-1px;">Submit</button>
           </form>
-          </div>
+        </div>
           <div class="col-sm-12 card_style" style="padding-bottom:15px;">
             <ul class="nav nav-tabs nav-justified">
               <li class="active"><a href="#tab1" data-toggle="tab">Update or Delete Record</a></li>
@@ -61,10 +86,10 @@
                 <form class="form-horizontal">
                   <div class="row">
                     <div class="col-sm-6">
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal">Delete Record</button>
+                      <button type="button" class="btn btn-danger pull-left" data-toggle="modal" data-target="#confirmModal">Delete Record</button>
                     </div>
                     <div class="col-sm-2 col-sm-offset-4">
-                      <button type="submit" class="btn btn-success pull-right">Edit Record</button>
+                      <button type="submit" class="btn btn-success btn-lg">Edit Record</button>
                     </div>
                   </div>
                   <div class="row main-form">
@@ -156,7 +181,12 @@
                       <div class="form-group">
                         <label for="left_infint" class="col-sm-1 control-label">Infection Intensity</label>
                         <div class="col-sm-10 col-sm-offset-1">
-                          <input type="text" class="form-control" id="left_infint">
+                            <select class="form-control" name="">
+                              <option></option>
+                              <option>H</option>
+                              <option>M</option>
+                              <option>L</option>
+                            </select>
                         </div>
                       </div>
                       <div class="form-group">
@@ -366,7 +396,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="left_drsp" class="col-sm-1 control-label">Other</label>
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_1</label>
                         <div class="col-sm-10 col-sm-offset-1">
                           <input type="text" class="form-control" id="left_drsp">
                         </div>
@@ -378,7 +408,43 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="left_drsp" class="col-sm-1 control-label">Other Quantity</label>
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_1 Quantity</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_2</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Dose</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_2 Quantity</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_3</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Dose</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_3 Quantity</label>
                         <div class="col-sm-10 col-sm-offset-1">
                           <input type="text" class="form-control" id="left_drsp">
                         </div>
@@ -390,7 +456,7 @@
                       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal">Delete Record</button>
                     </div>
                     <div class="col-sm-2 col-sm-offset-4">
-                      <button type="submit" class="btn btn-success pull-right">Edit Record</button>
+                      <button type="submit" class="btn btn-success btn-lg">Edit Record</button>
                     </div>
                   </div>
                   <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
@@ -416,7 +482,7 @@
                 <form class="form-horizontal">
                   <div class="row">
                     <div class="col-sm-12">
-                      <button type="submit" class="btn btn-success pull-right">Add Record</button>
+                      <button type="submit" class="btn btn-success pull-right btn-lg">Add Record</button>
                     </div>
                   </div>
                   <div class="row main-form">
@@ -730,7 +796,55 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="left_drsp" class="col-sm-1 control-label">Other Quantity</label>
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_1</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Dose</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_1 Quantity</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_2</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Dose</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_2 Quantity</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_3</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Dose</label>
+                        <div class="col-sm-10 col-sm-offset-1">
+                          <input type="text" class="form-control" id="left_drsp">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="left_drsp" class="col-sm-1 control-label">Other_3 Quantity</label>
                         <div class="col-sm-10 col-sm-offset-1">
                           <input type="text" class="form-control" id="left_drsp">
                         </div>
@@ -739,7 +853,7 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-12">
-                      <button type="submit" class="btn btn-success pull-right">Add Record</button>
+                      <button type="submit" class="btn btn-success pull-right btn-lg">Add Record</button>
                     </div>
                   </div>
                 </form>
