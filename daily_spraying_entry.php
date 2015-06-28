@@ -302,7 +302,7 @@
           <div class="jumbotron" style="background:#795548;">
             <h1>Spraying Data Entry</h1>
             <form action="daily_spraying_entry.php" class="form-inline" method="post">
-              <select id="division" name ="short_sec_name" class="form-control input-group">
+              <select id="division" name ="short_sec_name" class="form-control">
                 <?php
                     $q = "SELECT * FROM sections";
                     $result = mysqli_query($connection, $q);
@@ -310,7 +310,7 @@
                     confirm_query($result);
                     //$_POST['sec_short_nm'] = NULL;
 
-                    echo "<option id=\"opt0\" value=NULL> </option>";
+                    echo "<option id=\"opt0\" value=NULL></option>";
                     while($sec_values = mysqli_fetch_assoc($result)) {
                 ?>
                       <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>"><?php echo htmlentities($sec_values['short_sec_name']); ?></option>

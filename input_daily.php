@@ -134,7 +134,7 @@
             <div class="jumbotron" style="background:#BF360C;margin-left:-15px;margin-right: -15px;">
                 <h1>Daily Data Entry</h1>
                 <form action="input_daily.php" method="post" class="form form-group form-inline" style="margin-top: 30px;">
-									<select id="division" name ="short_sec_name" class="form-control input-group">
+									<select id="division" name ="short_sec_name" class="form-control">
 										<?php
 												$q = "SELECT * FROM sections";
 												$result = mysqli_query($connection, $q);
