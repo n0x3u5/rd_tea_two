@@ -1,6 +1,10 @@
 <?php
 	require_once('/includes/sessions.php');
 	require_once('/includes/functions.php');
+	
+	if(!isset($_SESSION['user'])) {
+		redirect_to("index.php");
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,12 +30,12 @@
                 <p></p>
                 <h3 style="color:#fff">Division
                     <form>
-                        <select id="division" class="form-control input-group" style="height:60%;">
+                        <select id="division" name="div_name" class="form-control input-group" style="height:60%;">
                           <option></option>
-                          <option>Balasan</option>
-                          <option>Bidhannagar</option>
-                          <option>Hansqua</option>
-                          <option>Kishoribag</option>
+						  <option <?php if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
+						  <option <?php if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
+						  <option <?php if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
+						  <option <?php if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
                         </select>
                     </form>
                 </h3>
