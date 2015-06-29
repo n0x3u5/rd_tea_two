@@ -40,7 +40,7 @@
                         </li>-->
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <p class="navbar-text" style="color:#FFFFFF;">Signed in as Gregor Mendel</p>
+                        <p class="navbar-text" style="color:#FFFFFF;">Signed in as <?php if(isset($_SESSION)) { echo $_SESSION['user']; } else { echo "Invalid User!"; } ?> </p>
                         <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account Actions<span class="caret"></span></a>
                         <ul class="dropdown-menu">
