@@ -1,7 +1,105 @@
 <?php
 	require_once('/includes/sessions.php');
 	require_once('/includes/functions.php');
+
+	if(!isset($_SESSION['user'])) {
+		redirect_to("index.php");
+	}
 ?>
+<?php
+	$connection = make_connection();
+
+	//var_dump($_POST);echo "<br><hr>";
+	if(isset($_POST["dt_sec_submit"])){
+		$req_date = date('Y-m-d', strtotime($_POST["date_value"]));
+		$req_div_name = $_POST["div_name"];
+		$_SESSION['div_name'] = $req_div_name;
+		$_SESSION['date'] = $req_date;
+
+
+		// echo "<br>got date =".$req_date."<br>";
+		// echo "<br>got div_name =" .$req_div_name."<br>";
+		// var_dump($req_date);echo "<br>"; var_dump($req_div_name);
+
+		$query = "SELECT * FROM daily_weather WHERE division='{$req_div_name}' and record_date='{$req_date}'";
+
+		$result = mysqli_query($connection, $query);
+		confirm_query($result);
+
+		$_SESSION['daily_weather'] = mysqli_fetch_assoc($result);
+		//$daily =mysqli_fetch_assoc($result);
+	}
+	else {
+		$req_date = NULL;
+		$req_div_name = NULL;
+	}
+?>
+
+<?php
+	if (isset($_POST['add_submit'])) {
+		$division = $_SESSION['div_name'];
+		$record_date = $_SESSION['date'];
+		
+		$rain_max = (float) mysqli_real_escape_string($connection, $_POST["rain_max"]);
+		$rain_min = (float) mysqli_real_escape_string($connection, $_POST["rain_min"]);
+		$temp_max = (float) mysqli_real_escape_string($connection, $_POST["temp_max"]);
+		$temp_min = (float) mysqli_real_escape_string($connection, $_POST["temp_min"]);
+		$sun_shine_hr = (float) mysqli_real_escape_string($connection, $_POST["sun_shine_hr"]);
+		$weather_cond = mysqli_real_escape_string($connection, $_POST["weather_cond"]);
+		
+		$query = "INSERT INTO daily_weather (";
+		$query .= " division, record_date, rain_max, rain_min, temp_max, temp_min,";
+		$query .= " sun_shine_hr, weather_cond )";
+		$query .= " VALUES ('{$division}', '{$record_date}', {$rain_max}, {$rain_min}, {$temp_max}, {$temp_min}, {$sun_shine_hr}, '{$weather_cond}')";
+		
+		$result = mysqli_query($connection, $query);
+		confirm_query($result);
+		
+		echo "Inserted Successfully!";
+		
+		$_SESSION['daily_weather'] = NULL;
+	}
+	
+	if(isset($_POST['edit_submit'])) {
+
+		$division = $_SESSION['div_name'];
+		$record_date = $_SESSION['date'];
+		$req_id = $_SESSION['daily_weather']['id'];
+		
+		$rain_max = (float) mysqli_real_escape_string($connection, $_POST["rain_max"]);
+		$rain_min = (float) mysqli_real_escape_string($connection, $_POST["rain_min"]);
+		$temp_max = (float) mysqli_real_escape_string($connection, $_POST["temp_max"]);
+		$temp_min = (float) mysqli_real_escape_string($connection, $_POST["temp_min"]);
+		$sun_shine_hr = (float) mysqli_real_escape_string($connection, $_POST["sun_shine_hr"]);
+		$weather_cond = mysqli_real_escape_string($connection, $_POST["weather_cond"]);
+		
+		$query = "UPDATE daily_weather SET";
+		$query .= " division='{$division}', record_date='{$record_date}', rain_max={$rain_max}, rain_min={$rain_min},";
+		$query .= " temp_max={$temp_max}, temp_min={$temp_min}, sun_shine_hr={$sun_shine_hr}, weather_cond='{$weather_cond}' WHERE id={$req_id}";
+		
+		$result = mysqli_query($connection, $query);
+		confirm_query($result);
+		
+		echo "Updated Successfully!";
+		
+		$_SESSION['daily_weather'] = NULL;
+	}
+	
+	if(isset($_POST['del_entry'])) {
+		$division = $_SESSION['div_name'];
+		$record_date = $_SESSION['date'];
+		
+		$query = "DELETE FROM daily_weather WHERE division='{$division}' and record_date='{$record_date}'";
+		
+		$result = mysqli_query($connection, $query);
+		confirm_query($result);
+		
+		echo "Deleted Successfully!";
+		
+		$_SESSION['daily_weather'] = NULL;
+	}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,14 +108,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-        <style>
-          @media (min-width: 500px) {
-            .btn {
-              display: inline;
-							margin-left: 27%;
-            }
-          }
-        </style>
         <link rel="stylesheet" href="css/stylesheet.css">
 
         <?php $page_id = 8;?>
@@ -32,26 +122,34 @@
                 <h1>Divisional Weather Entry</h1>
                 <p></p>
                 <p></p>
-                <h3 style="color:#fff">Division</h3>
-                <form class="form-group">
-                        <select id="division" class="form-control input-group" style="height:70%;">
-                          <option></option>
-													<option>Balasan</option>
-                          <option>Bidhannagar</option>
-                          <option>Hansqua</option>
-                          <option>Kishoribag</option>
-                        </select>
-
-                        <div class="input-group">
-  	                        <input type="text" name="date_value" class="form-control" id="datepicker" value="" placeholder="" onChange="enable_add()">
-  	                        <span class="input-group-addon">
-  	                            <i class="glyphicon glyphicon-calendar"></i>
-  	                        </span>
-  	                    </div>
-
-                  <input type="submit" name="dt_sec_submit" class="btn btn-default" value="Click to Add" style="width:auto; margin:0;">
-                </form>
-
+				<form action="weather_input.php" method="post" class="form-horizontal">
+					<div class="form-group">
+						<label for="division" class="col-sm-1 control-label" style="margin-right:0;">Division</label>
+						<div class="col-sm-4">
+							<select id="division" name="div_name" class="form-control">
+							  <option></option>
+							  <option <?php if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
+							  <option <?php if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
+							  <option <?php if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
+							  <option <?php if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="datepicker" class="col-sm-1 control-label" style="margin-top:10px;margin-right:0;">Date</label>
+						<div class="col-sm-4">
+							<div class="input-group" style="width:100%;">
+								<input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-11 col-sm-offset-1">
+							<input type="submit" name="dt_sec_submit" class="btn btn-default" value="Submit" style="width:auto;">
+						</div>
+					</div>
+				</form>
             </div>
 
             <div class="tab-container">
@@ -61,64 +159,67 @@
               </ul>
               <div class="tab-content" style="background-color:#FFFFFF">
                 <div class="tab-pane active" id="tab1">
-                    <form class="form group" style="margin-top:15px;">
-                      <div class="input-group">
+                    <form class="form group" style="margin-top:15px;" action="weather_input.php" method="post">
+					  <?php if(isset($_SESSION['daily_weather'])) { $daily = $_SESSION['daily_weather']; } else { $daily = NULL; }?>
+					  <div class="input-group">
                         <label for="max_rain">RainFall Maximum (in mm)</label>
-                        <input type="number" placeholder="Maximum Rainfall" class="form form-control max_rain">
+                        <input type="text" name="rain_max" <?php if (isset($daily)) { ?> value=" <?php echo $daily['rain_max']; ?> " <?php } else { ?> placeholder= <?php echo "\"Max Rainfall (in mm)\""; ?> <?php } ?> class="form form-control max_rain">
                       </div>
                       <div class="input-group">
-                          <label for="min_rain">RainFall Minimum</label>
-                          <input type="number" placeholder="Minimum Rainfall" class="form form-control min_rain">
+                          <label for="min_rain">RainFall Minimum (in mm)</label>
+                          <input type="text" name="rain_min" <?php if (isset($daily)) { ?> value=" <?php echo $daily['rain_min']; ?> " <?php } else { ?> placeholder= <?php echo "\"Min Rainfall (in mm)\""; ?> <?php } ?> class="form form-control min_rain">
                       </div>
                       <div class="input-group">
                         <label for="max_temp">Temparature Maximum( in &degC)</label>
-                        <input type="number" placeholder="Maximum Temparature" class="form form-control max_temp">
+                        <input type="text" name="temp_max" <?php if (isset($daily)) { ?> value=" <?php echo $daily['temp_max']; ?> " <?php } else { ?> placeholder= <?php echo "\"Max Temparature\""; ?> <?php } ?> class="form form-control max_temp">
                       </div>
                       <div class="input-group">
                         <label for="min_temp">Temparature Minimum (in &degC)</label>
-                        <input type="number" placeholder="Minimum Temparature" class="form form-control min_temp">
+                        <input type="text" name="temp_min"  <?php if (isset($daily)) { ?> value=" <?php echo $daily['temp_min']; ?> " <?php } else { ?> placeholder= <?php echo "\"Min Temparature\""; ?> <?php } ?>  class="form form-control min_temp">
                       </div>
                       <div class="input-group">
                         <label for="sun_hour">Sunshine Hour</label>
-                        <input type="number" placeholder="Sunshine Hour" class="form form-control sun_hour">
+                        <input type="text" name="sun_shine_hr"  <?php if (isset($daily)) { ?> value=" <?php echo $daily['sun_shine_hr']; ?> " <?php } else { ?> placeholder= <?php echo "\"Sunshine Hour (in mm)\""; ?> <?php } ?>  class="form form-control sun_hour">
                       </div>
                       <div class="input-group">
                         <label for="weath_cond">Weather Condition</label>
-                        <input type="text" placeholder="Weather Condition" class="form form-control weath_cond">
+                        <input type="text" name="weather_cond"  <?php if (isset($daily)) { ?> value=" <?php echo $daily['weather_cond']; ?> " <?php } else { ?> placeholder= <?php echo "\"Weather Condition\""; ?> <?php } ?>  class="form form-control weath_cond">
                       </div>
-                      <input type="submit" class="btn btn-success" value="Add Data" style="margin:10px 0 10px 0px;position:relative;">
-                      <input type="submit" class="btn btn-danger" value="Delete Entry">
+                      <input type="submit" name="edit_submit" class="btn btn-success" value="Edit_Entry" style="margin:10px 0 10px 0px;position:relative;">
+                      <input type="submit" name="del_entry" class="btn btn-danger" value="Delete Entry">
 
 
                   </form>
                 </div>
+				
+				
                 <div class="tab-pane" id="tab2">
-                    <form class="form group" style="margin-top:15px;">
+                    <form class="form group" style="margin-top:15px;" action="weather_input.php" method="post">
                       <div class="input-group">
                         <label for="max_rain">RainFall Maximum (in mm)</label>
-                        <input type="number" placeholder="Maximum Rainfall" class="form form-control max_rain">
+                        <input type="text" name="rain_max" placeholder="Maximum Rainfall" class="form form-control max_rain">
                       </div>
                       <div class="input-group">
-                          <label for="min_rain">RainFall Minimum</label>
-                          <input type="number" placeholder="Minimum Rainfall" class="form form-control min_rain">
+                          <label for="min_rain">RainFall Minimum (in mm)</label>
+                          <input type="text" name="rain_min" placeholder="Minimum Rainfall" class="form form-control min_rain">
                       </div>
                       <div class="input-group">
                         <label for="max_temp">Temparature Maximum( in &degC)</label>
-                        <input type="number" placeholder="Maximum Temparature" class="form form-control max_temp">
+                        <input type="text" name="temp_max" placeholder="Maximum Temparature" class="form form-control max_temp">
                       </div>
                       <div class="input-group">
                         <label for="min_temp">Temparature Minimum (in &degC)</label>
-                        <input type="number" placeholder="Minimum Temparature" class="form form-control min_temp">
+                        <input type="text" name="temp_min" placeholder="Minimum Temparature" class="form form-control min_temp">
                       </div>
                       <div class="input-group">
                         <label for="sun_hour">Sunshine Hour</label>
-                        <input type="number" placeholder="Sunshine Hour" class="form form-control sun_hour">
+                        <input type="text" name="sun_shine_hr" placeholder="Sunshine Hour" class="form form-control sun_hour">
                       </div>
                       <div class="input-group">
                         <label for="weath_cond">Weather Condition</label>
-                        <input type="text" placeholder="Weather Condition" class="form form-control weath_cond">
+                        <input type="text" name="weather_cond" placeholder="Weather Condition" class="form form-control weath_cond">
                       </div>
-                      <input type="submit" class="btn btn-success" value="Add Data" style="margin:10px 0 10px 20px;"><p></p>
+                      <input type="submit" name="add_submit"  class="btn btn-success" value="Add Data" style="margin:10px 0 10px 20px;"><p></p>
                     </form>
                 </div>
               </div>
@@ -136,3 +237,6 @@
         </script>
     </body>
 </html>
+<?php
+	end_connection($connection);
+?>

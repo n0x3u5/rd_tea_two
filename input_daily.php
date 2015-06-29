@@ -92,8 +92,8 @@
 
 		$result = mysqli_query($connection, $query);
 
-    confirm_query($result);
-    echo "Updated successfully!";
+		confirm_query($result);
+		echo "Updated successfully!";
 
 		$_SESSION['daily_plucking'] = NULL;
 	}
@@ -105,8 +105,8 @@
 		$query = "DELETE FROM daily_plucking WHERE short_sec_name='{$short_sec_name}' and record_date='{$record_date}'";
 
 		$result = mysqli_query($connection, $query);
-    confirm_query($result);
-    echo "Deleted successfully!";
+		confirm_query($result);
+		echo "Deleted successfully!";
 
 		$_SESSION['daily_plucking'] = NULL;
 	}

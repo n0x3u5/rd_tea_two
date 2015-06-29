@@ -2,9 +2,9 @@
 	require_once('/includes/sessions.php');
 	require_once('/includes/functions.php');
 
-	// if(!isset($_SESSION['user'])) {
-	// 	redirect_to("index.php");
-	// }
+	if(!isset($_SESSION['user'])) {
+		redirect_to("index.php");
+	}
 ?>
 <?php
 	$connection = make_connection();
