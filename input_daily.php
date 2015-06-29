@@ -168,10 +168,10 @@
 					<div class="tab-pane active" id="tab1">
 						<form action="input_daily.php" method="post">
 							<?php if(isset($_SESSION['daily_plucking'])) { $daily = $_SESSION['daily_plucking']; } else { $daily = NULL; }?>
-									<div class="input-group">
+									<!-- <div class="input-group">
 											<input class="form-control" name="prune"  type="text" <?php if (isset($daily)) { ?> value=" <?php echo $daily['prune']; ?> " <?php } else { ?> placeholder= <?php echo "\"Prune Type\""; ?> <?php } ?> >
 											<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
-									</div>
+									</div> -->
 									<div class="input-group">
 									    <input class="form-control" name="plucked_area" type="text" <?php if (isset($daily)) { ?> value=" <?php echo $daily['plucked_area']; ?> " <?php } else { ?>placeholder=<?php echo "\"Area Plucked\""; ?><?php } ?> >
 									    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
@@ -223,10 +223,10 @@
 					</div>
 					<div class="tab-pane" id="tab2">
 						<form action="input_daily.php" method="post">
-		                    <div class="input-group">
+		                    <!-- <div class="input-group">
 		                        <input class="form-control" name="prune"  type="text" placeholder="Prune Type">
 		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
-		                    </div>
+		                    </div> -->
 		                    <div class="input-group">
 		                        <input class="form-control" name="plucked_area" type="text" placeholder="Plucked Area">
 		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
