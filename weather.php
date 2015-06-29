@@ -6,6 +6,11 @@
 		redirect_to("index.php");
 	}
 ?>
+
+<?php
+	
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,6 +21,17 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/stylesheet.css">
+		<style>
+			.btn-default{
+				margin-top:10px;
+			}
+			.dataTables_length{
+				padding-top:10px;
+			}
+			.input-group{
+				margin-top:10px;
+			}
+		</style>
         <?php $page_id = 6;?>
     </head>
     <body>
@@ -28,37 +44,30 @@
                 <h1>Divisional Weather Details </h1>
                 <p></p>
                 <p></p>
-                <h3 style="color:#fff">Division
-                    <form>
+                <h3 style="color:#fff">Division</h3>
+
+                <form style="">
                         <select id="division" name="div_name" class="form-control input-group" style="height:60%;">
                           <option></option>
-						  <option <?php if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
-						  <option <?php if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
-						  <option <?php if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
-						  <option <?php if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
+						  <option <?php //if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
+						  <option <?php //if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
+						  <option <?php //if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
+						  <option <?php //if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
                         </select>
-                    </form>
-                </h3>
-                <form class="form-inline">
-                  <div class="form-group">
-                    <select id="start_year" class="form-control">
-                      <option>2015</option>
-                      <option>2016</option>
-                      <option>2017</option>
-                      <option>2018</option>
-                      <option>2019</option>
-                    </select>
+                
+                   <div>
+					
+					<select id="start_year" name="" class="form-control input-group">
+							<option>Select year</option>
+							<option>2015</option>
+							<option>2016</option>
+							<option>2017</option>
+							<option>2018</option>
+							<option>2019</option>
+					</select>
                   </div>
-                  <div class="form-group">
-                    <select id="end_year" class="form-control">
-                      <option>2015</option>
-                      <option>2016</option>
-                      <option>2017</option>
-                      <option>2018</option>
-                      <option>2019</option>
-                    </select>
-                  </div>
-                  <button type="submit" class="btn btn-default" style="margin-top:0px;">Get Data</button>
+        
+                  <button type="submit" name="div_date" class="btn btn-default">Get Data</button>
                 </form>
 
             </div>
@@ -92,7 +101,7 @@
                                 <td>9</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>11-06-2015</td>
                                 <td>00</td>
                                 <td>00</td>
                                 <td>31</td>
@@ -101,7 +110,7 @@
                                 <td>11</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>12-06-2015</td>
                                 <td>80</td>
                                 <td>100</td>
                                 <td>35</td>
@@ -110,7 +119,7 @@
                                 <td>11</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>13-06-2015</td>
                                 <td>80</td>
                                 <td>100</td>
                                 <td>35</td>
@@ -119,7 +128,7 @@
                                 <td>10</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>11-07-2015</td>
                                 <td>0</td>
                                 <td>90</td>
                                 <td>25</td>
@@ -128,7 +137,7 @@
                                 <td>9</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>11-07-2016</td>
                                 <td>00</td>
                                 <td>00</td>
                                 <td>31</td>
@@ -137,7 +146,7 @@
                                 <td>11</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>09-06-2016</td>
                                 <td>80</td>
                                 <td>100</td>
                                 <td>35</td>
@@ -146,7 +155,7 @@
                                 <td>11</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>10-09-2016</td>
                                 <td>80</td>
                                 <td>100</td>
                                 <td>35</td>
@@ -155,7 +164,7 @@
                                 <td>10</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>10-06-2017</td>
                                 <td>0</td>
                                 <td>90</td>
                                 <td>25</td>
@@ -164,7 +173,7 @@
                                 <td>9</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>13-07-2015</td>
                                 <td>00</td>
                                 <td>00</td>
                                 <td>31</td>
@@ -173,7 +182,7 @@
                                 <td>11</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>14-06-2015</td>
                                 <td>80</td>
                                 <td>100</td>
                                 <td>35</td>
@@ -182,7 +191,7 @@
                                 <td>11</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>27-06-2015</td>
                                 <td>80</td>
                                 <td>100</td>
                                 <td>35</td>
@@ -191,7 +200,7 @@
                                 <td>10</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>18-06-2015</td>
                                 <td>0</td>
                                 <td>90</td>
                                 <td>25</td>
@@ -200,7 +209,7 @@
                                 <td>9</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>18-07-2015</td>
                                 <td>00</td>
                                 <td>00</td>
                                 <td>31</td>
@@ -209,7 +218,7 @@
                                 <td>11</td>
                             </tr>
                             <tr>
-                                <td>10-06-2015</td>
+                                <td>10-08-2016</td>
                                 <td>80</td>
                                 <td>100</td>
                                 <td>35</td>
