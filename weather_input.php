@@ -39,63 +39,63 @@
 	if (isset($_POST['add_submit'])) {
 		$division = $_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
-		
+
 		$rain_max = (float) mysqli_real_escape_string($connection, $_POST["rain_max"]);
 		$rain_min = (float) mysqli_real_escape_string($connection, $_POST["rain_min"]);
 		$temp_max = (float) mysqli_real_escape_string($connection, $_POST["temp_max"]);
 		$temp_min = (float) mysqli_real_escape_string($connection, $_POST["temp_min"]);
 		$sun_shine_hr = (float) mysqli_real_escape_string($connection, $_POST["sun_shine_hr"]);
 		$weather_cond = mysqli_real_escape_string($connection, $_POST["weather_cond"]);
-		
+
 		$query = "INSERT INTO daily_weather (";
 		$query .= " division, record_date, rain_max, rain_min, temp_max, temp_min,";
 		$query .= " sun_shine_hr, weather_cond )";
 		$query .= " VALUES ('{$division}', '{$record_date}', {$rain_max}, {$rain_min}, {$temp_max}, {$temp_min}, {$sun_shine_hr}, '{$weather_cond}')";
-		
+
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
-		
+
 		echo "Inserted Successfully!";
-		
+
 		$_SESSION['daily_weather'] = NULL;
 	}
-	
+
 	if(isset($_POST['edit_submit'])) {
 
 		$division = $_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
 		$req_id = $_SESSION['daily_weather']['id'];
-		
+
 		$rain_max = (float) mysqli_real_escape_string($connection, $_POST["rain_max"]);
 		$rain_min = (float) mysqli_real_escape_string($connection, $_POST["rain_min"]);
 		$temp_max = (float) mysqli_real_escape_string($connection, $_POST["temp_max"]);
 		$temp_min = (float) mysqli_real_escape_string($connection, $_POST["temp_min"]);
 		$sun_shine_hr = (float) mysqli_real_escape_string($connection, $_POST["sun_shine_hr"]);
 		$weather_cond = mysqli_real_escape_string($connection, $_POST["weather_cond"]);
-		
+
 		$query = "UPDATE daily_weather SET";
 		$query .= " division='{$division}', record_date='{$record_date}', rain_max={$rain_max}, rain_min={$rain_min},";
 		$query .= " temp_max={$temp_max}, temp_min={$temp_min}, sun_shine_hr={$sun_shine_hr}, weather_cond='{$weather_cond}' WHERE id={$req_id}";
-		
+
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
-		
+
 		echo "Updated Successfully!";
-		
+
 		$_SESSION['daily_weather'] = NULL;
 	}
-	
+
 	if(isset($_POST['del_entry'])) {
 		$division = $_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
-		
+
 		$query = "DELETE FROM daily_weather WHERE division='{$division}' and record_date='{$record_date}'";
-		
+
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
-		
+
 		echo "Deleted Successfully!";
-		
+
 		$_SESSION['daily_weather'] = NULL;
 	}
 ?>
@@ -185,14 +185,14 @@
                         <label for="weath_cond">Weather Condition</label>
                         <input type="text" name="weather_cond"  <?php if (isset($daily)) { ?> value=" <?php echo $daily['weather_cond']; ?> " <?php } else { ?> placeholder= <?php echo "\"Weather Condition\""; ?> <?php } ?>  class="form form-control weath_cond">
                       </div>
-                      <input type="submit" name="edit_submit" class="btn btn-success" value="Edit_Entry" style="margin:10px 0 10px 0px;position:relative;">
+                      <input type="submit" name="edit_submit" class="btn btn-success" value="Edit Entry" style="margin:10px 0 10px 0px;position:relative;">
                       <input type="submit" name="del_entry" class="btn btn-danger" value="Delete Entry">
 
 
                   </form>
                 </div>
-				
-				
+
+
                 <div class="tab-pane" id="tab2">
                     <form class="form group" style="margin-top:15px;" action="weather_input.php" method="post">
                       <div class="input-group">

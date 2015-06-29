@@ -120,9 +120,17 @@
         <title>R.D. Tea | Manage Sections</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+				<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+				<link rel="stylesheet" href="css/bootstrap-tokenfield.css" type="text/css">
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="icon" href="images/logo_rdtea.png"/>
+				<style>
+					.btn-default {
+						background: #BF360C;
+						color: #FFFFFF;
+						border: none;
+					}
+				</style>
         <?php $page_id = 7;?>
     </head>
     <body>
@@ -177,6 +185,14 @@
 									    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 									</div>
 									<div class="input-group">
+											<input id="wrkgrp1" class="form-control" name="wrk_grp" type="text" placeholder="Worker Group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+									</div>
+									<div class="input-group">
+											<input id="grpleaf1" class="form-control" name="grp_leaf" type="text" placeholder="Group Leaves">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+									</div>
+									<div class="input-group">
 									    <input class="form-control" name="leaf_plucked" type="text" <?php if (isset($daily)) { ?> value=" <?php echo $daily['leaf_plucked']; ?> " <?php } else { ?> placeholder= <?php echo "\"Leaf Plucked\""; ?> <?php } ?> >
 									    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 									</div>
@@ -184,6 +200,10 @@
 									      <input class="form-control" name="hz_qty" type="text" <?php if (isset($daily)) { ?> value=" <?php echo $daily['hz_qty']; ?> " <?php } else { ?> placeholder= <?php echo "\"Hazri Quantity\""; ?> <?php } ?> >
 									      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
 									  </div>
+										<div class="input-group">
+												<input id="grphzar1" class="form-control" name="grp_hz_ar" type="text" placeholder="Group Hazri Area">
+												<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+										</div>
 									<div class="input-group">
 									    <input class="form-control"  name="hz_area" type="text" <?php if (isset($daily)) { ?> value=" <?php echo $daily['hz_area']; ?> " <?php } else { ?> placeholder= <?php echo "\"Hazri Area\""; ?> <?php } ?> >
 									    <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
@@ -197,10 +217,14 @@
 									    <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
 									</div>
 									<div class="input-group">
+											<input id="grpmd1" class="form-control" name="grp_md" type="text" placeholder="Group Mandays">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+									</div>
+									<div class="input-group">
 									    <input class="form-control" name="mandays" type="text" <?php if (isset($daily)) { ?> value=" <?php echo $daily['mandays']; ?> " <?php } else { ?> placeholder= <?php echo "\"Mandays\""; ?> <?php } ?> >
 									    <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
 									</div>
-									<button type="button" value="Delete Entry" class="btn btn-default" data-toggle="modal" data-target="#confirmModal">Delete Entry</button>
+									<button type="button" value="Delete Entry" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal">Delete Entry</button>
 									<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModallabel">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
@@ -231,14 +255,26 @@
 		                        <input class="form-control" name="plucked_area" type="text" placeholder="Plucked Area">
 		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 		                    </div>
+												<div class="input-group">
+		                        <input id="wrkgrp2" class="form-control" name="wrk_grp" type="text" placeholder="Worker Group">
+		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+		                    </div>
+												<div class="input-group">
+		                        <input id="grpleaf2" class="form-control" name="grp_leaf" type="text" placeholder="Group Leaves">
+		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+		                    </div>
 		                    <div class="input-group">
 		                        <input class="form-control" name="leaf_plucked" type="text" placeholder="Total Leaf">
 		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 		                    </div>
-			                    <div class="input-group">
-			                        <input class="form-control" name="hz_qty" type="text" placeholder="Hazri Quantity">
-			                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
-		                    	</div>
+		                    <div class="input-group">
+		                        <input class="form-control" name="hz_qty" type="text" placeholder="Hazri Quantity">
+		                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
+	                    	</div>
+												<div class="input-group">
+		                        <input id="grphzar2" class="form-control" name="grp_hz_ar" type="text" placeholder="Group Hazri Area">
+		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+		                    </div>
 		                    <div class="input-group">
 		                        <input class="form-control"  name="hz_area" type="text" placeholder="Hazri Area">
 		                        <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
@@ -250,6 +286,10 @@
 		                    <div class="input-group">
 		                        <input class="form-control" name="db_area" type="text" placeholder="Doubly Area">
 		                        <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
+		                    </div>
+												<div class="input-group">
+		                        <input id="grpmd2" class="form-control" name="grp_md" type="text" placeholder="Group Mandays">
+		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 		                    </div>
 		                    <div class="input-group">
 		                        <input class="form-control" name="mandays" type="text" placeholder="Mandays">
@@ -264,9 +304,18 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<script>
+		<script src="scripts/bootstrap-tokenfield.min.js"></script>
+		<script type="text/javascript">
 				$(function() {
-				$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
+					$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
+					$('#wrkgrp1, #wrkgrp2').tokenfield({
+						autocomplete: {
+							source: ['P. Men','P. Women','Temp. Men','Temp. Women','Incentives'],
+							delay: 100
+						},
+						showAutocompleteOnFocus: true
+					});
+					$('#grpleaf1, #grpleaf2, #grphzar1, #grphzar2, #grpmd1, #grpmd2').tokenfield();
 				});
 		</script>
     </body>
