@@ -1,6 +1,6 @@
 <?php
     function nav_echoer($page_id) { ?>
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -19,34 +19,32 @@
                     <ul class="nav navbar-nav">
                         <li <?php if($page_id == 1) {?> class="active"><a href="#"> <?php } else { ?> ><a href="manage_users.php"> <?php } ?> Manage Users</a></li>
                         <li <?php if($page_id == 2) {?> class="active"><a href="#"> <?php } else { ?> ><a href="manage_sections.php"> <?php } ?> Manage Sections</a></li>
-                        <li <?php if($page_id == 4) {?> class="active"><a href="#"> <?php } else { ?> ><a href="sectional_yearly_review.php"> <?php } ?> Yearly Report</a></li>
-                        <li <?php if($page_id == 5) {?> class="active"><a href="#"> <?php } else { ?> ><a href="sectional_daily_review.php"> <?php } ?> Daily Report</a></li>
-                        <li <?php if($page_id == 6) {?> class="active"><a href="#"> <?php } else { ?> ><a href="weather.php"> <?php } ?> Weather Report</a></li>
-                        <li <?php if($page_id == 7) {?> class="active"><a href="#"> <?php } else { ?> ><a href="input_daily.php"> <?php } ?> Plucking Entry</a></li>
-                        <li <?php if($page_id == 8) {?> class="active"><a href="#"> <?php } else { ?> ><a href="weather_input.php"> <?php } ?> Weather Entry</a></li>
-                        <li <?php if($page_id == 9) {?> class="active"><a href="#"> <?php } else { ?> ><a href="daily_spraying_entry.php"> <?php } ?> Spraying Entry</a></li>
-                        <li <?php if($page_id == 10) {?> class="active"><a href="#"> <?php } else { ?> ><a href="spray_chit.php"> <?php } ?> Spraying Chit</a></li>
-                        <!-- <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <li <?php if($page_id == 7 || $page_id == 8 || $page_id == 9) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Entry <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
+                                <li><a href="input_daily.php">Plucking Entry</a></li>
+                                <li><a href="daily_spraying_entry.php">Spraying Entry</a></li>
+                                <li><a href="weather_input.php">Weather Entry</a></li>
                             </ul>
-                        </li>-->
+                        </li>
+                        <li <?php if($page_id == 4 || $page_id == 5 || $page_id == 6 || $page_id == 10) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="sectional_yearly_review.php">Yearly Report</a></li>
+                                <li><a href="sectional_daily_review.php">Daily Report</a></li>
+                                <li><a href="weather.php">Weather Report</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Leaf Chit</a></li>
+                                <li><a href="spray_chit.php">Spraying Chit</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <p class="navbar-text" style="color:#FFFFFF;">Signed in as <?php if(isset($_SESSION)) { echo $_SESSION['user']; } else { echo "Invalid User!"; } ?> </p>
-                        <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account Actions<span class="caret"></span></a>
+                        <li <?php if($page_id == 3) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Signed in as <?php if(isset($_SESSION)) { echo $_SESSION['user']; } else { echo "Invalid User!"; } ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="form_process_logout.php">Log Out</a></li>
                             <li><a href="update_profile.php">Your Profile</a></li>
-                            <li><a href="#">Another action</a></li>
                             <li><a href="#">Something else here</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">Separated link</a></li>
