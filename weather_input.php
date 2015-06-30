@@ -12,8 +12,8 @@
 	//var_dump($_POST);echo "<br><hr>";
 	if(isset($_POST["dt_sec_submit"])){
 		$req_date = date('Y-m-d', strtotime($_POST["date_value"]));
-		$req_div_name = $_POST["div_name"];
-		$_SESSION['div_name'] = $req_div_name;
+		//$req_div_name = $_POST["div_name"];
+		//$_SESSION['div_name'] = $req_div_name;
 		$_SESSION['date'] = $req_date;
 
 
@@ -21,7 +21,7 @@
 		// echo "<br>got div_name =" .$req_div_name."<br>";
 		// var_dump($req_date);echo "<br>"; var_dump($req_div_name);
 
-		$query = "SELECT * FROM daily_weather WHERE division='{$req_div_name}' and record_date='{$req_date}'";
+		$query = "SELECT * FROM daily_weather WHERE division='Hansqua' and record_date='{$req_date}'";
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
@@ -37,20 +37,20 @@
 
 <?php
 	if (isset($_POST['add_submit'])) {
-		$division = $_SESSION['div_name'];
+		$division = "Hansqua"; //$_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
 
-		$rain_max = (float) mysqli_real_escape_string($connection, $_POST["rain_max"]);
-		$rain_min = (float) mysqli_real_escape_string($connection, $_POST["rain_min"]);
+		$rain_day = (float) mysqli_real_escape_string($connection, $_POST["rain_day"]);
+		$rain_night = (float) mysqli_real_escape_string($connection, $_POST["rain_night"]);
 		$temp_max = (float) mysqli_real_escape_string($connection, $_POST["temp_max"]);
 		$temp_min = (float) mysqli_real_escape_string($connection, $_POST["temp_min"]);
 		$sun_shine_hr = (float) mysqli_real_escape_string($connection, $_POST["sun_shine_hr"]);
 		$weather_cond = mysqli_real_escape_string($connection, $_POST["weather_cond"]);
 
 		$query = "INSERT INTO daily_weather (";
-		$query .= " division, record_date, rain_max, rain_min, temp_max, temp_min,";
+		$query .= " division, record_date, rain_day, rain_night, temp_max, temp_min,";
 		$query .= " sun_shine_hr, weather_cond )";
-		$query .= " VALUES ('{$division}', '{$record_date}', {$rain_max}, {$rain_min}, {$temp_max}, {$temp_min}, {$sun_shine_hr}, '{$weather_cond}')";
+		$query .= " VALUES ('{$division}', '{$record_date}', {$rain_day}, {$rain_night}, {$temp_max}, {$temp_min}, {$sun_shine_hr}, '{$weather_cond}')";
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
@@ -62,19 +62,19 @@
 
 	if(isset($_POST['edit_submit'])) {
 
-		$division = $_SESSION['div_name'];
+		$division = "Hansqua"; //$_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
 		$req_id = $_SESSION['daily_weather']['id'];
 
-		$rain_max = (float) mysqli_real_escape_string($connection, $_POST["rain_max"]);
-		$rain_min = (float) mysqli_real_escape_string($connection, $_POST["rain_min"]);
+		$rain_day = (float) mysqli_real_escape_string($connection, $_POST["rain_day"]);
+		$rain_night = (float) mysqli_real_escape_string($connection, $_POST["rain_night"]);
 		$temp_max = (float) mysqli_real_escape_string($connection, $_POST["temp_max"]);
 		$temp_min = (float) mysqli_real_escape_string($connection, $_POST["temp_min"]);
 		$sun_shine_hr = (float) mysqli_real_escape_string($connection, $_POST["sun_shine_hr"]);
 		$weather_cond = mysqli_real_escape_string($connection, $_POST["weather_cond"]);
 
 		$query = "UPDATE daily_weather SET";
-		$query .= " division='{$division}', record_date='{$record_date}', rain_max={$rain_max}, rain_min={$rain_min},";
+		$query .= " division='{$division}', record_date='{$record_date}', rain_day={$rain_day}, rain_night={$rain_night},";
 		$query .= " temp_max={$temp_max}, temp_min={$temp_min}, sun_shine_hr={$sun_shine_hr}, weather_cond='{$weather_cond}' WHERE id={$req_id}";
 
 		$result = mysqli_query($connection, $query);
@@ -86,7 +86,7 @@
 	}
 
 	if(isset($_POST['del_entry'])) {
-		$division = $_SESSION['div_name'];
+		$division = "Hansqua"; //$_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
 
 		$query = "DELETE FROM daily_weather WHERE division='{$division}' and record_date='{$record_date}'";
@@ -124,16 +124,16 @@
                 <p></p>
 				<form action="weather_input.php" method="post" class="form-horizontal">
 					<div class="form-group">
-						<label for="division" class="col-sm-1 control-label" style="margin-right:0;">Division</label>
+						<!-- <label for="division" class="col-sm-1 control-label" style="margin-right:0;">Division</label>
 						<div class="col-sm-4">
 							<select id="division" name="div_name" class="form-control">
 							  <option></option>
-							  <option <?php if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
-							  <option <?php if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
-							  <option <?php if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
-							  <option <?php if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
+							  <option <?php //if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
+							  <option <?php //if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
+							  <option <?php //if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
+							  <option <?php //if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
 							</select>
-						</div>
+						</div> -->
 					</div>
 					<div class="form-group">
 						<label for="datepicker" class="col-sm-1 control-label" style="margin-top:10px;margin-right:0;">Date</label>
@@ -162,12 +162,12 @@
                     <form class="form group" style="margin-top:15px;" action="weather_input.php" method="post">
 					  <?php if(isset($_SESSION['daily_weather'])) { $daily = $_SESSION['daily_weather']; } else { $daily = NULL; }?>
 					  <div class="input-group">
-                        <label for="max_rain">RainFall Maximum (in mm)</label>
-                        <input type="text" name="rain_max" <?php if (isset($daily)) { ?> value=" <?php echo $daily['rain_max']; ?> " <?php } else { ?> placeholder= <?php echo "\"Max Rainfall (in mm)\""; ?> <?php } ?> class="form form-control max_rain">
+                        <label for="max_rain">RainFall during Day (in mm)</label>
+                        <input type="text" name="rain_day" <?php if (isset($daily)) { ?> value=" <?php echo $daily['rain_day']; ?> " <?php } else { ?> placeholder= <?php echo "\"Max Rainfall (in mm)\""; ?> <?php } ?> class="form form-control max_rain">
                       </div>
                       <div class="input-group">
-                          <label for="min_rain">RainFall Minimum (in mm)</label>
-                          <input type="text" name="rain_min" <?php if (isset($daily)) { ?> value=" <?php echo $daily['rain_min']; ?> " <?php } else { ?> placeholder= <?php echo "\"Min Rainfall (in mm)\""; ?> <?php } ?> class="form form-control min_rain">
+                          <label for="min_rain">RainFall during Night (in mm)</label>
+                          <input type="text" name="rain_night" <?php if (isset($daily)) { ?> value=" <?php echo $daily['rain_night']; ?> " <?php } else { ?> placeholder= <?php echo "\"Min Rainfall (in mm)\""; ?> <?php } ?> class="form form-control min_rain">
                       </div>
                       <div class="input-group">
                         <label for="max_temp">Temparature Maximum( in &degC)</label>
@@ -196,12 +196,12 @@
                 <div class="tab-pane" id="tab2">
                     <form class="form group" style="margin-top:15px;" action="weather_input.php" method="post">
                       <div class="input-group">
-                        <label for="max_rain">RainFall Maximum (in mm)</label>
-                        <input type="text" name="rain_max" placeholder="Maximum Rainfall" class="form form-control max_rain">
+                        <label for="max_rain">RainFall during Day (in mm)</label>
+                        <input type="text" name="rain_day" placeholder="Daytime Rainfall" class="form form-control max_rain">
                       </div>
                       <div class="input-group">
-                          <label for="min_rain">RainFall Minimum (in mm)</label>
-                          <input type="text" name="rain_min" placeholder="Minimum Rainfall" class="form form-control min_rain">
+                          <label for="min_rain">RainFall during Night (in mm)</label>
+                          <input type="text" name="rain_night" placeholder="Nighttime Rainfall" class="form form-control min_rain">
                       </div>
                       <div class="input-group">
                         <label for="max_temp">Temparature Maximum( in &degC)</label>
