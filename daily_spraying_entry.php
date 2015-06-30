@@ -435,7 +435,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="left_infint1" class="col-sm-5 control-label">Infection Intensity</label>
+                        <label for="left_infint1" class="col-sm-5 control-label">Infestation Intensity</label>
                         <div class="col-sm-7">
                           <select class="form-control" name="infctn_intensity" id="left_infint1">
                             <option></option>
@@ -836,7 +836,7 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="left_infint2" class="col-sm-5 control-label">Infection Intensity</label>
+                        <label for="left_infint2" class="col-sm-5 control-label">Infestation Intensity</label>
                         <div class="col-sm-7">
                           <select class="form-control" name="infctn_intensity" id="left_infint2">
                             <option></option>
