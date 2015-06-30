@@ -135,7 +135,7 @@
 			              </div>
 
                   <button type="submit" name="div_date_submit" class="btn btn-default">Get Data</button>
-									
+
                 </form>
 
             </div>
@@ -174,7 +174,6 @@
 																	</tr>
 														<?php
 																}
-															}
 														?>
 
                         </tbody>
@@ -202,13 +201,52 @@
 											<tbody>
 																<tr>
 																	<td>NA</td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
+																	<td>
+																		<?php
+																				$query_sum= "SELECT SUM(rain_day) as day_sum FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
+																				$result = mysqli_query($connection, $query_sum);
+																			  confirm_query($result);
+
+																				$sum_rain_day = mysqli_fetch_assoc($result);
+																				echo $sum_rain_day['day_sum'];
+																		?>
+																	</td>
+																	<td>
+																		<?php
+																				$query_sum= "SELECT SUM(rain_night) as night_sum FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
+																				$result = mysqli_query($connection, $query_sum);
+																			  confirm_query($result);
+
+																				$sum_rain_night = mysqli_fetch_assoc($result);
+																				echo $sum_rain_night['night_sum'];
+																		?>
+																	</td>
+																	<td>
+																		<?php
+																				$query_avg= "SELECT AVG(temp_max) as max_temp_avg FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
+																				$result = mysqli_query($connection, $query_avg);
+																			  confirm_query($result);
+
+																				$avg_max_temp = mysqli_fetch_assoc($result);
+																				echo round ($avg_max_temp['max_temp_avg'], 2);
+																		?>
+																	</td>
+																	<td>
+																		<?php
+																				$query_avg= "SELECT AVG(temp_min) as min_temp_avg FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
+																				$result = mysqli_query($connection, $query_avg);
+																			  confirm_query($result);
+
+																				$avg_min_temp = mysqli_fetch_assoc($result);
+																				echo round($avg_min_temp['min_temp_avg'], 2);
+																		?>
+																	</td>
 																	<td>NA</td>
 																	<td>NA</td>
 																</tr>
+													<?php
+														}
+													?>
 											</tbody>
 									</table>
 							</div>
