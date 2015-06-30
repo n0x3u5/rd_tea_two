@@ -1,14 +1,14 @@
 <?php
 	require_once('/includes/sessions.php');
 	require_once('/includes/functions.php');
-	
+
 	if(!isset($_SESSION['user'])) {
 		redirect_to("index.php");
 	}
 ?>
 
 <?php
-	
+
 ?>
 
 <!DOCTYPE html>
@@ -46,29 +46,32 @@
                 <p></p>
                 <h3 style="color:#fff">Division</h3>
 
-                <form style="">
-                        <select id="division" name="div_name" class="form-control input-group" style="height:60%;">
-                          <option></option>
-						  <option <?php //if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
-						  <option <?php //if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
-						  <option <?php //if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
-						  <option <?php //if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
-                        </select>
-                
-                   <div>
-					
-					<select id="start_year" name="" class="form-control input-group">
-							<option>Select year</option>
-							<option>2015</option>
-							<option>2016</option>
-							<option>2017</option>
-							<option>2018</option>
-							<option>2019</option>
-					</select>
-                  </div>
-        
-                  <button type="submit" name="div_date" class="btn btn-default">Get Data</button>
-                </form>
+                <form style="form-horizontal">
+									<div style="display:block;">
+										<div class="col-sm-6 row">
+			              		<select id="division" name="div_name" class="form-control" style="height:60%;">
+			                  <option>Select Division</option>
+									  		<option <?php //if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
+									  		<option <?php //if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
+									  		<option <?php //if($req_div_name == 'Hansqua') { echo "selected"; }  ?> 	>Hansqua</option>
+									  		<option <?php //if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
+			                        </select>
+											</div>
+	                  <div class="col-sm-6 row">
+
+											<select id="start_year" name="" class="form-control">
+												<option>Select year</option>
+												<option>2015</option>
+												<option>2016</option>
+												<option>2017</option>
+												<option>2018</option>
+												<option>2019</option>
+											</select>
+	                  </div>
+
+	                  <button type="submit" name="div_date" class="btn btn-default">Get Data</button>
+                	</div>
+								</form>
 
             </div>
 
