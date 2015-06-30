@@ -156,9 +156,3 @@ div.dataTables_wrapper {
     -moz-box-shadow: 1px 1px 5px 1px rgba(145,145,145,1);
     box-shadow: 1px 1px 5px 1px rgba(145,145,145,1);
 }
-.dataTables_filter{
-    margin-top: 30px;
-}
-.dataTables_length{
-    margin-top: 30px;
-}

@@ -70,13 +70,10 @@
 				margin-top:10px;
 			}
 			.dataTables_length{
+				padding-top:10px;
 			}
 			.input-group{
 				margin-top:10px;
-			}
-			.card_style {
-				margin-top: 30px;
-				text-align: center;
 			}
 		</style>
         <?php $page_id = 6;?>
@@ -135,7 +132,6 @@
 			              </div>
 
                   <button type="submit" name="div_date_submit" class="btn btn-default">Get Data</button>
-									
                 </form>
 
             </div>
@@ -176,44 +172,147 @@
 																}
 															}
 														?>
+                            <!-- <tr>
+                                <td>10-06-2015</td>
+                                <td>0</td>
+                                <td>90</td>
+                                <td>25</td>
+                                <td>20</td>
+                                <td>8</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>11-06-2015</td>
+                                <td>00</td>
+                                <td>00</td>
+                                <td>31</td>
+                                <td>29</td>
+                                <td>10</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>12-06-2015</td>
+                                <td>80</td>
+                                <td>100</td>
+                                <td>35</td>
+                                <td>29</td>
+                                <td>7</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>13-06-2015</td>
+                                <td>80</td>
+                                <td>100</td>
+                                <td>35</td>
+                                <td>29</td>
+                                <td>12</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>11-07-2015</td>
+                                <td>0</td>
+                                <td>90</td>
+                                <td>25</td>
+                                <td>20</td>
+                                <td>8</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>11-07-2016</td>
+                                <td>00</td>
+                                <td>00</td>
+                                <td>31</td>
+                                <td>29</td>
+                                <td>10</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>09-06-2016</td>
+                                <td>80</td>
+                                <td>100</td>
+                                <td>35</td>
+                                <td>29</td>
+                                <td>7</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>10-09-2016</td>
+                                <td>80</td>
+                                <td>100</td>
+                                <td>35</td>
+                                <td>29</td>
+                                <td>12</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>10-06-2017</td>
+                                <td>0</td>
+                                <td>90</td>
+                                <td>25</td>
+                                <td>20</td>
+                                <td>8</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>13-07-2015</td>
+                                <td>00</td>
+                                <td>00</td>
+                                <td>31</td>
+                                <td>29</td>
+                                <td>10</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>14-06-2015</td>
+                                <td>80</td>
+                                <td>100</td>
+                                <td>35</td>
+                                <td>29</td>
+                                <td>7</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>27-06-2015</td>
+                                <td>80</td>
+                                <td>100</td>
+                                <td>35</td>
+                                <td>29</td>
+                                <td>12</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>18-06-2015</td>
+                                <td>0</td>
+                                <td>90</td>
+                                <td>25</td>
+                                <td>20</td>
+                                <td>8</td>
+                                <td>9</td>
+                            </tr>
+                            <tr>
+                                <td>18-07-2015</td>
+                                <td>00</td>
+                                <td>00</td>
+                                <td>31</td>
+                                <td>29</td>
+                                <td>10</td>
+                                <td>11</td>
+                            </tr>
+                            <tr>
+                                <td>10-08-2016</td>
+                                <td>80</td>
+                                <td>100</td>
+                                <td>35</td>
+                                <td>29</td>
+                                <td>7</td>
+                                <td>11</td>
+                            </tr> -->
 
                         </tbody>
                     </table>
                 </div>
             </div>
-      			<div class="card_style col-sm-12">
-							<div style="width:90%;margin:auto;">
-									<table id="total" class="table table-hover" border="1" style="margin-top:20px;">
-											<thead style="border: solid 2px black">
-													<tr>
-															<th rowspan="2">Date</th>
-															<th colspan="2">RainFall(Total)</th>
-															<th colspan="2">Temparature (Avg.)</th>
-															<th rowspan="2">Sunshine Hour</th>
-															<th rowspan="2">Weather condition</th>
-													</tr>
-													<tr>
-															<th>Day</th>
-															<th>Night</th>
-															<th>max</th>
-															<th>Min</th>
-													</tr>
-											</thead>
-											<tbody>
-																<tr>
-																	<td>NA</td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td></td>
-																	<td>NA</td>
-																	<td>NA</td>
-																</tr>
-											</tbody>
-									</table>
-							</div>
-						</div>
-		  </div>
+        </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
@@ -226,11 +325,6 @@
         <script>
             $(document).ready(function() {
                     $('#weather').dataTable({"scrollX": true});
-										$('#total').dataTable({"scrollX": true,
-										"paging":   false,
-										// "ordering": false,
-										// "info":     false
-										});
             });
         </script>
 				<script type="text/javascript">
