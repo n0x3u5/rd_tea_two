@@ -10,9 +10,9 @@
 <?php
 	$connection = make_connection();
 
-	var_dump($_POST); echo "<br>";
+	//var_dump($_POST); echo "<br>";
 	if(isset($_POST['div_date_submit'])) {
-		$req_div_name = $_POST['div_name'];
+		//$req_div_name = $_POST['div_name'];
 		//$req_year = $_POST['year_value'];
 		$req_start_date = $_POST['start_date_value'];
 		$req_end_date = $_POST['end_date_value'];
@@ -47,10 +47,11 @@
 		//echo "<br> div name : ".$req_div_name."<br> req year : ".$req_year ."<br>";
 	}
 	else {
-		$req_div_name = NULL;
+		//$req_div_name = NULL;
 		//$req_year = NULL;
 		$req_start_date = NULL;
 		$req_end_date = NULL;
+		$result = NULL;
 	}
 ?>
 
@@ -87,16 +88,16 @@
                 <h1>Divisional Weather Details </h1>
                 <p></p>
                 <p></p>
-                <h3 style="color:#fff">Division</h3>
+                <!-- <h3 style="color:#fff">Division</h3> -->
 
                 <form style="" action="weather.php" method="post">
-                    <select id="division" name="div_name" class="form-control input-group" style="height:60%;">
+                    <!-- <select id="division" name="div_name" class="form-control input-group" style="height:60%;">
                     <option></option>
-									  <option <?php if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
-									  <option <?php if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
-									  <option <?php if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
-									  <option <?php if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
-			              </select>
+									  <option <?php //if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
+									  <option <?php //if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
+									  <option <?php //if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
+									  <option <?php //if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
+			              </select> -->
 
 			              <div>
 										<!-- <select id="start_year" name="year_value" class="form-control input-group">
@@ -155,18 +156,20 @@
                         </thead>
                         <tbody>
 														<?php
-															 while($weather = mysqli_fetch_assoc($result)) {
+															if (isset($_POST['div_date_submit'])) {
+																while($weather = mysqli_fetch_assoc($result)) {
 														?>
 																	<tr>
-																		<td><?php echo $weather['record_date']; ?></td>
-																			<td><?php echo $weather['rain_max']; ?></td>
-																				<td><?php echo $weather['rain_min']; ?></td>
-																					<td><?php echo $weather['temp_max']; ?></td>
-																						<td><?php echo $weather['temp_min']; ?></td>
-																							<td><?php echo $weather['sun_shine_hr']; ?></td>
-																								<td><?php echo $weather['weather_cond']; ?></td>
+																		<td><?php echo date('d-m-Y', strtotime($weather['record_date'])); ?></td>
+																		<td><?php echo $weather['rain_max']; ?></td>
+																		<td><?php echo $weather['rain_min']; ?></td>
+																		<td><?php echo $weather['temp_max']; ?></td>
+																		<td><?php echo $weather['temp_min']; ?></td>
+																		<td><?php echo $weather['sun_shine_hr']; ?></td>
+																		<td><?php echo $weather['weather_cond']; ?></td>
 																	</tr>
 														<?php
+																}
 															}
 														?>
                             <!-- <tr>

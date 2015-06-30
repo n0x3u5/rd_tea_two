@@ -12,8 +12,8 @@
 	//var_dump($_POST);echo "<br><hr>";
 	if(isset($_POST["dt_sec_submit"])){
 		$req_date = date('Y-m-d', strtotime($_POST["date_value"]));
-		$req_div_name = $_POST["div_name"];
-		$_SESSION['div_name'] = $req_div_name;
+		//$req_div_name = $_POST["div_name"];
+		//$_SESSION['div_name'] = $req_div_name;
 		$_SESSION['date'] = $req_date;
 
 
@@ -21,7 +21,7 @@
 		// echo "<br>got div_name =" .$req_div_name."<br>";
 		// var_dump($req_date);echo "<br>"; var_dump($req_div_name);
 
-		$query = "SELECT * FROM daily_weather WHERE division='{$req_div_name}' and record_date='{$req_date}'";
+		$query = "SELECT * FROM daily_weather WHERE division='Hansqua' and record_date='{$req_date}'";
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
@@ -37,7 +37,7 @@
 
 <?php
 	if (isset($_POST['add_submit'])) {
-		$division = $_SESSION['div_name'];
+		$division = "Hansqua"; //$_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
 
 		$rain_max = (float) mysqli_real_escape_string($connection, $_POST["rain_max"]);
@@ -62,7 +62,7 @@
 
 	if(isset($_POST['edit_submit'])) {
 
-		$division = $_SESSION['div_name'];
+		$division = "Hansqua"; //$_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
 		$req_id = $_SESSION['daily_weather']['id'];
 
@@ -86,7 +86,7 @@
 	}
 
 	if(isset($_POST['del_entry'])) {
-		$division = $_SESSION['div_name'];
+		$division = "Hansqua"; //$_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
 
 		$query = "DELETE FROM daily_weather WHERE division='{$division}' and record_date='{$record_date}'";
@@ -124,16 +124,16 @@
                 <p></p>
 				<form action="weather_input.php" method="post" class="form-horizontal">
 					<div class="form-group">
-						<label for="division" class="col-sm-1 control-label" style="margin-right:0;">Division</label>
+						<!-- <label for="division" class="col-sm-1 control-label" style="margin-right:0;">Division</label>
 						<div class="col-sm-4">
 							<select id="division" name="div_name" class="form-control">
 							  <option></option>
-							  <option <?php if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
-							  <option <?php if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
-							  <option <?php if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
-							  <option <?php if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
+							  <option <?php //if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
+							  <option <?php //if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
+							  <option <?php //if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
+							  <option <?php //if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
 							</select>
-						</div>
+						</div> -->
 					</div>
 					<div class="form-group">
 						<label for="datepicker" class="col-sm-1 control-label" style="margin-top:10px;margin-right:0;">Date</label>
