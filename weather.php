@@ -161,8 +161,8 @@
 														?>
 																	<tr>
 																		<td><?php echo date('d-m-Y', strtotime($weather['record_date'])); ?></td>
-																		<td><?php echo $weather['rain_max']; ?></td>
-																		<td><?php echo $weather['rain_min']; ?></td>
+																		<td><?php echo $weather['rain_day']; ?></td>
+																		<td><?php echo $weather['rain_night']; ?></td>
 																		<td><?php echo $weather['temp_max']; ?></td>
 																		<td><?php echo $weather['temp_min']; ?></td>
 																		<td><?php echo $weather['sun_shine_hr']; ?></td>
