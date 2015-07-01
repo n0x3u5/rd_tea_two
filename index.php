@@ -12,6 +12,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+				<meta name="theme-color" content="#66BB6A">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link href='http://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet'>
