@@ -22,7 +22,7 @@ body {
 /* -- Main style ------------------------------------ */
 .btn {
   font-family: "Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif;
-  font-size: 14px;
+  font-size: 1.3em;
   font-weight: 400;
   line-height: 1.1;
   text-transform: uppercase;
@@ -444,11 +444,11 @@ label {
 }
 /* input colors ---- */
 .form-control:focus ~ label {
-  color: #03a9f4;
+  color: #81C784;
 }
 .form-control:focus ~ .form-bar:before,
 .form-control:focus ~ .form-bar:after {
-  background: #03a9f4;
+  background: #81C784;
 }
 /* help-block */
 .form-group .help-block {
@@ -534,37 +534,9 @@ label {
   -moz-animation: inputHighlighter 0.3s ease;
   animation: inputHighlighter 0.3s ease;
 }
-/* -- highlighter animation --------------------------- */
-@-webkit-keyframes inputHighlighter {
-  from {
-    background: #5264AE;
-  }
-  to {
-    width: 0;
-    background: transparent;
-  }
-}
-@-moz-keyframes inputHighlighter {
-  from {
-    background: #5264AE;
-  }
-  to {
-    width: 0;
-    background: transparent;
-  }
-}
-@keyframes inputHighlighter {
-  from {
-    background: #5264AE;
-  }
-  to {
-    width: 0;
-    background: transparent;
-  }
-}
 body {
   font-family: "Roboto", 'Helvetica Neue, Helvetica, Arial', sans-serif;
-  background: #0277bd;
+  background: #4CAF50;
 }
 /* -- login paper styles ------------------------------ */
 .signin-card {
@@ -583,7 +555,7 @@ body {
 /* -- font styles ------------------------------------- */
 .display1 {
   font-size: 28px;
-  font-weight: 100;
+  font-weight: 400;
   line-height: 1.2;
   color: #757575;
   text-transform: inherit;
@@ -637,7 +609,7 @@ button{
 @keyframes ripple-animation {
     from {
       transform: scale(1);
-      opacity: 04;
+      opacity: 0.4;
     }
     to {
       transform: scale(100);

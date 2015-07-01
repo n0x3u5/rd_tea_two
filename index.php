@@ -27,13 +27,13 @@
 			<img src="images/logo_rdtea.png" alt="Logo" title="Logo" width="138">
 			</div>
 			<h1 class="display1">R.D. Tea Ltd.</h1>
-			<p class="subhead">Hansqua Tea Garden</p>
-				<form action="" method="" class="" role="form">
+			<!-- <p class="subhead">Hansqua Tea Garden</p> -->
+				<form action="form_process_login.php" method="post" role="form">
 					<div id="form-login-username" class="form-group">
-						<input id="username" class="form-control" name="username" type="text" size="18" alt="login" required />
+						<input id="username" class="form-control" name="email" type="email" size="18" alt="login" required />
 						<span class="form-highlight"></span>
 						<span class="form-bar"></span>
-						<label for="username" class="float-label">login</label>
+						<label for="username" class="float-label">email</label>
 					</div>
 					<div id="form-login-password" class="form-group">
 						<input id="passwd" class="form-control" name="password" type="password" size="18" alt="password" required>
@@ -42,7 +42,7 @@
 						<label for="password" class="float-label">password</label>
 					</div>
 					<div>
-						<button class="btn btn-block btn-raised btn-info ripple" type="submit" name="Submit" alt="sign in">Sign in</button>
+						<button class="btn btn-block btn-raised btn-success ripple" type="submit" name="login_submit" alt="sign in">Sign in</button>
 					</div>
 				</form>
 			</div>
@@ -53,7 +53,6 @@
 		(function (window, $) {
 			$(function() {
 				$('.ripple').on('click', function (event) {
-					event.preventDefault();
 					var $div = $('<div/>'),
 						btnOffset = $(this).offset(),
 						xPos = event.pageX - btnOffset.left,
