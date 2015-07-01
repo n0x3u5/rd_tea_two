@@ -1,7 +1,7 @@
 <?php
 	require_once('/includes/sessions.php');
 	require_once('/includes/functions.php');
-	
+
 	if(!isset($_SESSION['user'])) {
 		redirect_to("index.php");
 	}
@@ -156,7 +156,7 @@
                         <input class="form-control" name="cnfpwd" type="password" placeholder="Confirm New Password">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
                     </div>
-                    <input type="submit" name="edit" value="Save Changes" class="btn btn-primary" style="background:#673ab7">
+                    <input type="submit" name="edit" value="Save Changes" class="btn btn-primary" style="background:#673ab7" id="save_change">
                     </div>
                 </form>
 

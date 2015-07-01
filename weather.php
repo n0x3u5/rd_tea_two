@@ -65,6 +65,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/stylesheet.css">
+				<link rel="icon" href="images/logo_rdtea.png"/>
 		<style>
 			.btn-default{
 				margin-top:10px;
@@ -114,7 +115,7 @@
 										<div class="form-group">
 											<p>Start date</p>
 											<div class="input-group">
-												<input type="text" name="start_date_value" class="form-control" id="datepicker1" <?php if($req_start_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_start_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()">
+												<input type="text" name="start_date_value" class="form-control" id="datepicker1" <?php if($req_start_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_start_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 												<span class="input-group-addon">
 														<i class="glyphicon glyphicon-calendar"></i>
 												</span>
@@ -125,7 +126,7 @@
 										<div class="form-group">
 											<p>End date</p>
 											<div class="input-group">
-												<input type="text" name="end_date_value" class="form-control" id="datepicker2" <?php if($req_end_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_end_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()">
+												<input type="text" name="end_date_value" class="form-control" id="datepicker2" <?php if($req_end_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_end_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 												<span class="input-group-addon">
 														<i class="glyphicon glyphicon-calendar"></i>
 												</span>

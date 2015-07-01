@@ -27,11 +27,13 @@
 		confirm_query($result);
 
 		$_SESSION['daily_weather'] = mysqli_fetch_assoc($result);
+		$sub_enable=1;
 		//$daily =mysqli_fetch_assoc($result);
 	}
 	else {
 		$req_date = NULL;
 		$req_div_name = NULL;
+		$sub_enable=0;
 	}
 ?>
 
@@ -58,6 +60,7 @@
 		echo "Inserted Successfully!";
 
 		$_SESSION['daily_weather'] = NULL;
+		$_SESSION['date'] = NULL;
 	}
 
 	if(isset($_POST['edit_submit'])) {
@@ -83,6 +86,7 @@
 		echo "Updated Successfully!";
 
 		$_SESSION['daily_weather'] = NULL;
+		$_SESSION['date'] = NULL;
 	}
 
 	if(isset($_POST['del_entry'])) {
@@ -97,6 +101,7 @@
 		echo "Deleted Successfully!";
 
 		$_SESSION['daily_weather'] = NULL;
+		$_SESSION['date'] = NULL;
 	}
 ?>
 
@@ -109,8 +114,16 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="css/stylesheet.css">
-
+				<style>
+						@media screen and (min-width: 500px) {
+							#delete_weather{
+								margin-left:27%;
+							}
+  						}
+				</style>
+				<link rel="icon" href="images/logo_rdtea.png"/>
         <?php $page_id = 8;?>
+
     </head>
     <body>
         <?php
@@ -139,14 +152,14 @@
 						<label for="datepicker" class="col-sm-1 control-label" style="margin-top:10px;margin-right:0;">Date</label>
 						<div class="col-sm-4">
 							<div class="input-group" style="width:100%;">
-								<input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()">
+								<input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> required>
 								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-11 col-sm-offset-1">
-							<input type="submit" name="dt_sec_submit" class="btn btn-default" value="Submit" style="width:auto;">
+							<input type="submit" name="dt_sec_submit" class="btn btn-default" id="unhide" value="Submit" style="width:auto;" onclick="unhide_button()">
 						</div>
 					</div>
 				</form>
@@ -185,8 +198,8 @@
                         <label for="weath_cond">Weather Condition</label>
                         <input type="text" name="weather_cond"  <?php if (isset($daily)) { ?> value=" <?php echo $daily['weather_cond']; ?> " <?php } else { ?> placeholder= <?php echo "\"Weather Condition\""; ?> <?php } ?>  class="form form-control weath_cond">
                       </div>
-                      <input type="submit" name="edit_submit" class="btn btn-success" value="Edit Entry" style="margin:10px 0 10px 0px;position:relative;">
-                      <input type="submit" name="del_entry" class="btn btn-danger" value="Delete Entry">
+                      <input type="submit" id="edit_weather" name="edit_submit" class="btn btn-success" value="Edit Entry" style="margin:10px 0 10px 0px;position:relative;" onclick="edit_check()">
+                      <input type="submit" id="delete_weather" name="del_entry" class="btn btn-danger" value="Delete Entry">
 
 
                   </form>
@@ -219,7 +232,7 @@
                         <label for="weath_cond">Weather Condition</label>
                         <input type="text" name="weather_cond" placeholder="Weather Condition" class="form form-control weath_cond">
                       </div>
-                      <input type="submit" name="add_submit"  class="btn btn-success" value="Add Data" style="margin:10px 0 10px 20px;"><p></p>
+                      <input type="submit" id="add_weather"name="add_submit"  class="btn btn-success" value="Add Data" style="margin:10px 0 10px 20px;"><p></p>
                     </form>
                 </div>
               </div>
@@ -235,6 +248,52 @@
             $("#datepicker").datepicker({dateFormat: 'dd-mm-yy'});
             });
         </script>
+				<script>
+
+						$("#edit_weather").click(	function(event){
+
+							var currentDate = $( "#datepicker" ).datepicker( "getDate" );
+							if(currentDate ==null)
+									{	event.preventDefault();
+										window.alert("Please Select a Date");
+								}
+
+							}
+						);
+						$("#delete_weather").click(	function(event){
+
+								var currentDate = $( "#datepicker" ).datepicker( "getDate" );
+								if(currentDate ==null)
+									{	event.preventDefault();
+										window.alert("Please Select a Date");
+								}
+							}
+						);
+						$("#add_weather").click(	function(event){
+
+							var currentDate = $( "#datepicker" ).datepicker( "getDate" );
+							if(currentDate ==null)
+									{	event.preventDefault();
+										window.alert("Please Select a Date");
+								}
+							}
+						);
+				</script>
+
+				<?php
+					echo"
+							<script>
+							document.getElementById('add_weather').disabled=true;
+							document.getElementById('edit_weather').disabled=true;
+							document.getElementById('delete_weather').disabled=true;
+							if($sub_enable==1)
+								{
+									document.getElementById('add_weather').disabled=false;
+									document.getElementById('edit_weather').disabled=false;
+									document.getElementById('delete_weather').disabled=false;
+								}
+						</script>"
+					?>
     </body>
 </html>
 <?php
