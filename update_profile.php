@@ -49,7 +49,6 @@
 				$query .= " password='{$old_pwd}'";
 				$query .= " WHERE id = '{$_SESSION['user_id']}'";
 				$result = mysqli_query($connection, $query);
-
 				confirm_query($result);
 				//echo "Updated successfully!";
 				$check_flag = 1;
@@ -70,7 +69,6 @@
 							$query .= " password='{$hash_passwd}'";
 							$query .= " WHERE id = '{$_SESSION['user_id']}'";
 							$result = mysqli_query($connection, $query);
-
 							confirm_query($result);
 							//echo "Updated successfully!";
 							$check_flag = 1;
@@ -127,20 +125,20 @@
 											<span class="input-group-addon"><i class="glyphicon glyphicon-star-empty" ></i></span>
 										</div>
                     <div class="input-group">
-                        <input class="form-control" name="f_name" type="text" value=<?php echo $users["first_name"]?> >
+                        <input class="form-control" name="f_name" type="text" value="<?php echo $users["first_name"]?>" >
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
                     </div>
                     <div class="input-group">
-                        <input class="form-control" name="m_name" type="text" value=<?php echo $users["middle_name"]?> >
+                        <input class="form-control" name="m_name" type="text" value="<?php echo $users["middle_name"]?>" >
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
                     </div>
                     <div class="input-group">
-                        <input class="form-control" name="l_name" type="text" value=<?php echo $users["last_name"]?> >
+                        <input class="form-control" name="l_name" type="text" value="<?php echo $users["last_name"]?>" >
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
                     </div>
 
 	                    <div class="input-group">
-	                        <input class="form-control" name="email" type="email" value=<?php echo $users["e_mail"]?> >
+	                        <input class="form-control" name="email" type="email" value="<?php echo $users["e_mail"]?>" >
 	                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
                     	</div>
 
@@ -163,7 +161,7 @@
 								<?php
 									echo"<script>
 										if(  $check_flag===1 )
-										{	window.alert('Updaed successfully');	}
+										{	window.alert('Update successful! The updated information will be displayed on your next log in!');	}
 											</script>";
 									?>
 

@@ -80,7 +80,6 @@
 				$_SESSION["message"] = "password/email error!";
 			}
 
-
 			//echo "session level = <br> <br>".$_SESSION["user_lvl"]."<br><br>";
 			if($_SESSION["user_lvl"]!= NULL && $_SESSION["user_lvl"] != 3 ) {
 				 redirect_to("manage_users.php");
