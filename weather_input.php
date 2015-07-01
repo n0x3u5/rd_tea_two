@@ -120,6 +120,12 @@
 								margin-left:27%;
 							}
   						}
+
+							.nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:active, .nav-tabs.nav-justified > .active > a:enabled {
+							background-color: #01579B !important;
+							border-bottom-color: #5D4037;
+							color: #FFFFFF;
+							}
 				</style>
 				<link rel="icon" href="images/logo_rdtea.png"/>
         <?php $page_id = 8;?>
@@ -131,7 +137,7 @@
             nav_echoer($page_id);
         ?>
         <div class="container">
-            <div class="jumbotron" style="background:#2A47A3;margin-left:-15px;margin-right: -15px;">
+            <div class="jumbotron" style="background:#0288D1;margin-left:-15px;margin-right: -15px;">
                 <h1>Divisional Weather Entry</h1>
                 <p></p>
                 <p></p>

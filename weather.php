@@ -88,7 +88,7 @@
             nav_echoer($page_id);
         ?>
         <div class="container">
-            <div class="jumbotron" style="background:#2A47A3;margin-left:-15px;margin-right: -15px;">
+            <div class="jumbotron" style="background:#0277BD;margin-left:-15px;margin-right: -15px;">
                 <h1>Divisional Weather Details </h1>
                 <p></p>
                 <p></p>
@@ -113,7 +113,7 @@
 												<option <?php //if($req_year == 2019) { echo "selected"; }  ?> >2019</option>
 										</select> -->
 										<div class="form-group">
-											<p>Start date</p>
+											<p style="color:#B3E5FC">Start date</p>
 											<div class="input-group">
 												<input type="text" name="start_date_value" class="form-control" id="datepicker1" <?php if($req_start_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_start_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 												<span class="input-group-addon">
@@ -124,7 +124,7 @@
 										<p></p>
 										<p></p>
 										<div class="form-group">
-											<p>End date</p>
+											<p style="color:#B3E5FC">End date</p>
 											<div class="input-group">
 												<input type="text" name="end_date_value" class="form-control" id="datepicker2" <?php if($req_end_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_end_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 												<span class="input-group-addon">
