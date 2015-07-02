@@ -203,12 +203,10 @@
 						</div> -->
 					</div>
 					<div class="form-group">
-						<label for="datepicker" class="col-sm-1 control-label" style="margin-top:10px;margin-right:0;">Date</label>
+						<label for="datepicker" class="col-sm-1 control-label" style="margin-top:5px;margin-right:0;">Date</label>
 						<div class="col-sm-4">
-							<div class="input-group" style="width:100%;">
 								<input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> required>
-								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-							</div>
+
 						</div>
 					</div>
 					<div class="form-group">
@@ -221,11 +219,11 @@
 
             <div class="tab-container">
               <ul class="nav nav-tabs nav-justified">
-                  <li class="active"><a href="#tab1" data-toggle="tab">Edit Entry</a></li>
-                  <li><a href="#tab2" data-toggle="tab">Add Entry</a></li>
+                  <li id="ac_one"><a href="#tab1" id="take1" data-toggle="tab" style="color:#666">Edit Entry</a></li>
+                  <li id="ac_two"><a href="#tab2" data-toggle="tab" id="take2" style="color:#666">Add Entry</a></li>
               </ul>
               <div class="tab-content" style="background-color:#FFFFFF">
-                <div class="tab-pane active" id="tab1">
+                <div class="tab-pane" id="tab1">
                     <form class="form group" style="margin-top:15px;" action="weather_input.php" method="post">
 										  <?php if(isset($_SESSION['daily_weather'])) { $daily = $_SESSION['daily_weather']; } else { $daily = NULL; }?>
 										  <div class="input-group">
@@ -238,11 +236,11 @@
                       </div>
                       <div class="input-group">
                         <label for="max_temp">Temparature Maximum( in &degC)</label>
-                        <input type="text" name="temp_max" <?php if (isset($daily)) { ?> value="<?php echo $daily['temp_max']; ?>" <?php } else { ?> placeholder= <?php echo "\"Max Temparature\""; ?> <?php } ?> class="form form-control max_temp">
+                        <input type="text" id="unhide_two" name="temp_max" <?php if (isset($daily)) { ?> value="<?php echo $daily['temp_max']; ?>" <?php } else { ?> placeholder= <?php echo "\"Max Temparature\""; ?> <?php } ?> class="form form-control max_temp" required>
                       </div>
                       <div class="input-group">
                         <label for="min_temp">Temparature Minimum (in &degC)</label>
-                        <input type="text" name="temp_min"  <?php if (isset($daily)) { ?> value="<?php echo $daily['temp_min']; ?>" <?php } else { ?> placeholder= <?php echo "\"Min Temparature\""; ?> <?php } ?>  class="form form-control min_temp">
+                        <input type="text" name="temp_min"  <?php if (isset($daily)) { ?> value="<?php echo $daily['temp_min']; ?>" <?php } else { ?> placeholder= <?php echo "\"Min Temparature\""; ?> <?php } ?>  class="form form-control min_temp" required>
                       </div>
                       <div class="input-group">
                         <label for="sun_hour">Sunshine Hour</label>
@@ -270,11 +268,11 @@
                       </div>
                       <div class="input-group">
                         <label for="max_temp">Temparature Maximum( in &degC)</label>
-                        <input type="text" name="temp_max" placeholder="Maximum Temparature" class="form form-control max_temp">
+                        <input type="text"  name="temp_max" placeholder="Maximum Temparature" class="form form-control max_temp" required>
                       </div>
                       <div class="input-group">
                         <label for="min_temp">Temparature Minimum (in &degC)</label>
-                        <input type="text" name="temp_min" placeholder="Minimum Temparature" class="form form-control min_temp">
+                        <input type="text" name="temp_min" placeholder="Minimum Temparature" class="form form-control min_temp" required>
                       </div>
                       <div class="input-group">
                         <label for="sun_hour">Sunshine Hour</label>
@@ -338,11 +336,34 @@
 							document.getElementById('add_weather').disabled=true;
 							document.getElementById('edit_weather').disabled=true;
 							document.getElementById('delete_weather').disabled=true;
+								document.getElementById('take1').disabled=true;
+									document.getElementById('take2').disabled=true;
 							if($sub_enable==1)
 								{
-									document.getElementById('add_weather').disabled=false;
-									document.getElementById('edit_weather').disabled=false;
-									document.getElementById('delete_weather').disabled=false;
+									if(document.getElementById('unhide_two').value=='')
+									{
+												document.getElementById('take2').disabled=false;
+											document.getElementById('add_weather').disabled=false;
+										var b1=	document.getElementById('ac_two');
+										var c1=document.getElementById('take2');
+										b1.style.backgroundColor = '#01579B';
+										c1.style.color = '#FFFFFF';
+										var a1=document.getElementById('tab2');
+										a1.setAttribute('class', 'active');
+										document.getElementById('take1').disabled=true;
+									}
+									else{
+											document.getElementById('take1').disabled=false;
+										document.getElementById('edit_weather').disabled=false;
+										document.getElementById('delete_weather').disabled=false;
+										var b2=document.getElementById('ac_one');
+										b2.style.backgroundColor = '#01579B';
+										var c2=document.getElementById('take1');
+										var a2=document.getElementById('tab1');
+										a2.setAttribute('class', 'active');
+										c2.style.color='#FFFFFF';
+										document.getElementById('take2').disabled=true;
+									}
 								}
 						</script>"
 					?>

@@ -185,7 +185,7 @@
       			<div class="card_style col-sm-12">
 							<div style="width:90%;margin:auto;">
 									<table id="total" class="table table-hover" border="1" style="margin-top:20px;">
-											<h3 style="float:left;margin-top:40px;margin-bottom:10px;margin-left:40px;color:rgb(175,0,0)"><strong>Total</strong></h3>
+											<h3 style="margin-top:40px;margin-bottom:10px;margin-left:40px;color:rgb(175,0,0)"><strong>Total</strong></h3>
 											<thead style="border: solid 2px black">
 													<tr>
 
@@ -268,6 +268,11 @@
 
             $(document).ready(function() {
                     $('#weather').dataTable({"scrollX": true});
+										  $('#total').dataTable({"scrollX": true,"paging":   false,
+        											"ordering": false,
+        											"info":    true
+
+											});
 
             });
         </script>
