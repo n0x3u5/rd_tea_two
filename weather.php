@@ -79,6 +79,7 @@
 				margin-top: 30px;
 				text-align: center;
 			}
+
 		</style>
         <?php $page_id = 6;?>
     </head>
@@ -263,6 +264,7 @@
 		</script>
 		<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script>
+						
             $(document).ready(function() {
                     $('#weather').dataTable({"scrollX": true});
 										$('#total').dataTable({"scrollX": true,
