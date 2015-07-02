@@ -28,6 +28,10 @@ body{
   color: #FFFFFF;
 }
 
+.modal-backdrop {
+  z-index: 1000;
+}
+
 .jumbotron {
     /*border-bottom-style: double;
     border-bottom-color: #666;*/

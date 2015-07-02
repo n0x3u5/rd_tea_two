@@ -34,6 +34,9 @@
 	else {
 		$req_date = NULL;
 		$req_ssn = NULL;
+		// $_SESSION['ssn'] = NULL;
+		// $_SESSION['date'] = NULL;
+		// $_SESSION['daily_spraying'] = NULL;
 	}
 ?>
 
@@ -132,7 +135,7 @@
     echo "Inserted successfully!";
 
 		$_SESSION['daily_spraying'] = NULL;
-  }
+	 }
 ?>
 <?php
     if (isset($_POST['edit_submit'])) {

@@ -48,6 +48,7 @@
 				$query .= " e_mail='{$_POST['email']}',";
 				$query .= " password='{$old_pwd}'";
 				$query .= " WHERE id = '{$_SESSION['user_id']}'";
+				var_dump($query);
 				$result = mysqli_query($connection, $query);
 				confirm_query($result);
 				//echo "Updated successfully!";
@@ -68,6 +69,8 @@
 							$query .= " e_mail='{$_POST['email']}',";
 							$query .= " password='{$hash_passwd}'";
 							$query .= " WHERE id = '{$_SESSION['user_id']}'";
+
+							var_dump($query);
 							$result = mysqli_query($connection, $query);
 							confirm_query($result);
 							//echo "Updated successfully!";
@@ -121,7 +124,7 @@
             <div class="main-content" style="background-color:#FFFFFF">
                 <form action="update_profile.php" method="post">
 										<div class="input-group">
-											<input class="form-control" name="desig" type="text" value="<?php echo $users["designation"]?>" >
+											<input class="form-control" name="desig" type="text" value="<?php echo $users['designation'];?>" >
 											<span class="input-group-addon"><i class="glyphicon glyphicon-star-empty" ></i></span>
 										</div>
                     <div class="input-group">

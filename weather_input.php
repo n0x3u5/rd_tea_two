@@ -56,8 +56,24 @@
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
+		if(mysqli_affected_rows($connection) > 0) {
+			echo "Inserted Successfully!";
+		}
+		else {
+			echo "No record affected! Check your input!";
+		}
 
-		echo "Inserted Successfully!";
+		$q = "select * from weather_change where id = (select max(id) from weather_change)";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+		$wth_chng = mysqli_fetch_assoc($r);
+		//var_dump($wth_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$q = "UPDATE weather_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$wth_chng['id']})";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+
+		//echo "Inserted Successfully!";
 
 		$_SESSION['daily_weather'] = NULL;
 		$_SESSION['date'] = NULL;
@@ -76,14 +92,32 @@
 		$sun_shine_hr = (float) mysqli_real_escape_string($connection, $_POST["sun_shine_hr"]);
 		$weather_cond = mysqli_real_escape_string($connection, $_POST["weather_cond"]);
 
+		$typed_req_id = (int)$req_id;
+
 		$query = "UPDATE daily_weather SET";
 		$query .= " division='{$division}', record_date='{$record_date}', rain_day={$rain_day}, rain_night={$rain_night},";
-		$query .= " temp_max={$temp_max}, temp_min={$temp_min}, sun_shine_hr={$sun_shine_hr}, weather_cond='{$weather_cond}' WHERE id={$req_id}";
+		$query .= " temp_max={$temp_max}, temp_min={$temp_min}, sun_shine_hr={$sun_shine_hr}, weather_cond='{$weather_cond}' WHERE id={$typed_req_id}";
+
+		//var_dump($query);
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
+		if(mysqli_affected_rows($connection) > 0) {
+			echo "Updated Successfully!";
+		}
+		else {
+			echo "No record affected! Check your input!";
+		}
 
-		echo "Updated Successfully!";
+		$q = "select * from weather_change where id = (select max(id) from weather_change)";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+		$wth_chng = mysqli_fetch_assoc($r);
+		//var_dump($wth_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$q = "UPDATE weather_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$wth_chng['id']})";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
 
 		$_SESSION['daily_weather'] = NULL;
 		$_SESSION['date'] = NULL;
@@ -97,8 +131,22 @@
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
+		if(mysqli_affected_rows($connection) > 0) {
+			echo "Deleted Successfully!";
+		}
+		else {
+			echo "No record affected! Check your input!";
+		}
 
-		echo "Deleted Successfully!";
+		$q = "select * from weather_change where id = (select max(id) from weather_change)";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+		$wth_chng = mysqli_fetch_assoc($r);
+		//var_dump($wth_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$q = "UPDATE weather_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$wth_chng['id']})";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
 
 		$_SESSION['daily_weather'] = NULL;
 		$_SESSION['date'] = NULL;
@@ -179,35 +227,33 @@
               <div class="tab-content" style="background-color:#FFFFFF">
                 <div class="tab-pane active" id="tab1">
                     <form class="form group" style="margin-top:15px;" action="weather_input.php" method="post">
-					  <?php if(isset($_SESSION['daily_weather'])) { $daily = $_SESSION['daily_weather']; } else { $daily = NULL; }?>
-					  <div class="input-group">
+										  <?php if(isset($_SESSION['daily_weather'])) { $daily = $_SESSION['daily_weather']; } else { $daily = NULL; }?>
+										  <div class="input-group">
                         <label for="max_rain">RainFall during Day (in mm)</label>
-                        <input type="text" name="rain_day" <?php if (isset($daily)) { ?> value=" <?php echo $daily['rain_day']; ?> " <?php } else { ?> placeholder= <?php echo "\"Max Rainfall (in mm)\""; ?> <?php } ?> class="form form-control max_rain">
+                        <input type="text" name="rain_day" <?php if (isset($daily)) { ?> value="<?php echo $daily['rain_day']; ?>" <?php } else { ?> placeholder= <?php echo "\"Max Rainfall (in mm)\""; ?> <?php } ?> class="form form-control max_rain">
                       </div>
                       <div class="input-group">
                           <label for="min_rain">RainFall during Night (in mm)</label>
-                          <input type="text" name="rain_night" <?php if (isset($daily)) { ?> value=" <?php echo $daily['rain_night']; ?> " <?php } else { ?> placeholder= <?php echo "\"Min Rainfall (in mm)\""; ?> <?php } ?> class="form form-control min_rain">
+                          <input type="text" name="rain_night" <?php if (isset($daily)) { ?> value="<?php echo $daily['rain_night']; ?>" <?php } else { ?> placeholder= <?php echo "\"Min Rainfall (in mm)\""; ?> <?php } ?> class="form form-control min_rain">
                       </div>
                       <div class="input-group">
                         <label for="max_temp">Temparature Maximum( in &degC)</label>
-                        <input type="text" name="temp_max" <?php if (isset($daily)) { ?> value=" <?php echo $daily['temp_max']; ?> " <?php } else { ?> placeholder= <?php echo "\"Max Temparature\""; ?> <?php } ?> class="form form-control max_temp">
+                        <input type="text" name="temp_max" <?php if (isset($daily)) { ?> value="<?php echo $daily['temp_max']; ?>" <?php } else { ?> placeholder= <?php echo "\"Max Temparature\""; ?> <?php } ?> class="form form-control max_temp">
                       </div>
                       <div class="input-group">
                         <label for="min_temp">Temparature Minimum (in &degC)</label>
-                        <input type="text" name="temp_min"  <?php if (isset($daily)) { ?> value=" <?php echo $daily['temp_min']; ?> " <?php } else { ?> placeholder= <?php echo "\"Min Temparature\""; ?> <?php } ?>  class="form form-control min_temp">
+                        <input type="text" name="temp_min"  <?php if (isset($daily)) { ?> value="<?php echo $daily['temp_min']; ?>" <?php } else { ?> placeholder= <?php echo "\"Min Temparature\""; ?> <?php } ?>  class="form form-control min_temp">
                       </div>
                       <div class="input-group">
                         <label for="sun_hour">Sunshine Hour</label>
-                        <input type="text" name="sun_shine_hr"  <?php if (isset($daily)) { ?> value=" <?php echo $daily['sun_shine_hr']; ?> " <?php } else { ?> placeholder= <?php echo "\"Sunshine Hour (in mm)\""; ?> <?php } ?>  class="form form-control sun_hour">
+                        <input type="text" name="sun_shine_hr"  <?php if (isset($daily)) { ?> value="<?php echo $daily['sun_shine_hr']; ?>" <?php } else { ?> placeholder= <?php echo "\"Sunshine Hour (in mm)\""; ?> <?php } ?>  class="form form-control sun_hour">
                       </div>
                       <div class="input-group">
                         <label for="weath_cond">Weather Condition</label>
-                        <input type="text" name="weather_cond"  <?php if (isset($daily)) { ?> value=" <?php echo $daily['weather_cond']; ?> " <?php } else { ?> placeholder= <?php echo "\"Weather Condition\""; ?> <?php } ?>  class="form form-control weath_cond">
+                        <input type="text" name="weather_cond"  <?php if (isset($daily)) { ?> value="<?php echo $daily['weather_cond']; ?>" <?php } else { ?> placeholder= <?php echo "\"Weather Condition\""; ?> <?php } ?>  class="form form-control weath_cond">
                       </div>
                       <input type="submit" id="edit_weather" name="edit_submit" class="btn btn-success" value="Edit Entry" style="margin:10px 0 10px 0px;position:relative;" onclick="edit_check()">
                       <input type="submit" id="delete_weather" name="del_entry" class="btn btn-danger" value="Delete Entry">
-
-
                   </form>
                 </div>
 
