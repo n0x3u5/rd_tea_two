@@ -164,7 +164,7 @@
 	                            <i class="glyphicon glyphicon-calendar"></i>
 	                        </span>
 	                    </div>
-											<input type="submit" name="dt_sec_submit" class="btn btn-default">
+											<input type="submit" name="dt_sec_submit" class="btn btn-default" onclick="unhide()">
                 </form>
             </div>
 				<div class="tab-container">
@@ -224,7 +224,7 @@
 									    <input class="form-control" name="mandays" type="text" <?php if (isset($daily)) { ?> value=" <?php echo $daily['mandays']; ?> " <?php } else { ?> placeholder= <?php echo "\"Mandays\""; ?> <?php } ?> >
 									    <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
 									</div>
-									<button type="button" value="Delete Entry" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal">Delete Entry</button>
+									<button type="button" value="Delete Entry" id="delete_entry" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal">Delete Entry</button>
 									<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModallabel">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
@@ -237,12 +237,12 @@
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-													<input type="submit" name="del_entry" class="btn btn-danger" value="Confirm Delete">
+													<input type="submit"  name="del_entry" class="btn btn-danger" value="Confirm Delete">
 												</div>
 											</div>
 										</div>
 									</div>
-                  <input type="submit" name="edit_submit" value="Edit Entry" class="btn btn-default">
+                  <input type="submit" id="edit_entry" name="edit_submit" value="Edit Entry" class="btn btn-default">
               </form>
 					</div>
 					<div class="tab-pane" id="tab2">
@@ -295,7 +295,7 @@
 		                        <input class="form-control" name="mandays" type="text" placeholder="Mandays">
 		                        <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
 		                    </div>
-		                    <input type="submit" name="add_submit" value="Add Entry" class="btn btn-default">
+		                    <input type="submit" id="add_entry" name="add_submit" value="Add Entry" class="btn btn-default">
 		                </form>
 					</div>
 				</div>
@@ -306,6 +306,9 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<script src="scripts/bootstrap-tokenfield.min.js"></script>
 		<script type="text/javascript">
+				 document.getElementById("add_entry").disabled=true;
+				 document.getElementById("edit_entry").disabled=true;
+				 document.getElementById("delete_entry").disabled=true;
 				$(function() {
 					$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
 					$('#wrkgrp1, #wrkgrp2').tokenfield({
@@ -317,6 +320,13 @@
 					});
 					$('#grpleaf1, #grpleaf2, #grphzar1, #grphzar2, #grpmd1, #grpmd2').tokenfield();
 				});
+
+				function unhide(){
+					document.getElementById("add_entry").disabled=false;
+					document.getElementById("edit_entry").disabled=false;
+					document.getElementById("delete_entry").disabled=false;
+				}
+
 		</script>
     </body>
 </html>

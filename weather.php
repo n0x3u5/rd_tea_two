@@ -142,7 +142,7 @@
 
             </div>
 
-            <div class="row" style="background-color:#FFF">
+            <div class="card_style" style="background-color:#FFF">
                 <div style="width:90%;margin:auto;">
                     <table id="weather" class="table table-hover" border="1">
                         <thead style="border: solid 2px black">
@@ -185,9 +185,10 @@
       			<div class="card_style col-sm-12">
 							<div style="width:90%;margin:auto;">
 									<table id="total" class="table table-hover" border="1" style="margin-top:20px;">
+											<h3 style="float:left;margin-top:40px;margin-bottom:10px;margin-left:40px;color:rgb(175,0,0)"><strong>Total</strong></h3>
 											<thead style="border: solid 2px black">
 													<tr>
-															<th rowspan="2">Date</th>
+
 															<th colspan="2">RainFall(Total)</th>
 															<th colspan="2">Temparature (Avg.)</th>
 															<th rowspan="2">Sunshine Hour</th>
@@ -202,7 +203,7 @@
 											</thead>
 											<tbody>
 																<tr>
-																	<td>NA</td>
+
 																	<td>
 																		<?php
 																				$query_sum= "SELECT SUM(rain_day) as day_sum FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
@@ -264,14 +265,10 @@
 		</script>
 		<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script>
-						
+
             $(document).ready(function() {
                     $('#weather').dataTable({"scrollX": true});
-										$('#total').dataTable({"scrollX": true,
-										"paging":   false,
-										// "ordering": false,
-										// "info":     false
-										});
+
             });
         </script>
 				<script type="text/javascript">

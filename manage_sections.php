@@ -138,177 +138,178 @@
                 <div class="tab-content"  style="background-color:#0097A7">
                     <div class="tab-pane active" id="tab1">
                         <form id="view_update_section" class="form-horizontal" action="manage_sections.php" method="post" size="10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
-                            <select  class="form-control" name="sec_short_name" form="view_update_section" required>
-                              <?php
-                                  $q = "SELECT * FROM sections";
-                                  $result = mysqli_query($connection, $q);
-
-                                  confirm_query($result);
-                                  //$_POST['sec_short_nm'] = NULL;
-
-                                  echo "<option id=\"opt0\" value=NULL> </option>";
-                                  while($sec_values = mysqli_fetch_assoc($result)) {
-                              ?>
-                                    <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" ><?php echo htmlentities($sec_values['sec_name']) ?></option>
+                          <div class="input-group">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
+                              <select  class="form-control" name="sec_short_name" form="view_update_section" required>
                                 <?php
-                                  }
+                                    $q = "SELECT * FROM sections";
+                                    $result = mysqli_query($connection, $q);
+
+                                    confirm_query($result);
+                                    //$_POST['sec_short_nm'] = NULL;
+
+                                    echo "<option id=\"opt0\" value=NULL> </option>";
+                                    while($sec_values = mysqli_fetch_assoc($result)) {
                                 ?>
-                            </select>
-                        </div>
+                                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" ><?php echo htmlentities($sec_values['sec_name']) ?></option>
+                                  <?php
+                                    }
+                                  ?>
+                              </select>
+                          </div>
 
-                                <input type="submit" class="btn btn-info" name="view_submit" value="View a Section">
-                                <p></p>
+                                  <input type="submit" class="btn btn-info" name="view_submit" value="View a Section">
+                                  <p></p>
 
-                                <?php if(isset($_POST['view_submit'])) {
-                                        $ssnV = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
-                                        //echo "ssnV=".$ssnV;
-                                        $q2 = " SELECT * FROM sections WHERE short_sec_name = '{$ssnV}'";
+                                  <?php if(isset($_POST['view_submit'])) {
+                                          $ssnV = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
+                                          //echo "ssnV=".$ssnV;
+                                          $q2 = " SELECT * FROM sections WHERE short_sec_name = '{$ssnV}'";
 
-                                        $result = mysqli_query($connection, $q2);
-                                        confirm_query($result);
+                                          $result = mysqli_query($connection, $q2);
+                                          confirm_query($result);
 
-                                        $sec = mysqli_fetch_assoc($result);
+                                          $sec = mysqli_fetch_assoc($result);
 
-                                ?>
+                                  ?>
 
-                                  <div class="form-group">
-                                    <label for="textbox1" class="col-sm-3" style="padding-top:15px;">Section Name:</label>
-                                    <div class="input-group" class="col-sm-9">
-                                      <input id="textbox1" type="text" class="form-control" name="sec_nm" value="<?php echo $sec['sec_name']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
-                                    </div>
-                                  </div>
                                     <div class="form-group">
-                                      <label for="textbox2" class="col-sm-3" style="padding-top:15px;">Section Name(Short):</label>
-
-                                        <div class="input-group" class="col-sm-9">
-                                    <input id="textbox2" type="text" class="form-control" name="sec_short_nm" value="<?php echo $sec['short_sec_name']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-certificate"></i></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <label for="area_plucked" class="col-sm-3" style="padding-top:15px;">Area Pluced</label>
-
-                                      <div class="input-group" class="col-sm-9">
-                                          <input type="text" id="area_plucked" class="form-control" name="sec_area" value="<?php echo $sec['total_area']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-tree-conifer"></i></span>
+                                      <label for="textbox1" class="col-sm-2" style="padding-top:15px;">Section Name:</label>
+                                      <div class="input-group" class="col-sm-10">
+                                        <input id="textbox1" type="text" class="form-control" name="sec_nm" value="<?php echo $sec['sec_name']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
                                       </div>
                                     </div>
-                                    <div class="form-group">
-                                      <label for="status_" class="col-sm-3" style="padding-top:15px;">Status</label>
+                                      <div class="form-group">
+                                        <label for="textbox2" class="col-sm-2" style="padding-top:15px;">Section Name(Short):</label>
 
-                                        <div class="input-group" class="col-sm-9">
-                                          <input type="text" class="form-control" id="status_" name="status" value="<?php echo $sec['sec_status']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                                          <div class="input-group" class="col-sm-10">
+                                      <input id="textbox2" type="text" class="form-control" name="sec_short_nm" value="<?php echo $sec['short_sec_name']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-certificate"></i></span>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="area_plucked" class="col-sm-2" style="padding-top:15px;">Area Pluced</label>
+
+                                        <div class="input-group" class="col-sm-10">
+                                            <input type="text" id="area_plucked" class="form-control" name="sec_area" value="<?php echo $sec['total_area']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-tree-conifer"></i></span>
                                         </div>
-                                    </div>
-                                <div class="form-group">
-                                  <label for="Jat_" class="col-sm-3" style="padding-top:15px;">Jat/Clone</label>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="status_" class="col-sm-2" style="padding-top:15px;">Status</label>
 
-                                <div class="input-group" class="col-sm-9">
-                                    <input type="text" class="form-control" name="jat" id="Jat_" value="<?php echo $sec['jat']; ?>"> <span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
-                                </div>
-                                <div class="form-group">
-                                  <label for="shade_species_temp_" class="col-sm-3" style="padding-top:15px;">shade species temporary</label>
+                                          <div class="input-group" class="col-sm-10">
+                                            <input type="text" class="form-control" id="status_" name="status" value="<?php echo $sec['sec_status']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                                          </div>
+                                      </div>
+                                  <div class="form-group">
+                                    <label for="Jat_" class="col-sm-2" style="padding-top:15px;">Jat/Clone</label>
 
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="text" id="shade_species_temp_" class="form-control" name="shade_species_temp" value="<?php echo $sec['shade_spcs_temp']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="shade_species_perm_" class="col-sm-3" style="padding-top:15px;">shade species permanent</label>
-
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="text" class="form-control" id="shade_species_perm_" name="shade_species_perm" value="<?php echo $sec['shade_spcs_perm']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="Frame_Height_" class="col-sm-3" style="padding-top:15px;">Frame Height</label>
-
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="text" id="Frame_Height_" class="form-control" name="Frame_Height" value="<?php echo $sec['frame_height']; ?>"> <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
-                                  </div>
-                                </div>
-
-                                <div class="form-group">
-                                  <label for="Bush_Height_" class="col-sm-3" style="padding-top:15px;">Bush Height</label>
-
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="text" id="Bush_Height_" class="form-control" name="Bush_Height" value="<?php echo $sec['bush_height']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="Planting_year_" class="col-sm-3" style="padding-top:15px;">Planting year</label>
-
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="number" id="Planting_year_" class="form-control" name="Planting_year" value="<?php echo $sec['yr_of_plant']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-jpy"></i></span>
-                                  </div>
-                                </div>
-
-                                <div class="form-group">
-                                  <label for="Plant_Spacing_" class="col-sm-3" style="padding-top:15px;">Plant Spacing</label>
-
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="text" id="Plant_Spacing_" class="form-control" name="Plant_Spacing" value="<?php echo $sec['plant_spacing']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="Temp_Shade_spacing_" class="col-sm-3" style="padding-top:15px;">Temp. Shade spacing</label>
-
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="text" class="form-control" id="Temp_Shade_spacing_" name="Temp_Shade_spacing" value="<?php echo $sec['perm_shd_spcing']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="Perm_Shade_spacing_" class="col-sm-3" style="padding-top:15px;">Perm Shade spacing</label>
-
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="text" id="Perm_Shade_spacing_" class="form-control" name="Perm_Shade_spacing" value="<?php echo $sec['perm_shd_spcing']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="Plant_Density_" class="col-sm-3" style="padding-top:15px;">Plant Density</label>
-
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="text" class="form-control" id="Plant_Density_" name="Plant_Density" value="<?php echo $sec['plant_density']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="Bush_Popu_" class="col-sm-3" style="padding-top:15px;">Bush Population</label>
-
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="text" class="form-control" id="Bush_Popu_" name="Bush_Popu" value="<?php  echo $sec['bush_pop']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-cloud-upload"></i></span>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="Drain_Status_" class="col-sm-3" style="padding-top:15px;">Drain Status</label>
-
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="text" class="form-control" id="Drain_Status_" name="Drain_Status" value="<?php echo $sec['drain_stats']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="Soil_Topo_" class="col-sm-3" style="padding-top:15px;">Soil Topology</label>
-
-                                  <div class="input-group" class="col-sm-9">
-                                      <input type="text" class="form-control" id="Soil_Topo_" name="Soil_Topo" value="<?php echo $sec['soil_topo']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <label for="ext_rplnt_" class="col-sm-3" style="padding-top:15px;">ext/replantation</label>
-
-                                    <div class="input-group" class="col-sm-9">
-                                        <input type="number" class="form-control" id="ext_rplnt_" name="ext_rplnt" value="<?php echo $sec['ext_rplnt']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" class="form-control" name="jat" id="Jat_" value="<?php echo $sec['jat']; ?>"> <span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
                                     </div>
                                 </div>
-                                <input type="submit" class="btn btn-success" name="update_submit" value="Update Section">
-                                <?php
-                                      }
-                                ?>
+                                  <div class="form-group">
+                                    <label for="shade_species_temp_" class="col-sm-2" style="padding-top:15px;">shade species temporary</label>
 
-                            </form>
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" id="shade_species_temp_" class="form-control" name="shade_species_temp" value="<?php echo $sec['shade_spcs_temp']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="shade_species_perm_" class="col-sm-2" style="padding-top:15px;">shade species permanent</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" class="form-control" id="shade_species_perm_" name="shade_species_perm" value="<?php echo $sec['shade_spcs_perm']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="Frame_Height_" class="col-sm-2" style="padding-top:15px;">Frame Height</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" id="Frame_Height_" class="form-control" name="Frame_Height" value="<?php echo $sec['frame_height']; ?>"> <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label for="Bush_Height_" class="col-sm-2" style="padding-top:15px;">Bush Height</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" id="Bush_Height_" class="form-control" name="Bush_Height" value="<?php echo $sec['bush_height']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="Planting_year_" class="col-sm-2" style="padding-top:15px;">Planting year</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="number" id="Planting_year_" class="form-control" name="Planting_year" value="<?php echo $sec['yr_of_plant']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-jpy"></i></span>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label for="Plant_Spacing_" class="col-sm-2" style="padding-top:15px;">Plant Spacing</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" id="Plant_Spacing_" class="form-control" name="Plant_Spacing" value="<?php echo $sec['plant_spacing']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="Temp_Shade_spacing_" class="col-sm-2" style="padding-top:15px;">Temp. Shade spacing</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" class="form-control" id="Temp_Shade_spacing_" name="Temp_Shade_spacing" value="<?php echo $sec['perm_shd_spcing']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="Perm_Shade_spacing_" class="col-sm-2" style="padding-top:15px;">Perm Shade spacing</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" id="Perm_Shade_spacing_" class="form-control" name="Perm_Shade_spacing" value="<?php echo $sec['perm_shd_spcing']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="Plant_Density_" class="col-sm-2" style="padding-top:15px;">Plant Density</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" class="form-control" id="Plant_Density_" name="Plant_Density" value="<?php echo $sec['plant_density']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="Bush_Popu_" class="col-sm-2" style="padding-top:15px;">Bush Population</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" class="form-control" id="Bush_Popu_" name="Bush_Popu" value="<?php  echo $sec['bush_pop']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-cloud-upload"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="Drain_Status_" class="col-sm-2" style="padding-top:15px;">Drain Status</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" class="form-control" id="Drain_Status_" name="Drain_Status" value="<?php echo $sec['drain_stats']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="Soil_Topo_" class="col-sm-2" style="padding-top:15px;">Soil Topology</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" class="form-control" id="Soil_Topo_" name="Soil_Topo" value="<?php echo $sec['soil_topo']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="ext_rplnt_" class="col-sm-2" style="padding-top:15px;">Ext. / Replantation</label>
+
+                                      <div class="input-group" class="col-sm-10">
+                                          <input type="number" class="form-control" id="ext_rplnt_" name="ext_rplnt" value="<?php echo $sec['ext_rplnt']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                                      </div>
+                                  </div>
+                                  <input type="submit" class="btn btn-success" name="update_submit" value="Update Section">
+                                  <?php
+                                        }
+                                  ?>
+
+                              </form>
 
 
                     </div>
-                  </div>
+
                     <div class="tab-pane" id="tab2">
                         <form id="remove_section" action="manage_sections.php" method="post" size="10">
                         <div class="input-group">
@@ -426,8 +427,11 @@
 
 
                     </div>
+
+              </div>
             </div>
-        </div>
+          </div>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
