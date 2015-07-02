@@ -38,23 +38,34 @@
 		$short_sec_name = $_SESSION['ssn'];
 		$record_date = $_SESSION['date'];
 
-		$prune = mysqli_real_escape_string($connection, $_POST['prune']);
-		$plucked_area = mysqli_real_escape_string($connection, $_POST['plucked_area']);
-		$leaf_plucked = mysqli_real_escape_string($connection, $_POST['leaf_plucked']);
-		$hz_area = mysqli_real_escape_string($connection, $_POST['hz_area']);
-		$db_area = mysqli_real_escape_string($connection, $_POST['db_area']);
-		$hz_qty = mysqli_real_escape_string($connection, $_POST['hz_qty']);
-		$db_qty = mysqli_real_escape_string($connection, $_POST['db_qty']);
-		$mandays = mysqli_real_escape_string($connection, $_POST['mandays']);
+		$plucked_area = (int) mysqli_real_escape_string($connection, $_POST['plucked_area']);
+		$leaf_plucked = (int) mysqli_real_escape_string($connection, $_POST['leaf_plucked']);
+		$hz_area = (int) mysqli_real_escape_string($connection, $_POST['hz_area']);
+		$db_area = (int) mysqli_real_escape_string($connection, $_POST['db_area']);
+		$hz_qty = (int) mysqli_real_escape_string($connection, $_POST['hz_qty']);
+		$db_qty = (int) mysqli_real_escape_string($connection, $_POST['db_qty']);
+		$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
+		$wrk_grp = mysqli_real_escape_string($connection, $_POST['wrk_grp']);
+		$grp_leaf = mysqli_real_escape_string($connection, $_POST['grp_leaf']);
+		$grp_hz_ar = mysqli_real_escape_string($connection, $_POST['grp_hz_ar']);
+		$grp_md = mysqli_real_escape_string($connection, $_POST['grp_md']);
+
+		$wrk_grp_exp = explode(", ", $wrk_grp);
+		$wrk_grp = implode("¥", $wrk_grp_exp);
+		$grp_leaf_exp = explode(", ", $grp_leaf);
+		$grp_leaf = implode("¥", $grp_leaf_exp);
+		$grp_hz_ar_exp = explode(", ", $grp_hz_ar);
+		$grp_hz_ar = implode("¥", $grp_hz_ar_exp);
+		$grp_md_exp = explode(", ", $grp_md);
+		$grp_md = implode("¥", $grp_md_exp);
 
 		$query = "INSERT INTO daily_plucking (short_sec_name, record_date,";
-		$query .= " prune, plucked_area, leaf_plucked, hz_area, hz_qty,";
-		$query .= " db_area, db_qty, mandays)";
+		$query .= " plucked_area, leaf_plucked, hz_area, hz_qty,";
+		$query .= " db_area, db_qty, mandays, groups_worked, groups_leaves, groups_area, groups_mandays)";
 		$query .= " VALUES (";
-		$query .= "'{$short_sec_name}', '{$record_date}', '{$prune}', {$plucked_area},";
+		$query .= "'{$short_sec_name}', '{$record_date}', {$plucked_area},";
 		$query .= " {$leaf_plucked}, {$hz_area}, {$hz_qty}, {$db_area}, {$db_qty},";
-		$query .= " {$mandays})";
-
+		$query .= " {$mandays}, '{$wrk_grp}', '{$grp_leaf}', '{$grp_hz_ar}', '{$grp_md}')";
 		$result = mysqli_query($connection, $query);
 
     confirm_query($result);
@@ -76,19 +87,35 @@
 		$record_date = $_SESSION['date'];
 		$req_id = $_SESSION['daily_plucking']['id'];
 
-		$prune = mysqli_real_escape_string($connection, $_POST['prune']);
-		$plucked_area = mysqli_real_escape_string($connection, $_POST['plucked_area']);
-		$leaf_plucked = mysqli_real_escape_string($connection, $_POST['leaf_plucked']);
-		$hz_area = mysqli_real_escape_string($connection, $_POST['hz_area']);
-		$db_area = mysqli_real_escape_string($connection, $_POST['db_area']);
-		$hz_qty = mysqli_real_escape_string($connection, $_POST['hz_qty']);
-		$db_qty = mysqli_real_escape_string($connection, $_POST['db_qty']);
+		//var_dump($_SESSION);
+
+		$plucked_area = (int) mysqli_real_escape_string($connection, $_POST['plucked_area']);
+		$leaf_plucked = (int) mysqli_real_escape_string($connection, $_POST['leaf_plucked']);
+		$hz_area = (int) mysqli_real_escape_string($connection, $_POST['hz_area']);
+		$db_area = (int) mysqli_real_escape_string($connection, $_POST['db_area']);
+		$hz_qty = (int) mysqli_real_escape_string($connection, $_POST['hz_qty']);
+		$db_qty = (int) mysqli_real_escape_string($connection, $_POST['db_qty']);
 		$mandays = mysqli_real_escape_string($connection, $_POST['mandays']);
+		$wrk_grp = mysqli_real_escape_string($connection, $_POST['wrk_grp']);
+		$grp_leaf = mysqli_real_escape_string($connection, $_POST['grp_leaf']);
+		$grp_hz_ar = mysqli_real_escape_string($connection, $_POST['grp_hz_ar']);
+		$grp_md = mysqli_real_escape_string($connection, $_POST['grp_md']);
+
+		$wrk_grp_exp = explode(", ", $wrk_grp);
+		$wrk_grp = implode("¥", $wrk_grp_exp);
+		$grp_leaf_exp = explode(", ", $grp_leaf);
+		$grp_leaf = implode("¥", $grp_leaf_exp);
+		$grp_hz_ar_exp = explode(", ", $grp_hz_ar);
+		$grp_hz_ar = implode("¥", $grp_hz_ar_exp);
+		$grp_md_exp = explode(", ", $grp_md);
+		$grp_md = implode("¥", $grp_md_exp);
 
 		$query = "UPDATE daily_plucking SET short_sec_name = '{$short_sec_name}', record_date = '{$record_date}',";
-		$query .= " prune = '{$prune}', plucked_area = {$plucked_area}, leaf_plucked = {$leaf_plucked},";
+		$query .= " plucked_area = {$plucked_area}, leaf_plucked = {$leaf_plucked},";
 		$query .= " hz_area = {$hz_area}, hz_qty = {$hz_qty},";
-		$query .= " db_area = {$db_area}, db_qty = {$db_qty}, mandays = {$mandays} WHERE id ={$req_id}";
+		$query .= " db_area = {$db_area}, db_qty = {$db_qty}, mandays = {$mandays}, groups_worked = '{$wrk_grp}', groups_leaves = '{$grp_leaf}', groups_area = '{$grp_hz_ar}', groups_mandays = '{$grp_md}' WHERE id ={$req_id}";
+
+		//var_dump($query);
 
 		$result = mysqli_query($connection, $query);
 
@@ -140,7 +167,7 @@
         ?>
         <div class="container">
             <div class="jumbotron" style="background:#BF360C;margin-left:-15px;margin-right: -15px;">
-                <h1>Daily Data Entry</h1>
+                <h1>Daily Plucking Entry</h1>
                 <form action="input_daily.php" method="post" class="form form-group form-inline" style="margin-top: 30px;">
 									<select id="division" name ="short_sec_name" class="form-control">
 										<?php
@@ -150,7 +177,7 @@
 												confirm_query($result);
 												//$_POST['sec_short_nm'] = NULL;
 
-												echo "<option id=\"opt0\" value=NULL> </option>";
+												echo "<option id=\"opt0\" value=NULL>Select a section...</option>";
 												while($sec_values = mysqli_fetch_assoc($result)) {
 										?>
 													<option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>"><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
@@ -177,7 +204,7 @@
 						<form action="input_daily.php" method="post">
 							<?php if(isset($_SESSION['daily_plucking'])) { $daily = $_SESSION['daily_plucking']; } else { $daily = NULL; }?>
 									<!-- <div class="input-group">
-											<input class="form-control" name="prune"  type="text" <?php if (isset($daily)) { ?> value=" <?php echo $daily['prune']; ?> " <?php } else { ?> placeholder= <?php echo "\"Prune Type\""; ?> <?php } ?> >
+											<input class="form-control" name="prune"  type="text" <?php //if (isset($daily)) { ?> value=" <?php //echo $daily['prune']; ?> " <?php// } else { ?> placeholder= <?php //echo "\"Prune Type\""; ?> <?php //} ?> >
 											<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 									</div> -->
 									<div class="input-group">
@@ -185,11 +212,11 @@
 									    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 									</div>
 									<div class="input-group">
-											<input id="wrkgrp1" class="form-control" name="wrk_grp" type="text" placeholder="Worker Group">
+											<input id="wrkgrp1" class="form-control" name="wrk_grp" type="text" <?php if (isset($daily)) { $csv = str_replace("¥", ", ", $daily['groups_worked']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Worker Group\""; ?><?php } ?> >
 											<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 									</div>
 									<div class="input-group">
-											<input id="grpleaf1" class="form-control" name="grp_leaf" type="text" placeholder="Group Leaves">
+											<input id="grpleaf1" class="form-control" name="grp_leaf" type="text" <?php if (isset($daily)) { $csv = str_replace("¥", ", ", $daily['groups_leaves']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Group Leaves\""; ?><?php } ?>>
 											<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 									</div>
 									<div class="input-group">
@@ -201,7 +228,7 @@
 									      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
 									  </div>
 										<div class="input-group">
-												<input id="grphzar1" class="form-control" name="grp_hz_ar" type="text" placeholder="Group Hazri Area">
+												<input id="grphzar1" class="form-control" name="grp_hz_ar" type="text" <?php if (isset($daily)) { $csv = str_replace("¥", ", ", $daily['groups_area']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Group Hazri Area\""; ?><?php } ?>>
 												<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 										</div>
 									<div class="input-group">
@@ -217,7 +244,7 @@
 									    <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
 									</div>
 									<div class="input-group">
-											<input id="grpmd1" class="form-control" name="grp_md" type="text" placeholder="Group Mandays">
+											<input id="grpmd1" class="form-control" name="grp_md" type="text" <?php if (isset($daily)) { $csv = str_replace("¥", ", ", $daily['groups_mandays']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Group Mandays\""; ?><?php } ?>>
 											<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 									</div>
 									<div class="input-group">
@@ -252,7 +279,7 @@
 		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 		                    </div> -->
 		                    <div class="input-group">
-		                        <input class="form-control" name="plucked_area" type="text" placeholder="Plucked Area">
+		                        <input class="form-control" name="plucked_area" type="text" placeholder="Area Plucked">
 		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 		                    </div>
 												<div class="input-group">
@@ -264,7 +291,7 @@
 		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 		                    </div>
 		                    <div class="input-group">
-		                        <input class="form-control" name="leaf_plucked" type="text" placeholder="Total Leaf">
+		                        <input class="form-control" name="leaf_plucked" type="text" placeholder="Leaf Plucked">
 		                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 		                    </div>
 		                    <div class="input-group">
@@ -306,9 +333,9 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<script src="scripts/bootstrap-tokenfield.min.js"></script>
 		<script type="text/javascript">
-				 document.getElementById("add_entry").disabled=true;
-				 document.getElementById("edit_entry").disabled=true;
-				 document.getElementById("delete_entry").disabled=true;
+				//  document.getElementById("add_entry").disabled=true;
+				//  document.getElementById("edit_entry").disabled=true;
+				//  document.getElementById("delete_entry").disabled=true;
 				$(function() {
 					$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
 					$('#wrkgrp1, #wrkgrp2').tokenfield({
@@ -319,14 +346,13 @@
 						showAutocompleteOnFocus: true
 					});
 					$('#grpleaf1, #grpleaf2, #grphzar1, #grphzar2, #grpmd1, #grpmd2').tokenfield();
-				});
-
-				function unhide(){
-					document.getElementById("add_entry").disabled=false;
-					document.getElementById("edit_entry").disabled=false;
-					document.getElementById("delete_entry").disabled=false;
-				}
-
+				 });
+				//
+				// function unhide(){
+				// 	document.getElementById("add_entry").disabled=false;
+				// 	document.getElementById("edit_entry").disabled=false;
+				// 	document.getElementById("delete_entry").disabled=false;
+				// }
 		</script>
     </body>
 </html>
