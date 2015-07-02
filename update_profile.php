@@ -48,7 +48,7 @@
 				$query .= " e_mail='{$_POST['email']}',";
 				$query .= " password='{$old_pwd}'";
 				$query .= " WHERE id = '{$_SESSION['user_id']}'";
-				var_dump($query);
+				//var_dump($query);
 				$result = mysqli_query($connection, $query);
 				confirm_query($result);
 				//echo "Updated successfully!";
@@ -70,7 +70,7 @@
 							$query .= " password='{$hash_passwd}'";
 							$query .= " WHERE id = '{$_SESSION['user_id']}'";
 
-							var_dump($query);
+							//var_dump($query);
 							$result = mysqli_query($connection, $query);
 							confirm_query($result);
 							//echo "Updated successfully!";
