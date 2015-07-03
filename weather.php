@@ -77,7 +77,6 @@
 			}
 			.card_style {
 				margin-top: 30px;
-				text-align: center;
 			}
 
 		</style>
@@ -255,31 +254,47 @@
 							</div>
 						</div>
 		  </div>
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script src="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-	    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js">
-		</script>
-		<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+	    	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+				<script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script>
+          $(document).ready(function() {
+            $('#weather').dataTable({
+							"aoColumns": [
+									{ "sType": "date-uk" },
+									null,
+									null,
+									null,
+									null,
+									null,
+									null,
+							]
+						});
+						$('#total','#weather').dataTable({"scrollX": true});
+          });
+					jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+          "date-uk-pre": function ( a ) {
+          var ukDatea = a.split('-');
+          return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+          },
 
-            $(document).ready(function() {
-                    $('#weather').dataTable({"scrollX": true});
-										  $('#total').dataTable({"scrollX": true,"paging":   false,
-        											"ordering": false,
-        											"info":    true
+          "date-uk-asc": function ( a, b ) {
+          return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+          },
 
-											});
-
-            });
+          "date-uk-desc": function ( a, b ) {
+          return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+          }
+        } );
         </script>
 				<script type="text/javascript">
-						$(function() {
-							$( "#datepicker1, #datepicker2" ).datepicker({dateFormat: 'dd-mm-yy'});
-						});
+					$(function() {
+						$( "#datepicker1, #datepicker2" ).datepicker({dateFormat: 'dd-mm-yy'});
+					});
 				</script>
     </body>
 </html>
