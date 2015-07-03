@@ -344,31 +344,38 @@
                             </select>
                         </div>
 
-                                <input type="submit" class="btn btn-danger" name="rmv_sec_submit" value="Remove a Section">
-
+                                <button type="button" class="btn btn-danger" name="rmv_sec_submit" data-toggle="modal" data-target="#confirmModal">Remove a Section</button>
+                                <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="confirmModalLabel">Are you sure?</h4>
+                                      </div>
+                                      <div class="modal-body">Are you absolutely sure you want to delete this record?</div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <input type="submit" class="btn btn-danger" value="Yes, I'm sure!">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                                 <?php if(isset($_POST['rmv_sec_submit'])) {
-                                        $ssn = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
+                                    $ssn = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
 
-                                        $q = "DELETE FROM sections WHERE short_sec_name = '{$ssn}'";
-                                        $result = mysqli_query($connection, $q);
+                                    $q = "DELETE FROM sections WHERE short_sec_name = '{$ssn}'";
+                                    $result = mysqli_query($connection, $q);
 
-                                        confirm_query($result);
-                                        echo "Deleted successfully!";
+                                    confirm_query($result);
+                                    echo "Deleted successfully!";
 
-                                      }
-                                      else {
-                                        $ssn = NULL;
-                                      }
-
+                                  }
+                                  else {
+                                    $ssn = NULL;
+                                  }
                                 ?>
                         </form>
                     </div>
-
-
-
-
-
-
 
                     <div class="tab-pane" id="tab3">
                         <form class="add_section" action="manage_sections.php" method="post">
