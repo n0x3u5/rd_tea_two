@@ -6,6 +6,41 @@
 		redirect_to("index.php");
 	}
 ?>
+
+<?php
+	$connection = make_connection();
+
+	//var_dump($_POST); echo "<br>";
+	if(isset($_POST['sec_date_submit'])) {
+		$req_start_date = $_POST['start_date_value'];
+		$req_end_date = $_POST['end_date_value'];
+		$req_ssn = $_POST['short_sec_name'];
+
+		$from = date('Y-m-d', strtotime($req_start_date));
+	  $to = date('Y-m-d', strtotime($req_end_date));
+	  $query = "select * from daily_spraying where short_sec_name ='$req_ssn' and record_date between '$from' and '$to'";
+
+
+	  //var_dump($query);
+
+	  $result = mysqli_query($connection, $query);
+	  confirm_query($result);
+
+		//var_dump($req_day_spray);
+		// echo "<br> header processing ends. <hr>";
+
+	}
+	else {
+		//$req_div_name = NULL;
+		//$req_year = NULL;
+		$req_start_date = NULL;
+		$req_end_date = NULL;
+		$result = NULL;
+	}
+?>
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,38 +67,49 @@
                 <p></p>
                 <p></p>
                 <h3 style="color:#fff">Section:</h3>
-                <form class="form-inline">
-                  <div class="form-group">
+                <form class=" form-horizontal" action="sectional_daily_review.php" method="post">
+									<div class="row">
+                  <div class="form-group col-sm-6">
                     <!-- <label class="sr-only" for="sec_select">Email address</label> -->
-                    <select id="sec_select" class="form-control">
-                      <option>1w</option>
-                      <option>19</option>
-                      <option>5E</option>
-                      <option>6N</option>
-                      <option>7w</option>
-                    </select>
+										<select id="division" name ="short_sec_name" class="form-control">
+			                <?php
+			                    $q = "SELECT * FROM sections";
+			                    $r = mysqli_query($connection, $q);
+
+			                    confirm_query($r);
+			                    //$_POST['sec_short_nm'] = NULL;
+
+			                    echo "<option id=\"opt0\" value=NULL></option>";
+			                    while($sec_values = mysqli_fetch_assoc($r)) {
+			                ?>
+			                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>"><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
+			                <?php
+			                    }
+			                ?>
+			              </select>
                   </div>
-                  <div class="form-group">
-                    <!-- <label class="sr-only" for="start_year">Password</label> -->
-                    <select id="start_year" class="form-control">
-                      <option>2015</option>
-                      <option>2016</option>
-                      <option>2017</option>
-                      <option>2018</option>
-                      <option>2019</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <!-- <label class="sr-only" for="end_year">Password</label> -->
-                    <select id="end_year" class="form-control">
-                      <option>2015</option>
-                      <option>2016</option>
-                      <option>2017</option>
-                      <option>2018</option>
-                      <option>2019</option>
-                    </select>
-                  </div>
-                  <button type="submit" class="btn btn-default" style="margin-top:0px;">Get Data</button>
+									</div>
+									<div class="form-group">
+										<p style="color:#B3E5FC">Start date</p>
+										<div class="input-group">
+											<input type="text" name="start_date_value" class="form-control" id="datepicker1" <?php if($req_start_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_start_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
+											<span class="input-group-addon">
+													<i class="glyphicon glyphicon-calendar"></i>
+											</span>
+										</div>
+									</div>
+									<p></p>
+									<p></p>
+									<div class="form-group">
+										<p style="color:#B3E5FC">End date</p>
+										<div class="input-group">
+											<input type="text" name="end_date_value" class="form-control" id="datepicker2" <?php if($req_end_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_end_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
+											<span class="input-group-addon">
+													<i class="glyphicon glyphicon-calendar"></i>
+											</span>
+										</div>
+									</div>
+                  <button type="submit" name='sec_date_submit' value="section and date range" class="btn btn-default" style="margin-top:0px;">Get Data</button>
                 </form>
 
             </div>
@@ -90,7 +136,6 @@
                                     <th>Db Quantity</th>
                                     <th>Db area</th>
                                     <th>Mandays</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -269,7 +314,7 @@
                         </table>
                     </div>
                     <div class="tab-pane" id="tab2">
-                         <table  id="spray_day" class="table table-hover" border="1">
+                         <table  id="spray_day" class="table table-hover display" border="1" cellspacing="0" width="100%">
                              <thead style="border: solid 2px green">
                                  <tr>
                                     <th>Date</th>
@@ -302,15 +347,12 @@
                                     <th>SYTH 4</th>
                                     <th>DOSE</th>
                                     <th>SYTH 4<br/>(QTY)</th>
-
                                     <th>STR 5</th>
                                     <th>DOSE</th>
                                     <th>STR 5<br/>(QTY)</th>
-
                                     <th>FNG 6</th>
                                     <th>DOSE</th>
                                     <th>FNG 6<br/>(QTY)</th>
-
                                     <th>WDC 7</th>
                                     <th>DOSE</th>
                                     <th>WDC 7<br/>(QTY)</th>
@@ -323,14 +365,95 @@
                                     <th>ZINC</th>
                                     <th>DOSE</th>
                                     <th>NTR 10<br/>(QTY)</th>
-                                    <th>BOORON</th>
+                                    <th>BORON</th>
                                     <th>DOSE</th>
                                     <th>NTR 11<br/>(QTY)</th>
-																		<th>Other</th>
-                                    <th>DOSE</th>
-                                    <th>Other<br/>(QTY)</th>
+																		<th>Other1<br/>Name</th>
+                                    <th>Othrer1<br/> DOSE</th>
+                                    <th>Other1<br/>(QTY)</th>
+																		<th>Other2<br/>Name</th>
+                                    <th>Othrer2<br/> DOSE</th>
+                                    <th>Other2<br/>(QTY)</th>
+																		<th>Other3<br/>Name</th>
+                                    <th>Othrer3<br/> DOSE</th>
+                                    <th>Other3<br/>(QTY)</th>
                                 </tr>
                              </thead>
+														<tbody>
+															<?php
+															 //echo "need some post value to be checked";
+																//var_dump($_POST);
+																if(isset($_POST['sec_date_submit'])) {
+																	while($req_day_spray = mysqli_fetch_assoc($result)) {
+																		//var_dump($req_day_spray); echo "<hr>";
+															?>
+																		<tr>
+																			<td><?php echo $req_day_spray['record_date']; ?></td>
+																			<td><?php echo $req_day_spray['short_sec_name']; ?></td>
+																			<td><?php echo $req_day_spray['hz_area']; ?></td>
+																			<td><?php echo $req_day_spray['db_area']; ?></td>
+																			<td><?php echo $req_day_spray['hz_mandays']; ?></td>
+																			<td><?php echo $req_day_spray['dr_hz_mix']; ?></td>
+																			<td><?php echo $req_day_spray['dr_hz_pani']; ?></td>
+																			<td><?php echo $req_day_spray['drum_short']; ?></td>
+																			<td><?php echo $req_day_spray['mr_db_mnds']; ?></td>
+																			<td><?php echo $req_day_spray['dr_db_nl_mnds']; ?></td>
+																			<td><?php echo $req_day_spray['dr_db_mnds']; ?></td>
+																			<td><?php echo $req_day_spray['mc_db_mnds']; ?></td>
+																			<td><?php echo $req_day_spray['dr_db_mix']; ?></td>
+																			<td><?php echo $req_day_spray['dr_db_pani']; ?></td>
+																			<td><?php echo $req_day_spray['cocktail']; ?></td>
+																			<td><?php echo $req_day_spray['pest_disease']; ?></td>
+																			<td><?php echo $req_day_spray['infctn_intensity']; ?></td>
+																			<td><?php echo $req_day_spray['drums_sprayed']; ?></td>
+																			<td><?php echo $req_day_spray['ins1_nm']; ?></td>
+																			<td><?php echo $req_day_spray['ins1_dose']; ?></td>
+																			<td><?php echo $req_day_spray['ins1_qty']; ?></td>
+																			<td><?php echo $req_day_spray['ins2_nm']; ?></td>
+																			<td><?php echo $req_day_spray['ins2_dose']; ?></td>
+																			<td><?php echo $req_day_spray['ins2_qty']; ?></td>
+																			<td><?php echo $req_day_spray['acc3_nm']; ?></td>
+																			<td><?php echo $req_day_spray['acc3_dose']; ?></td>
+																			<td><?php echo $req_day_spray['acc3_qty']; ?></td>
+																			<td><?php echo $req_day_spray['synth4_nm']; ?></td>
+																			<td><?php echo $req_day_spray['synth4_dose']; ?></td>
+																			<td><?php echo $req_day_spray['synth4_qty']; ?></td>
+																			<td><?php echo $req_day_spray['str5_nm']; ?></td>
+																			<td><?php echo $req_day_spray['str5_dose']; ?></td>
+																			<td><?php echo $req_day_spray['str5_qty']; ?></td>
+																			<td><?php echo $req_day_spray['fng6_nm']; ?></td>
+																			<td><?php echo $req_day_spray['fng6_dose']; ?></td>
+																			<td><?php echo $req_day_spray['fng6_qty']; ?></td>
+																			<td><?php echo $req_day_spray['wdc7_nm']; ?></td>
+																			<td><?php echo $req_day_spray['wdc7_dose']; ?></td>
+																			<td><?php echo $req_day_spray['wdc7_qty']; ?></td>
+																			<td><?php echo $req_day_spray['wdc8_nm']; ?></td>
+																			<td><?php echo $req_day_spray['wdc8_dose']; ?></td>
+																			<td><?php echo $req_day_spray['wdc8_qty']; ?></td>
+																			<td><?php echo $req_day_spray['urea']; ?></td>
+																			<td><?php echo $req_day_spray['u_dose']; ?></td>
+																			<td><?php echo $req_day_spray['ntr9_qty']; ?></td>
+																			<td><?php echo $req_day_spray['zinc']; ?></td>
+																			<td><?php echo $req_day_spray['z_dose']; ?></td>
+																			<td><?php echo $req_day_spray['ntr10_qty']; ?></td>
+																			<td><?php echo $req_day_spray['boron']; ?></td>
+																			<td><?php echo $req_day_spray['b_dose']; ?></td>
+																			<td><?php echo $req_day_spray['ntr11_qty']; ?></td>
+																			<td><?php echo $req_day_spray['othr1_nm']; ?></td>
+																			<td><?php echo $req_day_spray['othr1_dose']; ?></td>
+																			<td><?php echo $req_day_spray['othr1_qty']; ?></td>
+																			<td><?php echo $req_day_spray['othr2_nm']; ?></td>
+																			<td><?php echo $req_day_spray['othr2_dose']; ?></td>
+																			<td><?php echo $req_day_spray['othr2_qty']; ?></td>
+																			<td><?php echo $req_day_spray['othr3_nm']; ?></td>
+																			<td><?php echo $req_day_spray['othr3_dose']; ?></td>
+																			<td><?php echo $req_day_spray['othr3_qty']; ?></td>
+																		</tr>
+															<?php
+																	}
+																}
+															?>
+														</tbody>
                         </table>
                     </div>
 
@@ -355,5 +478,10 @@
 
             });
         </script>
+				<script type="text/javascript">
+						$(function() {
+							$( "#datepicker1, #datepicker2" ).datepicker({dateFormat: 'dd-mm-yy'});
+						});
+				</script>
     </body>
 </html>
