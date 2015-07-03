@@ -131,190 +131,67 @@
                             <thead style="border: solid 2px green">
                                 <tr>
                                     <th>Date</th>
-                                    <th>Division</th>
                                     <th>Section</th>
                                     <th>Prune</th>
                                     <th>Plucked Area</th>
+                                    <th>NCP leaf Quantity</th>
+                                    <th>CP Leaf Quantity</th>
                                     <th>Leaf</th>
-                                    <th>Hz Quantity</th>
-                                    <th>Hz area</th>
-                                    <th>Db Quantity</th>
-                                    <th>Db area</th>
                                     <th>Mandays</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
                                     <td>1West</td>
                                     <td>LP</td>
                                     <td>12</td>
                                     <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
+                                    <td>12</td>
+                                    <td>969</td>
                                     <td>40</td>
-                                    <td>6</td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
+																	<td style="text-align:center;">10-6-2015</td>
+																	<td>1West</td>
+																	<td>LP</td>
+																	<td>12</td>
+																	<td>957</td>
+																	<td>12</td>
+																	<td>969</td>
+																	<td>40</td>
+															  </tr>
+                                <tr>
+																	<td style="text-align:center;">10-6-2015</td>
+																	<td>1West</td>
+																	<td>LP</td>
+																	<td>12</td>
+																	<td>957</td>
+																	<td>12</td>
+																	<td>969</td>
+																	<td>40</td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
+																	<td style="text-align:center;">10-6-2015</td>
+																	<td>1West</td>
+																	<td>LP</td>
+																	<td>12</td>
+																	<td>957</td>
+																	<td>12</td>
+																	<td>969</td>
+																	<td>40</td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
+																	<td style="text-align:center;">10-6-2015</td>
+																	<td>1West</td>
+																	<td>LP</td>
+																	<td>12</td>
+																	<td>957</td>
+																	<td>12</td>
+																	<td>969</td>
+																	<td>40</td>
                                 </tr>
-                                <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>HN</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td></td>
-                                    <td>917</td>
-                                    <td></td>
-                                    <td>40</td>
-                                    <td>6</td>
-                                </tr>
-
+                                 	 	 	
                             </tbody>
                         </table>
                     </div>
