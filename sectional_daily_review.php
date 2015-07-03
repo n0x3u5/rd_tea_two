@@ -53,6 +53,11 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="icon" href="images/logo_rdtea.png"/>
+				<style>
+					.scrollStyle {
+						overflow-x: auto;
+					}
+				</style>
         <?php $page_id = 5;?>
     </head>
     <body>
@@ -474,8 +479,11 @@
         <script>
             $(document).ready(function() {
                     $('#pluck_day').dataTable({"scrollX": true});
-                    $('#spray_day').dataTable({"scrollX": true});
-
+                    var wideTable = $('#spray_day').dataTable({});
+										$(window).bind('resize', function () {
+											wideTable.fnAdjustColumnSizing();
+										});
+										jQuery('.dataTable').wrap('<div class="scrollStyle" />');
             });
         </script>
 				<script type="text/javascript">

@@ -180,7 +180,7 @@
 												echo "<option id=\"opt0\" value=NULL>Select a section...</option>";
 												while($sec_values = mysqli_fetch_assoc($result)) {
 										?>
-													<option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>"><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
+													<option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST["dt_sec_submit"]) && ($_SESSION['ssn'] == $sec_values['short_sec_name'])) { echo "selected";} ?> ><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
 										<?php
 												}
 										?>
