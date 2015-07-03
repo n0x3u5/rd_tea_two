@@ -108,7 +108,7 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="icon" href="images/logo_rdtea.png"/>
-        <title>R.D. Tea | Manage Users</title>
+        <title>R.D. Tea | Edit Profile</title>
         <?php $page_id = 3;?>
     </head>
     <body>

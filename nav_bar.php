@@ -27,14 +27,14 @@
                                 <li><a href="weather_input.php">Weather Entry</a></li>
                             </ul>
                         </li>
-                        <li <?php if($page_id == 4 || $page_id == 5 || $page_id == 6 || $page_id == 10) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
+                        <li <?php if($page_id == 4 || $page_id == 5 || $page_id == 6 || $page_id == 10 || $page_id == 11) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="sectional_yearly_review.php">Yearly Report</a></li>
                                 <li><a href="sectional_daily_review.php">Daily Report</a></li>
                                 <li><a href="weather.php">Weather Report</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Leaf Chit</a></li>
+                                <li><a href="leaf_chit.php">Leaf Chit</a></li>
                                 <li><a href="spray_chit.php">Spraying Chit</a></li>
                             </ul>
                         </li>
