@@ -122,7 +122,7 @@
         .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:active, .nav-tabs.nav-justified > .active > a:enabled {
             background-color: #327640 !important;
             border-bottom-color: #ffffff;
-            color: #000000;
+            color: #FFFFFF;
         }
         </style>
     </head>

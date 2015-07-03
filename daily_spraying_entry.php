@@ -30,6 +30,7 @@
     // echo "<br>Its just a test for session set check <br>";
     // var_dump($_SESSION['daily_spraying']);
     // echo "<br>";
+		$sub_enable_two = 1;
 	}
 	else {
 		$req_date = NULL;
@@ -37,6 +38,7 @@
 		// $_SESSION['ssn'] = NULL;
 		// $_SESSION['date'] = NULL;
 		// $_SESSION['daily_spraying'] = NULL;
+			$sub_enable_two = 0;
 	}
 ?>
 
@@ -316,14 +318,14 @@
                     echo "<option id=\"opt0\" value=NULL></option>";
                     while($sec_values = mysqli_fetch_assoc($result)) {
                 ?>
-                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>"><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
+                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php //if($_POST['short_sec_name'] == $sec_values['short_sec_name']) { echo "selected"; } ?> ><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
                 <?php
                     }
                 ?>
               </select>
               <div class="form-group">
                 <div class="input-group" style="width:100%">
-                  <input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()">
+                  <input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?>>
                   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
               </div>
@@ -332,11 +334,11 @@
         </div>
           <div class="col-sm-12 card_style" style="padding-bottom:15px;">
             <ul class="nav nav-tabs nav-justified">
-              <li class="active"><a href="#tab1" data-toggle="tab">Update or Delete Record</a></li>
-              <li><a href="#tab2" data-toggle="tab">Add Record</a></li>
+              <li id="ac_one"><a href="#tab1" data-toggle="tab" id="take1">Update or Delete Record</a></li>
+              <li id="ac_two"><a href="#tab2" data-toggle="tab" id="take2">Add Record</a></li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane active" id="tab1">
+              <div class="tab-pane" id="tab1">
                 <form class="form-horizontal" action="daily_spraying_entry.php" method="post">
                   <?php if(isset($_SESSION['daily_spraying'])) { $daily = $_SESSION['daily_spraying']; } else { $daily = NULL; }  //var_dump($daily); ?>
                   <div class="row">
@@ -352,7 +354,7 @@
                       <div class="form-group">
                         <label for="left_hzar1" class="col-sm-5 control-label">Hazri Area</label>
                         <div class="col-sm-7">
-                          <input type="text" name="hz_area" class="form-control" id="left_hzar1" <?php if (isset($daily)) { ?> value=" <?php echo $daily['hz_area']; ?> " <?php } ?> >
+                          <input type="text" name="hz_area" class="form-control" id="left_hzar1" <?php if (isset($daily)) { ?> value=" <?php echo $daily['hz_area']; ?> " <?php } ?> required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -451,7 +453,8 @@
                       <div class="form-group">
                         <label for="left_drsp1" class="col-sm-5 control-label">Drums Sprayed</label>
                         <div class="col-sm-7">
-                          <input type="text" name="drums_sprayed" class="form-control" id="left_drsp1" <?php if (isset($daily)) { ?> value=" <?php echo $daily['drums_sprayed']; ?> " <?php } ?> >
+                          <input type="text" name="drums_sprayed" class="form-control" id="left_drsp1" <?php if (isset($daily)) { ?> value="<?php echo $daily['drums_sprayed']; $var_chk=1; ?>" <?php } else { ?> value="" <?php
+													 $var_chk=2; } ?> >
                         </div>
                       </div>
                     </div>
@@ -753,7 +756,7 @@
                       <div class="form-group">
                         <label for="left_hzar2" class="col-sm-5 control-label">Hazri Area</label>
                         <div class="col-sm-7">
-                          <input type="text" name="hz_area" class="form-control" id="left_hzar2">
+                          <input type="text" name="hz_area" class="form-control" id="left_hzar2" required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -1129,6 +1132,39 @@
     				$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
     				});
     		</script>
+				<?php
+					if(isset($var_chk)){
+					echo"<script>		var submit_chk=$var_chk; submit_chk2=$sub_enable_two; </script>";}
+
+					?>
+					<script>
+							document.getElementById('take1').disabled=true;
+							document.getElementById('take2').disabled=true;
+										if(submit_chk==1 && submit_chk2)
+										{
+													var b2=document.getElementById('ac_one');
+													b2.style.backgroundColor = '#01579B';
+													var c2=document.getElementById('take1');
+													var a2=document.getElementById('tab1');
+													a2.setAttribute('class', 'active');
+													c2.style.color='#FFFFFF';
+													document.getElementById('take2').disabled=true;
+										}
+										if(submit_chk==2 && submit_chk2){
+											// document.getElementById('take2').disabled=false;
+											var b1=	document.getElementById('ac_two');
+											var c1=document.getElementById('take2');
+											b1.style.backgroundColor = '#01579B';
+											c1.style.color = '#FFFFFF';
+											var a1=document.getElementById('tab2');
+											a1.setAttribute('class', 'active');
+											document.getElementById('take1').disabled=true;
+
+										}
+
+
+					</script>
+
         </body>
     </body>
 </html>
