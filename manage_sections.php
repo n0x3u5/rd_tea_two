@@ -118,6 +118,13 @@
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="icon" href="images/logo_rdtea.png"/>
         <?php $page_id = 2;?>
+        <style>
+        .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:active, .nav-tabs.nav-justified > .active > a:enabled {
+            background-color: #327640 !important;
+            border-bottom-color: #ffffff;
+            color: #000000;
+        }
+        </style>
     </head>
     <body>
         <?php
@@ -127,7 +134,7 @@
         <div class="container">
             <div class="jumbotron" style="background:#006064;margin-left: -15px;margin-right: -15px;">
                 <h1>Manage Sections</h1>
-                <p style="color:#B2DFDB">Add or remove a new section</p>
+                <p style="color:#B2DFDB">Add or remove a section</p>
             </div>
             <div class="tab-container">
                 <ul class="nav nav-tabs nav-justified">

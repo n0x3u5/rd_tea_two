@@ -1,7 +1,7 @@
 <?php
 	require_once('/includes/sessions.php');
 	require_once('/includes/functions.php');
-	
+
 	if(!isset($_SESSION['user'])) {
 		redirect_to("index.php");
 	}
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>R.D. Tea | Manage Sections</title>
+        <title>R.D. Tea | Yearly Sectional Review</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="http://cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
@@ -71,7 +71,7 @@
                 </ul>
                 <div class="tab-content" >
                     <div class="tab-pane active" id="tab1">
-                            <table  id="prune_year" class="table table-hover" border="1">
+                            <table  id="prune_year" class="display table table-hover" border="1" cellspacing="0" width="100%">
                                 <thead  style="background-color:#A5D6A7">
                                     <tr>
                                         <th rowspan="2"   style="text-align:center padding:2 0 2 0 ">Year</th>
@@ -92,7 +92,7 @@
                                 <tbody>
                                     <tr>
 
-                                        <td   style="text-align:center">1</td>
+                                        <td   style="text-align:center">19522220</td>
                                         <td   style="text-align:center">2</td>
                                         <td   style="text-align:center">3</td>
                                         <td   style="text-align:center">4</td>
@@ -104,7 +104,7 @@
                                     </tr>
                                     <tr>
 
-                                        <td   style="text-align:center">12</td>
+                                        <td   style="text-align:center">1245545151</td>
                                         <td   style="text-align:center">23</td>
                                         <td   style="text-align:center">34</td>
                                         <td   style="text-align:center">45</td>
@@ -118,7 +118,7 @@
                             </table>
                     </div>
                     <div class="tab-pane" id="tab2">
-                        <table  id="soil_year" class="table table-hover" border="1">
+                        <table  id="soil_year" class="table table-hover display" border="1" cellspacing="0" width="100%">
                             <thead  style="background-color:#A5D6A7">
                                 <tr>
                                     <th rowspan="2">Year</th>
@@ -143,7 +143,7 @@
                             <tbody>
                                 <tr>
 
-                                    <td   style="text-align:center">1</td>
+                                    <td   style="text-align:center">1970</td>
                                     <td   style="text-align:center">2</td>
                                     <td   style="text-align:center">3</td>
                                     <td   style="text-align:center">4</td>

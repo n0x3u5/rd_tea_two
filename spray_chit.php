@@ -1,7 +1,7 @@
 <?php
 	require_once('/includes/sessions.php');
 	require_once('/includes/functions.php');
-	
+
 	if(!isset($_SESSION['user'])) {
 		redirect_to("index.php");
 	}
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>R.D. Tea | Manage Sections</title>
+        <title>R.D. Tea |Daily Spray Chit</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.6/css/dataTables.responsive.css">
@@ -38,7 +38,7 @@
             <div class="col-sm-12" style="background:#FFFFFF">
               <form class="form-group" style="padding-top:20px;">
 
-                  <table id="spray_chit" class="table table-hover" border="1">
+                  <table id="spray_chit" class=" display table table-hover" border="1" cellspacing="0" width="100%">
                     <thead style="2px solid green">
                       <th>Date</th>
 											<th>Item</th>

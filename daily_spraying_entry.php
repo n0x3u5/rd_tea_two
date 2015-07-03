@@ -243,7 +243,7 @@
 <html>
     <head>
       <meta charset="utf-8">
-      <title>R.D. Tea | Manage Sections</title>
+      <title>R.D. Tea | Daily Spraying Entry</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">

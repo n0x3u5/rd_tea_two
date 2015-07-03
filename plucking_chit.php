@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>R.D. Tea | Leaf Chit</title>
+        <title>R.D. Tea | daily Leaf Chit</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.6/css/dataTables.responsive.css">
