@@ -20,10 +20,10 @@
     <?php $page_id = 11;?>
     <style>
 			.jumbotron {
-				background:#D32F2F;
+				background:#520808;
 			}
-			.jumbotron h3 {
-				color:#FFCDD2;
+			.jumbotron h1,h3 {
+				color:#EDD2D2;
 			}
       .jumbotron form input[type="submit"] {
 				background: #FFC107;
@@ -58,7 +58,8 @@
         </form>
       </div>
 			<div class="main-content">
-				<table id="leaf_chit_table" class="display">
+
+				<table id="leaf_chit_table" class=" table display" cellspacing="0" width="100%" border="1">
 					<thead>
 						<tr>
 								<th rowspan="2">Labour Category</th>
@@ -67,34 +68,34 @@
 								<th colspan="3">Pruned</th>
 						</tr>
 						<tr>
-							<th>Date Last Plucked</th>
-							<th>Round Days</th>
+							<th>Date<br/>Last<br/>Plucked</th>
+							<th>Round<br/>Days</th>
 							<th>Section</th>
-							<th>Area Plucked (Hec.)</th>
+							<th>Area<br/>Plucked<br/>(Hec.)</th>
 							<th>Pluckers</th>
-							<th>Pluckers per Hec.</th>
-							<th>Leaf Plucked</th>
-							<th>Average Productivity</th>
+							<th>Pluckers<br/>per<br/>Hec.</th>
+							<th>Leaf<br/>Plucked</th>
+							<th>Average<br/>Productivity</th>
 							<th>Task</th>
-							<th>Date Last Plucked</th>
-							<th>Round Days</th>
+							<th>Date<br/>Last<br/>Plucked</th>
+							<th>Round<br/>Days</th>
 							<th>Section</th>
-							<th>Area Plucked (Hec.)</th>
+							<th>Area<br/>Plucked<br/>(Hec.)</th>
 							<th>Pluckers</th>
-							<th>Pluckers per Hec.</th>
-							<th>Leaf Plucked</th>
-							<th>Average Productivity</th>
+							<th>Pluckers<br/>per<br/>Hec.</th>
+							<th>Leaf<br/>Plucked</th>
+							<th>Average<br/>Productivity</th>
 							<th>Task</th>
-							<th>Total Area Plucked (Hec.)</th>
-							<th>Total Pluckers</th>
-							<th>Total Leaf Plucked</th>
+							<th>Total<br/>Area<br/>Plucked (Hec.)</th>
+							<th>Total<br/>Pluckers</th>
+							<th>Total<br/>Leaf<br/>Plucked</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>Perm. Men</td>
 							<td>27-06-2015</td>
-							<td>1EXTA</td>
+							<td>1EXTA </td>
 							<td>5</td>
 							<td>112</td>
 							<td>22</td>

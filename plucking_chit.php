@@ -8,206 +8,148 @@
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>R.D. Tea | daily Leaf Chit</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.6/css/dataTables.responsive.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-        <style>
-					.col-sm-12{
-						margin-top: 30px;
-					}
-					#table2_filter{
-						display: none;
-					}
-					#table3_filter{
-						display: none;
-					}
-					#table2_wrapper{
-						padding-top: -20px;
-					}
-        </style>
-        <link rel="stylesheet" href="css/stylesheet.css">
-        <link rel="icon" href="images/logo_rdtea.png"/>
-        <?php $page_id =11;?>
-    </head>
-    <body>
-        <?php
-            include("nav_bar.php");
-            nav_echoer($page_id);
-        ?>
-        <div class="container">
-            <div class="jumbotron" style="background:#083A00;margin-left:-15px;margin-right: -15px;">
-                <h1>Leaf Chit</h1>
-                <p></p>
-								<h3 style="color:#FFFFFF">Hansqua Tea Garden</h3>
-                <p></p>
-            </div>
-            <div class="card_style col-sm-12" style="background:#FFFFFF">
-								<h3 style="position:relative;margin-top:40px;margin-bottom:10px;margin-left:40px;color:rgb(175,175,0)"><strong>Unpruned</strong></h3>
-
-                  <table id="leaf_chit_unpruned" class="table table-hover" border="1">
-                    <thead style="2px solid green">
-                      <th>Date</th>
-											<th>Category</th>
-                      <th>Section No.</th>
-                      <th>Area Plucked (in Ha.)</th>
-                      <th>Total Pluckers</th>
-                      <th>Pluckers per Hec.</th>
-                      <th>Total G. Leaf Plucked</th>
-                      <th>Average</th>
-											<th>No. of Round Days</th>
-											<th>task</th>
-											<th>Ballometer Count</th>
-                    </thead>
-                    <tbody>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-                    </tbody>
-
-                  </table>
-            </div>
-						<div class="card_style col-sm-12" style="background:#FFFFFF">
-							<h3 style="position:relative;margin-top:40px;margin-bottom:10px;margin-left:40px;color:rgb(175,175,0)"><strong>Total</strong></h3>
-									<table id="table2" class="table table-hover" border="1">
-										<thead style="2px solid green">
-											<th>Date</th>
-											<th>Category</th>
-											<th>Section No.</th>
-											<th>Area Plucked (in Ha.)</th>
-											<th>Total Pluckers</th>
-											<th>Pluckers per Hec.</th>
-											<th>Total G. Leaf Plucked</th>
-											<th>Average</th>
-											<th>No. of Round Days</th>
-											<th>task</th>
-											<th>Ballometer Count</th>
-										</thead>
-										<tbody>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-										</tbody>
-
-									</table>
-						</div>
-						<div class="card_style col-sm-12" style="background:#FFFFFF">
-								<h3 style="position:relative;margin-top:40px;margin-bottom:10px;margin-left:40px;color:rgb(175,175,0)"><strong>Pruned</strong></h3>
-
-                  <table id="leaf_chit_pruned" class="table table-hover" border="1">
-                    <thead style="2px solid green">
-                      <th>Date</th>
-											<th>Category</th>
-                      <th>Section No.</th>
-                      <th>Area Plucked (in Ha.)</th>
-                      <th>Total Pluckers</th>
-                      <th>Pluckers per Hec.</th>
-                      <th>Total G. Leaf Plucked</th>
-                      <th>Average</th>
-											<th>No. of Round Days</th>
-											<th>task</th>
-											<th>Ballometer Count</th>
-                    </thead>
-                    <tbody>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-                    </tbody>
-
-                  </table>
-
-            </div>
-						<div class="card_style col-sm-12" style="background:#FFFFFF">
-							<h3 style="position:relative;margin-top:40px;margin-bottom:10px;margin-left:40px;color:rgb(175,175,0)"><strong>Total</strong></h3>
-									<table id="table3" class="table table-hover" border="1">
-										<thead style="2px solid green">
-											<th>Date</th>
-											<th>Category</th>
-											<th>Section No.</th>
-											<th>Area Plucked (in Ha.)</th>
-											<th>Total Pluckers</th>
-											<th>Pluckers per Hec.</th>
-											<th>Total G. Leaf Plucked</th>
-											<th>Average</th>
-											<th>No. of Round Days</th>
-											<th>task</th>
-											<th>Ballometer Count</th>
-										</thead>
-										<tbody>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-										</tbody>
-
-									</table>
-
-						</div>
-
-
+  <head>
+    <meta charset="utf-8">
+    <title>R.D. Tea |Daily Leaf Chit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="icon" href="images/logo_rdtea.png"/>
+    <?php $page_id = 11;?>
+    <style>
+			.jumbotron {
+				background:#520808;
+			}
+			.jumbotron h1,h3 {
+				color:#EDD2D2;
+			}
+      .jumbotron form input[type="submit"] {
+				background: #FFC107;
+				color: #000000;
+			}
+    </style>
+  </head>
+  <body>
+    <?php
+      include("nav_bar.php");
+      nav_echoer($page_id);
+    ?>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Leaf Chit</h1>
+  			<h3>Hansqua Division</h3>
+        <form class="form-inline" action="leaf_chit.php" method="post">
+          <div class="form-group">
+            <label class="sr-only" for="sectionPicker">Email address</label>
+            <select class="form-control" id="sectionPicker">
+							<option selected>Choose a section...</option>
+							<option>1EXTA</option>
+							<option>1EXTB</option>
+							<option>EXT3</option>
+							<option>4W</option>
+						</select>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="datepicker" placeholder="dd-mm-yy">
+          </div>
+          <input type="submit" class="btn btn-warning" name="btn_submit" value="Get Data">
+        </form>
       </div>
+			<div class="main-content">
+				<div class=row>
+					<div class="col-sm-6">
+							<h1>Unpruned</h1>
+							<table id="leaf_chit_table" class="table display" cellspacing="0" width="100%" border="1">
+								<thead>
+									<tr>
+										<th>Date<br/> Last<br/>Plucked</th>
+										<th>Round<br/>Days</th>
+										<th>Section</th>
+										<th>Area<br/>Plucked<br/>(Hec.)</th>
+										<th>Pluckers</th>
+										<th>Pluckers<br/>per<br/>Hec.</th>
+										<th>Leaf<br/>Plucked</th>
+										<th>Average<br/>Productivity</th>
+										<th>Task</th>
+									</thead>
+								<tbody>
+									<tr>
+										<td>Perm. Men</td>
+										<td>27-06-2015</td>
+										<td>1EXTA</td>
+										<td>5</td>
+										<td>112</td>
+										<td>22</td>
+										<td>2330</td>
+										<td>21</td>
+										<td>7</td>
+									</tr>
+									<tr>
+										<td>Perm. Men</td>
+										<td>27-06-2015</td>
+										<td>1EXTA</td>
+										<td>5</td>
+										<td>112</td>
+										<td>22</td>
+										<td>2330</td>
+										<td>21</td>
+										<td>7</td>
+									</tr>
+									<tr>
+										<td>Perm. Men</td>
+										<td>27-06-2015</td>
+										<td>1EXTA</td>
+										<td>5</td>
+										<td>112</td>
+										<td>22</td>
+										<td>2330</td>
+										<td>21</td>
+										<td>7</td>
+									</tr>
+									<tr>
+										<td>Perm. Men</td>
+										<td>27-06-2015</td>
+										<td>1EXTA</td>
+										<td>5</td>
+										<td>112</td>
+										<td>22</td>
+										<td>2330</td>
+										<td>21</td>
+										<td>7</td>
+									</tr>
+									<tr>
+										<td>Perm. Men</td>
+										<td>27-06-2015</td>
+										<td>1EXTA</td>
+										<td>5</td>
+										<td>112</td>
+										<td>22</td>
+										<td>2330</td>
+										<td>21</td>
+										<td>7</td>
+									</tr>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-        <script src="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-        <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js">
-        </script>
-        <script src="https://cdn.datatables.net/responsive/1.0.6/js/dataTables.responsive.js"></script>
-        <script>
-            $(document).ready(function() {
-                    $('#leaf_chit_unpruned').dataTable({"scrollX": true});
-										  $('#leaf_chit_pruned').dataTable({"scrollX": true});
-										$('#table2').dataTable({"scrollX": true,"paging":   false,
-														"ordering": false,
-														"info":    true
-
-										});
-										$('#table3').dataTable({"scrollX": true,"paging":   false,
-														"ordering": false,
-														"info":    true
-
-										});
-
-            });
-        </script>
-
-    </body>
+								</tbody>
+					</div>
+				</div>
+			</div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+		<script>
+			$(function() {
+				$("#datepicker").datepicker({
+					dateFormat: "dd-mm-yy"
+				});
+				$('#leaf_chit_table').dataTable({
+					scrollX: true
+				});
+			});
+		</script>
+  </body>
 </html>
