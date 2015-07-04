@@ -30,7 +30,7 @@
 				color: #000000;
 			}
 			.container{
-				width:85%;
+				width:88%;
 			}
 			th{
 				text-align: center;
@@ -76,7 +76,7 @@
 								<th rowspan="2">Labour<br/>Category</th>
 								<th colspan="9">Unpruned</th>
 								<th colspan="9">Pruned</th>
-								<th colspan="3">Grand Total</th>
+								<th colspan="3">Grand<br/>Total</th>
 						</tr>
 						<tr>
 							<th>Date<br/>Last<br/>Plucked</th>
