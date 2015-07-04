@@ -44,10 +44,12 @@
 		// 	var_dump($_SESSION['daily_plucking']);
 		// }
 		//$daily =mysqli_fetch_assoc($result);
+		$set = 1;
 	}
 	else {
 		$req_date = NULL;
 		$req_ssn = NULL;
+		$set = 0;
 	}
 ?>
 
@@ -183,25 +185,20 @@
         <link rel="icon" href="images/logo_rdtea.png"/>
 				<style>
 					.btn-default {
-						background: #BF360C;
-						color: #FFFFFF;
+						background: #FFFFFF;
+						color:Black;
 						border: none;
 					}
-					/*@media screen and (min-width: 500px) {
-						#edit_entry{
-							margin-left:27%;
-						}
-						}
-						@media screen and (min-width: 500px) {
-							#add_entry{
-								margin-left:27%;
-							}
-							}
-						@media screen and (min-width: 500px) {
-							#delete_entry{
-								margin-left:12%;
-							}
-							}*/
+					.jumbotron{
+						 background:#7B1FA2;
+						margin-left:-15px;
+						margin-right: -15px;
+					}
+					.jumbotron h1{
+						color:#EDD2D2;
+					}
+
+
 				</style>
         <?php $page_id = 7;?>
     </head>
@@ -211,7 +208,7 @@
             nav_echoer($page_id);
         ?>
     <div class="container">
-            <div class="jumbotron" style="background:#BF360C;margin-left:-15px;margin-right: -15px;">
+            <div class="jumbotron">
                 <h1>Daily Plucking Entry</h1>
                 <form action="daily_plucking_entry.php" method="post" class="form form-group form-inline" style="margin-top: 30px;">
 									<select id="division" name ="short_sec_name" class="form-control" required>
@@ -222,12 +219,13 @@
 												confirm_query($result);
 												//$_POST['sec_short_nm'] = NULL;
 
-												echo "<option id=\"opt0\" value=NULL>Select a section...</option>";
+												echo "<option id=\"opt0\" value=\"Select a section...\">Select a section...</option>";
 												while($sec_values = mysqli_fetch_assoc($result)) {
 										?>
 													<option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST["dt_sec_submit"]) && ($_SESSION['ssn'] == $sec_values['short_sec_name'])) { echo "selected";} ?> ><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
 										<?php
 												}
+
 										?>
 									</select>
 											<div class="input-group">
@@ -236,22 +234,22 @@
 	                            <i class="glyphicon glyphicon-calendar"></i>
 	                        </span>
 	                    </div>
-											<input type="submit" name="dt_sec_submit" class="btn btn-default">
+											<input type="submit" id="selct_sec" name="dt_sec_submit" value="Add Data" class="btn btn-default" onclick="enable_tab()">
                 </form>
             </div>
 			<div class="tab-container">
 	            <ul class="nav nav-tabs nav-justified">
-	                <li class="active"><a href="#tab1" data-toggle="tab">Edit Entry</a></li>
-	                <li><a href="#tab2" data-toggle="tab">Add Entry</a></li>
+	                <li id="actv_one"><a href="#tab1" data-toggle="tab" id="link_one">Edit Entry</a></li>
+	                <li id="actv_two"><a href="#tab2" data-toggle="tab" id="link_two">Add Entry</a></li>
 	            </ul>
 				<div class="tab-content" style="background-color:#FFFFFF">
-					<div class="tab-pane active" id="tab1">
+					<div class="tab-pane" id="tab1">
 						<form class="form-horizontal" action="daily_plucking_entry.php" method="post">
 							<?php if(isset($_SESSION['daily_plucking'])) { $daily = $_SESSION['daily_plucking']; } else { $daily = NULL; }?>
 							<div class="form-group" style="margin-top:30px">
 								<label for="wrkgrp1" class="col-sm-3 control-label">Labour Category:</label>
 								<div class="col-sm-4">
-									<input type="text" name="labour_cat" class="form-control" id="wrkgrp1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['labour_cat']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select Labour Category\""; ?><?php } //comma separeted value?> >
+									<input type="text" name="labour_cat" class="form-control" id="wrkgrp1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['labour_cat']); $set2=1; ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select Labour Category\""; $set2=2;?><?php } //comma separeted value?> >
 								</div>
 							</div>
 							<div class="form-group">
@@ -285,7 +283,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-sm-3">
+								<div class="col-sm-1 col-sm-offset-2">
 									<button type="button" value="Delete Entry" id="delete_entry" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" style="margin-top:20px;">Delete Entry</button>
 								</div>
 										<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModallabel">
@@ -305,8 +303,8 @@
 												</div>
 											</div>
 										</div>
-								<div class="col-sm-2 col-sm-offset-2">
-									  <input type="submit" id="edit_entry" name="edit_submit" value="Edit Entry" class="btn btn-default" style="margin-top:20px;">
+								<div class="col-sm-2 col-sm-offset-3">
+									  <input type="submit" id="edit_entry" name="edit_submit" value="Edit Entry" class="btn btn-success" style="margin-top:20px;">
 								</div>
 							</div>
             </form>
@@ -316,25 +314,25 @@
 							<div class="form-group" style="margin-top:30px">
 								<label for="wrkgrp2" class="col-sm-3 control-label">Labour Category:</label>
 								<div class="col-sm-4">
-									<input type="text" name="labour_cat" class="form-control" id="wrkgrp2" placeholder="Select Labour Category">
+									<input type="text" name="labour_cat" class="form-control" id="wrkgrp2" placeholder="Select Labour Category" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="lb_area" class="col-sm-3 control-label">Area Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" name="lab_cat_plkd_area" class="form-control" id="lb_area" placeholder="Area Plucked by each Category">
+									<input type="text" name="lab_cat_plkd_area" class="form-control" id="lb_area" placeholder="Area Plucked by each Category" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="grpleaf1" class="col-sm-3 control-label">Leaf Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" name="lab_cat_leaf_qty" class="form-control" id="grpleaf1" placeholder="Leaf Plucked by each Category">
+									<input type="text" name="lab_cat_leaf_qty" class="form-control" id="grpleaf1" placeholder="Leaf Plucked by each Category" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="grpmd1" class="col-sm-3 control-label">Mandays for each group:</label>
 								<div class="col-sm-4">
-									<input type="text" name="lab_cat_mandays" class="form-control" id="grpmd1" placeholder="Pluckers for each Category">
+									<input type="text" name="lab_cat_mandays" class="form-control" id="grpmd1" placeholder="Pluckers for each Category" required>
 								</div>
 							</div>
 							<div class="form-group">
@@ -349,7 +347,7 @@
 									<input type="text" name="task" class="form-control" id="task" placeholder="Task Alloted (kg)">
 								</div>
 							</div>
-          		<input type="submit" id="add_entry" name="add_submit" value="Add Entry" class="btn btn-default"style="margin-top:20px">
+          		<input type="submit" id="add_entry" name="add_submit" value="Add Entry" class="btn btn-success"style="margin-top:20px">
 		    		</form>
 					</div>
 				</div>
@@ -380,7 +378,56 @@
 				// 	document.getElementById("edit_entry").disabled=false;
 				// 	document.getElementById("delete_entry").disabled=false;
 				// }
+
 		</script>
+		<script>
+			document.getElementById('selct_sec').disabled=true;
+			document.getElementById('link_one').disabled=true;
+			document.getElementById('link_two').disabled=true;
+			if(document.getElementById('division').value!='Select a section...')
+			{
+				document.getElementById('selct_sec').disabled=false;
+			}
+			function enable_add(){
+				if(document.getElementById('division').value!='Select a section...')
+				{
+					document.getElementById('selct_sec').disabled=false;
+				}
+			}
+
+		</script>
+		<?php
+		if(isset($set2)){
+		echo"<script>		var submit_chk=$set2; submit_chk2=$set; </script>";}
+		 ?>
+
+					<script>
+						if(submit_chk==1 && submit_chk2)
+							{
+								document.getElementById('link_one').disabled=false;
+								var a1=document.getElementById('tab1');
+								a1.setAttribute('class','active');
+								var b1=document.getElementById('actv_one');
+								b1.style.background='#4A148C';
+								var c1=document.getElementById('link_one');
+								c1.style.color='#FFFFFF';
+
+
+							}
+						 if(submit_chk==2 && submit_chk2){
+								document.getElementById('link_two').disabled=false;
+								var a2=document.getElementById('tab2');
+								a2.setAttribute('class','active');
+								var b2=document.getElementById('actv_two');
+								b2.style.background='#4A148C';
+								var c2=document.getElementById('link_two');
+								c2.style.color='#FFFFFF';
+							}
+
+					</script>
+
+
+
     </body>
 </html>
 <?php

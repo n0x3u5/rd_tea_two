@@ -13,7 +13,10 @@
     <title>R.D. Tea |Daily Leaf Chit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
 		<link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="icon" href="images/logo_rdtea.png"/>
@@ -40,6 +43,9 @@
 			}
 			div.DTTT { margin-bottom: 0.5em; float: right; }
     	div.dataTables_wrapper { clear: both; }
+			.card_style{
+				margin-top:10px;
+			}
     </style>
   </head>
   <body>
@@ -70,7 +76,7 @@
       </div>
 			<div class="main-content">
 
-				<table id="leaf_chit_table" class="table table-hover table-bordered" cellspacing="0" width="100%">
+				<table id="leaf_chit_table" class="table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 					<thead>
 						<tr class="col-head">
 								<th rowspan="2">Labour<br/>Category</th>
@@ -271,7 +277,35 @@
 							<td>224</td>
 							<td>4660</td>
 						</tr>
+
 					</tbody>
+					<tfoot>
+						<tr>
+							<td>Cash Pluckers</td>
+							<td>02-07-2015</td>
+							<td>1EXTA </td>
+							<td>5</td>
+							<td>112</td>
+							<td>22</td>
+							<td>2330</td>
+							<td>21</td>
+							<td>7</td>
+							<td>24</td>
+							<td>02-07-2015</td>
+							<td>1EXTA</td>
+							<td>5</td>
+							<td>112</td>
+							<td>22</td>
+							<td>2330</td>
+							<td>21</td>
+							<td>7</td>
+							<td>24</td>
+							<td>10</td>
+							<td>224</td>
+							<td>4660</td>
+						</tr>
+
+					</tfoot>
 				</table>
 			</div>
     </div>
@@ -280,14 +314,18 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdn.datatables.net/tabletools/2.2.4/js/dataTables.tableTools.min.js"></script>
+		<script src="https://cdn.datatables.net/fixedcolumns/3.0.4/js/dataTables.fixedColumns.min.js"></script>
 		<script src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 		<script>
 			$(function() {
 				$("#datepicker").datepicker({
 					dateFormat: "dd-mm-yy"
 				});
+				$('#leaf_chit_total').DataTable({"scrollX":true });
 				var table = $('#leaf_chit_table').DataTable({
+
 						"scrollX": true,
+						"scrollCollapse": true,
 						"ordering": false,
 						dom: 'T<"clear">lfrtip',
 						tableTools: {
@@ -325,10 +363,15 @@
 								null,
 								null
 						]
+						
 	    	});
+				new $.fn.dataTable.FixedColumns( table );
 			// 	var tt = new $.fn.dataTable.TableTools(table);
     	// 	$( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
 			});
+
+
+
 			jQuery.extend( jQuery.fn.dataTableExt.oSort, {
 			"date-uk-pre": function ( a ) {
 			var ukDatea = a.split('-');
