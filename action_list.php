@@ -10,11 +10,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>R.D. Tea |Last Action Performed</title>
+    <title>R.D. Tea | Action Logs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 		<link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="icon" href="images/logo_rdtea.png"/>
@@ -35,14 +34,6 @@
 			}
 			th{
 				text-align: center;
-			}
-			.col-head{
-				color:#520808;
-			}
-			.nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:active, .nav-tabs.nav-justified > .active > a:enabled {
-					background-color: #327640 !important;
-					border-bottom-color: #ffffff;
-					color: #FFFFFF;
 			}
     </style>
   </head>
@@ -78,102 +69,150 @@
 								<li><a href="#tab2" data-toggle="tab">Spraying History</a></li>
 								<li><a href="#tab3" data-toggle="tab">Weather History</a></li>
 						</ul>
-						<div class="tab-content"  style="background-color:#EFEFEF">
+						<div class="tab-content">
 								<div class="tab-pane active" id="tab1">
-									<table id="plucking" class="table display" border="1">
-										<tr>
-											<thead>
-												<th>RainFall<br/>Day<br/>(in m.m.)</th>
-												<th>RainFall<br/>Night<br/>(in m.m.)</th>
-												<th>Temp.<br/>Max.<br/>(in &degC)</th>
-												<th>Temp.<br/>Min.<br/>(in &degC)</th>
-												<th>Sunshine<br/>Hour</th>
-												<th>Weather<br/>Condition</th>
-												<th>Changed<br/>On</th>
-												<th>Updated<br/>By</th>
-												<th>Action</th>
-											</thead>
-										</tr>
+									<table id="plucking" class="table table-hover table-bordered" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th colspan="2">Rainfall (mm)</th>
+												<th colspan="2">Temperature (&degC)</th>
+												<th rowspan="2">Sunshine Hours</th>
+												<th rowspan="2">Weather Condition</th>
+												<th rowspan="2">Changed By</th>
+												<th rowspan="2">Updated By</th>
+												<th rowspan="2">Action</th>
+											</tr>
+											<tr>
+												<th>Day</th>
+												<th>Night</th>
+												<th>Maximum</th>
+												<th>Minimum</th>
+											</tr>
+										</thead>
 										<tbody>
 											<tr>
-												<td>1</td>
-												<td>2</td>
-												<td>3</td>
-												<td>4</td>
+												<td>27-06-2015</td>
+												<td>1EXTA </td>
 												<td>5</td>
+												<td>112</td>
+												<td>22</td>
+												<td>2330</td>
+												<td>21</td>
 												<td>7</td>
-												<td>8</td>
-												<td>9</td>
-												<td>0</td>
+												<td>10</td>
+											</tr>
+											<tr>
+												<td>28-06-2015</td>
+												<td>1EXTA </td>
+												<td>5</td>
+												<td>112</td>
+												<td>22</td>
+												<td>2330</td>
+												<td>21</td>
+												<td>7</td>
+												<td>10</td>
 											</tr>
 										</tbody>
-
 									</table>
-
 								</div>
+
+
+
+
+
 								<div class="tab-pane" id="tab2">
-									<table id="spraying" class="table display" border="1">
-										<tr>
-											<thead>
-												<th>RainFall<br/>Day<br/>(in m.m.)</th>
-												<th>RainFall<br/>Night<br/>(in m.m.)</th>
-												<th>Temp.<br/>Max.<br/>(in &degC)</th>
-												<th>Temp.<br/>Min.<br/>(in &degC)</th>
-												<th>Sunshine<br/>Hour</th>
-												<th>Weather<br/>Condition</th>
-												<th>Changed<br/>On</th>
-												<th>Updated<br/>By</th>
-												<th>Action</th>
-											</thead>
-										</tr>
+									<table id="spraying" class="table table-hover table-bordered" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th colspan="2">Rainfall (mm)</th>
+												<th colspan="2">Temperature (&degC)</th>
+												<th rowspan="2">Sunshine Hours</th>
+												<th rowspan="2">Weather Condition</th>
+												<th rowspan="2">Changed By</th>
+												<th rowspan="2">Updated By</th>
+												<th rowspan="2">Action</th>
+											</tr>
+											<tr>
+												<th>Day</th>
+												<th>Night</th>
+												<th>Maximum</th>
+												<th>Minimum</th>
+											</tr>
+										</thead>
 										<tbody>
 											<tr>
-												<td>1</td>
-												<td>2</td>
-												<td>3</td>
-												<td>4</td>
+												<td>27-06-2015</td>
+												<td>1EXTA </td>
 												<td>5</td>
+												<td>112</td>
+												<td>22</td>
+												<td>2330</td>
+												<td>21</td>
 												<td>7</td>
-												<td>8</td>
-												<td>9</td>
+												<td>10</td>
+											</tr>
+											<tr>
+												<td>28-06-2015</td>
+												<td>1EXTA </td>
+												<td>5</td>
+												<td>112</td>
+												<td>22</td>
+												<td>2330</td>
+												<td>21</td>
+												<td>7</td>
 												<td>10</td>
 											</tr>
 										</tbody>
-
 									</table>
-
-
-
 								</div>
+
+
+
+
+
 								<div class="tab-pane" id="tab3">
-									<table id="weather" class="table display" border="1">
-										<tr>
-											<thead>
-												<th>RainFall<br/>Day<br/>(in m.m.)</th>
-												<th>RainFall<br/>Night<br/>(in m.m.)</th>
-												<th>Temp.<br/>Max.<br/>(in &degC)</th>
-												<th>Temp.<br/>Min.<br/>(in &degC)</th>
-												<th>Sunshine<br/>Hour</th>
-												<th>Weather<br/>Condition</th>
-												<th>Changed<br/>On</th>
-												<th>Updated<br/>By</th>
-												<th>Action</th>
-											</thead>
-										</tr>
+									<table id="weather" class="table table-hover table-bordered" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th colspan="2">Rainfall (mm)</th>
+												<th colspan="2">Temperature (&degC)</th>
+												<th rowspan="2">Sunshine Hours</th>
+												<th rowspan="2">Weather Condition</th>
+												<th rowspan="2">Changed By</th>
+												<th rowspan="2">Updated By</th>
+												<th rowspan="2">Action</th>
+											</tr>
+											<tr>
+												<th>Day</th>
+												<th>Night</th>
+												<th>Maximum</th>
+												<th>Minimum</th>
+											</tr>
+										</thead>
 										<tbody>
 											<tr>
-												<td>1</td>
-												<td>2</td>
-												<td>3</td>
-												<td>4</td>
+												<td>27-06-2015</td>
+												<td>1EXTA </td>
 												<td>5</td>
+												<td>112</td>
+												<td>22</td>
+												<td>2330</td>
+												<td>21</td>
 												<td>7</td>
-												<td>8</td>
-												<td>9</td>
+												<td>10</td>
+											</tr>
+											<tr>
+												<td>28-06-2015</td>
+												<td>1EXTA </td>
+												<td>5</td>
+												<td>112</td>
+												<td>22</td>
+												<td>2330</td>
+												<td>21</td>
+												<td>7</td>
 												<td>10</td>
 											</tr>
 										</tbody>
-
 									</table>
 								</div>
 						</div>
@@ -183,18 +222,14 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js">
 		</script>
-		<script src="https://cdn.datatables.net/responsive/1.0.6/js/dataTables.responsive.js"></script>
 
 		<script>
 		$(document).ready(function() {
-						$('#plucking').dataTable({"scrollX": true});
-						$('#spraying').dataTable({"scrollX": true});
-						$('#weather').dataTable({"scrollX": true});
-			});
+			$('table').dataTable({});
+		});
 		</script>
   </body>
 </html>
