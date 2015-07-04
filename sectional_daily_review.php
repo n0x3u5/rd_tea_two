@@ -18,15 +18,18 @@
 
 		$from = date('Y-m-d', strtotime($req_start_date));
 	  $to = date('Y-m-d', strtotime($req_end_date));
-	  $query = "select * from daily_spraying where short_sec_name ='$req_ssn' and record_date between '$from' and '$to'";
+	  $query_spray = "select * from daily_spraying where short_sec_name ='$req_ssn' and record_date between '$from' and '$to'";
+	  //var_dump($query_spray);
 
-
-	  //var_dump($query);
-
-	  $result = mysqli_query($connection, $query);
-	  confirm_query($result);
-
+	  $result_spray = mysqli_query($connection, $query_spray);
+	  confirm_query($result_spray);
 		//var_dump($req_day_spray);
+
+		$query_pluck = "select * from daily_plucking where short_sec_name ='$req_ssn' and rec_dt between '$from' and '$to'";
+
+		$result_pluck = mysqli_query($connection, $query_pluck);
+		confirm_query($result_pluck);
+
 		// echo "<br> header processing ends. <hr>";
 
 	}
@@ -35,7 +38,7 @@
 		//$req_year = NULL;
 		$req_start_date = NULL;
 		$req_end_date = NULL;
-		$result = NULL;
+		$result_spray = NULL;
 	}
 ?>
 
@@ -87,7 +90,7 @@
 			                    echo "<option id=\"opt0\" value=NULL></option>";
 			                    while($sec_values = mysqli_fetch_assoc($r)) {
 			                ?>
-			                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>"><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
+			                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST["sec_date_submit"]) && ($_POST['short_sec_name'] == $sec_values['short_sec_name'])) { echo "selected";} ?> ><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
 			                <?php
 			                    }
 			                ?>
@@ -136,62 +139,52 @@
                                     <th>Plucked Area</th>
                                     <th>NCP leaf Quantity</th>
                                     <th>CP Leaf Quantity</th>
-                                    <th>Leaf</th>
+                                    <th>Total Leaf Plucked</th>
                                     <th>Mandays</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td style="text-align:center;">10-6-2015</td>
-                                    <td>1West</td>
-                                    <td>LP</td>
-                                    <td>12</td>
-                                    <td>957</td>
-                                    <td>12</td>
-                                    <td>969</td>
-                                    <td>40</td>
-                                </tr>
-                                <tr>
-																	<td style="text-align:center;">10-6-2015</td>
-																	<td>1West</td>
-																	<td>LP</td>
-																	<td>12</td>
-																	<td>957</td>
-																	<td>12</td>
-																	<td>969</td>
-																	<td>40</td>
-															  </tr>
-                                <tr>
-																	<td style="text-align:center;">10-6-2015</td>
-																	<td>1West</td>
-																	<td>LP</td>
-																	<td>12</td>
-																	<td>957</td>
-																	<td>12</td>
-																	<td>969</td>
-																	<td>40</td>
-                                </tr>
-                                <tr>
-																	<td style="text-align:center;">10-6-2015</td>
-																	<td>1West</td>
-																	<td>LP</td>
-																	<td>12</td>
-																	<td>957</td>
-																	<td>12</td>
-																	<td>969</td>
-																	<td>40</td>
-                                </tr>
-                                <tr>
-																	<td style="text-align:center;">10-6-2015</td>
-																	<td>1West</td>
-																	<td>LP</td>
-																	<td>12</td>
-																	<td>957</td>
-																	<td>12</td>
-																	<td>969</td>
-																	<td>40</td>
-                                </tr>
-                                 	 	 	
+															<?php
+																if(isset($_POST['sec_date_submit'])) {
+																	while($req_day_pluck = mysqli_fetch_assoc($result_pluck)) {
+															?>
+	                                <tr>
+	                                    <td style="text-align:center;"><?php echo date('d-m-Y', strtotime($req_day_pluck['rec_dt'])); ?></td>
+	                                    <td><?php echo $req_day_pluck['short_sec_name']; ?></td>
+	                                    <td><?php echo $req_day_pluck['prune_status']; ?></td>
+	                                    <td>
+																				<?php
+																					$exp_arr = explode("¥", $req_day_pluck['lab_cat_plkd_area']);
+																					$plkd_area = array_sum($exp_arr);
+																					echo $plkd_area;
+																				?>
+																			</td>
+	                                    <td>
+																				<?php
+																					$exp_arr = explode("¥", $req_day_pluck['lab_cat_leaf_qty']);
+																					$ncp_leaf_qty = array_sum($exp_arr);
+																					echo $ncp_leaf_qty;
+																				?>
+																			</td>
+	                                    <td><?php echo $req_day_pluck['cp_leaf_qty']; ?></td>
+	                                    <td>
+																				<?php
+																				  $total_leaf = $ncp_leaf_qty + $req_day_pluck['cp_leaf_qty'];
+																					echo $total_leaf;
+																				?>
+																			</td>>
+	                                    <td>
+																				<?php
+																					$exp_arr = explode("¥", $req_day_pluck['lab_cat_mandays']);
+																					$mandays = array_sum($exp_arr);
+																					echo $mandays;
+																				?>
+																			</td>
+	                                </tr>
+															<?php
+																  }
+																}
+															?>
                             </tbody>
                         </table>
                     </div>
@@ -266,7 +259,7 @@
 															 //echo "need some post value to be checked";
 																//var_dump($_POST);
 																if(isset($_POST['sec_date_submit'])) {
-																	while($req_day_spray = mysqli_fetch_assoc($result)) {
+																	while($req_day_spray = mysqli_fetch_assoc($result_spray)) {
 																		//var_dump($req_day_spray); echo "<hr>";
 															?>
 																		<tr>
@@ -355,7 +348,7 @@
         <script src="https://cdn.datatables.net/responsive/1.0.6/js/dataTables.responsive.js"></script>
         <script>
             $(document).ready(function() {
-                    $('#pluck_day').dataTable({"scrollX": true});
+                    $('#pluck_day').dataTable({});
                     var wideTable = $('#spray_day').dataTable({});
 										$(window).bind('resize', function () {
 											wideTable.fnAdjustColumnSizing();

@@ -27,6 +27,18 @@
     confirm_query($result);
 
 		$_SESSION['daily_plucking'] = mysqli_fetch_assoc($result);
+
+
+
+		$q_prune = "SELECT prune_status from sections where short_sec_name = '$req_ssn'";
+		//var_dump($q_prune);
+
+		$r_prune = mysqli_query($connection, $q_prune);
+		confirm_query($r_prune);
+
+		$_SESSION['prune_stats'] = mysqli_fetch_assoc($r_prune);
+		//var_dump($_SESSION['prune_status']);
+
 		// while($_SESSION['daily_plucking'] = mysqli_fetch_assoc($result))
 		// {
 		// 	var_dump($_SESSION['daily_plucking']);
@@ -59,10 +71,13 @@
 		$cp_leaf_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_leaf_qty']);
 		$task = (int) mysqli_real_escape_string($connection, $_POST['task']);
 		// var_dump($labour_cat);
-		$q_in = "INSERT INTO daily_plucking (short_sec_name, rec_dt, labour_cat,";
+
+		$prune = $_SESSION['prune_stats']['prune_status'];
+
+		$q_in = "INSERT INTO daily_plucking (short_sec_name, rec_dt, prune_status, labour_cat,";
 		$q_in .= " lab_cat_plkd_area, lab_cat_leaf_qty, lab_cat_mandays, cp_leaf_qty, task)";
-		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$labour_cat', '$lab_cat_plkd_area',";
-		$q_in .= " '$lab_cat_leaf_qty', '$lab_cat_mandays', $cp_leaf_qty, $task)";
+		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$prune', '$labour_cat',";
+		$q_in .= " '$lab_cat_plkd_area', '$lab_cat_leaf_qty', '$lab_cat_mandays', $cp_leaf_qty, $task)";
 
 		$result_in = mysqli_query($connection, $q_in);
 
