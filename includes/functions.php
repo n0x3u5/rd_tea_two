@@ -71,4 +71,15 @@
 			return false;
 		}
 	}
+
+	function explode_implode($imploded_string) {
+		$exploded_string = explode(", ", $imploded_string);
+		$imploded_db_str = implode("¥", $exploded_string);
+
+		return $imploded_db_str;
+	}
+	function comma_sep_val($val_sent) {
+		$prep_val = str_replace("¥", ", ", $val_sent);
+		return $prep_val;
+	}
 ?>

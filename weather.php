@@ -191,7 +191,6 @@
 															<th colspan="2">RainFall(Total)</th>
 															<th colspan="2">Temparature (Avg.)</th>
 															<th rowspan="2">Sunshine Hour</th>
-															<th rowspan="2">Weather condition</th>
 													</tr>
 													<tr>
 															<th>Day</th>
@@ -202,7 +201,6 @@
 											</thead>
 											<tbody>
 																<tr>
-
 																	<td>
 																		<?php
 																				$query_sum= "SELECT SUM(rain_day) as day_sum FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
@@ -243,8 +241,16 @@
 																				echo round($avg_min_temp['min_temp_avg'], 2);
 																		?>
 																	</td>
-																	<td>NA</td>
-																	<td>NA</td>
+																	<td>
+																		<?php
+																				$query_avg= "SELECT AVG(sun_shine_hr) as sunshine_avg FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
+																				$result = mysqli_query($connection, $query_avg);
+																			  confirm_query($result);
+
+																				$avg_min_temp = mysqli_fetch_assoc($result);
+																				echo round($avg_min_temp['sunshine_avg'], 2);
+																		?>
+																	</td>
 																</tr>
 													<?php
 														}

@@ -22,7 +22,7 @@
                         <li <?php if($page_id == 7 || $page_id == 8 || $page_id == 9) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Entry <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="input_daily.php">Plucking Entry</a></li>
+                                <li><a href="daily_plucking_entry.php">Plucking Entry</a></li>
                                 <li><a href="daily_spraying_entry.php">Spraying Entry</a></li>
                                 <li><a href="weather_input.php">Weather Entry</a></li>
                             </ul>
