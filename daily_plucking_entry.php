@@ -211,7 +211,7 @@
             <div class="jumbotron">
                 <h1>Daily Plucking Entry</h1>
                 <form action="daily_plucking_entry.php" method="post" class="form form-group form-inline" style="margin-top: 30px;">
-									<select id="division" name ="short_sec_name" class="form-control" required>
+									<select id="division" name ="short_sec_name" class="form-control" onchange="enable_add()" required>
 										<?php
 												$q = "SELECT * FROM sections";
 												$result = mysqli_query($connection, $q);
@@ -392,6 +392,9 @@
 				if(document.getElementById('division').value!='Select a section...')
 				{
 					document.getElementById('selct_sec').disabled=false;
+				}
+				else {
+					document.getElementById('selct_sec').disabled=true;
 				}
 			}
 
