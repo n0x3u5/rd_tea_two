@@ -86,6 +86,9 @@ if(isset($_POST['date_submit'])) {
 			th{
 				text-align: center;
 			}
+			.main-content {
+				overflow: scroll;
+			}
 			.main-content .btn {
 				box-shadow: none;
 			}
@@ -123,13 +126,12 @@ if(isset($_POST['date_submit'])) {
         </form>
       </div>
 			<div class="main-content">
-
 				<table id="leaf_chit_table" class="table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 					<thead>
 						<tr class="col-head">
 								<th rowspan="2">Labour<br/>Category</th>
-								<th colspan="9">Unpruned</th>
-								<th colspan="9">Pruned</th>
+								<th colspan="10">Unpruned</th>
+								<th colspan="10">Pruned</th>
 								<th colspan="3">Grand<br/>Total</th>
 						</tr>
 						<tr>
@@ -142,6 +144,7 @@ if(isset($_POST['date_submit'])) {
 							<th>Leaf<br/>Plkd</th>
 							<th>Avg.<br/>Prod.</th>
 							<th>Task</th>
+							<th>Bal.<br>Cnt.</th>
 							<!--------------------------------------------------------------------->
 							<th>Date<br/>Last<br/>Plucked</th>
 							<th>Rnd.<br/>Days</th>
@@ -152,6 +155,7 @@ if(isset($_POST['date_submit'])) {
 							<th>Leaf<br/>Plkd</th>
 							<th>Avg.<br/>Prod.</th>
 							<th>Task</th>
+							<th>Bal.<br>Cnt.</th>
 							<!--------------------------------------------------------------------->
 							<th>Tot.<br/>Area<br/>Plkd.<br/>(Hec.)</th>
 							<th>Tot.<br/>Pluckers</th>
@@ -162,7 +166,7 @@ if(isset($_POST['date_submit'])) {
 						<?php
 							if(isset($_POST['date_submit'])) {
 								for($i=0;$i<count($lcsn_arr);$i++) {
-									//echo $i;
+									//echo "<br><br>Iterator i:";var_dump($i);
 									$query = "select * from daily_plucking where rec_dt='{$req_date}'";
 									//var_dump($query);
 									$result = mysqli_query($connection, $query);
@@ -172,6 +176,7 @@ if(isset($_POST['date_submit'])) {
 										//var_dump($day_chit); echo "<hr>";
 										$exp_lab_cat = explode("¥", $day_chit['labour_cat']);
 										// echo "<br>lcsn :";var_dump($lcsn_arr[$i]);
+										//echo "<br>lcsn :".$lcsn_arr[$i]."<br>";
 										// echo "<br>exp_lab_cat :";var_dump($exp_lab_cat);
 										// echo "<br>in_arr :";var_dump(in_array($lcsn_arr[$i], $exp_lab_cat));
 										if(in_array($lcsn_arr[$i], $exp_lab_cat)){
@@ -183,9 +188,8 @@ if(isset($_POST['date_submit'])) {
 												$exp_plkd_area = explode("¥", $day_chit['lab_cat_plkd_area']);
 												$exp_leaf_qty = explode("¥", $day_chit['lab_cat_leaf_qty']);
 												$exp_lab_count = explode("¥", $day_chit['lab_cat_mandays']);
-
-												// echo "Other details of '{$lcsn_arr[$i]}' :<br>"."Plucke Area:{$exp_plkd_area[$index]}";
-												// echo "  Plucked Leaf: {$exp_leaf_qty[$index]} "." Labour Count: {$exp_lab_count[$index]}";
+												//echo "Other details of '{$lcsn_arr[$i]}' :<br>"."Plucke Area:{$exp_plkd_area[$index]}";
+												//echo "  Plucked Leaf: {$exp_leaf_qty[$index]} "." Labour Count: {$exp_lab_count[$index]}";
 										?>
 												<tr>
 													<td><?php echo $lcsn_arr[$i]; ?></td>
@@ -193,21 +197,23 @@ if(isset($_POST['date_submit'])) {
 													<td>7</td>
 													<td><?php echo $day_chit['short_sec_name']; ?></td>
 													<td><?php $area1 = $exp_plkd_area[$index]; echo $area1; $areau_arr[] = $area1; ?></td>
-													<td><?php $pluckers1 = $exp_lab_count[$index]; echo $pluckers1; ?></td>
+													<td><?php $pluckers1 = $exp_lab_count[$index]; echo $pluckers1; $pluckersu_arr[] = $pluckers1; ?></td>
 													<td><?php echo round($exp_lab_count[$index]/$exp_plkd_area[$index], 2); ?></td>
-													<td><?php $leaf1 = $exp_leaf_qty[$index]; echo $leaf1; ?></td>
+													<td><?php $leaf1 = $exp_leaf_qty[$index]; echo $leaf1; $leafu_arr[] = $leaf1; ?></td>
 													<td><?php echo round($exp_leaf_qty[$index]/$exp_lab_count[$index], 2); ?></td>
 													<td><?php echo $day_chit['task']; ?></td>
+													<td>100%</td>
 													<!--------------------------------------------------------------------->
 													<td></td>
 													<td></td>
 													<td></td>
 													<td><?php $area2 = 0; $areap_arr[] = $area2; ?></td>
-													<td><?php $pluckers2 = 0; ?></td>
+													<td><?php $pluckers2 = 0;  $pluckersp_arr[] = $pluckers2; ?></td>
 													<td></td>
-													<td><?php $leaf2 = 0; ?></td>
+													<td><?php $leaf2 = 0;  $leafp_arr[] = $leaf2; ?></td>
 													<td></td>
 													<td></td>
+													<td>100%</td>
 													<!--------------------------------------------------------------------->
 													<td><?php echo $area1 + $area2;?></td>
 													<td><?php echo $pluckers1 + $pluckers2; ?></td>
@@ -233,20 +239,22 @@ if(isset($_POST['date_submit'])) {
 													<td></td>
 													<td></td>
 													<td><?php $area3 = 0; $areau_arr[] = $area3; ?></td>
-													<td><?php $pluckers3 = 0; ?></td>
+													<td><?php $pluckers3 = 0; $pluckersu_arr[] = $pluckers3; ?></td>
 													<td></td>
-													<td><?php $leaf3 = 0; ?></td>
+													<td><?php $leaf3 = 0; $leafu_arr[] = $leaf3; ?></td>
 													<td></td>
 													<td></td>
+													<td>100%</td>
 													<td>17-07-2015</td>
 													<td>7</td>
 													<td><?php echo $day_chit['short_sec_name']; ?></td>
 													<td><?php $area4 = $exp_plkd_area[$index]; echo $area4; $areap_arr[] = $area4; ?></td>
-													<td><?php $pluckers4 = $exp_lab_count[$index]; echo $pluckers4; ?></td>
+													<td><?php $pluckers4 = $exp_lab_count[$index]; echo $pluckers4; $pluckersp_arr[] = $pluckers4; ?></td>
 													<td><?php echo round($exp_lab_count[$index]/$exp_plkd_area[$index],2); ?></td>
-													<td><?php $leaf4 = $exp_leaf_qty[$index]; echo $leaf4; ?></td>
+													<td><?php $leaf4 = $exp_leaf_qty[$index]; echo $leaf4; $leafp_arr[] = $leaf4; ?></td>
 													<td><?php echo round($exp_leaf_qty[$index]/$exp_lab_count[$index],2); ?></td>
 													<td><?php echo $day_chit['task']; ?></td>
+													<td>100%</td>
 													<!--------------------------------------------------------------------->
 													<!--------------------------------------------------------------------->
 													<td><?php echo $area3 + $area4;?></td>
@@ -267,23 +275,25 @@ if(isset($_POST['date_submit'])) {
 							<td></td>
 							<td></td>
 							<td><?php $areas1 = array_sum($areau_arr); echo $areas1; ?></td>
-							<td>12</td>
-							<td>12</td>
-							<td>12</td>
-							<td>12</td>
-							<td>12</td>
+							<td><?php $pluckerss1 = array_sum($pluckersu_arr); echo $pluckerss1; ?></td>
+							<td><?php echo round(($pluckerss1/$areas1), 2) ?></td>
+							<td><?php $leafs1 = array_sum($leafu_arr); echo $leafs1; ?></td>
+							<td><?php echo round($leafs1/$pluckerss1) ?></td>
+							<td></td>
+							<td>100%</td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td><?php $areas2 = array_sum($areap_arr); echo $areas2; ?></td>
-							<td>12</td>
-							<td>12</td>
-							<td>12</td>
-							<td>12</td>
-							<td>12</td>
+							<td><?php $pluckerss2 = array_sum($pluckersp_arr); echo $pluckerss2; ?></td>
+							<td><?php echo round(($pluckerss2/$areas2), 2) ?></td>
+							<td><?php $leafs2 = array_sum($leafp_arr); echo $leafs2; ?></td>
+							<td><?php echo round($leafs2/$pluckerss2) ?></td>
+							<td></td>
+							<td>100%</td>
 							<td><?php echo $areas1 + $areas2; ?></td>
-							<td>12</td>
-							<td>12</td>
+							<td><?php echo $pluckerss1 + $pluckerss2; ?></td>
+							<td><?php echo $leafs1 + $leafs2; ?></td>
 						</tr>
 					</tfoot>
 				<?php }//end of isset $_post[date_submit] ?>
@@ -301,54 +311,54 @@ if(isset($_POST['date_submit'])) {
 				$("#datepicker").datepicker({
 					dateFormat: "dd-mm-yy"
 				});
-				$('#leaf_chit_total').DataTable({"scrollX":true });
-				var table = $('#leaf_chit_table').DataTable({
-						"scrollX": true,
-						"order": [],
-						"aoColumns": [
-								null,
-								{ "sType": "date-uk" },
-								null,
-								null,
-								null,
-								null,
-								null,
-								null,
-								null,
-								null,
-								{ "sType": "date-uk" },
-								null,
-								null,
-								null,
-								null,
-								null,
-								null,
-								null,
-								null,
-								null,
-								null,
-								null
-						]
-
-	    	});
-				new $.fn.dataTable.FixedColumns( table );
-			// 	var tt = new $.fn.dataTable.TableTools(table);
-    	// 	$( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
-			});
-			jQuery.extend( jQuery.fn.dataTableExt.oSort, {
-			"date-uk-pre": function ( a ) {
-			var ukDatea = a.split('-');
-			return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
-			},
-
-			"date-uk-asc": function ( a, b ) {
-			return ((a < b) ? -1 : ((a > b) ? 1 : 0));
-			},
-
-			"date-uk-desc": function ( a, b ) {
-			return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-			}
-		} );
+		// 		$('#leaf_chit_table').DataTable({"scrollX":true });
+		// 		var table = $('#leaf_chit_table').DataTable({
+		// 				"scrollX": true,
+		// 				"order": [],
+		// 				"aoColumns": [
+		// 						null,
+		// 						{ "sType": "date-uk" },
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						{ "sType": "date-uk" },
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null,
+		// 						null
+		// 				]
+		//
+	  //   	});
+		// 		new $.fn.dataTable.FixedColumns( table );
+		// 	// 	var tt = new $.fn.dataTable.TableTools(table);
+    // 	// 	$( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+		// 	});
+		// 	jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+		// 	"date-uk-pre": function ( a ) {
+		// 	var ukDatea = a.split('-');
+		// 	return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+		// 	},
+		//
+		// 	"date-uk-asc": function ( a, b ) {
+		// 	return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+		// 	},
+		//
+		// 	"date-uk-desc": function ( a, b ) {
+		// 	return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+		// 	}
+		 } );
 		</script>
   </body>
 </html>
