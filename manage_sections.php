@@ -194,7 +194,7 @@
                                           </div>
                                       </div>
                                       <div class="form-group">
-                                        <label for="area_plucked" class="col-sm-2" style="padding-top:15px;">Area Pluced</label>
+                                        <label for="area_plucked" class="col-sm-2" style="padding-top:15px;">Area Plucked</label>
 
                                         <div class="input-group" class="col-sm-10">
                                             <input type="text" id="area_plucked" class="form-control" name="sec_area" value="<?php echo $sec['total_area']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-tree-conifer"></i></span>
