@@ -319,6 +319,7 @@
 
                     <div class="tab-pane" id="tab2">
                         <form id="remove_section" action="manage_sections.php" method="post" size="10">
+                        <label for="sec_short_name"> Select Section:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-remove-sign"></i></span>
                             <select class="form-control" name="sec_short_name" form="remove_section" required>
@@ -344,7 +345,7 @@
                             </select>
                         </div>
 
-                                <button type="button" class="btn btn-danger" name="rmv_sec_submit" data-toggle="modal" data-target="#confirmModal">Remove a Section</button>
+                                <button type="button" class="btn btn-danger" name="rmv_sec_submit" data-toggle="modal" data-target="#confirmModal" style="margin-top:10px;">Remove a Section</button>
                                 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -378,61 +379,120 @@
                     </div>
 
                     <div class="tab-pane" id="tab3">
-                        <form class="add_section" action="manage_sections.php" method="post">
-                            <div class="input-group">
+                        <form class="add_section form-horizontal" action="manage_sections.php" method="post">
+                            <div class=" form-group">
+                                <label for="sec_nm" class="col-sm-3" style="padding-top:15px">Section Name:</label>
 
-                                <input type="text" class="form-control" name="sec_nm" placeholder="Section Name" required><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                <div class="input-group col-sm-6">
+                                    <input type="text" class="form-control" name="sec_nm" placeholder="Section Name" required><span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="sec_short_nm" placeholder="Section Short Name" required><span class="input-group-addon"><i class="glyphicon glyphicon-certificate"></i></span>
+                            <div class="form-group">
+                                <label for="sec_short_nm" class="col-sm-3" style="padding-top:15px">Section's short name:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="sec_short_nm" placeholder="Section Short Name" required><span class="input-group-addon"><i class="glyphicon glyphicon-certificate"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="sec_area" placeholder="Section Area" required><span class="input-group-addon"><i class="glyphicon glyphicon-tree-conifer"></i></span>
+                            <div class="form-group">
+                                <label for="sec_area" class="col-sm-3" style="padding-top:15px">Sectional Area:</label>
+
+                                <div class="input-group col-sm-6">
+
+                                  <input type="text" class="form-control" name="sec_area" placeholder="Section Area" required><span class="input-group-addon"><i class="glyphicon glyphicon-tree-conifer"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="status" placeholder="Section Status" required><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                            <div class="form-group">
+                                <label for="status" class="col-sm-3" style="padding-top:15px">Status:</label>
+                                <div class="input-group col-sm-6">
+
+                                  <input type="text" class="form-control" name="status" placeholder="Section Status" required><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="jat" placeholder="Jat/Clone"> <span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
+                            <div class="form-group">
+                                <label for="jat" class="col-sm-3" style="padding-top:15px">Jat:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="jat" placeholder="Jat/Clone"> <span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="shade_species_temp" placeholder="Shade Species Temporary" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
+                            <div class="form-group">
+                                <label for="shade_species_temp" class="col-sm-3" style="padding-top:15px">shade species temp.:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="shade_species_temp" placeholder="Shade Species Temporary" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="shade_species_perm" placeholder="Shade Species Permanent" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
+                            <div class="form-group">
+                                <label for="shade_species_perm" class="col-sm-3" style="padding-top:15px">Shade species perm.:</label>
+                                <div class="input-group col-sm-6">
+
+                                  <input type="text" class="form-control" name="shade_species_perm" placeholder="Shade Species Permanent" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="Frame_Height" placeholder="Frame Height"> <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
+                            <div class="form-group">
+                                <label for="Frame_Height" class="col-sm-3" style="padding-top:15px">frame height:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="Frame_Height" placeholder="Frame Height"> <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="Bush_Height" placeholder="Bush Height"><span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
+                            <div class="form-group">
+                                <label for="Bush_Height" class="col-sm-3" style="padding-top:15px">bush height:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="Bush_Height" placeholder="Bush Height"><span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="number" class="form-control" name="Planting_year" placeholder="Year of planting" required><span class="input-group-addon"><i class="glyphicon glyphicon-jpy"></i></span>
+                            <div class="form-group">
+                                <label for="Planting_year" class="col-sm-3" style="padding-top:15px">Planting year:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="number" class="form-control" name="Planting_year" placeholder="Year of planting" required><span class="input-group-addon"><i class="glyphicon glyphicon-jpy"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="Plant_Spacing" placeholder="Plant Spacing"><span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                            <div class="form-group">
+                                <label for="Plant_Spacing" class="col-sm-3" style="padding-top:15px">Plant Spacing:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="Plant_Spacing" placeholder="Plant Spacing"><span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="Temp_Shade_spacing" placeholder="Temporary Shade spacing"><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                            <div class="form-group">
+                                <label for="Temp_Shade_spacing" class="col-sm-3" style="padding-top:15px">Temp. Shade Spacing:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="Temp_Shade_spacing" placeholder="Temporary Shade spacing"><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="Perm_Shade_spacing" placeholder="Permanent Shade spacing"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                            <div class="form-group">
+                                <label for="Perm_Shade_spacing" class="col-sm-3" style="padding-top:15px">Perm. Shade Spacing:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="Perm_Shade_spacing" placeholder="Permanent Shade spacing"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="Plant_Density" placeholder="Plant Density"><span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                            <div class="form-group">
+                                <label for="Plant_Density" class="col-sm-3" style="padding-top:15px">Plant Density:</label>
+                                <div class="input-group col-sm-6">
+
+                                  <input type="text" class="form-control" name="Plant_Density" placeholder="Plant Density"><span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="Bush_Popu" placeholder="Bush Population"><span class="input-group-addon"><i class="glyphicon glyphicon-cloud-upload"></i></span>
+                            <div class="form-group">
+                                <label for="Bush_Popu" class="col-sm-3" style="padding-top:15px">Bush Population:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="Bush_Popu" placeholder="Bush Population"><span class="input-group-addon"><i class="glyphicon glyphicon-cloud-upload"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="Drain_Status" placeholder="Drain Status" ><span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                            <div class="form-group">
+                                <label for="Drain_Status" class="col-sm-3" style="padding-top:15px">Drain Status:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="Drain_Status" placeholder="Drain Status" ><span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="Soil_Topo" placeholder="Soil Type and Topography" required><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                            <div class="form-group">
+                                <label for="Soil_Topo" class="col-sm-3" style="padding-top:15px">Soil Topology:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="Soil_Topo" placeholder="Soil Type and Topography" required><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <input type="number" class="form-control" name="ext_rplnt" placeholder="Extention/Replantation" ><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                            <div class="form-group">
+                                <label for="ext_rplnt" class="col-sm-3" style="padding-top:15px">Ext / Replantation:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="number" class="form-control" name="ext_rplnt" placeholder="Extention/Replantation" ><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                                </div>
                             </div>
 
 

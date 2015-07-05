@@ -1,4 +1,4 @@
-<?php
+	<?php
 	require_once('/includes/sessions.php');
 	require_once('/includes/functions.php');
 
@@ -74,43 +74,41 @@
 									<table id="plucking" class="table table-hover table-bordered" cellspacing="0" width="100%">
 										<thead>
 											<tr>
-												<th colspan="2">Rainfall (mm)</th>
-												<th colspan="2">Temperature (&degC)</th>
-												<th rowspan="2">Sunshine Hours</th>
-												<th rowspan="2">Weather Condition</th>
-												<th rowspan="2">Changed By</th>
-												<th rowspan="2">Updated By</th>
-												<th rowspan="2">Action</th>
+												<th>Labour Category</th>
+												<th>Area Plucked</th>
+												<th>Leaf Plucked</th>
+												<th>Mandays for<br/> each group</th>
+												<th>Cash Plucked leaf</th>
+												<th>Task</th>
+												<th>Changed On</th>
+												<th>Updated By</th>
+												<th>Action</th>
+
 											</tr>
-											<tr>
-												<th>Day</th>
-												<th>Night</th>
-												<th>Maximum</th>
-												<th>Minimum</th>
-											</tr>
+
 										</thead>
 										<tbody>
 											<tr>
-												<td>27-06-2015</td>
-												<td>1EXTA </td>
-												<td>5</td>
-												<td>112</td>
+												<td>P women</td>
+												<td>5 </td>
+												<td>123</td>
+												<td>14</td>
 												<td>22</td>
-												<td>2330</td>
-												<td>21</td>
-												<td>7</td>
-												<td>10</td>
+												<td>18</td>
+												<td>18-07-2015</td>
+												<td>G Mondal</td>
+												<td>Added</td>
 											</tr>
 											<tr>
-												<td>28-06-2015</td>
-												<td>1EXTA </td>
-												<td>5</td>
-												<td>112</td>
+												<td>P women</td>
+												<td>5 </td>
+												<td>123</td>
+												<td>14</td>
 												<td>22</td>
-												<td>2330</td>
-												<td>21</td>
-												<td>7</td>
-												<td>10</td>
+												<td>18</td>
+												<td>18-07-2015</td>
+												<td>G Mondal</td>
+												<td>Added</td>
 											</tr>
 										</tbody>
 									</table>
@@ -128,7 +126,7 @@
 												<th colspan="2">Temperature (&degC)</th>
 												<th rowspan="2">Sunshine Hours</th>
 												<th rowspan="2">Weather Condition</th>
-												<th rowspan="2">Changed By</th>
+												<th rowspan="2">Changed On</th>
 												<th rowspan="2">Updated By</th>
 												<th rowspan="2">Action</th>
 											</tr>
@@ -178,7 +176,7 @@
 												<th colspan="2">Temperature (&degC)</th>
 												<th rowspan="2">Sunshine Hours</th>
 												<th rowspan="2">Weather Condition</th>
-												<th rowspan="2">Changed By</th>
+												<th rowspan="2">Changed On</th>
 												<th rowspan="2">Updated By</th>
 												<th rowspan="2">Action</th>
 											</tr>
