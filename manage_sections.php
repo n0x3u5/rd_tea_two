@@ -35,7 +35,7 @@
     $q_in .= "(sec_name, short_sec_name, total_area, jat,";
     $q_in .= " shade_spcs_temp, shade_spcs_perm, frame_height, bush_height,";
     $q_in .= " yr_of_plant, plant_spacing,temp_shd_spcing, perm_shd_spcing,";
-    $q_in .= " plant_density, bush_pop, drain_stats, soil_topo, ext_rplnt, sec_status)";
+    $q_in .= " plant_density, bush_pop, drain_stats, soil_topo, ext_rplnt, prune_status)";
     $q_in .= " VALUES ('{$sec_nm}', '{$sec_shrt_nm}', {$sec_area}, '{$jat}', '{$shd_spcs_tmp}', '{$shd_spcs_perm}',";
     $q_in .= " {$frame_ht}, {$bush_ht}, {$plntng_yr}, {$plnt_spcing}, {$tmp_shd_spcing}, {$prm_shd_spcing},";
     $q_in .= " {$plnt_dens}, {$bsh_popu}, '{$drn_stats}', '{$soil_topo}', {$ext_rplnt}, '{$stats}' )";
@@ -91,7 +91,7 @@
     $q_up .= " yr_of_plant = {$plntng_yr}, plant_spacing = {$plnt_spcing},";
     $q_up .= " temp_shd_spcing = {$tmp_shd_spcing}, perm_shd_spcing = {$prm_shd_spcing},";
     $q_up .= " plant_density = {$plnt_dens}, bush_pop = {$bsh_popu}, drain_stats ='{$drn_stats}',";
-    $q_up .= " soil_topo = '{$soil_topo}', ext_rplnt = {$ext_rplnt}, sec_status = '{$stats}'";
+    $q_up .= " soil_topo = '{$soil_topo}', ext_rplnt = {$ext_rplnt}, prune_status = '{$stats}'";
     $q_up .= " WHERE id = $req_ID";
 
     $result_up = mysqli_query($connection, $q_up);
@@ -204,7 +204,7 @@
                                         <label for="status_" class="col-sm-2" style="padding-top:15px;">Status</label>
 
                                           <div class="input-group" class="col-sm-10">
-                                            <input type="text" class="form-control" id="status_" name="status" value="<?php echo $sec['sec_status']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                                            <input type="text" class="form-control" id="status_" name="status" value="<?php echo $sec['prune_status']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
                                           </div>
                                       </div>
                                   <div class="form-group">
