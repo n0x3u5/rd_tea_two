@@ -58,6 +58,8 @@
 		$short_sec_name = $_SESSION['ssn'];
 		$rec_dt = $_SESSION['date'];
 
+		$date_last_plkd = date('Y-m-d', strtotime($_POST['last_date_add']));
+
 		$labour_cat = mysqli_real_escape_string($connection, $_POST['labour_cat']);
 		$labour_cat = explode_implode($labour_cat);//made function
 
@@ -72,14 +74,15 @@
 
 		$cp_leaf_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_leaf_qty']);
 		$task = (int) mysqli_real_escape_string($connection, $_POST['task']);
+		$ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
 		// var_dump($labour_cat);
 
 		$prune = $_SESSION['prune_stats']['prune_status'];
 
-		$q_in = "INSERT INTO daily_plucking (short_sec_name, rec_dt, prune_status, labour_cat,";
-		$q_in .= " lab_cat_plkd_area, lab_cat_leaf_qty, lab_cat_mandays, cp_leaf_qty, task)";
-		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$prune', '$labour_cat',";
-		$q_in .= " '$lab_cat_plkd_area', '$lab_cat_leaf_qty', '$lab_cat_mandays', $cp_leaf_qty, $task)";
+		$q_in = "INSERT INTO daily_plucking (short_sec_name, rec_dt, date_last_plkd, prune_status, labour_cat,";
+		$q_in .= " lab_cat_plkd_area, lab_cat_leaf_qty, lab_cat_mandays, cp_leaf_qty, task, ballo_count)";
+		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$date_last_plkd', '$prune', '$labour_cat',";
+		$q_in .= " '$lab_cat_plkd_area', '$lab_cat_leaf_qty', '$lab_cat_mandays', $cp_leaf_qty, $task, $ballo_count)";
 
 		$result_in = mysqli_query($connection, $q_in);
 
@@ -90,6 +93,16 @@
 		else {
 			echo "No record affected! Check your Submission Properly!";
 		}
+		//
+		// $q = "select * from plucking_change where id = (select max(id) from plucking_change)";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
+		// $plk_chng = mysqli_fetch_assoc($r);
+		// //var_dump($wth_chng);
+		// //echo "<br>user_name".$_SESSION['user'];
+		// $q = "UPDATE plucking_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
 
 		$_SESSION['daily_plucking'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -109,6 +122,9 @@
 		$rec_dt = $_SESSION['date'];
 		$req_id = $_SESSION['daily_plucking']['id'];
 
+
+		$date_last_plkd = date('Y-m-d', strtotime($_POST['last_date_edit']));
+
 		$labour_cat = mysqli_real_escape_string($connection, $_POST['labour_cat']);
 		$labour_cat = explode_implode($labour_cat);//made function
 
@@ -126,9 +142,9 @@
 		// var_dump($labour_cat);
 
 		$q_up = "UPDATE daily_plucking SET";
-		$q_up .= " short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}', labour_cat='{$labour_cat}',";
+		$q_up .= " short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}', date_last_plkd='{$date_last_plkd}', labour_cat='{$labour_cat}',";
 		$q_up .= " lab_cat_plkd_area='{$lab_cat_plkd_area}', lab_cat_leaf_qty='{$lab_cat_leaf_qty}',";
-		$q_up .= " lab_cat_mandays='{$lab_cat_mandays}', cp_leaf_qty={$cp_leaf_qty}, task={$task} WHERE id ={$req_id}";
+		$q_up .= " lab_cat_mandays='{$lab_cat_mandays}', cp_leaf_qty={$cp_leaf_qty}, task={$task}, ballo_count={$ballo_count} WHERE id ={$req_id}";
 
 		//var_dump($q_up);
 		$result_up = mysqli_query($connection, $q_up);
@@ -140,6 +156,17 @@
 		else {
 			echo "No record affected! Check your Submission Properly!";
 		}
+
+		//
+		// $q = "select * from plucking_change where id = (select max(id) from plucking_change)";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
+		// $plk_chng = mysqli_fetch_assoc($r);
+		// //var_dump($wth_chng);
+		// //echo "<br>user_name".$_SESSION['user'];
+		// $q = "UPDATE plucking_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
 
 		$_SESSION['daily_plucking'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -164,6 +191,16 @@
 		else {
 			echo "No record affected! Check your Submission Properly!";
 		}
+
+		// $q = "select * from plucking_change where id = (select max(id) from plucking_change)";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
+		// $plk_chng = mysqli_fetch_assoc($r);
+		// //var_dump($wth_chng);
+		// //echo "<br>user_name".$_SESSION['user'];
+		// $q = "UPDATE plucking_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
 
 		$_SESSION['daily_plucking'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -246,7 +283,13 @@
 					<div class="tab-pane" id="tab1">
 						<form class="form-horizontal" action="daily_plucking_entry.php" method="post">
 							<?php if(isset($_SESSION['daily_plucking'])) { $daily = $_SESSION['daily_plucking']; } else { $daily = NULL; }?>
-							<div class="form-group" style="margin-top:30px">
+							<div class="form-group" style="margin-top: 30px;">
+									<label for="datepicker_edit" class="col-sm-3 control-label">Date Last Plucked:</label>
+									<div class="col-sm-4">
+										<input type="text" name="last_date_edit" class="form-control col-sm-3" id="datepicker_edit" <?php if(isset($daily)) { ?>value="<?php echo date('d-m-Y', strtotime($daily['date_last_plkd']));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> required>
+									</div>
+							</div>
+							<div class="form-group">
 								<label for="wrkgrp1" class="col-sm-3 control-label">Labour Category:</label>
 								<div class="col-sm-4">
 									<input type="text" name="labour_cat" class="form-control" id="wrkgrp1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['labour_cat']); $set2=1; ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select Labour Category\""; $set2=2;?><?php } //comma separeted value?> >
@@ -268,6 +311,12 @@
 								<label for="grpmd1" class="col-sm-3 control-label">Mandays for each group:</label>
 								<div class="col-sm-4">
 									<input type="text" name="lab_cat_mandays" class="form-control" id="grpmd1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['lab_cat_mandays']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Pluckers for each Category\""; ?><?php } ?> >
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="blmtr1" class="col-sm-3 control-label">Ballometer Count:</label>
+								<div class="col-sm-4">
+									<input type="text" name="ballo_count" class="form-control" id="blmtr1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['ballo_count']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Ballometer count for each Category\""; ?><?php } ?> >
 								</div>
 							</div>
 							<div class="form-group">
@@ -311,7 +360,13 @@
 					</div>
 					<div class="tab-pane" id="tab2">
 						<form class="form-horizontal" action="daily_plucking_entry.php" method="post">
-							<div class="form-group" style="margin-top:30px">
+							<div class="form-group" style="margin-top: 30px;">
+									<label for="datepicker_add" class="col-sm-3 control-label">Date Last Plucked:</label>
+									<div class="col-sm-4">
+										<input type="text" name="last_date_add" class="form-control col-sm-3" id="datepicker_add"  placeholder="Date (dd-mm-yyyy)" required>
+									</div>
+							</div>
+							<div class="form-group">
 								<label for="wrkgrp2" class="col-sm-3 control-label">Labour Category:</label>
 								<div class="col-sm-4">
 									<input type="text" name="labour_cat" class="form-control" id="wrkgrp2" placeholder="Select Labour Category" required>
@@ -335,6 +390,13 @@
 									<input type="text" name="lab_cat_mandays" class="form-control" id="grpmd1" placeholder="Pluckers for each Category" required>
 								</div>
 							</div>
+							<div class="form-group">
+								<label for="blmtr2" class="col-sm-3 control-label"> Ballometer Count:</label>
+								<div class="col-sm-4">
+									<input type="text" name="ballo_count" class="form-control" id="blmtr2" <?php if (isset($daily)) { $csv = comma_sep_val($daily['ballo_count']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Ballometer count for each Category\""; ?><?php } ?> >
+								</div>
+							</div>
+
 							<div class="form-group">
 								<label for="cp_leaf_qty" class="col-sm-3 control-label">Cash Plucked Leaf :</label>
 								<div class="col-sm-4">
@@ -362,15 +424,15 @@
 				//  document.getElementById("edit_entry").disabled=true;
 				//  document.getElementById("delete_entry").disabled=true;
 				$(function() {
-					$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
+					$( "#datepicker, #datepicker_edit, #datepicker_add" ).datepicker({dateFormat: 'dd-mm-yy'});
 					$('#wrkgrp1, #wrkgrp2').tokenfield({
 						autocomplete: {
-							source: ['P. Men','P. Women','Temp. Men','Temp. Women','Incentives'],
+							source: ['Perm. Men','Perm. Women','Temp. Men','Temp. Women','Incentives'],
 							delay: 100
 						},
 						showAutocompleteOnFocus: true
 					});
-					$('#grpleaf1, #grpleaf2, #lb_area, #grphzar2, #grpmd1, #grpmd2').tokenfield();
+					$('#grpleaf1, #grpleaf2, #lb_area, #grphzar2, #grpmd1, #grpmd2, #blmtr1, #blmtr2').tokenfield();
 				 });
 				//
 				// function unhide(){
