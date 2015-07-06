@@ -246,40 +246,22 @@
 					<div class="tab-pane" id="tab1">
 						<form class="form-horizontal" action="daily_plucking_entry.php" method="post">
 							<?php if(isset($_SESSION['daily_plucking'])) { $daily = $_SESSION['daily_plucking']; } else { $daily = NULL; }?>
-							<div class="form-group" style="margin-top:30px">
-								<label for="wrkgrp1" class="col-sm-3 control-label">Labour Category:</label>
-								<div class="col-sm-4">
-									<input type="text" name="labour_cat" class="form-control" id="wrkgrp1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['labour_cat']); $set2=1; ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select Labour Category\""; $set2=2;?><?php } //comma separeted value?> >
-								</div>
-							</div>
 							<div class="form-group">
 								<label for="lb_area" class="col-sm-3 control-label">Area Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" name="lab_cat_plkd_area" class="form-control" id="lb_area" <?php if (isset($daily)) { $csv = comma_sep_val($daily['lab_cat_plkd_area']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Area Plucked by each Category\""; ?><?php } ?> >
+									<input type="text" name="plkd_area" class="form-control" id="lb_area" <?php if (isset($daily)) { $csv = comma_sep_val($daily['lab_cat_plkd_area']); ?> value="<?php echo $csv; $set2=1; ?>" <?php } else { ?>placeholder=<?php $set2=2; echo "\"Area Plucked by each Category\""; ?><?php } ?> required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="grpleaf1" class="col-sm-3 control-label">Leaf Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" name="lab_cat_leaf_qty" class="form-control" id="grpleaf1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['lab_cat_leaf_qty']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Leaf Plucked by each Category\""; ?><?php } ?> >
+									<input type="text" name="plkd_leaf" class="form-control" id="grpleaf1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['lab_cat_leaf_qty']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Leaf Plucked by each Category\""; ?><?php } ?> >
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="grpmd1" class="col-sm-3 control-label">Mandays for each group:</label>
+								<label for="grpmd1" class="col-sm-3 control-label">Mandays:</label>
 								<div class="col-sm-4">
-									<input type="text" name="lab_cat_mandays" class="form-control" id="grpmd1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['lab_cat_mandays']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Pluckers for each Category\""; ?><?php } ?> >
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="cp_leaf_qty" class="col-sm-3 control-label">Cash Plucked Leaf :</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cp_leaf_qty" name="cp_leaf_qty" <?php if (isset($daily)) {  ?> value="<?php echo $daily['cp_leaf_qty']; ?>" <?php } else { ?>placeholder=<?php echo "\"Cash Plucked Leaf\""; ?><?php } ?> >
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="task" class="col-sm-3 control-label">Task :</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="task" name="task" <?php if (isset($daily)) {  ?> value="<?php echo $daily['task']; ?>" <?php } else { ?>placeholder=<?php echo "\"Task Alloted (kg)\""; ?><?php } ?> >
+									<input type="text" name="mandays" class="form-control" id="grpmd1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['lab_cat_mandays']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Pluckers for each Category\""; ?><?php } ?> >
 								</div>
 							</div>
 							<div class="row">
@@ -311,42 +293,25 @@
 					</div>
 					<div class="tab-pane" id="tab2">
 						<form class="form-horizontal" action="daily_plucking_entry.php" method="post">
-							<div class="form-group" style="margin-top:30px">
-								<label for="wrkgrp2" class="col-sm-3 control-label">Labour Category:</label>
-								<div class="col-sm-4">
-									<input type="text" name="labour_cat" class="form-control" id="wrkgrp2" placeholder="Select Labour Category" required>
-								</div>
-							</div>
 							<div class="form-group">
 								<label for="lb_area" class="col-sm-3 control-label">Area Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" name="lab_cat_plkd_area" class="form-control" id="lb_area" placeholder="Area Plucked by each Category" required>
+									<input type="text" name="plkd_area" class="form-control" id="lb_area" placeholder="Area Plucked " required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="grpleaf1" class="col-sm-3 control-label">Leaf Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" name="lab_cat_leaf_qty" class="form-control" id="grpleaf1" placeholder="Leaf Plucked by each Category" required>
+									<input type="text" name="plkd_leaf" class="form-control" id="grpleaf1" placeholder="Leaf Plucked " required>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="grpmd1" class="col-sm-3 control-label">Mandays for each group:</label>
+								<label for="grpmd1" class="col-sm-3 control-label">Mandays:</label>
 								<div class="col-sm-4">
-									<input type="text" name="lab_cat_mandays" class="form-control" id="grpmd1" placeholder="Pluckers for each Category" required>
+									<input type="text" name="mandays" class="form-control" id="grpmd1" placeholder="Pluckers employed" required>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="cp_leaf_qty" class="col-sm-3 control-label">Cash Plucked Leaf :</label>
-								<div class="col-sm-4">
-									<input type="text" name="cp_leaf_qty" class="form-control" id="cp_leaf_qty" placeholder="Cash Plucked Leaf">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="task" class="col-sm-3 control-label">Task :</label>
-								<div class="col-sm-4">
-									<input type="text" name="task" class="form-control" id="task" placeholder="Task Alloted (kg)">
-								</div>
-							</div>
+
           		<input type="submit" id="add_entry" name="add_submit" value="Add Entry" class="btn btn-success"style="margin-top:20px">
 		    		</form>
 					</div>
@@ -364,13 +329,10 @@
 				$(function() {
 					$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
 					$('#wrkgrp1, #wrkgrp2').tokenfield({
-						autocomplete: {
-							source: ['P. Men','P. Women','Temp. Men','Temp. Women','Incentives'],
-							delay: 100
-						},
+
 						showAutocompleteOnFocus: true
 					});
-					$('#grpleaf1, #grpleaf2, #lb_area, #grphzar2, #grpmd1, #grpmd2').tokenfield();
+
 				 });
 				//
 				// function unhide(){

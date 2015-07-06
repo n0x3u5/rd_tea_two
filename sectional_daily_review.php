@@ -137,10 +137,11 @@
                                     <th>Section</th>
                                     <th>Prune</th>
                                     <th>Plucked Area</th>
-                                    <th>NCP leaf Quantity</th>
-                                    <th>CP Leaf Quantity</th>
                                     <th>Total Leaf Plucked</th>
                                     <th>Mandays</th>
+																		<th>Leaf / Ha.</th>
+																		<th>Pluckers / Ha</th>
+																		<th>Leaf / Plucker</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -159,28 +160,12 @@
 																					echo $plkd_area;
 																				?>
 																			</td>
-	                                    <td>
-																				<?php
-																					$exp_arr = explode("¥", $req_day_pluck['lab_cat_leaf_qty']);
-																					$ncp_leaf_qty = array_sum($exp_arr);
-																					echo $ncp_leaf_qty;
-																				?>
-																			</td>
-	                                    <td><?php echo $req_day_pluck['cp_leaf_qty']; ?></td>
-	                                    <td>
-																				<?php
-																				  $total_leaf = $ncp_leaf_qty + $req_day_pluck['cp_leaf_qty'];
-																					echo $total_leaf;
-																				?>
-																			</td>>
-	                                    <td>
-																				<?php
-																					$exp_arr = explode("¥", $req_day_pluck['lab_cat_mandays']);
-																					$mandays = array_sum($exp_arr);
-																					echo $mandays;
-																				?>
-																			</td>
-	                                </tr>
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																  </tr>
 															<?php
 																  }
 																}
