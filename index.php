@@ -18,7 +18,7 @@
         <link href='http://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet'>
         <link type="text/css" rel="stylesheet" href="css/login_style.css" />
         <link rel="icon" href="images/logo_rdtea.png"/>
-        <title>R.D. Tea | Login</title>
+        <title>R. D. Tea | Login</title>
 
     </head>
     <body>
@@ -27,7 +27,7 @@
 			<div class="logo-image">
 			<img src="images/logo_rdtea.png" alt="Logo" title="Logo" width="138">
 			</div>
-			<h1 class="display1">R.D. Tea Ltd.</h1>
+			<h1 class="display1">R. D. Tea Ltd.</h1>
 			<!-- <p class="subhead">Hansqua Tea Garden</p> -->
 				<form action="form_process_login.php" method="post" role="form">
 					<div id="form-login-username" class="form-group">
