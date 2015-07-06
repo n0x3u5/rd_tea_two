@@ -74,7 +74,9 @@
 
 		$cp_leaf_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_leaf_qty']);
 		$task = (int) mysqli_real_escape_string($connection, $_POST['task']);
-		$ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
+
+		$ballo_count = mysqli_real_escape_string($connection, $_POST['ballo_count']);
+		$ballo_count = explode_implode($ballo_count);
 		// var_dump($labour_cat);
 
 		$prune = $_SESSION['prune_stats']['prune_status'];
@@ -82,8 +84,9 @@
 		$q_in = "INSERT INTO daily_plucking (short_sec_name, rec_dt, date_last_plkd, prune_status, labour_cat,";
 		$q_in .= " lab_cat_plkd_area, lab_cat_leaf_qty, lab_cat_mandays, cp_leaf_qty, task, ballo_count)";
 		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$date_last_plkd', '$prune', '$labour_cat',";
-		$q_in .= " '$lab_cat_plkd_area', '$lab_cat_leaf_qty', '$lab_cat_mandays', $cp_leaf_qty, $task, $ballo_count)";
+		$q_in .= " '$lab_cat_plkd_area', '$lab_cat_leaf_qty', '$lab_cat_mandays', $cp_leaf_qty, $task, '$ballo_count')";
 
+		//var_dump($q_in);
 		$result_in = mysqli_query($connection, $q_in);
 
     confirm_query($result_in);
@@ -139,12 +142,15 @@
 
 		$cp_leaf_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_leaf_qty']);
 		$task = (int) mysqli_real_escape_string($connection, $_POST['task']);
+
+		$ballo_count = mysqli_real_escape_string($connection, $_POST['ballo_count']);
+		$ballo_count = explode_implode($ballo_count);
 		// var_dump($labour_cat);
 
 		$q_up = "UPDATE daily_plucking SET";
 		$q_up .= " short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}', date_last_plkd='{$date_last_plkd}', labour_cat='{$labour_cat}',";
 		$q_up .= " lab_cat_plkd_area='{$lab_cat_plkd_area}', lab_cat_leaf_qty='{$lab_cat_leaf_qty}',";
-		$q_up .= " lab_cat_mandays='{$lab_cat_mandays}', cp_leaf_qty={$cp_leaf_qty}, task={$task}, ballo_count={$ballo_count} WHERE id ={$req_id}";
+		$q_up .= " lab_cat_mandays='{$lab_cat_mandays}', cp_leaf_qty={$cp_leaf_qty}, task={$task}, ballo_count='{$ballo_count}' WHERE id ={$req_id}";
 
 		//var_dump($q_up);
 		$result_up = mysqli_query($connection, $q_up);
@@ -271,7 +277,7 @@
 	                            <i class="glyphicon glyphicon-calendar"></i>
 	                        </span>
 	                    </div>
-											<input type="submit" id="selct_sec" name="dt_sec_submit" value="Add Data" class="btn btn-default" onclick="enable_tab()">
+											<input type="submit" id="selct_sec" name="dt_sec_submit" value="Submit" class="btn btn-default" onclick="enable_tab()">
                 </form>
             </div>
 			<div class="tab-container">
