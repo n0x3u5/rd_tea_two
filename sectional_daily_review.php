@@ -80,6 +80,7 @@
                   <div class="form-group col-sm-6">
                     <!-- <label class="sr-only" for="sec_select">Email address</label> -->
 										<select id="division" name ="short_sec_name" class="form-control">
+											<option>Select a section</option>
 			                <?php
 			                    $q = "SELECT * FROM sections";
 			                    $r = mysqli_query($connection, $q);
@@ -100,10 +101,11 @@
 									<div class="form-group">
 										<p style="color:#B3E5FC">Start date</p>
 										<div class="input-group">
-											<input type="text" name="start_date_value" class="form-control" id="datepicker1" <?php if($req_start_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_start_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 											<span class="input-group-addon">
 													<i class="glyphicon glyphicon-calendar"></i>
 											</span>
+											<input type="text" name="start_date_value" class="form-control" id="datepicker1" <?php if($req_start_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_start_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
+
 										</div>
 									</div>
 									<p></p>
@@ -111,10 +113,11 @@
 									<div class="form-group">
 										<p style="color:#B3E5FC">End date</p>
 										<div class="input-group">
-											<input type="text" name="end_date_value" class="form-control" id="datepicker2" <?php if($req_end_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_end_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 											<span class="input-group-addon">
 													<i class="glyphicon glyphicon-calendar"></i>
 											</span>
+											<input type="text" name="end_date_value" class="form-control" id="datepicker2" <?php if($req_end_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_end_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
+
 										</div>
 									</div>
                   <button type="submit" name='sec_date_submit' value="section and date range" class="btn btn-default" style="margin-top:0px;">Get Data</button>

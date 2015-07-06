@@ -41,37 +41,57 @@
                     <div class="tab-pane active" id="tab1">
                         <h4>Enter the following details and hit submit to add a new user to the Information Network.</h4>
                         <div>
-                            <form action="form_process_insert.php" method="post">
-                                <div class="input-group">
-                                    <input class="form-control" name="desig" type="text" placeholder="Designation" required>
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-star-empty" ></i></span>
-                                </div>
-                                <div class="input-group">
-                                    <input class="form-control" name="f_name" type="text" placeholder="First Name" required>
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
-                                </div>
-                                <div class="input-group">
-                                    <input class="form-control" name="m_name" type="text" placeholder="Middle Name">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
-                                </div>
-                                <div class="input-group">
-                                    <input class="form-control" name="l_name" type="text" placeholder="Last Name" required>
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
-                                </div>
-                                <div class="input-group">
-                                    <input class="form-control" name="email" type="email" placeholder="Email" required>
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
-                                </div>
-                                <div class="input-group">
-                                    <input class="form-control" name="pwd" type="Password" placeholder="Password" required>
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
-                                </div>
-                                <div class="input-group">
-                                    <input class="form-control" name="cnfpwd" type="Password" placeholder="Confirm Password" required>
-                                    <span class="input-group-addon" ><i class="glyphicon glyphicon-asterisk" ></i></span>
-                                </div>
-                                <input type="submit" value="Submit" class="btn btn-primary">
-                            </form>
+                            <form action="form_process_insert.php" class="form-horizontal" method="post">
+															<div class="form-group" style="margin-top:30px;">
+																<label for="desig" class="col-sm-3 control-label">Designation:</label>
+																<div class="input-group">
+																    <input class="form-control" name="desig" type="text" placeholder="Designation" required>
+																    <span class="input-group-addon"><i class="glyphicon glyphicon-star-empty" ></i></span>
+																</div>
+															</div>
+															<div class="form-group">
+																<label for="f_name" class="col-sm-3 control-label">First Name:</label>
+																<div class="input-group">
+																    <input class="form-control" name="f_name" type="text" placeholder="First Name" required>
+																    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+																</div>
+															</div>
+															<div class="form-group">
+																<label for="l_name" class="col-sm-3 control-label">Middle name:</label>
+																<div class="input-group">
+																    <input class="form-control" name="l_name" type="text" placeholder="Last Name" required>
+																    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+																</div>
+														</div>
+															<div class="form-group">
+																<label for="email" class="col-sm-3 control-label">Email-id:</label>
+																<div class="input-group">
+																		<input class="form-control" name="email" type="email" placeholder="Email" required>
+																		<span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
+																</div>
+
+															</div>
+															<div class="form-group">
+																<label for="pwd" class="col-sm-3 control-label">Password:</label>
+																<div class="input-group">
+																    <input class="form-control" name="pwd" type="Password" placeholder="Password" required>
+																    <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
+																</div>
+															</div>
+															<div class="form-group">
+																<label for="cnfpwd" class="col-sm-3 control-label">Retype Password:</label>
+																<div class="input-group">
+																    <input class="form-control" name="cnfpwd" type="Password" placeholder="Confirm Password" required>
+																    <span class="input-group-addon" ><i class="glyphicon glyphicon-asterisk" ></i></span>
+																</div>
+															</div>
+															<div class="form-group">
+																<label for="sbm" class="col-sm-3 control-label"></label>
+																<div class="input-group">
+																	<input type="submit" id="sbm" value="Submit" class="btn btn-primary">
+																</div>
+															</div>
+														</form>
                          </div>
                     </div>
                     <div class="tab-pane" id="tab2">

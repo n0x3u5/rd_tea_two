@@ -78,7 +78,12 @@
 			.card_style {
 				margin-top: 30px;
 			}
-
+			.dataTables_filter{
+				margin-top: 30px;
+			}
+			.dataTables_length{
+				margin-top: 30px;
+			}
 		</style>
         <?php $page_id = 6;?>
     </head>
@@ -115,10 +120,11 @@
 										<div class="form-group">
 											<p style="color:#B3E5FC">Start date</p>
 											<div class="input-group">
-												<input type="text" name="start_date_value" class="form-control" id="datepicker1" <?php if($req_start_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_start_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 												<span class="input-group-addon">
 														<i class="glyphicon glyphicon-calendar"></i>
 												</span>
+
+												<input type="text" name="start_date_value" class="form-control" id="datepicker1" <?php if($req_start_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_start_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 											</div>
 										</div>
 										<p></p>
@@ -126,10 +132,11 @@
 										<div class="form-group">
 											<p style="color:#B3E5FC">End date</p>
 											<div class="input-group">
-												<input type="text" name="end_date_value" class="form-control" id="datepicker2" <?php if($req_end_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_end_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 												<span class="input-group-addon">
 														<i class="glyphicon glyphicon-calendar"></i>
 												</span>
+
+												<input type="text" name="end_date_value" class="form-control" id="datepicker2" <?php if($req_end_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_end_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 											</div>
 										</div>
 
@@ -191,6 +198,7 @@
 															<th colspan="2">RainFall(Total)</th>
 															<th colspan="2">Temparature (Avg.)</th>
 															<th rowspan="2">Sunshine Hour</th>
+															<th rowspan="2">Todate Railfall</th>
 													</tr>
 													<tr>
 															<th>Day</th>
@@ -208,6 +216,7 @@
 																			  confirm_query($result);
 
 																				$sum_rain_day = mysqli_fetch_assoc($result);
+																				$day_total = $sum_rain_day['day_sum'];
 																				echo $sum_rain_day['day_sum'];
 																		?>
 																	</td>
@@ -218,6 +227,7 @@
 																			  confirm_query($result);
 
 																				$sum_rain_night = mysqli_fetch_assoc($result);
+																				$night_total = $sum_rain_night['night_sum'];
 																				echo $sum_rain_night['night_sum'];
 																		?>
 																	</td>
@@ -250,6 +260,10 @@
 																				$avg_min_temp = mysqli_fetch_assoc($result);
 																				echo round($avg_min_temp['sunshine_avg'], 2);
 																		?>
+																	</td>
+																	<td>
+																			<?php echo $day_total + $night_total;
+																			?>
 																	</td>
 																</tr>
 													<?php

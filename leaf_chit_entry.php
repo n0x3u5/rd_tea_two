@@ -152,10 +152,6 @@
 					.jumbotron h1{
 						color:#EDD2D2;
 					}
-					.bootstrap-datetimepicker-widget-dropdown-menu.top {
-						background: #FFFFFF;
-					}
-
 				</style>
         <?php $page_id = 14;?>
     </head>
@@ -200,10 +196,10 @@
 									<div class="col-sm-12">
 											<label for="datepicker" class="col-sm-2">Select Date:</label>
 											<div class="input-group">
-												<input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 												<span class="input-group-addon">
 														<i class="glyphicon glyphicon-calendar"></i>
 												</span>
+												<input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 											</div>
 									</div>
 									<label for="datepicker" class="col-sm-2"></label>

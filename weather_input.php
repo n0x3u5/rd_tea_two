@@ -204,7 +204,10 @@
 					</div>
 					<div class="form-group">
 						<label for="datepicker" class="col-sm-1 control-label" style="margin-top:5px;margin-right:0;">Date</label>
-						<div class="col-sm-4">
+						<div class=" input-group col-sm-4">
+							<span class="input-group-addon">
+									<i class="glyphicon glyphicon-calendar"></i>
+							</span>
 								<input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> required>
 
 						</div>

@@ -15,6 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 				<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+				<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="icon" href="images/logo_rdtea.png"/>
 				<style>
@@ -74,9 +75,7 @@
                       <div class="form-group col-sm-6">
                         <label for="year">Select Year:</label>
                         <div>
-                          <select id="year" name ="yr" class="col-sm-3 form-control" style="margin-top:10px;"required>
-                            <option>Select year</option>
-                          </select>
+                        <input type="text" id="year" class="form-control">
 
                         </div>
                       </div>
@@ -230,9 +229,16 @@
       </div>
   		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment-with-locales.min.js"></script>
   		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+			<script src="scripts/bootstrap-datetimepicker.min.js"></script>
       <script>
-        
+			$(function() {
+				$('#year').datetimepicker({
+					locale:'en',
+					format:'YYYY'
+				});
+			});
       </script>
     </body>
 </html>
