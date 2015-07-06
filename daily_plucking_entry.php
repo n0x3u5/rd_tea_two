@@ -21,27 +21,26 @@
 		// echo "<br>got ssn =" .$req_ssn."<br>";
 		// var_dump($req_date);echo "<br>"; var_dump($req_ssn);
 
-		$query = "SELECT * FROM daily_plucking WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}'";
-
+		$query = "SELECT * FROM blue_bk_plk WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}'";
+		//var_dump($query);
 		$result = mysqli_query($connection, $query);
     confirm_query($result);
 
-		$_SESSION['daily_plucking'] = mysqli_fetch_assoc($result);
+		$_SESSION['blue_bk_plk'] = mysqli_fetch_assoc($result);
 
 
 
 		$q_prune = "SELECT prune_status from sections where short_sec_name = '$req_ssn'";
 		//var_dump($q_prune);
-
 		$r_prune = mysqli_query($connection, $q_prune);
 		confirm_query($r_prune);
 
 		$_SESSION['prune_stats'] = mysqli_fetch_assoc($r_prune);
 		//var_dump($_SESSION['prune_status']);
 
-		// while($_SESSION['daily_plucking'] = mysqli_fetch_assoc($result))
+		// while($_SESSION['blue_bk_plk'] = mysqli_fetch_assoc($result))
 		// {
-		// 	var_dump($_SESSION['daily_plucking']);
+		// 	var_dump($_SESSION['blue_bk_plk']);
 		// }
 		//$daily =mysqli_fetch_assoc($result);
 		$set = 1;
@@ -58,33 +57,16 @@
 		$short_sec_name = $_SESSION['ssn'];
 		$rec_dt = $_SESSION['date'];
 
-		$date_last_plkd = date('Y-m-d', strtotime($_POST['last_date_add']));
+		$plkd_area = mysqli_real_escape_string($connection, $_POST['plkd_area']);
 
-		$labour_cat = mysqli_real_escape_string($connection, $_POST['labour_cat']);
-		$labour_cat = explode_implode($labour_cat);//made function
+		$plkd_leaf = mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
 
-		$lab_cat_plkd_area = mysqli_real_escape_string($connection, $_POST['lab_cat_plkd_area']);
-		$lab_cat_plkd_area = explode_implode($lab_cat_plkd_area);
-
-		$lab_cat_leaf_qty = mysqli_real_escape_string($connection, $_POST['lab_cat_leaf_qty']);
-		$lab_cat_leaf_qty = explode_implode($lab_cat_leaf_qty);
-
-		$lab_cat_mandays = mysqli_real_escape_string($connection, $_POST['lab_cat_mandays']);
-		$lab_cat_mandays = explode_implode($lab_cat_mandays);
-
-		$cp_leaf_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_leaf_qty']);
-		$task = (int) mysqli_real_escape_string($connection, $_POST['task']);
-
-		$ballo_count = mysqli_real_escape_string($connection, $_POST['ballo_count']);
-		$ballo_count = explode_implode($ballo_count);
-		// var_dump($labour_cat);
+		$mandays = mysqli_real_escape_string($connection, $_POST['mandays']);
 
 		$prune = $_SESSION['prune_stats']['prune_status'];
 
-		$q_in = "INSERT INTO daily_plucking (short_sec_name, rec_dt, date_last_plkd, prune_status, labour_cat,";
-		$q_in .= " lab_cat_plkd_area, lab_cat_leaf_qty, lab_cat_mandays, cp_leaf_qty, task, ballo_count)";
-		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$date_last_plkd', '$prune', '$labour_cat',";
-		$q_in .= " '$lab_cat_plkd_area', '$lab_cat_leaf_qty', '$lab_cat_mandays', $cp_leaf_qty, $task, '$ballo_count')";
+		$q_in = "INSERT INTO blue_bk_plk (short_sec_name, rec_dt, plkd_area, plkd_leaf, mandays, prune_status)";
+		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$plkd_area', '$plkd_leaf', '$mandays', '$prune')";
 
 		//var_dump($q_in);
 		$result_in = mysqli_query($connection, $q_in);
@@ -96,61 +78,36 @@
 		else {
 			echo "No record affected! Check your Submission Properly!";
 		}
-		//
-		// $q = "select * from plucking_change where id = (select max(id) from plucking_change)";
-		// $r = mysqli_query($connection, $q);
-		// confirm_query($r);
-		// $plk_chng = mysqli_fetch_assoc($r);
-		// //var_dump($wth_chng);
-		// //echo "<br>user_name".$_SESSION['user'];
-		// $q = "UPDATE plucking_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
-		// $r = mysqli_query($connection, $q);
-		// confirm_query($r);
 
-		$_SESSION['daily_plucking'] = NULL;
+		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
 	}
-?>
-<?php //updating
+ ?>
+ <?php //updating
 
 	if(isset($_POST['edit_submit'])) {
 
-		// $query = "SELECT * FROM daily_plucking WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}'";
+		// $query = "SELECT * FROM blue_bk_plk WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}'";
 		//
 		// $result = mysqli_query($connection, $query);
     // confirm_query($result);
 
 		$short_sec_name = $_SESSION['ssn'];
 		$rec_dt = $_SESSION['date'];
-		$req_id = $_SESSION['daily_plucking']['id'];
+		$req_id = $_SESSION['blue_bk_plk']['id'];
 
 
-		$date_last_plkd = date('Y-m-d', strtotime($_POST['last_date_edit']));
+		$plkd_area = mysqli_real_escape_string($connection, $_POST['plkd_area']);
 
-		$labour_cat = mysqli_real_escape_string($connection, $_POST['labour_cat']);
-		$labour_cat = explode_implode($labour_cat);//made function
+		$plkd_leaf = mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
 
-		$lab_cat_plkd_area = mysqli_real_escape_string($connection, $_POST['lab_cat_plkd_area']);
-		$lab_cat_plkd_area = explode_implode($lab_cat_plkd_area);
+		$mandays = mysqli_real_escape_string($connection, $_POST['mandays']);
 
-		$lab_cat_leaf_qty = mysqli_real_escape_string($connection, $_POST['lab_cat_leaf_qty']);
-		$lab_cat_leaf_qty = explode_implode($lab_cat_leaf_qty);
-
-		$lab_cat_mandays = mysqli_real_escape_string($connection, $_POST['lab_cat_mandays']);
-		$lab_cat_mandays = explode_implode($lab_cat_mandays);
-
-		$cp_leaf_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_leaf_qty']);
-		$task = (int) mysqli_real_escape_string($connection, $_POST['task']);
-
-		$ballo_count = mysqli_real_escape_string($connection, $_POST['ballo_count']);
-		$ballo_count = explode_implode($ballo_count);
-		// var_dump($labour_cat);
-
-		$q_up = "UPDATE daily_plucking SET";
-		$q_up .= " short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}', date_last_plkd='{$date_last_plkd}', labour_cat='{$labour_cat}',";
-		$q_up .= " lab_cat_plkd_area='{$lab_cat_plkd_area}', lab_cat_leaf_qty='{$lab_cat_leaf_qty}',";
-		$q_up .= " lab_cat_mandays='{$lab_cat_mandays}', cp_leaf_qty={$cp_leaf_qty}, task={$task}, ballo_count='{$ballo_count}' WHERE id ={$req_id}";
+		$q_up = "UPDATE blue_bk_plk SET";
+		$q_up .= " short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}',";
+		$q_up .= " plkd_area='{$plkd_area}', plkd_leaf='{$plkd_leaf}',";
+		$q_up .= " mandays='{$mandays}' WHERE id ={$req_id}";
 
 		//var_dump($q_up);
 		$result_up = mysqli_query($connection, $q_up);
@@ -163,29 +120,19 @@
 			echo "No record affected! Check your Submission Properly!";
 		}
 
-		//
-		// $q = "select * from plucking_change where id = (select max(id) from plucking_change)";
-		// $r = mysqli_query($connection, $q);
-		// confirm_query($r);
-		// $plk_chng = mysqli_fetch_assoc($r);
-		// //var_dump($wth_chng);
-		// //echo "<br>user_name".$_SESSION['user'];
-		// $q = "UPDATE plucking_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
-		// $r = mysqli_query($connection, $q);
-		// confirm_query($r);
 
-		$_SESSION['daily_plucking'] = NULL;
+		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
 	}
-?>
-<?php //DELETE
+ ?>
+ <?php //DELETE
  //var_dump($_POST);
 	if(isset($_POST['del_entry'])){
 		$short_sec_name = $_SESSION['ssn'];
 		$rec_dt = $_SESSION['date'];
 
-		$q_del = "DELETE FROM daily_plucking WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}'";
+		$q_del = "DELETE FROM blue_bk_plk WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}'";
 		//var_dump($q_del);
 
 		$r_del = mysqli_query($connection, $q_del);
@@ -198,17 +145,8 @@
 			echo "No record affected! Check your Submission Properly!";
 		}
 
-		// $q = "select * from plucking_change where id = (select max(id) from plucking_change)";
-		// $r = mysqli_query($connection, $q);
-		// confirm_query($r);
-		// $plk_chng = mysqli_fetch_assoc($r);
-		// //var_dump($wth_chng);
-		// //echo "<br>user_name".$_SESSION['user'];
-		// $q = "UPDATE plucking_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
-		// $r = mysqli_query($connection, $q);
-		// confirm_query($r);
 
-		$_SESSION['daily_plucking'] = NULL;
+		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
 	}
@@ -288,23 +226,23 @@
 				<div class="tab-content" style="background-color:#FFFFFF">
 					<div class="tab-pane" id="tab1">
 						<form class="form-horizontal" action="daily_plucking_entry.php" method="post">
-							<?php if(isset($_SESSION['daily_plucking'])) { $daily = $_SESSION['daily_plucking']; } else { $daily = NULL; }?>
+							<?php if(isset($_SESSION['blue_bk_plk'])) { $daily = $_SESSION['blue_bk_plk']; } else { $daily = NULL; }?>
 							<div class="form-group">
 								<label for="lb_area" class="col-sm-3 control-label">Area Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" name="plkd_area" class="form-control" id="lb_area" <?php if (isset($daily)) { $csv = comma_sep_val($daily['lab_cat_plkd_area']); ?> value="<?php echo $csv; $set2=1; ?>" <?php } else { ?>placeholder=<?php $set2=2; echo "\"Area Plucked by each Category\""; ?><?php } ?> required>
+									<input type="text" name="plkd_area" class="form-control" id="lb_area" <?php if (isset($daily)) { ?> value="<?php echo $daily['plkd_area']; $set2=1; ?>" <?php } else { ?>placeholder=<?php $set2=2; echo "\"Area Plucked by each Category\""; ?><?php } ?> required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="grpleaf1" class="col-sm-3 control-label">Leaf Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" name="plkd_leaf" class="form-control" id="grpleaf1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['lab_cat_leaf_qty']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Leaf Plucked by each Category\""; ?><?php } ?> >
+									<input type="text" name="plkd_leaf" class="form-control" id="grpleaf1" <?php if (isset($daily)) { ?> value="<?php echo $daily['plkd_leaf']; ?>" <?php } else { ?>placeholder=<?php echo "\"Leaf Plucked by each Category\""; ?><?php } ?> >
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="grpmd1" class="col-sm-3 control-label">Mandays:</label>
 								<div class="col-sm-4">
-									<input type="text" name="mandays" class="form-control" id="grpmd1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['lab_cat_mandays']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Pluckers for each Category\""; ?><?php } ?> >
+									<input type="text" name="mandays" class="form-control" id="grpmd1" <?php if (isset($daily)) { ?> value="<?php echo $daily['mandays']; ?>" <?php } else { ?>placeholder=<?php echo "\"Pluckers for each Category\""; ?><?php } ?> >
 								</div>
 							</div>
 							<div class="row">
@@ -334,6 +272,9 @@
 							</div>
             </form>
 					</div>
+
+
+
 					<div class="tab-pane" id="tab2">
 						<form class="form-horizontal" action="daily_plucking_entry.php" method="post">
 							<div class="form-group">

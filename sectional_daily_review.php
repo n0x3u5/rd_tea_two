@@ -25,7 +25,7 @@
 	  confirm_query($result_spray);
 		//var_dump($req_day_spray);
 
-		$query_pluck = "select * from daily_plucking where short_sec_name ='$req_ssn' and rec_dt between '$from' and '$to'";
+		$query_pluck = "select * from blue_bk_plk where short_sec_name ='$req_ssn' and rec_dt between '$from' and '$to'";
 
 		$result_pluck = mysqli_query($connection, $query_pluck);
 		confirm_query($result_pluck);
@@ -140,31 +140,25 @@
                                     <th>Total Leaf Plucked</th>
                                     <th>Mandays</th>
 																		<th>Leaf / Ha.</th>
-																		<th>Pluckers / Ha</th>
+																		<th>Pluckers / Ha.</th>
 																		<th>Leaf / Plucker</th>
                                 </tr>
                             </thead>
                             <tbody>
 															<?php
 																if(isset($_POST['sec_date_submit'])) {
-																	while($req_day_pluck = mysqli_fetch_assoc($result_pluck)) {
+																	while($plk_rev = mysqli_fetch_assoc($result_pluck)) {
 															?>
 	                                <tr>
-	                                    <td style="text-align:center;"><?php echo date('d-m-Y', strtotime($req_day_pluck['rec_dt'])); ?></td>
-	                                    <td><?php echo $req_day_pluck['short_sec_name']; ?></td>
-	                                    <td><?php echo $req_day_pluck['prune_status']; ?></td>
-	                                    <td>
-																				<?php
-																					$exp_arr = explode("¥", $req_day_pluck['lab_cat_plkd_area']);
-																					$plkd_area = array_sum($exp_arr);
-																					echo $plkd_area;
-																				?>
-																			</td>
-																			<td></td>
-																			<td></td>
-																			<td></td>
-																			<td></td>
-																			<td></td>
+	                                    <td style="text-align:center;"><?php echo date('d-m-Y', strtotime($plk_rev['rec_dt'])); ?></td>
+	                                    <td><?php echo $plk_rev['short_sec_name']; ?></td>
+	                                    <td><?php echo $plk_rev['prune_status']; ?></td>
+	                                    <td><?php	echo $plk_rev['plkd_area'];	?></td>
+																			<td><?php	echo $plk_rev['plkd_leaf'];	?></td>
+																			<td><?php	echo $plk_rev['mandays'];	?></td>
+																			<td><?php	echo round($plk_rev['plkd_leaf']/$plk_rev['plkd_area']);	?></td>
+																			<td><?php	echo round($plk_rev['mandays']/$plk_rev['plkd_area'], 2);	?></td>
+																			<td><?php	echo round($plk_rev['plkd_leaf']/$plk_rev['mandays'], 2);	?></td>
 																  </tr>
 															<?php
 																  }
