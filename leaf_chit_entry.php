@@ -6,6 +6,126 @@
 		redirect_to("index.php");
 	}
 ?>
+
+<?php
+	$connection = make_connection();
+	if(isset($_POST['dt_cat_submit'])) {
+		$req_lcsn = $_POST['lab_cat'];
+		$_SESSION['lcsn'] = $req_lcsn;
+		$_SESSION['prune_stats'] = $_POST['prune_stats'];
+		$req_date = date('Y-m-d', strtotime($_POST['date_value']));
+		$_SESSION['date'] = $req_date;
+
+		$query = "SELECT * FROM leaf_chit_table WHERE lab_cat ='{$req_lcsn}' and rec_dt='{$req_date}'";
+
+		$result = mysqli_query($connection, $query);
+    confirm_query($result);
+
+		$_SESSION['leaf_chit'] = mysqli_fetch_assoc($result);
+
+
+		// var_dump($_SESSION['lcsn']);
+		// var_dump($_SESSION['prune_stats']);
+		// var_dump($req_date);
+
+
+	  //var_dump($query);
+		//
+	  // $result = mysqli_query($connection, $query);
+	  // confirm_query($result);
+
+	}
+	else {
+		$req_date = NULL;
+		$result = NULL;
+	}
+
+	if(isset($_POST['add_submit'])) {
+
+	$lab_cat = $_SESSION['lcsn'];
+	$rec_dt = $_SESSION['date'];
+	$prune_stats = $_SESSION['prune_stats'];
+
+	$short_sec_name = mysqli_real_escape_string($connection, $_POST['short_sec_name']);
+	$short_sec_name = explode_implode($short_sec_name);
+
+	$plkd_area = (float) mysqli_real_escape_string($connection, $_POST['plkd_area']);
+	$plkd_leaf = (float) mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
+	$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
+	$task = (int) mysqli_real_escape_string($connection, $_POST['task']);
+	$ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
+	$cp_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_qty']);
+	$cp_hr_from = mysqli_real_escape_string($connection, $_POST['cp_hr_from']);
+	$cp_hr_to = mysqli_real_escape_string($connection, $_POST['cp_hr_to']);
+
+	$q_in = "INSERT INTO leaf_chit_table (prune_stats, lab_cat, rec_dt, short_sec_name, plkd_area, plkd_leaf, mandays, task, ballo_count, cp_qty, cp_hr_from, cp_hr_to) VALUES ('{$prune_stats}', '{$lab_cat}', '{$rec_dt}',  '{$short_sec_name}', {$plkd_area}, {$plkd_leaf}, {$mandays}, $task, {$ballo_count}, {$cp_qty}, '{$cp_hr_from}','{$cp_hr_to}') ";
+
+	$r_in = mysqli_query($connection, $q_in);
+	confirm_query($r_in);
+
+	if(mysqli_affected_rows($connection) > 0) {
+		echo "Inserted Successfully!";
+	}
+	else {
+		echo "No record affected! Check your Submission Properly!";
+	}
+
+ }
+
+
+ if(isset($_POST['edit_submit'])) {
+
+	$lab_cat = $_SESSION['lcsn'];
+	$rec_dt = $_SESSION['date'];
+	$req_id = $_SESSION['leaf_chit']['id'];
+	$prune_stats = $_SESSION['prune_stats'];
+
+	$short_sec_name = mysqli_real_escape_string($connection, $_POST['short_sec_name']);
+	$short_sec_name = explode_implode($short_sec_name);
+
+	$plkd_area = (float) mysqli_real_escape_string($connection, $_POST['plkd_area']);
+	$plkd_leaf = (float) mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
+	$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
+	$task = (int) mysqli_real_escape_string($connection, $_POST['task']);
+	$ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
+	$cp_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_qty']);
+	$cp_hr_from = mysqli_real_escape_string($connection, $_POST['cp_hr_from']);
+	$cp_hr_to = mysqli_real_escape_string($connection, $_POST['cp_hr_to']);
+
+	$q_up = "UPDATE leaf_chit_table SET prune_stats='{$prune_stats}', lab_cat='{$lab_cat}', rec_dt='{$rec_dt}', short_sec_name = '{$short_sec_name}', plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf}, mandays = {$mandays}, task = $task, ballo_count={$ballo_count}, cp_qty={$cp_qty}, cp_hr_from='{$cp_hr_from}', cp_hr_to='{$cp_hr_to}' where id = $req_id ";
+	$r_up = mysqli_query($connection, $q_up);
+	confirm_query($r_up);
+
+	if(mysqli_affected_rows($connection) > 0) {
+		echo "Updated Successfully!";
+	}
+	else {
+		echo "No record affected! Check your Submission Properly!";
+	}
+
+ }
+
+ if(isset($_POST['del_entry'])) {
+	$lab_cat = $_SESSION['lcsn'];
+	$rec_dt = $_SESSION['date'];
+
+	$q_del = "DELETE FROM leaf_chit_table WHERE lab_cat ='{$lab_cat}' and rec_dt='{$rec_dt}'";
+	//var_dump($q_del);
+
+	$r_del = mysqli_query($connection, $q_del);
+  confirm_query($r_del);
+
+	if(mysqli_affected_rows($connection) > 0) {
+		echo "Deleted Successfully!";
+	}
+	else {
+		echo "No record affected! Check your Submission Properly!";
+	}
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,28 +172,42 @@
 										<label for="group" class="col-sm-2">Select a group:</label>
 										<div class="col-sm-3">
 											<select id="group" name ="lab_cat" class="form-control" onchange="enable_add()" required>
-												<option> Select a Group</option>
+												<?php
+													$lab_cat_q = "SELECT * FROM labour_categories";
+													$lab_cat_r = mysqli_query($connection, $lab_cat_q);
+													confirm_query($lab_cat_r);
+
+													echo "<option id=\"opt0\" value=\"Select a section...\">Select a section...</option>";
+
+													while($lab_cats = mysqli_fetch_assoc($lab_cat_r))
+													{
+												?>
+													<option value="<?php echo htmlentities($lab_cats['lcsn']) ?>" <?php if(isset($_POST["dt_cat_submit"]) && ($_SESSION['lcsn'] == $lab_cats['lcsn'])) { echo "selected";} ?> ><?php echo htmlentities($lab_cats['lcsn']); ?></option>
+												<?php
+													}
+												?>
 											</select>
 										</div>
 										<label for="prune" class="col-sm-3">Select Prune Status:</label>
 										<div class="col-sm-3">
 											<select id="prune" name ="prune_stats" class="form-control" onchange="enable_add()" required>
-												<option>Unpruned</option>
-												<option>Pruned</option>
+												<option>Select Prune Type</option>
+												<option <?php if(isset($_POST["dt_cat_submit"]) && ($_SESSION['prune_stats'] == 'UNPRUNED')) { echo "selected";} ?> >UNPRUNED</option>
+												<option <?php if(isset($_POST["dt_cat_submit"]) && ($_SESSION['prune_stats'] == 'PRUNED')) { echo "selected";} ?> >PRUNED</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-sm-12">
 											<label for="datepicker" class="col-sm-2">Select Date:</label>
 											<div class="input-group">
-	                        <input type="text" name="date_value" class="form-control" id="datepicker" onChange="enable_add()" required>
-	                        <span class="input-group-addon">
-	                            <i class="glyphicon glyphicon-calendar"></i>
-	                        </span>
-	                    </div>
+												<input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
+												<span class="input-group-addon">
+														<i class="glyphicon glyphicon-calendar"></i>
+												</span>
+											</div>
 									</div>
 									<label for="datepicker" class="col-sm-2"></label>
-									<input type="submit" style="margin-left:10px" id="selct_sec" name="dt_sec_submit" value="Submit" class="btn btn-default" onclick="enable_tab()">
+									<input type="submit" style="margin-left:10px" id="selct_sec" name="dt_cat_submit" value="Submit" class="btn btn-default" onclick="enable_tab()">
                 </form>
             </div>
 			<div class="tab-container">
@@ -82,54 +216,62 @@
 	                <li id="actv_two"><a href="#tab2" data-toggle="tab" id="link_two">Add Entry</a></li>
 	            </ul>
 				<div class="tab-content" style="background-color:#FFFFFF">
+
 					<div class="tab-pane active" id="tab1">
-						<form class="form-horizontal" action="daily_plucking_entry.php" method="post">
+						<form class="form-horizontal" action="leaf_chit_entry.php" method="post">
+							<?php if(isset($_SESSION['leaf_chit'])) { $daily = $_SESSION['leaf_chit']; } else { $daily = NULL; }?>
 							<div class="form-group">
 								<label for="short_sec_name" class="col-sm-3 control-label">Short Section Name:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="short_sec_name1" name="short_sec_name">
+									<input type="text" class="form-control" id="short_sec_name1" name="short_sec_name" <?php if (isset($daily)) { $csv = comma_sep_val($daily['short_sec_name']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select section name.\""; ?><?php } //comma separeted value?>  >
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="plkd_area" class="col-sm-3 control-label">Area Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="plkd_area1" name="plkd_area">
+									<input type="text" class="form-control" id="plkd_area1" name="plkd_area" <?php if(isset($daily)) {?>value="<?php echo $daily['plkd_area']; ?>" <?php } else {?>placeholder=<?php  echo "\"Area Plucked\""?> <?php } ?> >
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="grpleaf1" class="col-sm-3 control-label">Leaf Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="leaf1" name="leaf">
+									<input type="text" class="form-control" id="leaf1" name="plkd_leaf" <?php if(isset($daily)) {?>value="<?php echo $daily['plkd_leaf']; ?>" <?php } else {?>placeholder=<?php  echo "\"Leaf Plucked\""?> <?php } ?>  >
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="mandays" class="col-sm-3 control-label">Mandays:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="mandays1" name="mandays">
+									<input type="text" class="form-control" id="mandays1" name="mandays" <?php if(isset($daily)) {?>value="<?php echo $daily['mandays']; ?>" <?php } else {?>placeholder=<?php  echo "\"Mandays\""?> <?php } ?>  >
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="task" class="col-sm-3 control-label">Task:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="task1" name="task">
+									<input type="text" class="form-control" id="task1" name="task" <?php if(isset($daily)) {?>value="<?php echo $daily['task']; ?>" <?php } else {?>placeholder=<?php  echo "\"Task\""?> <?php } ?>  >
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="ballo_count" class="col-sm-3 control-label">Ballometer Count:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="ballo_count1" name="ballo_count">
+									<input type="text" class="form-control" id="ballo_count1" name="ballo_count" <?php if(isset($daily)) {?>value="<?php echo $daily['ballo_count']; ?>" <?php } else {?>placeholder=<?php  echo "\"Ballometer Kal\""?> <?php } ?>  >
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="cp_qty" class="col-sm-3 control-label">Cash Plucking Quantity:</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="cp_qty1" name="cp_qty" <?php if(isset($daily)) {?>value="<?php echo $daily['cp_qty']; ?>" <?php } else {?>placeholder=<?php  echo "\"Cash Plucking quantity\""?> <?php } ?>  >
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cp_hr_from" class="col-sm-3 control-label timepicker">Start Time (CashPlucking):</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cp_hr_from1" name="cp_hr_from">
+									<input type="text" class="form-control" id="cp_hr_from1" name="cp_hr_from" <?php if(isset($daily)) {?>value="<?php echo $daily['cp_hr_from']; ?>" <?php } else {?>placeholder=<?php  echo "\"cp starting time\""?> <?php } ?>  >
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="cp_hr_to" class="col-sm-3 control-label">Start Time (CashPlucking):</label>
+								<label for="cp_hr_to" class="col-sm-3 control-label">End Time (CashPlucking):</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cp_hr_to1" name="cp_hr_to">
+									<input type="text" class="form-control" id="cp_hr_to1" name="cp_hr_to" <?php if(isset($daily)) {?>value="<?php echo $daily['cp_hr_to']; ?>" <?php } else {?>placeholder=<?php  echo "\"cp ending hr\""?> <?php } ?>  >
 								</div>
 							</div>
 							<div class="row">
@@ -159,6 +301,9 @@
 							</div>
             </form>
 					</div>
+
+
+
 					<div class="tab-pane" id="tab2">
 						<form class="form-horizontal" action="" method="post">
 							<div class="form-group">
@@ -176,7 +321,7 @@
 							<div class="form-group">
 								<label for="leaf" class="col-sm-3 control-label">Leaf Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="leaf2" name="leaf">
+									<input type="text" class="form-control" id="leaf2" name="plkd_leaf">
 								</div>
 							</div>
 							<div class="form-group">
@@ -241,7 +386,37 @@
 					});
 					$('#short_sec_name1,#short_sec_name2').tokenfield({
 					  autocomplete: {
-					    source: ['P Men I','P Men II','P Women I','P Women II','P Women III','P Women IV','T Women I','T Women II','T Women III','T Women IV','T Men I','T Men II','Incentive I','Incentive II','Gariwala'],
+					    source: [ <?php
+													if(isset($_POST['dt_cat_submit'])){
+														if($_SESSION['prune_stats'] == "UNPRUNED") {
+															$q_pstat= "select short_sec_name from sections where prune_style in (select prune_style from prune_style_stats where prune_stat = 'UNPRUNED')";
+
+															$r_pstat = mysqli_query($connection, $q_pstat);
+															confirm_query($r_pstat);
+
+															$prefix = '';
+															while($pstat = mysqli_fetch_assoc($r_pstat)) {
+																echo $prefix ."'{$pstat['short_sec_name']}'";
+																$prefix = ',';
+															}
+
+														}
+														else if($_SESSION['prune_stats'] == "PRUNED") {
+															$q_pstat= "select short_sec_name from sections where prune_style in (select prune_style from prune_style_stats where prune_stat = 'PRUNED')";
+
+															$r_pstat = mysqli_query($connection, $q_pstat);
+															confirm_query($r_pstat);
+
+															$prefix = '';
+															while($pstat = mysqli_fetch_assoc($r_pstat)) {
+																echo $prefix ."'{$pstat['short_sec_name']}'";
+																$prefix = ',';
+															}
+														}
+
+														// 	echo "'P Men I','P Men II','P Women I','P Women II','P Women III','P Women IV','T Women I','T Women II','T Women III','T Women IV','T Men I','T Men II','Incentive I','Incentive II','Gariwala'";
+													}
+												?> ],
 					    delay: 100
 					  },
 					  showAutocompleteOnFocus: true
