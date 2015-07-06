@@ -86,9 +86,9 @@ if(isset($_POST['date_submit'])) {
 			th{
 				text-align: center;
 			}
-			.main-content {
+			/*.main-content {
 				overflow: scroll;
-			}
+			}*/
 			.main-content .btn {
 				box-shadow: none;
 			}
@@ -311,53 +311,55 @@ if(isset($_POST['date_submit'])) {
 				$("#datepicker").datepicker({
 					dateFormat: "dd-mm-yy"
 				});
-		// 		$('#leaf_chit_table').DataTable({"scrollX":true });
-		// 		var table = $('#leaf_chit_table').DataTable({
-		// 				"scrollX": true,
-		// 				"order": [],
-		// 				"aoColumns": [
-		// 						null,
-		// 						{ "sType": "date-uk" },
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						{ "sType": "date-uk" },
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null,
-		// 						null
-		// 				]
-		//
-	  //   	});
-		// 		new $.fn.dataTable.FixedColumns( table );
-		// 	// 	var tt = new $.fn.dataTable.TableTools(table);
-    // 	// 	$( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
-		// 	});
-		// 	jQuery.extend( jQuery.fn.dataTableExt.oSort, {
-		// 	"date-uk-pre": function ( a ) {
-		// 	var ukDatea = a.split('-');
-		// 	return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
-		// 	},
-		//
-		// 	"date-uk-asc": function ( a, b ) {
-		// 	return ((a < b) ? -1 : ((a > b) ? 1 : 0));
-		// 	},
-		//
-		// 	"date-uk-desc": function ( a, b ) {
-		// 	return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-		// 	}
+				//$('#leaf_chit_table').DataTable({"scrollX":true });
+				var table = $('#leaf_chit_table').DataTable({
+						"scrollX": true,
+						"order": [],
+						"aoColumns": [
+								null,
+								{ "sType": "date-uk" },
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								{ "sType": "date-uk" },
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null,
+								null
+						]
+
+	    	});
+				new $.fn.dataTable.FixedColumns( table );
+			// 	var tt = new $.fn.dataTable.TableTools(table);
+    	// 	$( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+			});
+			jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+			"date-uk-pre": function ( a ) {
+			var ukDatea = a.split('-');
+			return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+			},
+
+			"date-uk-asc": function ( a, b ) {
+			return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+			},
+
+			"date-uk-desc": function ( a, b ) {
+			return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+			}
 		 } );
 		</script>
   </body>
