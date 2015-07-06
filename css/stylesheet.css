@@ -153,3 +153,9 @@ tfoot {
     -moz-box-shadow: 1px 1px 5px 1px rgba(145,145,145,1);
     box-shadow: 1px 1px 5px 1px rgba(145,145,145,1);
 }
+
+
+.dropdown-menu {
+  background: #F3F3F3;
+  border-bottom: none;
+}

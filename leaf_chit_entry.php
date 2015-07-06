@@ -32,10 +32,6 @@
 					.jumbotron h1{
 						color:#EDD2D2;
 					}
-					.bootstrap-datetimepicker-widget-dropdown-menu.top {
-						background: #FFFFFF;
-					}
-
 				</style>
         <?php $page_id = 14;?>
     </head>
