@@ -58,6 +58,8 @@
 		$short_sec_name = $_SESSION['ssn'];
 		$rec_dt = $_SESSION['date'];
 
+		$date_last_plkd = date('Y-m-d', strtotime($_POST['last_date_add']));
+
 		$labour_cat = mysqli_real_escape_string($connection, $_POST['labour_cat']);
 		$labour_cat = explode_implode($labour_cat);//made function
 
@@ -72,15 +74,19 @@
 
 		$cp_leaf_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_leaf_qty']);
 		$task = (int) mysqli_real_escape_string($connection, $_POST['task']);
+
+		$ballo_count = mysqli_real_escape_string($connection, $_POST['ballo_count']);
+		$ballo_count = explode_implode($ballo_count);
 		// var_dump($labour_cat);
 
 		$prune = $_SESSION['prune_stats']['prune_status'];
 
-		$q_in = "INSERT INTO daily_plucking (short_sec_name, rec_dt, prune_status, labour_cat,";
-		$q_in .= " lab_cat_plkd_area, lab_cat_leaf_qty, lab_cat_mandays, cp_leaf_qty, task)";
-		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$prune', '$labour_cat',";
-		$q_in .= " '$lab_cat_plkd_area', '$lab_cat_leaf_qty', '$lab_cat_mandays', $cp_leaf_qty, $task)";
+		$q_in = "INSERT INTO daily_plucking (short_sec_name, rec_dt, date_last_plkd, prune_status, labour_cat,";
+		$q_in .= " lab_cat_plkd_area, lab_cat_leaf_qty, lab_cat_mandays, cp_leaf_qty, task, ballo_count)";
+		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$date_last_plkd', '$prune', '$labour_cat',";
+		$q_in .= " '$lab_cat_plkd_area', '$lab_cat_leaf_qty', '$lab_cat_mandays', $cp_leaf_qty, $task, '$ballo_count')";
 
+		//var_dump($q_in);
 		$result_in = mysqli_query($connection, $q_in);
 
     confirm_query($result_in);
@@ -90,6 +96,16 @@
 		else {
 			echo "No record affected! Check your Submission Properly!";
 		}
+		//
+		// $q = "select * from plucking_change where id = (select max(id) from plucking_change)";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
+		// $plk_chng = mysqli_fetch_assoc($r);
+		// //var_dump($wth_chng);
+		// //echo "<br>user_name".$_SESSION['user'];
+		// $q = "UPDATE plucking_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
 
 		$_SESSION['daily_plucking'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -109,6 +125,9 @@
 		$rec_dt = $_SESSION['date'];
 		$req_id = $_SESSION['daily_plucking']['id'];
 
+
+		$date_last_plkd = date('Y-m-d', strtotime($_POST['last_date_edit']));
+
 		$labour_cat = mysqli_real_escape_string($connection, $_POST['labour_cat']);
 		$labour_cat = explode_implode($labour_cat);//made function
 
@@ -123,12 +142,15 @@
 
 		$cp_leaf_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_leaf_qty']);
 		$task = (int) mysqli_real_escape_string($connection, $_POST['task']);
+
+		$ballo_count = mysqli_real_escape_string($connection, $_POST['ballo_count']);
+		$ballo_count = explode_implode($ballo_count);
 		// var_dump($labour_cat);
 
 		$q_up = "UPDATE daily_plucking SET";
-		$q_up .= " short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}', labour_cat='{$labour_cat}',";
+		$q_up .= " short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}', date_last_plkd='{$date_last_plkd}', labour_cat='{$labour_cat}',";
 		$q_up .= " lab_cat_plkd_area='{$lab_cat_plkd_area}', lab_cat_leaf_qty='{$lab_cat_leaf_qty}',";
-		$q_up .= " lab_cat_mandays='{$lab_cat_mandays}', cp_leaf_qty={$cp_leaf_qty}, task={$task} WHERE id ={$req_id}";
+		$q_up .= " lab_cat_mandays='{$lab_cat_mandays}', cp_leaf_qty={$cp_leaf_qty}, task={$task}, ballo_count='{$ballo_count}' WHERE id ={$req_id}";
 
 		//var_dump($q_up);
 		$result_up = mysqli_query($connection, $q_up);
@@ -140,6 +162,17 @@
 		else {
 			echo "No record affected! Check your Submission Properly!";
 		}
+
+		//
+		// $q = "select * from plucking_change where id = (select max(id) from plucking_change)";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
+		// $plk_chng = mysqli_fetch_assoc($r);
+		// //var_dump($wth_chng);
+		// //echo "<br>user_name".$_SESSION['user'];
+		// $q = "UPDATE plucking_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
 
 		$_SESSION['daily_plucking'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -164,6 +197,16 @@
 		else {
 			echo "No record affected! Check your Submission Properly!";
 		}
+
+		// $q = "select * from plucking_change where id = (select max(id) from plucking_change)";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
+		// $plk_chng = mysqli_fetch_assoc($r);
+		// //var_dump($wth_chng);
+		// //echo "<br>user_name".$_SESSION['user'];
+		// $q = "UPDATE plucking_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
+		// $r = mysqli_query($connection, $q);
+		// confirm_query($r);
 
 		$_SESSION['daily_plucking'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -234,7 +277,7 @@
 	                            <i class="glyphicon glyphicon-calendar"></i>
 	                        </span>
 	                    </div>
-											<input type="submit" id="selct_sec" name="dt_sec_submit" value="Add Data" class="btn btn-default" onclick="enable_tab()">
+											<input type="submit" id="selct_sec" name="dt_sec_submit" value="Submit" class="btn btn-default" onclick="enable_tab()">
                 </form>
             </div>
 			<div class="tab-container">
@@ -303,7 +346,7 @@
 								<label for="grpleaf1" class="col-sm-3 control-label">Leaf Plucked:</label>
 								<div class="col-sm-4">
 									<input type="text" name="plkd_leaf" class="form-control" id="grpleaf1" placeholder="Leaf Plucked " required>
-								</div>
+							</div>
 							</div>
 							<div class="form-group">
 								<label for="grpmd1" class="col-sm-3 control-label">Mandays:</label>
@@ -327,13 +370,8 @@
 				//  document.getElementById("edit_entry").disabled=true;
 				//  document.getElementById("delete_entry").disabled=true;
 				$(function() {
-					$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
-					$('#wrkgrp1, #wrkgrp2').tokenfield({
-
-						showAutocompleteOnFocus: true
-					});
-
-				 });
+					$( "#datepicker, #datepicker_edit, #datepicker_add" ).datepicker({dateFormat: 'dd-mm-yy'});
+				});
 				//
 				// function unhide(){
 				// 	document.getElementById("add_entry").disabled=false;

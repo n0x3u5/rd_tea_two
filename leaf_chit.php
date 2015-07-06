@@ -6,6 +6,56 @@
 		redirect_to("index.php");
 	}
 ?>
+
+<?php
+	$connection = make_connection();
+
+	//var_dump($_POST); echo "<br>";
+if(isset($_POST['date_submit'])) {
+		//$req_div_name = $_POST['div_name'];
+		//$req_year = $_POST['year_value'];
+		$req_date = date('Y-m-d', strtotime( $_POST['date_value']));
+
+		//echo "got date : ".$req_date."<br>";
+		$q_lab_cat = "select lcsn from labour_categories";
+		$r_lab_cat = mysqli_query($connection, $q_lab_cat);
+		confirm_query($r_lab_cat);
+		$i = 0;
+		while($lab_lcsn = mysqli_fetch_assoc($r_lab_cat)){
+		//var_dump($lab_arr);
+			$lcsn_arr[$i++] = $lab_lcsn['lcsn'];
+		}
+		//var_dump($lcsn_arr); echo "<br>".count($lcsn_arr)."<br>";
+
+		$q_dt = "select rec_dt from daily_plucking where id = (select max(id) from daily_plucking where short_sec_name = '1EXTB')";
+		$r = mysqli_query($connection, $q_dt);
+		confirm_query($r);
+		$last_dt =mysqli_fetch_assoc($r);
+
+		//var_dump($last_dt);
+
+		$q_dt = "select rec_dt from daily_plucking where id = (select (max(id)-1) from daily_plucking where short_sec_name = '1EXTB')";
+		$r = mysqli_query($connection, $q_dt);
+		confirm_query($r);
+
+		$prv_last_dt =mysqli_fetch_assoc($r);
+
+		//var_dump($prv_last_dt);
+
+		$last_ts = strtotime($last_dt['rec_dt']);
+		$prv_last_ts = strtotime($prv_last_dt['rec_dt']);
+
+		//var_dump((int)floor((abs($prv_last_ts - $last_ts))/(60 * 60 * 24)));
+
+}
+	else {
+		//$req_div_name = NULL;
+		//$req_year = NULL;
+		$req_date = NULL;
+		$result = NULL;
+	}
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,10 +63,8 @@
     <title>R.D. Tea |Daily Leaf Chit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
-
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
+		<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.css"> -->
 		<link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="icon" href="images/logo_rdtea.png"/>
@@ -38,6 +86,9 @@
 			th{
 				text-align: center;
 			}
+			/*.main-content {
+				overflow: scroll;
+			}*/
 			.main-content .btn {
 				box-shadow: none;
 			}
@@ -58,7 +109,7 @@
         <h1>Leaf Chit</h1>
   			<h3>Hansqua Division</h3>
         <form class="form-inline" action="leaf_chit.php" method="post">
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label class="sr-only" for="sectionPicker">Email address</label>
             <select class="form-control" id="sectionPicker">
 							<option selected>Choose a section...</option>
@@ -67,21 +118,20 @@
 							<option>EXT3</option>
 							<option>4W</option>
 						</select>
-          </div>
+          </div> -->
           <div class="form-group">
-            <input type="text" class="form-control" id="datepicker" placeholder="dd-mm-yy">
+            <input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
           </div>
-          <input type="submit" class="btn btn-warning" name="btn_submit" value="Get Data">
+          <input type="submit" class="btn btn-warning" name="date_submit" value="Get Data">
         </form>
       </div>
 			<div class="main-content">
-
 				<table id="leaf_chit_table" class="table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 					<thead>
 						<tr class="col-head">
 								<th rowspan="2">Labour<br/>Category</th>
-								<th colspan="9">Unpruned</th>
-								<th colspan="9">Pruned</th>
+								<th colspan="10">Unpruned</th>
+								<th colspan="10">Pruned</th>
 								<th colspan="3">Grand<br/>Total</th>
 						</tr>
 						<tr>
@@ -94,7 +144,9 @@
 							<th>Leaf<br/>Plkd</th>
 							<th>Avg.<br/>Prod.</th>
 							<th>Task</th>
-							<th>Date<br/>Last<br/>Plkd.</th>
+							<th>Bal.<br>Cnt.</th>
+							<!--------------------------------------------------------------------->
+							<th>Date<br/>Last<br/>Plucked</th>
 							<th>Rnd.<br/>Days</th>
 							<th>Sec.</th>
 							<th>Area<br/>Plkd.<br/>(Hec.)</th>
@@ -103,209 +155,148 @@
 							<th>Leaf<br/>Plkd</th>
 							<th>Avg.<br/>Prod.</th>
 							<th>Task</th>
+							<th>Bal.<br>Cnt.</th>
+							<!--------------------------------------------------------------------->
 							<th>Tot.<br/>Area<br/>Plkd.<br/>(Hec.)</th>
 							<th>Tot.<br/>Pluckers</th>
 							<th>Tot.<br/>Leaf<br/>Plkd.</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>Perm. Men</td>
-							<td>27-06-2015</td>
-							<td>1EXTA </td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>27-06-2015</td>
-							<td>1EXTA</td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>10</td>
-							<td>224</td>
-							<td>4660</td>
-						</tr>
-						<tr>
-							<td>Perm. Women</td>
-							<td>28-06-2015</td>
-							<td>1EXTA </td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>28-06-2015</td>
-							<td>1EXTA</td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>10</td>
-							<td>224</td>
-							<td>4660</td>
-						</tr>
-						<tr>
-							<td>Temp. Men</td>
-							<td>29-06-2015</td>
-							<td>1EXTA </td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>29-06-2015</td>
-							<td>1EXTA</td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>10</td>
-							<td>224</td>
-							<td>4660</td>
-						</tr>
-						<tr>
-							<td>Temp. Women</td>
-							<td>30-06-2015</td>
-							<td>1EXTA </td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>30-06-2015</td>
-							<td>1EXTA</td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>10</td>
-							<td>224</td>
-							<td>4660</td>
-						</tr>
-						<tr>
-							<td>Incentives</td>
-							<td>01-07-2015</td>
-							<td>1EXTA </td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>01-07-2015</td>
-							<td>1EXTA</td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>10</td>
-							<td>224</td>
-							<td>4660</td>
-						</tr>
-						<tr>
-							<td>Cash Pluckers</td>
-							<td>02-07-2015</td>
-							<td>1EXTA </td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>02-07-2015</td>
-							<td>1EXTA</td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>10</td>
-							<td>224</td>
-							<td>4660</td>
-						</tr>
-						<tr>
-							<td>Perm. Men</td>
-							<td>03-07-2015</td>
-							<td>1EXTA </td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>03-07-2015</td>
-							<td>1EXTA</td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>10</td>
-							<td>224</td>
-							<td>4660</td>
-						</tr>
+						<?php
+							if(isset($_POST['date_submit'])) {
+								for($i=0;$i<count($lcsn_arr);$i++) {
+									//echo "<br><br>Iterator i:";var_dump($i);
+									$query = "select * from daily_plucking where rec_dt='{$req_date}'";
+									//var_dump($query);
+									$result = mysqli_query($connection, $query);
+									confirm_query($result);
 
+									while($day_chit = mysqli_fetch_assoc($result)){
+										//var_dump($day_chit); echo "<hr>";
+										$exp_lab_cat = explode("¥", $day_chit['labour_cat']);
+										// echo "<br>lcsn :";var_dump($lcsn_arr[$i]);
+										//echo "<br>lcsn :".$lcsn_arr[$i]."<br>";
+										// echo "<br>exp_lab_cat :";var_dump($exp_lab_cat);
+										// echo "<br>in_arr :";var_dump(in_array($lcsn_arr[$i], $exp_lab_cat));
+										if(in_array($lcsn_arr[$i], $exp_lab_cat)){
+											if($day_chit['prune_status'] == 'U') {
+												//echo "<br>This will go to Prune Section <br>";
+												$index = array_search($lcsn_arr[$i], $exp_lab_cat);
+												//echo $day_chit['short_sec_name']."   ".$day_chit['labour_cat']."  index value :".$index."<br>";
+
+												$exp_plkd_area = explode("¥", $day_chit['lab_cat_plkd_area']);
+												$exp_leaf_qty = explode("¥", $day_chit['lab_cat_leaf_qty']);
+												$exp_lab_count = explode("¥", $day_chit['lab_cat_mandays']);
+												//echo "Other details of '{$lcsn_arr[$i]}' :<br>"."Plucke Area:{$exp_plkd_area[$index]}";
+												//echo "  Plucked Leaf: {$exp_leaf_qty[$index]} "." Labour Count: {$exp_lab_count[$index]}";
+										?>
+												<tr>
+													<td><?php echo $lcsn_arr[$i]; ?></td>
+													<td>17-07-2015</td>
+													<td>7</td>
+													<td><?php echo $day_chit['short_sec_name']; ?></td>
+													<td><?php $area1 = $exp_plkd_area[$index]; echo $area1; $areau_arr[] = $area1; ?></td>
+													<td><?php $pluckers1 = $exp_lab_count[$index]; echo $pluckers1; $pluckersu_arr[] = $pluckers1; ?></td>
+													<td><?php echo round($exp_lab_count[$index]/$exp_plkd_area[$index], 2); ?></td>
+													<td><?php $leaf1 = $exp_leaf_qty[$index]; echo $leaf1; $leafu_arr[] = $leaf1; ?></td>
+													<td><?php echo round($exp_leaf_qty[$index]/$exp_lab_count[$index], 2); ?></td>
+													<td><?php echo $day_chit['task']; ?></td>
+													<td>100%</td>
+													<!--------------------------------------------------------------------->
+													<td></td>
+													<td></td>
+													<td></td>
+													<td><?php $area2 = 0; $areap_arr[] = $area2; ?></td>
+													<td><?php $pluckers2 = 0;  $pluckersp_arr[] = $pluckers2; ?></td>
+													<td></td>
+													<td><?php $leaf2 = 0;  $leafp_arr[] = $leaf2; ?></td>
+													<td></td>
+													<td></td>
+													<td>100%</td>
+													<!--------------------------------------------------------------------->
+													<td><?php echo $area1 + $area2;?></td>
+													<td><?php echo $pluckers1 + $pluckers2; ?></td>
+													<td><?php echo $leaf1 +$leaf2; ?></td>
+												</tr>
+										<?php
+											}
+											elseif($day_chit['prune_status'] != 'U' && $day_chit['prune_status'] != 'UP') {
+												// echo "<br> this will go to the Unpruned section!<br>";
+												$index = array_search($lcsn_arr[$i], $exp_lab_cat);
+												// echo $day_chit['short_sec_name']."   ".$day_chit['labour_cat']."  index value :".$index."<br>";
+
+												$exp_plkd_area = explode("¥", $day_chit['lab_cat_plkd_area']);
+												$exp_leaf_qty = explode("¥", $day_chit['lab_cat_leaf_qty']);
+												$exp_lab_count = explode("¥", $day_chit['lab_cat_mandays']);
+
+												// echo "Other details of '$lcsn_arr[$i]' :<br>"."Plucke Area:{$exp_plkd_area[$index]}";
+												// echo "  Plucked Leaf: {$exp_leaf_qty[$index]} "." Labour Count: {$exp_lab_count[$index]}";
+										?>
+												<tr>
+													<td><?php echo $lcsn_arr[$i]; ?></td>
+													<td></td>
+													<td></td>
+													<td></td>
+													<td><?php $area3 = 0; $areau_arr[] = $area3; ?></td>
+													<td><?php $pluckers3 = 0; $pluckersu_arr[] = $pluckers3; ?></td>
+													<td></td>
+													<td><?php $leaf3 = 0; $leafu_arr[] = $leaf3; ?></td>
+													<td></td>
+													<td></td>
+													<td>100%</td>
+													<td>17-07-2015</td>
+													<td>7</td>
+													<td><?php echo $day_chit['short_sec_name']; ?></td>
+													<td><?php $area4 = $exp_plkd_area[$index]; echo $area4; $areap_arr[] = $area4; ?></td>
+													<td><?php $pluckers4 = $exp_lab_count[$index]; echo $pluckers4; $pluckersp_arr[] = $pluckers4; ?></td>
+													<td><?php echo round($exp_lab_count[$index]/$exp_plkd_area[$index],2); ?></td>
+													<td><?php $leaf4 = $exp_leaf_qty[$index]; echo $leaf4; $leafp_arr[] = $leaf4; ?></td>
+													<td><?php echo round($exp_leaf_qty[$index]/$exp_lab_count[$index],2); ?></td>
+													<td><?php echo $day_chit['task']; ?></td>
+													<td>100%</td>
+													<!--------------------------------------------------------------------->
+													<!--------------------------------------------------------------------->
+													<td><?php echo $area3 + $area4;?></td>
+													<td><?php echo $pluckers3 + $pluckers4; ?></td>
+													<td><?php echo $leaf3 + $leaf4; ?></td>
+												</tr>
+										<?php
+											}
+										}
+									}
+								}
+						?>
 					</tbody>
 					<tfoot>
 						<tr>
-							<td>Cash Pluckers</td>
-							<td>02-07-2015</td>
-							<td>1EXTA </td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>02-07-2015</td>
-							<td>1EXTA</td>
-							<td>5</td>
-							<td>112</td>
-							<td>22</td>
-							<td>2330</td>
-							<td>21</td>
-							<td>7</td>
-							<td>24</td>
-							<td>10</td>
-							<td>224</td>
-							<td>4660</td>
+							<td>Total</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><?php $areas1 = array_sum($areau_arr); echo $areas1; ?></td>
+							<td><?php $pluckerss1 = array_sum($pluckersu_arr); echo $pluckerss1; ?></td>
+							<td><?php echo round(($pluckerss1/$areas1), 2) ?></td>
+							<td><?php $leafs1 = array_sum($leafu_arr); echo $leafs1; ?></td>
+							<td><?php echo round($leafs1/$pluckerss1) ?></td>
+							<td></td>
+							<td>100%</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><?php $areas2 = array_sum($areap_arr); echo $areas2; ?></td>
+							<td><?php $pluckerss2 = array_sum($pluckersp_arr); echo $pluckerss2; ?></td>
+							<td><?php echo round(($pluckerss2/$areas2), 2) ?></td>
+							<td><?php $leafs2 = array_sum($leafp_arr); echo $leafs2; ?></td>
+							<td><?php echo round($leafs2/$pluckerss2) ?></td>
+							<td></td>
+							<td>100%</td>
+							<td><?php echo $areas1 + $areas2; ?></td>
+							<td><?php echo $pluckerss1 + $pluckerss2; ?></td>
+							<td><?php echo $leafs1 + $leafs2; ?></td>
 						</tr>
-
 					</tfoot>
+				<?php }//end of isset $_post[date_submit] ?>
 				</table>
 			</div>
     </div>
@@ -313,7 +304,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-		<script src="https://cdn.datatables.net/tabletools/2.2.4/js/dataTables.tableTools.min.js"></script>
 		<script src="https://cdn.datatables.net/fixedcolumns/3.0.4/js/dataTables.fixedColumns.min.js"></script>
 		<script src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 		<script>
@@ -321,24 +311,10 @@
 				$("#datepicker").datepicker({
 					dateFormat: "dd-mm-yy"
 				});
-				$('#leaf_chit_total').DataTable({"scrollX":true });
+				//$('#leaf_chit_table').DataTable({"scrollX":true });
 				var table = $('#leaf_chit_table').DataTable({
-
 						"scrollX": true,
-						"scrollCollapse": true,
-						"ordering": false,
-						dom: 'T<"clear">lfrtip',
-						tableTools: {
-	            "aButtons": [
-	                "copy",
-	                "xls",
-	                {
-	                    "sExtends": "pdf",
-	                    "sPdfOrientation": "landscape",
-	                },
-	                "print"
-	            	]
-        		},
+						"order": [],
 						"aoColumns": [
 								null,
 								{ "sType": "date-uk" },
@@ -350,7 +326,9 @@
 								null,
 								null,
 								null,
+								null,
 								{ "sType": "date-uk" },
+								null,
 								null,
 								null,
 								null,
@@ -363,15 +341,12 @@
 								null,
 								null
 						]
-						
+
 	    	});
 				new $.fn.dataTable.FixedColumns( table );
 			// 	var tt = new $.fn.dataTable.TableTools(table);
     	// 	$( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
 			});
-
-
-
 			jQuery.extend( jQuery.fn.dataTableExt.oSort, {
 			"date-uk-pre": function ( a ) {
 			var ukDatea = a.split('-');
@@ -385,7 +360,7 @@
 			"date-uk-desc": function ( a, b ) {
 			return ((a < b) ? 1 : ((a > b) ? -1 : 0));
 			}
-		} );
+		 } );
 		</script>
   </body>
 </html>
