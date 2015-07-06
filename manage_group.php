@@ -39,9 +39,9 @@
             </div>
             <div class="tab-container">
                 <ul class="nav nav-tabs nav-justified">
-                    <li class="active"><a href="#tab1" data-toggle="tab">View and Update Section</a></li>
-                    <li><a href="#tab2" data-toggle="tab">Remove Section</a></li>
-                    <li ><a href="#tab3" data-toggle="tab">Add Section</a></li>
+                    <li class="active"><a href="#tab1" data-toggle="tab">View and Update Group</a></li>
+                    <li><a href="#tab2" data-toggle="tab">Remove Group</a></li>
+                    <li ><a href="#tab3" data-toggle="tab">Add Group</a></li>
                 </ul>
                 <div class="tab-content"  style="background-color:#0097A7">
                     <div class="tab-pane active" id="tab1">
@@ -50,12 +50,12 @@
                                 <label for="view_grp" class="col-sm-2 col-sm-offset-1">Select a Group: </label>
                                 <div class="col-sm-4">
                                   <select class="form-control" id="view_grp">
-                                    <option>Select A Group</option>
+                                    <option>Select a Group</option>
                                     <option>G Men I</option>
                                     <option>G Men II</option>
                                   </select>
                                   <p></p>
-                                  <input type="submit" class="btn btn-info" name="view_submit" value="View a Group">
+                                  <input type="submit" class="btn btn-info" name="view_submit" value="Edit a Group">
 
 
                                 </div>
@@ -65,12 +65,6 @@
 
                               <div class="form-group">
                                 <label for="actual_name" class="col-sm-2 col-sm-offset-1">Group name:</label>
-                                <div class="col-sm-4">
-                                <input type="text" id="actual_name" class="form-control">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label for="alias" class="col-sm-2 col-sm-offset-1">Alias:</label>
                                 <div class="col-sm-4">
                                 <input type="text" id="actual_name" class="form-control">
                                 </div>
@@ -118,12 +112,7 @@
                             <input type="text" id="actual_name" class="form-control">
                             </div>
                           </div>
-                          <div class="form-group">
-                            <label for="alias" class="col-sm-2 col-sm-offset-1">Alias:</label>
-                            <div class="col-sm-4">
-                            <input type="text" id="actual_name" class="form-control">
-                            </div>
-                          </div>
+
                           <input type="submit" class="btn btn-primary col-sm-offset-3" name="section_submit" value="Add a Section">
                         </form>
 

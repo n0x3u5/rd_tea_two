@@ -210,10 +210,11 @@
 										?>
 									</select>
 											<div class="input-group">
+												<span class="input-group-addon">
+														<i class="glyphicon glyphicon-calendar"></i>
+												</span>
 	                        <input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
-	                        <span class="input-group-addon">
-	                            <i class="glyphicon glyphicon-calendar"></i>
-	                        </span>
+
 	                    </div>
 											<input type="submit" id="selct_sec" name="dt_sec_submit" value="Submit" class="btn btn-default" onclick="enable_tab()">
                 </form>

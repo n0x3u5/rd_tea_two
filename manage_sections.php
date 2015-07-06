@@ -145,6 +145,7 @@
                 <div class="tab-content"  style="background-color:#0097A7">
                     <div class="tab-pane active" id="tab1">
                         <form id="view_update_section" class="form-horizontal" action="manage_sections.php" method="post" size="10">
+                          <label for="sec_short_name">Select The Section:</label>
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
                               <select  class="form-control" name="sec_short_name" form="view_update_section" required>

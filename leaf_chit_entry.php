@@ -66,10 +66,11 @@
 									<div class="col-sm-12">
 											<label for="datepicker" class="col-sm-2">Select Date:</label>
 											<div class="input-group">
+												<span class="input-group-addon">
+														<i class="glyphicon glyphicon-calendar"></i>
+												</span>
 	                        <input type="text" name="date_value" class="form-control" id="datepicker" onChange="enable_add()" required>
-	                        <span class="input-group-addon">
-	                            <i class="glyphicon glyphicon-calendar"></i>
-	                        </span>
+
 	                    </div>
 									</div>
 									<label for="datepicker" class="col-sm-2"></label>
