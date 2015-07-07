@@ -226,8 +226,8 @@
 					        $(table).dataTable().fnAdjustColumnSizing();
 						    }
 							});
-              // $('#prune_year').dataTable({"scrollX": true});
-              // $('#soil_year').dataTable({"scrollX": true});
+               $('#prune_year').dataTable({"scrollX": true});
+               $('#soil_year').dataTable({"scrollX": true});
             });
         </script>
     </body>

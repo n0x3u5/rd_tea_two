@@ -57,11 +57,18 @@
 																</div>
 															</div>
 															<div class="form-group">
-																<label for="l_name" class="col-sm-3 control-label">Middle name:</label>
+																<label for="m_name" class="col-sm-3 control-label">Middle name:</label>
 																<div class="input-group">
-																    <input class="form-control" name="l_name" type="text" placeholder="Last Name" required>
+																    <input class="form-control" name="m_name" type="text" placeholder="Middle Name" required>
 																    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 																</div>
+														</div>
+														<div class="form-group">
+															<label for="l_name" class="col-sm-3 control-label">Last name:</label>
+															<div class="input-group">
+																	<input class="form-control" name="l_name" type="text" placeholder="Last Name" required>
+																	<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+															</div>
 														</div>
 															<div class="form-group">
 																<label for="email" class="col-sm-3 control-label">Email-id:</label>
@@ -73,22 +80,22 @@
 															</div>
 															<div class="form-group">
 																<label for="pwd" class="col-sm-3 control-label">Password:</label>
-																<div class="input-group">
-																    <input class="form-control" name="pwd" type="Password" placeholder="Password" required>
+																<div class="input-group" data-toggle="popover">
+																    <input class="form-control"  id="pwd1" name="pwd" type="Password" placeholder="Password" required>
 																    <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
 																</div>
 															</div>
 															<div class="form-group">
 																<label for="cnfpwd" class="col-sm-3 control-label">Retype Password:</label>
 																<div class="input-group">
-																    <input class="form-control" name="cnfpwd" type="Password" placeholder="Confirm Password" required>
+																    <input class="form-control" id="pwd2" name="cnfpwd" type="Password" placeholder="Confirm Password" required>
 																    <span class="input-group-addon" ><i class="glyphicon glyphicon-asterisk" ></i></span>
 																</div>
 															</div>
 															<div class="form-group">
 																<label for="sbm" class="col-sm-3 control-label"></label>
 																<div class="input-group">
-																	<input type="submit" id="sbm" value="Submit" class="btn btn-primary">
+																	<input type="submit" id="sbm" value="Submit" class="btn btn-primary" onclick="chk()">
 																</div>
 															</div>
 														</form>
@@ -129,5 +136,23 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+				<script>
+					function chk(){
+							var val_chk=document.getElementById('pwd1');
+							var flag=0;
+							var tomatch=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}/;
+							if(tomatch.test(val_chk))
+							{
+									flag=1;
+							}
+							if(flag==0)
+							{
+								event.preventDefault();
+
+								$('[data-toggle="popover"]').popover('Your password Should contain One capital letter, digit and special character');
+
+							}
+					}
+				</script>
     </body>
 </html>
