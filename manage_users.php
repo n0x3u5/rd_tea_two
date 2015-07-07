@@ -80,7 +80,7 @@
 															</div>
 															<div class="form-group">
 																<label for="pwd" class="col-sm-3 control-label">Password:</label>
-																<div class="input-group" data-toggle="popover">
+																<div class="input-group">
 																    <input class="form-control"  id="pwd1" name="pwd" type="Password" placeholder="Password" required>
 																    <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk" ></i></span>
 																</div>
@@ -148,8 +148,7 @@
 							if(flag==0)
 							{
 								event.preventDefault();
-
-								$('[data-toggle="popover"]').popover('Your password Should contain One capital letter, digit and special character');
+									window.alert('Your password Should contain One capital letter, digit and special character');
 
 							}
 					}
