@@ -63,7 +63,9 @@
 
 		$mandays = mysqli_real_escape_string($connection, $_POST['mandays']);
 
-		$prune = $_SESSION['prune_style']['prune_style'];
+
+		$prune = $_SESSION['prune_stats']['prune_style'];
+
 
 		$q_in = "INSERT INTO blue_bk_plk (short_sec_name, rec_dt, plkd_area, plkd_leaf, mandays, prune_status)";
 		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$plkd_area', '$plkd_leaf', '$mandays', '$prune')";
