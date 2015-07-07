@@ -30,7 +30,7 @@
 
 
 
-		$q_prune = "SELECT prune_status from sections where short_sec_name = '$req_ssn'";
+		$q_prune = "SELECT prune_style from sections where short_sec_name = '$req_ssn'";
 		//var_dump($q_prune);
 		$r_prune = mysqli_query($connection, $q_prune);
 		confirm_query($r_prune);
@@ -63,7 +63,7 @@
 
 		$mandays = mysqli_real_escape_string($connection, $_POST['mandays']);
 
-		$prune = $_SESSION['prune_stats']['prune_status'];
+		$prune = $_SESSION['prune_stats']['prune_style'];
 
 		$q_in = "INSERT INTO blue_bk_plk (short_sec_name, rec_dt, plkd_area, plkd_leaf, mandays, prune_status)";
 		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$plkd_area', '$plkd_leaf', '$mandays', '$prune')";

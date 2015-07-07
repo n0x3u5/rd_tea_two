@@ -35,7 +35,7 @@
     $q_in .= "(sec_name, short_sec_name, total_area, jat,";
     $q_in .= " shade_spcs_temp, shade_spcs_perm, frame_height, bush_height,";
     $q_in .= " yr_of_plant, plant_spacing,temp_shd_spcing, perm_shd_spcing,";
-    $q_in .= " plant_density, bush_pop, drain_stats, soil_topo, ext_rplnt, prune_status)";
+    $q_in .= " plant_density, bush_pop, drain_stats, soil_topo, ext_rplnt, prune_style)";
     $q_in .= " VALUES ('{$sec_nm}', '{$sec_shrt_nm}', {$sec_area}, '{$jat}', '{$shd_spcs_tmp}', '{$shd_spcs_perm}',";
     $q_in .= " {$frame_ht}, {$bush_ht}, {$plntng_yr}, {$plnt_spcing}, {$tmp_shd_spcing}, {$prm_shd_spcing},";
     $q_in .= " {$plnt_dens}, {$bsh_popu}, '{$drn_stats}', '{$soil_topo}', {$ext_rplnt}, '{$stats}' )";
@@ -44,7 +44,12 @@
     $result = mysqli_query($connection, $q_in);
 
     confirm_query($result);
-    echo "Inserted successfully!";
+    if(mysqli_affected_rows($connection) > 0) {
+			echo "Inserted Successfully!";
+		}
+		else {
+			echo "No record affected! Check your input!";
+		}
   }
 
 
@@ -53,7 +58,7 @@
   //an effort to run the update
   if(isset($_POST["update_submit"])) {
     //var_dump($_POST);
-    $req_ssn = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
+    $req_ssn = mysqli_real_escape_string($connection, $_SESSION['upd_ssn']);
     $q_req_ssn = "SELECT * FROM sections WHERE short_sec_name = '{$req_ssn}'";
     //var_dump($q_req_ssn);
 
@@ -91,7 +96,7 @@
     $q_up .= " yr_of_plant = {$plntng_yr}, plant_spacing = {$plnt_spcing},";
     $q_up .= " temp_shd_spcing = {$tmp_shd_spcing}, perm_shd_spcing = {$prm_shd_spcing},";
     $q_up .= " plant_density = {$plnt_dens}, bush_pop = {$bsh_popu}, drain_stats ='{$drn_stats}',";
-    $q_up .= " soil_topo = '{$soil_topo}', ext_rplnt = {$ext_rplnt}, prune_status = '{$stats}'";
+    $q_up .= " soil_topo = '{$soil_topo}', ext_rplnt = {$ext_rplnt}, prune_style = '{$stats}'";
     $q_up .= " WHERE id = $req_ID";
 
     $result_up = mysqli_query($connection, $q_up);
@@ -99,11 +104,16 @@
     //var_dump($result_up);
 
     confirm_query($result_up);
-    echo "Updated successfully!";
-
+    if(mysqli_affected_rows($connection) > 0) {
+			echo "Updated Successfully!";
+		}
+		else {
+			echo "No record affected! Check your input!";
+		}
     // mysqli_free_result($req_result);
     //
     // mysqli_free_result($result_up);
+    $_SESSION['upd_ssn'] = NULL;
   }
 ?>
 
@@ -145,6 +155,22 @@
                 <div class="tab-content"  style="background-color:#0097A7">
                     <div class="tab-pane active" id="tab1">
                         <form id="view_update_section" class="form-horizontal" action="manage_sections.php" method="post" size="10">
+                          <?php if(isset($_POST['view_submit'])) {
+                                  $ssnV = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
+                                  $_SESSION['upd_ssn'] = $ssnV;
+                                  //echo "ssnV=".$ssnV;
+                                  $q2 = " SELECT * FROM sections WHERE short_sec_name = '{$ssnV}'";
+
+                                  $result = mysqli_query($connection, $q2);
+                                  confirm_query($result);
+
+                                  $sec = mysqli_fetch_assoc($result);
+
+                                }
+                                else {
+                                  $sec = NULL;
+                                }
+                          ?>
                           <label for="sec_short_name">Select The Section:</label>
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
@@ -156,10 +182,11 @@
                                     confirm_query($result);
                                     //$_POST['sec_short_nm'] = NULL;
 
-                                    echo "<option id=\"opt0\" value=NULL> </option>";
+                                    echo "<option id=\"opt0\" value=\"Select a section...\">Select a section...</option>";
                                     while($sec_values = mysqli_fetch_assoc($result)) {
                                 ?>
-                                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" ><?php echo htmlentities($sec_values['sec_name']) ?></option>
+
+                                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST['view_submit']) && $_SESSION['upd_ssn'] == $sec_values['short_sec_name']) { echo "selected"; } ?> ><?php echo htmlentities($sec_values['sec_name']) ?></option>
                                   <?php
                                     }
                                   ?>
@@ -169,18 +196,9 @@
                                   <input type="submit" class="btn btn-info" name="view_submit" value="View a Section">
                                   <p></p>
 
-                                  <?php if(isset($_POST['view_submit'])) {
-                                          $ssnV = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
-                                          //echo "ssnV=".$ssnV;
-                                          $q2 = " SELECT * FROM sections WHERE short_sec_name = '{$ssnV}'";
-
-                                          $result = mysqli_query($connection, $q2);
-                                          confirm_query($result);
-
-                                          $sec = mysqli_fetch_assoc($result);
-
+                                  <?php
+                                    if(isset($_POST['view_submit'])) {
                                   ?>
-
                                     <div class="form-group">
                                       <label for="textbox1" class="col-sm-2" style="padding-top:15px;">Section Name:</label>
                                       <div class="input-group" class="col-sm-10">
@@ -205,7 +223,7 @@
                                         <label for="status_" class="col-sm-2" style="padding-top:15px;">Status</label>
 
                                           <div class="input-group" class="col-sm-10">
-                                            <input type="text" class="form-control" id="status_" name="status" value="<?php echo $sec['prune_status']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                                            <input type="text" class="form-control" id="status_" name="status" value="<?php echo $sec['prune_style']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
                                           </div>
                                       </div>
                                   <div class="form-group">
@@ -332,11 +350,11 @@
                                   confirm_query($result);
                                   //$_POST['sec_short_nm'] = NULL;
 
-                                  echo "<option value=NULL> </option>";
+                                  echo "<option id=\"opt0\" value=\"Select a section...\">Select a section...</option>";
                                   while($sec_values = mysqli_fetch_assoc($result)) {
                                 ?>
 
-                                    <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" ><?php echo htmlentities($sec_values['sec_name']) ?></option>
+                                    <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>"><?php echo htmlentities($sec_values['sec_name']) ?></option>
 
                                 <?php
                                   }
@@ -369,8 +387,12 @@
                                     $result = mysqli_query($connection, $q);
 
                                     confirm_query($result);
-                                    echo "Deleted successfully!";
-
+                                    if(mysqli_affected_rows($connection) > 0) {
+                                			echo "Deleted Successfully!";
+                                		}
+                                		else {
+                                			echo "No record affected! Check your input!";
+                                		}
                                   }
                                   else {
                                     $ssn = NULL;
@@ -511,13 +533,13 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script type="text/javascript">
-            var tb1 = document.getElementById('textbox1');
-            var tb2 = document.getElementById('textbox2');
-            var opt = document.getElementById('opt0');
-            if(tb2!=null) {
-                opt.text = tb1.value;
-                opt.value = tb2.value;
-            }
+            // var tb1 = document.getElementById('textbox1');
+            // var tb2 = document.getElementById('textbox2');
+            // var opt = document.getElementById('opt0');
+            // if(tb2!=null) {
+            //     opt.text = tb1.value;
+            //     opt.value = tb2.value;
+            // }
         </script>
     </body>
 </html>
