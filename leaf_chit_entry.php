@@ -55,12 +55,12 @@
 	$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
 	$task = mysqli_real_escape_string($connection, $_POST['task']);
 	$task = explode_implode($task);
-	// $ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
+	$ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
 	// $cp_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_qty']);
 	// $cp_hr_from = mysqli_real_escape_string($connection, $_POST['cp_hr_from']);
 	// $cp_hr_to = mysqli_real_escape_string($connection, $_POST['cp_hr_to']);
 
-	$q_in = "INSERT INTO leaf_chit_table (prune_stats, lab_cat, rec_dt, short_sec_name, dt_lst_plkd, plkd_area, plkd_leaf, mandays, task) VALUES ('{$prune_stats}', '{$lab_cat}', '{$rec_dt}',  '{$short_sec_name}', '{$dt_lst_plkd}', {$plkd_area}, {$plkd_leaf}, {$mandays}, '{$task}') ";
+	$q_in = "INSERT INTO leaf_chit_table (prune_stats, lab_cat, rec_dt, short_sec_name, dt_lst_plkd, plkd_area, plkd_leaf, mandays, task, ballo_count) VALUES ('{$prune_stats}', '{$lab_cat}', '{$rec_dt}',  '{$short_sec_name}', '{$dt_lst_plkd}', {$plkd_area}, {$plkd_leaf}, {$mandays}, '{$task}', {$ballo_count}) ";
 
 	$r_in = mysqli_query($connection, $q_in);
 	confirm_query($r_in);
@@ -93,12 +93,12 @@
 	$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
 	$task = mysqli_real_escape_string($connection, $_POST['task']);
 	$task = explode_implode($task);
-	// $ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
+	$ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
 	// $cp_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_qty']);
 	// $cp_hr_from = mysqli_real_escape_string($connection, $_POST['cp_hr_from']);
 	// $cp_hr_to = mysqli_real_escape_string($connection, $_POST['cp_hr_to']);
 
-	$q_up = "UPDATE leaf_chit_table SET prune_stats='{$prune_stats}', lab_cat='{$lab_cat}', rec_dt='{$rec_dt}', short_sec_name = '{$short_sec_name}', dt_lst_plkd = '{$dt_lst_plkd}', plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf}, mandays = {$mandays}, task = '{$task}' where id = $req_id ";
+	$q_up = "UPDATE leaf_chit_table SET prune_stats='{$prune_stats}', lab_cat='{$lab_cat}', rec_dt='{$rec_dt}', short_sec_name = '{$short_sec_name}', dt_lst_plkd = '{$dt_lst_plkd}', plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf}, mandays = {$mandays}, task = '{$task}', ballo_count = {$ballo_count} where id = $req_id ";
 	$r_up = mysqli_query($connection, $q_up);
 	confirm_query($r_up);
 
@@ -265,6 +265,12 @@
 									<input type="text" class="form-control" id="task1" name="task" <?php if(isset($daily)) { $csv = comma_sep_val($daily['task']); ?>value="<?php echo $csv; ?>" <?php } else {?>placeholder=<?php  echo "\"Task\""?> <?php } ?>  >
 								</div>
 							</div>
+							<div class="form-group">
+							  <label for="ballo_count" class="col-sm-3 control-label">Ballometer Count:</label>
+							  <div class="col-sm-4 input">
+							    <input type="text" class="form-control" id="ballo_count1" name="ballo_count" <?php if(isset($daily)) {?>value="<?php echo $daily['ballo_count']; ?>" <?php } else {?>placeholder=<?php  echo "\"Ballometer Count in %\""?> <?php } ?>  >
+							  </div>
+							</div>
 
 							<div class="row">
 
@@ -336,6 +342,12 @@
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="task2" name="task">
 								</div>
+							</div>
+							<div class="form-group">
+							  <label for="ballo_count" class="col-sm-3 control-label">Ballometer Count:</label>
+							  <div class="col-sm-4">
+							    <input type="text" class="form-control" id="ballo_count2" name="ballo_count">
+							  </div>
 							</div>
 
 

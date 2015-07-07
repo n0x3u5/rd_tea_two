@@ -210,7 +210,7 @@ if(isset($_POST['date_submit'])) {
 													<td><?php $leaf1 = $daily_chit['plkd_leaf']; echo $leaf1; $leafu_arr[] = $leaf1; ?></td>
 													<td><?php echo round($daily_chit['plkd_leaf']/$daily_chit['mandays'],2); ?></td>
 													<td><?php $bsv=str_replace("¥","<br>",$daily_chit['task']); echo $bsv; ?></td>
-													<td><?php //$ballo_count = $daily_chit['ballo_count']; echo $ballo_count; $ballo_num1 += $leaf1 * $ballo_count; ?></td>
+													<td><?php $ballo_count = $daily_chit['ballo_count']; echo $ballo_count; $ballo_num1 += $leaf1 * $ballo_count; ?></td>
 													<!--------------------------------------------------------------------->
 													<td></td>
 													<td></td>
@@ -269,7 +269,7 @@ if(isset($_POST['date_submit'])) {
 													<td><?php $leaf4 = $daily_chit['plkd_leaf']; echo $leaf4; $leafp_arr[] = $leaf4; ?></td>
 													<td><?php echo round($daily_chit['plkd_leaf']/$daily_chit['mandays'],2); ?></td>
 													<td><?php $bsv=str_replace("¥","<br>",$daily_chit['task']); echo $bsv; ?></td>
-													<td><?php //$ballo_count = $daily_chit['ballo_count']; echo $ballo_count; $ballo_num2 += $leaf4 * $ballo_count; ?></td>
+													<td><?php $ballo_count = $daily_chit['ballo_count']; echo $ballo_count; $ballo_num2 += $leaf4 * $ballo_count; ?></td>
 													<!--------------------------------------------------------------------->
 													<!--------------------------------------------------------------------->
 													<td><?php echo $area3 + $area4;?></td>
