@@ -57,18 +57,20 @@
 		$short_sec_name = $_SESSION['ssn'];
 		$rec_dt = $_SESSION['date'];
 
-		$plkd_area = mysqli_real_escape_string($connection, $_POST['plkd_area']);
+		$plkd_area = (float) mysqli_real_escape_string($connection, $_POST['plkd_area']);
 
-		$plkd_leaf = mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
+		$plkd_leaf = (float) mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
 
-		$mandays = mysqli_real_escape_string($connection, $_POST['mandays']);
+		$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
+
+		$rounddays = (int) mysqli_real_escape_string($connection, $_POST['rounddays']);
 
 
 		$prune = $_SESSION['prune_stats']['prune_style'];
 
 
-		$q_in = "INSERT INTO blue_bk_plk (short_sec_name, rec_dt, plkd_area, plkd_leaf, mandays, prune_status)";
-		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', '$plkd_area', '$plkd_leaf', '$mandays', '$prune')";
+		$q_in = "INSERT INTO blue_bk_plk (short_sec_name, rec_dt, plkd_area, plkd_leaf, mandays, prune_style, rnd_days)";
+		$q_in .= " VALUES ('$short_sec_name', '$rec_dt', $plkd_area, $plkd_leaf, $mandays, '$prune', $rounddays)";
 
 		//var_dump($q_in);
 		$result_in = mysqli_query($connection, $q_in);
@@ -100,16 +102,18 @@
 		$req_id = $_SESSION['blue_bk_plk']['id'];
 
 
-		$plkd_area = mysqli_real_escape_string($connection, $_POST['plkd_area']);
+		$plkd_area = (float) mysqli_real_escape_string($connection, $_POST['plkd_area']);
 
-		$plkd_leaf = mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
+		$plkd_leaf = (float) mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
 
-		$mandays = mysqli_real_escape_string($connection, $_POST['mandays']);
+		$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
+
+		$rounddays = (int) mysqli_real_escape_string($connection, $_POST['rounddays']);
 
 		$q_up = "UPDATE blue_bk_plk SET";
 		$q_up .= " short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}',";
-		$q_up .= " plkd_area='{$plkd_area}', plkd_leaf='{$plkd_leaf}',";
-		$q_up .= " mandays='{$mandays}' WHERE id ={$req_id}";
+		$q_up .= " plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf},";
+		$q_up .= " mandays={$mandays}, rnd_days={$rounddays} WHERE id ={$req_id}";
 
 		//var_dump($q_up);
 		$result_up = mysqli_query($connection, $q_up);
@@ -248,6 +252,12 @@
 									<input type="text" name="mandays" class="form-control" id="grpmd1" <?php if (isset($daily)) { ?> value="<?php echo $daily['mandays']; ?>" <?php } else { ?>placeholder=<?php echo "\"Pluckers for each Category\""; ?><?php } ?> >
 								</div>
 							</div>
+							<div class="form-group">
+								<label for="grpmd1" class="col-sm-3 control-label">Round days:</label>
+								<div class="col-sm-4">
+									<input type="text" name="rounddays" class="form-control" id="grpmd1" <?php if (isset($daily)) { ?> value="<?php echo $daily['rnd_days']; ?>" <?php } else { ?>placeholder=<?php echo "\"Round days\""; ?><?php } ?> >
+								</div>
+							</div>
 							<div class="row">
 								<div class="col-sm-1 col-sm-offset-2">
 									<button type="button" value="Delete Entry" id="delete_entry" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" style="margin-top:20px;">Delete Entry</button>
@@ -296,6 +306,12 @@
 								<label for="grpmd1" class="col-sm-3 control-label">Mandays:</label>
 								<div class="col-sm-4">
 									<input type="text" name="mandays" class="form-control" id="grpmd1" placeholder="Pluckers employed" required>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="grpmd1" class="col-sm-3 control-label">Round days:</label>
+								<div class="col-sm-4">
+									<input type="text" name="rounddays" class="form-control" id="grpmd1" placeholder="Round days" required>
 								</div>
 							</div>
 
@@ -351,7 +367,7 @@
 					<script>
 						if(submit_chk==1 && submit_chk2)
 							{
-							
+
 								document.getElementById('link_one').disabled=false;
 								var a1=document.getElementById('tab1');
 								a1.setAttribute('class','active');
