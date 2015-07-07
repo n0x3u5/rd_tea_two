@@ -217,6 +217,12 @@
 						<form class="form-horizontal" action="leaf_chit_entry.php" method="post">
 							<?php if(isset($_SESSION['leaf_chit'])) { $daily = $_SESSION['leaf_chit']; } else { $daily = NULL; }?>
 							<div class="form-group">
+								<label for="dt_lst_plkd" class="col-sm-3 control-label">Date last PLucked:</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="dt_lst_plkd1" name="dt_lst_plkd">
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="short_sec_name" class="col-sm-3 control-label">Short Section Name:</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="short_sec_name1" name="short_sec_name" <?php if (isset($daily)) { $csv = comma_sep_val($daily['short_sec_name']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select section name.\""; ?><?php } //comma separeted value?>  >
@@ -303,6 +309,12 @@
 					<div class="tab-pane" id="tab2">
 						<form class="form-horizontal" action="" method="post">
 							<div class="form-group">
+								<label for="dt_lst_plkd" class="col-sm-3 control-label">Date last PLucked:</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="dt_lst_plkd2" name="dt_lst_plkd">
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="short_sec_name" class="col-sm-3 control-label">Short Section Name:</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="short_sec_name2" name="short_sec_name">
@@ -375,11 +387,12 @@
 		<script type="text/javascript">
 
 				$(function() {
-					$( "#datepicker, #datepicker_edit, #datepicker_add" ).datepicker({dateFormat: 'dd-mm-yy'});
+					$( "#datepicker,#datepicker_edit, #datepicker_add" ).datepicker({dateFormat: 'dd-mm-yy'});
 					$('#cp_hr_from1, #cp_hr_from2, #cp_hr_to1, #cp_hr_to2 ').datetimepicker({
 						locale:'en',
 						format:'LT'
 					});
+					$('#dt_lst_plkd1,#dt_lst_plkd2,#task1,#task2').tokenfield({});
 					$('#short_sec_name1,#short_sec_name2').tokenfield({
 					  autocomplete: {
 					    source: [ <?php
