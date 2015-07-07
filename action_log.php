@@ -6,6 +6,49 @@
 		redirect_to("index.php");
 	}
 ?>
+
+<?php
+	$connection = make_connection();
+
+	//var_dump($_POST); echo "<br>";
+	if(isset($_POST['date_rng_submit'])) {
+		$req_start_date = $_POST['start_date_value'];
+		$req_end_date = $_POST['end_date_value'];
+		//$req_ssn = $_POST['short_sec_name'];
+
+		$from = date('Y-m-d', strtotime($req_start_date));
+	  $to = date('Y-m-d', strtotime($req_end_date));
+	  //var_dump($from); var_dump($to);
+		$q_weather = "select * from weather_change where record_date between '$from' and '$to'";
+	  //var_dump($q_weather);
+
+	  $r_weather = mysqli_query($connection, $q_weather);
+	  confirm_query($r_weather);
+		//var_dump($r_weather);
+
+
+		//$wth_rvw = mysqli_fetch_assoc($r_weather);
+		//var_dump($wth_rvw);
+		//
+		// $query_pluck = "select * from blue_bk_plk where short_sec_name ='$req_ssn' and rec_dt between '$from' and '$to'";
+		//
+		// $result_pluck = mysqli_query($connection, $query_pluck);
+		// confirm_query($result_pluck);
+
+		// echo "<br> header processing ends. <hr>";
+
+	}
+	else {
+		//$req_div_name = NULL;
+		//$req_year = NULL;
+		$req_start_date = NULL;		$from = NULL;
+		$req_end_date = NULL;			$to = NULL;
+		$r_weather = NULL;
+
+	}
+?>
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -53,32 +96,35 @@
       <div class="jumbotron">
         <h1>Action Logs</h1>
   			<h3>Hansqua Division</h3>
-        <form class="form-horizontal" action="leaf_chit.php" method="post">
+        <form class="form-horizontal" action="action_log.php" method="post">
 					<div class="head_select">
-					<div class="form-group">
-						<p style="color:#B3E5FC">Start date</p>
-						<div class="input-group">
-							<input type="text" name="start_date_value" class="form-control" id="datepicker1" placeholder="Date (dd-mm-yyyy)" required>
-							<span class="input-group-addon">
-									<i class="glyphicon glyphicon-calendar"></i>
-							</span>
+						<div class="form-group">
+							<p style="color:#B3E5FC">Start date</p>
+							<div class="input-group">
+								<span class="input-group-addon">
+										<i class="glyphicon glyphicon-calendar"></i>
+								</span>
+								<input type="text" name="start_date_value" class="form-control" id="datepicker1" <?php if($req_start_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_start_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
+
+							</div>
 						</div>
-					</div>
-					<p></p>
-					<p></p>
-					<div class="form-group">
-						<p style="color:#B3E5FC">End date</p>
-						<div class="input-group">
-							<input type="text" name="end_date_value" class="form-control" id="datepicker2"placeholder="Date (dd-mm-yyyy)" required>
-							<span class="input-group-addon">
-									<i class="glyphicon glyphicon-calendar"></i>
-							</span>
+						<p></p>
+						<p></p>
+						<div class="form-group">
+							<p style="color:#B3E5FC">End date</p>
+							<div class="input-group">
+								<span class="input-group-addon">
+										<i class="glyphicon glyphicon-calendar"></i>
+								</span>
+								<input type="text" name="end_date_value" class="form-control" id="datepicker2" <?php if($req_end_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_end_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
+
+							</div>
 						</div>
-					</div>
-					<button type="submit" name="div_date_submit" class="btn btn-default">Get Data</button>
+					<button type="submit" name="date_rng_submit" value="Date Range" class="btn btn-default">Get Data</button>
 				</div>
 				</form>
       </div>
+
 			<div class="main-content">
 					<div class="tab-container">
 						<ul class="nav nav-tabs nav-justified">
@@ -183,6 +229,8 @@
 									<table id="weather" class="display table table-hover table-bordered" cellspacing="0" width="100%">
 										<thead>
 											<tr>
+												<th rowspan="2">Record date</th>
+												<th rowspan="2">Division</th>
 												<th colspan="2">Rainfall (mm)</th>
 												<th colspan="2">Temperature (&degC)</th>
 												<th rowspan="2">Sunshine Hours</th>
@@ -199,28 +247,29 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>27-06-2015</td>
-												<td>1EXTA </td>
-												<td>5</td>
-												<td>112</td>
-												<td>22</td>
-												<td>2330</td>
-												<td>21</td>
-												<td>7</td>
-												<td>10</td>
-											</tr>
-											<tr>
-												<td>28-06-2015</td>
-												<td>1EXTA </td>
-												<td>5</td>
-												<td>112</td>
-												<td>22</td>
-												<td>2330</td>
-												<td>21</td>
-												<td>7</td>
-												<td>10</td>
-											</tr>
+											<?php
+												//var_dump($_POST);
+											 	if(isset($_POST['date_rng_submit'])) {
+													//var_dump($wth_rvw = mysqli_fetch_assoc($r_weather));
+													while($wth_rvw = mysqli_fetch_assoc($r_weather)) {
+											?>
+														<tr>
+															<td><?php echo $wth_rvw['record_date']; ?></td>
+															<td><?php echo $wth_rvw['division']; ?></td>
+															<td><?php echo $wth_rvw['rain_day']; ?></td>
+															<td><?php echo $wth_rvw['rain_night']; ?></td>
+															<td><?php echo $wth_rvw['temp_max']; ?></td>
+															<td><?php echo $wth_rvw['temp_min']; ?></td>
+															<td><?php echo $wth_rvw['sun_shine_hr']; ?></td>
+															<td><?php echo $wth_rvw['weather_cond']; ?></td>
+															<td><?php echo $wth_rvw['changed_on']; ?></td>
+															<td><?php echo $wth_rvw['changed_by']; ?></td>
+															<td><?php echo $wth_rvw['action']; ?></td>
+														</tr>
+											<?php
+													}
+												}
+											?>
 										</tbody>
 									</table>
 								</div>
@@ -252,3 +301,6 @@
 		</script>
   </body>
 </html>
+<?php
+	end_connection($connection);
+?>

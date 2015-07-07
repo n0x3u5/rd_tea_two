@@ -69,7 +69,7 @@
 		$wth_chng = mysqli_fetch_assoc($r);
 		//var_dump($wth_chng);
 		//echo "<br>user_name".$_SESSION['user'];
-		$q = "UPDATE weather_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$wth_chng['id']})";
+		$q = "UPDATE weather_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$wth_chng['id']})";
 		$r = mysqli_query($connection, $q);
 		confirm_query($r);
 
@@ -115,7 +115,7 @@
 		$wth_chng = mysqli_fetch_assoc($r);
 		//var_dump($wth_chng);
 		//echo "<br>user_name".$_SESSION['user'];
-		$q = "UPDATE weather_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$wth_chng['id']})";
+		$q = "UPDATE weather_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$wth_chng['id']})";
 		$r = mysqli_query($connection, $q);
 		confirm_query($r);
 
@@ -144,7 +144,7 @@
 		$wth_chng = mysqli_fetch_assoc($r);
 		//var_dump($wth_chng);
 		//echo "<br>user_name".$_SESSION['user'];
-		$q = "UPDATE weather_change SET updated_by = '{$_SESSION['user']}' WHERE id = ({$wth_chng['id']})";
+		$q = "UPDATE weather_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$wth_chng['id']})";
 		$r = mysqli_query($connection, $q);
 		confirm_query($r);
 
