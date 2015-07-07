@@ -145,6 +145,7 @@
 																		<th>Leaf / Ha.</th>
 																		<th>Pluckers / Ha.</th>
 																		<th>Leaf / Plucker</th>
+																		<th>Round days</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -155,14 +156,15 @@
 	                                <tr>
 	                                    <td style="text-align:center;"><?php echo date('d-m-Y', strtotime($plk_rev['rec_dt'])); ?></td>
 	                                    <td><?php echo $plk_rev['short_sec_name']; ?></td>
-	                                    <td><?php echo $plk_rev['prune_status']; ?></td>
+	                                    <td><?php echo $plk_rev['prune_style']; ?></td>
 	                                    <td><?php	echo $plk_rev['plkd_area'];	?></td>
 																			<td><?php	echo $plk_rev['plkd_leaf'];	?></td>
 																			<td><?php	echo $plk_rev['mandays'];	?></td>
 																			<td><?php	echo round($plk_rev['plkd_leaf']/$plk_rev['plkd_area']);	?></td>
 																			<td><?php	echo round($plk_rev['mandays']/$plk_rev['plkd_area'], 2);	?></td>
 																			<td><?php	echo round($plk_rev['plkd_leaf']/$plk_rev['mandays'], 2);	?></td>
-																  </tr>
+																  		<td>11</td>
+																	</tr>
 															<?php
 																  }
 																}
