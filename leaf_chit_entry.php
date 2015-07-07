@@ -33,11 +33,13 @@
 		//
 	  // $result = mysqli_query($connection, $query);
 	  // confirm_query($result);
+		$set = 1;
 
 	}
 	else {
 		$req_date = NULL;
 		$result = NULL;
+		$set = 0;
 	}
 
 	if(isset($_POST['add_submit'])) {
@@ -218,18 +220,18 @@
             </div>
 			<div class="tab-container">
 	            <ul class="nav nav-tabs nav-justified">
-	                <li class="active" id="actv_one"><a href="#tab1" data-toggle="tab" id="link_one">Edit Entry</a></li>
+	                <li id="actv_one"><a href="#tab1" data-toggle="tab" id="link_one">Edit Entry</a></li>
 	                <li id="actv_two"><a href="#tab2" data-toggle="tab" id="link_two">Add Entry</a></li>
 	            </ul>
 				<div class="tab-content" style="background-color:#FFFFFF">
 
-					<div class="tab-pane active" id="tab1">
+					<div class="tab-pane" id="tab1">
 						<form class="form-horizontal" action="leaf_chit_entry.php" method="post">
 							<?php if(isset($_SESSION['leaf_chit'])) { $daily = $_SESSION['leaf_chit']; } else { $daily = NULL; }?>
 							<div class="form-group">
 								<label for="short_sec_name" class="col-sm-3 control-label">Short Section Name:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="short_sec_name1" name="short_sec_name" <?php if (isset($daily)) { $csv = comma_sep_val($daily['short_sec_name']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select section name.\""; ?><?php } //comma separeted value?>  >
+									<input type="text" class="form-control" id="short_sec_name1" name="short_sec_name" <?php if (isset($daily)) { $csv = comma_sep_val($daily['short_sec_name']); $set2 = 1;?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php $set2 = 2; echo "\"Select section name.\""; ?><?php } //comma separeted value?>  >
 								</div>
 							</div>
 							<div class="form-group">
@@ -420,6 +422,55 @@
 				});
 
 		</script>
+		<script>
+			document.getElementById('selct_sec').disabled=true;
+			document.getElementById('link_one').disabled=true;
+			document.getElementById('link_two').disabled=true;
+			if((document.getElementById('group').value!='Select a group...')&& (document.getElementById('prune').value!='Select Prune Type'))
+			{
+				document.getElementById('selct_sec').disabled=false;
+			}
+			function enable_add(){
+					if((document.getElementById('group').value!='Select a group...')&& (document.getElementById('prune').value!='Select Prune Type'))
+				{
+					document.getElementById('selct_sec').disabled=false;
+				}
+				else {
+					document.getElementById('selct_sec').disabled=true;
+				}
+			}
+
+		</script>
+		<?php
+		if(isset($set2)){
+		echo"<script>		var submit_chk=$set2; submit_chk2=$set; </script>";}
+		?>
+
+					<script>
+
+						if(submit_chk==1 && submit_chk2)
+							{
+								document.getElementById('link_one').disabled=false;
+								var a1=document.getElementById('tab1');
+								a1.setAttribute('class','active');
+								var b1=document.getElementById('actv_one');
+								b1.style.background='#4A148C';
+								var c1=document.getElementById('link_one');
+								c1.style.color='#FFFFFF';
+
+
+							}
+						if(submit_chk==2 && submit_chk2){
+								document.getElementById('link_two').disabled=false;
+								var a2=document.getElementById('tab2');
+								a2.setAttribute('class','active');
+								var b2=document.getElementById('actv_two');
+								b2.style.background='#4A148C';
+								var c2=document.getElementById('link_two');
+								c2.style.color='#FFFFFF';
+							}
+
+					</script>
 
 	  </body>
 </html>

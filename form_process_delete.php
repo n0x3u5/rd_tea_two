@@ -72,7 +72,7 @@
 				$result = mysqli_query($connection, $query);
 				var_dump($result);
 				confirm_query($result);
-				echo "Deleted Successfully!";
+					redirect_to("http://localhost/rd_tea_two/on_success_delete_manage_user.php");
 				//echo "	level" .$lvl. " and delted lvl = ".$users['level'];
 
 

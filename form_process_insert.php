@@ -42,7 +42,7 @@
 				confirm_query($result);
 				echo "Inserted Successfully!";
 
-
+				redirect_to("http://localhost/rd_tea_two/on_success_manage_user.php");
 				//mysqli_free_result($result);
 			}
 			else {

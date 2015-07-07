@@ -233,7 +233,7 @@
 							<div class="form-group">
 								<label for="lb_area" class="col-sm-3 control-label">Area Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" name="plkd_area" class="form-control" id="lb_area" <?php if (isset($daily)) { ?> value="<?php echo $daily['plkd_area']; $set2=1; ?>" <?php } else { ?>placeholder=<?php $set2=2; echo "\"Area Plucked by each Category\""; ?><?php } ?> required>
+									<input type="text" name="plkd_area" class="form-control" id="lb_area" <?php if (isset($daily)) { ?> value="<?php echo $daily['plkd_area']; $set2=1; ?>" <?php } else { ?>placeholder=<?php $set2 = 2; echo "\"Area Plucked by each Category\""; ?><?php } ?> required>
 								</div>
 							</div>
 							<div class="form-group">
@@ -351,6 +351,7 @@
 					<script>
 						if(submit_chk==1 && submit_chk2)
 							{
+							
 								document.getElementById('link_one').disabled=false;
 								var a1=document.getElementById('tab1');
 								a1.setAttribute('class','active');
@@ -362,6 +363,7 @@
 
 							}
 						 if(submit_chk==2 && submit_chk2){
+
 								document.getElementById('link_two').disabled=false;
 								var a2=document.getElementById('tab2');
 								a2.setAttribute('class','active');

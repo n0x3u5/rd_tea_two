@@ -91,6 +91,7 @@
 			}
 			else {
 				echo  session_msg() . "<br>"; //. $_SESSION["user_lvl"];
+				 redirect_to("http://localhost/rd_tea_two/login_attempt1.php");
 			}
 
 		?>
