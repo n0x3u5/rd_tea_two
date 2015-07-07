@@ -99,37 +99,37 @@
                 <div class="form-group" style="margin-top:30px">
   								<label for="prune_type" class="col-sm-3 control-label">Prune Type:</label>
   								<div class="col-sm-4">
-  									<input type="text" name="prn_type" class="form-control" id="prune_type">
+  									<input type="text" placeholder="Prune Type" name="prn_type" class="form-control" id="prune_type">
   								</div>
   							</div>
   							<div class="form-group">
   								<label for="tipp" class="col-sm-3 control-label">Tipping:</label>
   								<div class="col-sm-4">
-  									<input type="text" name="tip_hght" class="form-control" id="tipp">
+  									<input type="text" name="tip_hght" placeholder=" Tipping" class="form-control" id="tipp">
   								</div>
   							</div>
   							<div class="form-group">
   								<label for="Md_tea" class="col-sm-3 control-label">Made Tea (Kg/Ha):</label>
   								<div class="col-sm-4">
-  									<input type="text" name="md_t" class="form-control" id="Md_tea" >
+  									<input type="text" name="md_t" placeholder=" Made Tea (Kg/Ha)" class="form-control" id="Md_tea" >
   								</div>
   							</div>
   							<div class="form-group">
   								<label for="vcp" class="col-sm-3 control-label">Vacancy (in %):</label>
   								<div class="col-sm-4">
-  									<input type="text" name="vacancy_p" class="form-control" id="vcp">
+  									<input type="text" name="vacancy_p" placeholder="Vacancy (in %)" class="form-control" id="vcp">
   								</div>
   							</div>
   							<div class="form-group">
   								<label for="shd_sts" class="col-sm-3 control-label">Shade Status:</label>
   								<div class="col-sm-4">
-  									<input type="text" class="form-control" id="shd_sts" name="shade_sts">
+  									<input type="text" class="form-control" placeholder="Shade Status" id="shd_sts" name="shade_sts">
   								</div>
   							</div>
   							<div class="form-group">
   								<label for="infill_t" class="col-sm-3 control-label">Infill (Tea):</label>
   								<div class="col-sm-4">
-  									<input type="text" class="form-control" id="infill_t" name="inf_t">
+  									<input type="text" placeholder="Infill (Tea)" class="form-control" id="infill_t" name="inf_t">
   								</div>
   							</div>
                 <div class="form-group">
@@ -139,11 +139,77 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="Remarks" class="col-sm-3 control-label">Remarks:</label>
+                  <label for="Remarks_prn_1" class="col-sm-3 control-label">Remarks for Pruning:</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="Remarks" name="rem">
+                    <input type="text" class="form-control" id="Remarks_prn_1" name="Remarks_prn_1">
                   </div>
                 </div>
+								<div class="form-group">
+									<label for="man_n1" class="col-sm-3 control-label">Na (Manuring):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="man_n1" name="man_n1">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="man_p1" class="col-sm-3 control-label">P (Manuring):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="man_p1" name="man_p1">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="man_k1" class="col-sm-3 control-label">K (Manuring):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="man_k1" name="man_k1">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="top1" class="col-sm-3 control-label">Top (in pH):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="top1" name="top1">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="sub1" class="col-sm-3 control-label">Sub (in pH):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="sub1" name="sub1">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="orgc1" class="col-sm-3 control-label">Org C (in %):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="orgc1" name="orgc1">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="avp1" class="col-sm-3 control-label">Av P (in ppm):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="avp1" name="avp1">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="Avk1" class="col-sm-3 control-label">Av K (in ppm):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="avk1" name="avk1">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="avbln1" class="col-sm-3 control-label">Avbl N (in ppm):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="avbln1" name="avbln1">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="avbls1" class="col-sm-3 control-label">Avbl S (in ppm):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="avbls1" name="avbls1">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="remarks_soil_2" class="col-sm-3 control-label">Remarks for Soil Analysis:</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="remarks_soil_2" name="remarks_soil_2">
+									</div>
+								</div>
   							<div class="row">
   								<div class="col-sm-1 col-sm-offset-2">
   									<button type="button" value="Delete Entry" id="delete_entry" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" style="margin-top:20px;">Delete Entry</button>
@@ -216,11 +282,78 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="Remarks" class="col-sm-3 control-label">Remarks:</label>
+                  <label for="Remarks_prn_2" class="col-sm-3 control-label">Remarks for Pruning:</label>
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" id="Remarks" name="rem">
+                    <input type="text" class="form-control" id="Remarks_prn_2" name="Remarks_prn_2">
                   </div>
                 </div>
+								<div class="form-group">
+									<label for="man_n2" class="col-sm-3 control-label">Na (Manuring):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="man_n2" name="man_n2">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="man_p2" class="col-sm-3 control-label">P (Manuring):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="man_p2" name="man_p2">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="man_k2" class="col-sm-3 control-label">K (Manuring):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="man_k2" name="man_k2">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="top2" class="col-sm-3 control-label">Top (in pH):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="top2" name="top2">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="sub2" class="col-sm-3 control-label">Sub (in pH):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="sub2" name="sub2">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="orgc2" class="col-sm-3 control-label">Org C (in %):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="orgc2" name="orgc2">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="avp2" class="col-sm-3 control-label">Av P (in ppm):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="avp2" name="avp2">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="Avk2" class="col-sm-3 control-label">Av K (in ppm):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="avk2" name="avk2">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="avbln2" class="col-sm-3 control-label">Avbl N (in ppm):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="avbln2" name="avbln2">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="avbls2" class="col-sm-3 control-label">Avbl S (in ppm):</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="avbls2" name="avbls2">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="remarks_soil_2" class="col-sm-3 control-label">Remarks for Soil Analysis:</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" id="remarks_soil_2" name="remarks_soil_2">
+									</div>
+								</div>
+
             		<input type="submit" id="add_entry" name="add_submit" value="Add Entry" class="btn btn-success"style="margin-top:20px">
   		    		</form>
   					</div>

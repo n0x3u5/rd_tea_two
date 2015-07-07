@@ -137,12 +137,12 @@
 									<table id="plucking" class="display table table-hover table-bordered" cellspacing="0" width="100%">
 										<thead>
 											<tr>
+												<th>Section</th>
 												<th>Labour Category</th>
 												<th>Area Plucked</th>
 												<th>Leaf Plucked</th>
-												<th>Mandays for<br/> each group</th>
-												<th>Cash Plucked leaf</th>
-												<th>Task</th>
+												<th>Mandays :</th>
+
 												<th>Changed On</th>
 												<th>Changed By</th>
 												<th>Action</th>
@@ -152,23 +152,23 @@
 										</thead>
 										<tbody>
 											<tr>
+												<td>1 EXA</td>
 												<td>P women</td>
 												<td>5 </td>
 												<td>123</td>
 												<td>14</td>
-												<td>22</td>
-												<td>18</td>
+
+
 												<td>18-07-2015</td>
 												<td>G Mondal</td>
 												<td>Added</td>
 											</tr>
 											<tr>
+												<td>3EXT</td>
 												<td>P women</td>
 												<td>5 </td>
 												<td>123</td>
 												<td>14</td>
-												<td>22</td>
-												<td>18</td>
 												<td>18-07-2015</td>
 												<td>G Mondal</td>
 												<td>Added</td>
