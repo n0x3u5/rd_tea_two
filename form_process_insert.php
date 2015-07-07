@@ -15,6 +15,7 @@
 	$first_name = $_POST["f_name"];
 	$middle_name = $_POST["m_name"];
 	$last_name = $_POST["l_name"];
+	$level=$_POST["level"];
 	$e_mail = $_POST["email"];
 	$passwd = $_POST["pwd"];//password_encrypt($_POST["pwd"]);
 	$cnfpwd = $_POST["cnfpwd"];//password_encrypt($_POST["cnfpwd"]);
@@ -24,17 +25,6 @@
 
 				$hash_passwd = password_encrypt($passwd);
 				//echo "hash password is:".$hash_passwd.", and its length is:".strlen($hash_passwd)."<br>";
-
-				if($designation == "Managing Director" || $designation == "Director") {
-					$level = 1;
-				}
-				else if ($designation == "Manager" || $designation == "Mngr" || $designation == "Man") {
-					$level = 2;
-				}
-				else {
-					$level = 3;
-				}
-
 
 				//2. perform database query
 				$query = "INSERT INTO users (";

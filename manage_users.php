@@ -59,7 +59,7 @@
 															<div class="form-group">
 																<label for="m_name" class="col-sm-3 control-label">Middle name:</label>
 																<div class="input-group">
-																    <input class="form-control" name="m_name" type="text" placeholder="Middle Name" required>
+																    <input class="form-control" name="m_name" type="text" placeholder="Middle Name">
 																    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 																</div>
 														</div>
@@ -67,6 +67,13 @@
 															<label for="l_name" class="col-sm-3 control-label">Last name:</label>
 															<div class="input-group">
 																	<input class="form-control" name="l_name" type="text" placeholder="Last Name" required>
+																	<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="level" class="col-sm-3 control-label">Level:</label>
+															<div class="input-group">
+																	<input class="form-control" name="level" type="text" placeholder="Level" required>
 																	<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 															</div>
 														</div>
@@ -106,10 +113,11 @@
                         <div>
                             <form action="form_process_delete.php" method="post">
                                 <div class="input-group">
-                                    <input class="form-control" name="email" type="email" placeholder="Email">
+																		<select  id="emailid" name ="emailid" class="form-control" required>
+																		</select>
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
                                 </div>
-                                <button type="button"  class="btn btn-danger" data-toggle="modal" data-target="#confirmModal">Remove</button>
+                                <button type="button" name="email_submit" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal">Remove</button>
                                 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -136,22 +144,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-				<script>
-					function chk(){
-							var val_chk=document.getElementById('pwd1');
-							var flag=0;
-							var tomatch=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}/;
-							if(tomatch.test(val_chk))
-							{
-									flag=1;
-							}
-							if(flag==0)
-							{
-								event.preventDefault();
-									window.alert('Your password Should contain One capital letter, digit and special character');
 
-							}
-					}
-				</script>
     </body>
 </html>

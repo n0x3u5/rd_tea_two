@@ -223,7 +223,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="short_sec_name" class="col-sm-3 control-label">Short Section Name:</label>
+								<label for="short_sec_name" class="col-sm-3 control-label"> Section's Short  Name:</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="short_sec_name1" name="short_sec_name" <?php if (isset($daily)) { $csv = comma_sep_val($daily['short_sec_name']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select section name.\""; ?><?php } //comma separeted value?>  >
 								</div>
@@ -252,31 +252,7 @@
 									<input type="text" class="form-control" id="task1" name="task" <?php if(isset($daily)) {?>value="<?php echo $daily['task']; ?>" <?php } else {?>placeholder=<?php  echo "\"Task\""?> <?php } ?>  >
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="ballo_count" class="col-sm-3 control-label">Ballometer Count:</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="ballo_count1" name="ballo_count" <?php if(isset($daily)) {?>value="<?php echo $daily['ballo_count']; ?>" <?php } else {?>placeholder=<?php  echo "\"Ballometer Kal\""?> <?php } ?>  >
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="cp_qty" class="col-sm-3 control-label">Cash Plucking Quantity:</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cp_qty1" name="cp_qty" <?php if(isset($daily)) {?>value="<?php echo $daily['cp_qty']; ?>" <?php } else {?>placeholder=<?php  echo "\"Cash Plucking quantity\""?> <?php } ?>  >
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="cp_hr_from" class="col-sm-3 control-label timepicker">Start Time (CashPlucking):</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cp_hr_from1" name="cp_hr_from" <?php if(isset($daily)) {?>value="<?php echo $daily['cp_hr_from']; ?>" <?php } else {?>placeholder=<?php  echo "\"cp starting time\""?> <?php } ?>  >
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="cp_hr_to" class="col-sm-3 control-label">End Time (CashPlucking):</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cp_hr_to1" name="cp_hr_to" <?php if(isset($daily)) {?>value="<?php echo $daily['cp_hr_to']; ?>" <?php } else {?>placeholder=<?php  echo "\"cp ending hr\""?> <?php } ?>  >
-								</div>
-							</div>
-							<div class="row">
+														<div class="row">
 								<div class="col-sm-1 col-sm-offset-2">
 									<button type="button" value="Delete Entry" id="delete_entry" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" style="margin-top:20px;">Delete Entry</button>
 								</div>
@@ -315,7 +291,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="short_sec_name" class="col-sm-3 control-label">Short Section Name:</label>
+								<label for="short_sec_name" class="col-sm-3 control-label">Section's Short  Name:</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="short_sec_name2" name="short_sec_name">
 								</div>
@@ -344,33 +320,6 @@
 									<input type="text" class="form-control" id="task2" name="task">
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="ballo_count" class="col-sm-3 control-label">Ballometer Count:</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="ballo_count2" name="ballo_count">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="cp_qty" class="col-sm-3 control-label">Cash Plucking Quantity:</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cp_qty2" name="cp_qty">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="cp_hr_from" class="col-sm-3 control-label">Start Time (CashPlucking):</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cp_hr_from2" name="cp_hr_from">
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="cp_hr_to" class="col-sm-3 control-label">Start Time (CashPlucking):</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cp_hr_to2" name="cp_hr_to">
-								</div>
-							</div>
-
-
-
 
           		<input type="submit" id="add_entry" name="add_submit" value="Add Entry" class="btn btn-success"style="margin-top:20px">
 		    		</form>
