@@ -145,6 +145,7 @@
 																		<th>Leaf / Ha.</th>
 																		<th>Pluckers / Ha.</th>
 																		<th>Leaf / Plucker</th>
+																		<th>Round days</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -162,7 +163,8 @@
 																			<td><?php	echo round($plk_rev['plkd_leaf']/$plk_rev['plkd_area']);	?></td>
 																			<td><?php	echo round($plk_rev['mandays']/$plk_rev['plkd_area'], 2);	?></td>
 																			<td><?php	echo round($plk_rev['plkd_leaf']/$plk_rev['mandays'], 2);	?></td>
-																  </tr>
+																  		<td>11</td>
+																	</tr>
 															<?php
 																  }
 																}

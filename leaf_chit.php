@@ -135,9 +135,9 @@ if(isset($_POST['date_submit'])) {
 								<th colspan="3">Grand<br/>Total</th>
 						</tr>
 						<tr>
+							<th>Sec.</th>
 							<th>Date<br/>Last<br/>Plucked</th>
 							<th>Rnd.<br/>Days</th>
-							<th>Sec.</th>
 							<th>Area<br/>Plkd<br/>(Hec.)</th>
 							<th>Plkrs.</th>
 							<th>Plkrs<br/>per<br/>Hec.</th>
@@ -193,24 +193,24 @@ if(isset($_POST['date_submit'])) {
 								$ballo_num1 = $ballo_num2 = 0;
 								while($daily_chit = mysqli_fetch_assoc($r_chit)) {
 									if($daily_chit['prune_stats'] == 'UNPRUNED') {
-										$cp_qtyu_arr[] = $daily_chit['cp_qty'];
+										//$cp_qtyu_arr[] = $daily_chit['cp_qty'];
 										?>
 												<tr>
 													<td><?php echo $daily_chit['lab_cat'];//echo $lcsn_arr[$i]; ?></td>
-													<td><?php $csv=comma_sep_val($daily_chit['dt_lst_plkd']); echo $csv; ?></td>
+													<td><?php $bsv=str_replace("¥","<br>",$daily_chit['short_sec_name']); echo $bsv;//echo $day_chit['short_sec_name']; ?></td>
+													<td><?php $bsv=str_replace("¥","<br>",$daily_chit['dt_lst_plkd']); echo $bsv; ?></td>
 													<td><?php $req_time = strtotime($req_date); $lst_dt_arr = explode('¥',$daily_chit['dt_lst_plkd']); $rnd_time = 0;
 													foreach ($lst_dt_arr as $lst_dt) {
 														$lst_time = strtotime($lst_dt);
-														$rnd_time .= (($req_time - $lst_time)/(24*60*60)).", ";
-													} echo ltrim(rtrim($rnd_time,", "), "0"); ?></td>
-													<td><?php $csv=comma_sep_val($daily_chit['short_sec_name']); echo $csv;//echo $day_chit['short_sec_name']; ?></td>
+														$rnd_time .= (($req_time - $lst_time)/(24*60*60))."<br>";
+													} echo ltrim(rtrim($rnd_time,"<br>"), "0"); ?></td>
 													<td><?php $area1 = $daily_chit['plkd_area']; echo $area1; $areau_arr[] = $area1; ?></td>
 													<td><?php $pluckers1 = $daily_chit['mandays']; echo $daily_chit['mandays']; $pluckersu_arr[] = $pluckers1; ?></td>
 													<td><?php echo round($daily_chit['mandays']/$daily_chit['plkd_area'],2); ?></td>
 													<td><?php $leaf1 = $daily_chit['plkd_leaf']; echo $leaf1; $leafu_arr[] = $leaf1; ?></td>
 													<td><?php echo round($daily_chit['plkd_leaf']/$daily_chit['mandays'],2); ?></td>
-													<td><?php $csv=comma_sep_val($daily_chit['task']); echo $csv; ?></td>
-													<td><?php $ballo_count = $daily_chit['ballo_count']; echo $ballo_count; $ballo_num1 += $leaf1 * $ballo_count; ?></td>
+													<td><?php $bsv=str_replace("¥","<br>",$daily_chit['task']); echo $bsv; ?></td>
+													<td><?php //$ballo_count = $daily_chit['ballo_count']; echo $ballo_count; $ballo_num1 += $leaf1 * $ballo_count; ?></td>
 													<!--------------------------------------------------------------------->
 													<td></td>
 													<td></td>
@@ -242,7 +242,7 @@ if(isset($_POST['date_submit'])) {
 											// 	// echo "  Plucked Leaf: {$exp_leaf_qty[$index]} "." Labour Count: {$exp_lab_count[$index]}";
 										}
 									else {
-										$cp_qtyp_arr[] = $daily_chit['cp_qty'];
+										//$cp_qtyp_arr[] = $daily_chit['cp_qty'];
 										?>
 												<tr>
 													<td><?php echo $daily_chit['lab_cat'];//echo $lcsn_arr[$i]; ?></td>
@@ -256,16 +256,20 @@ if(isset($_POST['date_submit'])) {
 													<td></td>
 													<td></td>
 													<td></td>
-													<td><?php $csv=comma_sep_val($daily_chit['dt_lst_plkd']); echo $csv; ?></td>
-													<td>7</td>
-													<td><?php $csv=comma_sep_val($daily_chit['short_sec_name']); echo $csv; ?></td>
+													<td><?php $bsv=str_replace("¥","<br>",$daily_chit['dt_lst_plkd']); echo $bsv; ?></td>
+													<td><?php $req_time = strtotime($req_date); $lst_dt_arr = explode('¥',$daily_chit['dt_lst_plkd']); $rnd_time = 0;
+													foreach ($lst_dt_arr as $lst_dt) {
+														$lst_time = strtotime($lst_dt);
+														$rnd_time .= (($req_time - $lst_time)/(24*60*60))."<br>";
+													} echo ltrim(rtrim($rnd_time,"<br>"), "0"); ?></td>
+													<td><?php $bsv=str_replace("¥","<br>",$daily_chit['short_sec_name']); echo $bsv; ?></td>
 													<td><?php $area4 = $daily_chit['plkd_area']; echo $area4; $areap_arr[] = $area4; ?></td>
 													<td><?php $pluckers4 = $daily_chit['mandays']; echo $pluckers4; $pluckersp_arr[] = $pluckers4; ?></td>
 													<td><?php echo round($daily_chit['mandays']/$daily_chit['plkd_area'],2); ?></td>
 													<td><?php $leaf4 = $daily_chit['plkd_leaf']; echo $leaf4; $leafp_arr[] = $leaf4; ?></td>
 													<td><?php echo round($daily_chit['plkd_leaf']/$daily_chit['mandays'],2); ?></td>
-													<td><?php $csv=comma_sep_val($daily_chit['task']); echo $csv; ?></td>
-													<td><?php $ballo_count = $daily_chit['ballo_count']; echo $ballo_count; $ballo_num2 += $leaf4 * $ballo_count; ?></td>
+													<td><?php $bsv=str_replace("¥","<br>",$daily_chit['task']); echo $bsv; ?></td>
+													<td><?php //$ballo_count = $daily_chit['ballo_count']; echo $ballo_count; $ballo_num2 += $leaf4 * $ballo_count; ?></td>
 													<!--------------------------------------------------------------------->
 													<!--------------------------------------------------------------------->
 													<td><?php echo $area3 + $area4;?></td>
@@ -288,7 +292,7 @@ if(isset($_POST['date_submit'])) {
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><?php $cpus = array_sum($cp_qtyu_arr); echo $cpus; ?></td>
+							<td><?php //$cpus = array_sum($cp_qtyu_arr); echo $cpus; ?></td>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -298,13 +302,13 @@ if(isset($_POST['date_submit'])) {
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><?php $cpps = array_sum($cp_qtyp_arr); echo $cpps; ?></td>
+							<td><?php //$cpps = array_sum($cp_qtyp_arr); echo $cpps; ?></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><?php echo $cpps + $cpus; ?></td>
+							<td><?php //echo $cpps + $cpus; ?></td>
 						</tr>
 					</tbody>
 					<tfoot>
@@ -316,7 +320,7 @@ if(isset($_POST['date_submit'])) {
 							<td><?php $areas1 = array_sum($areau_arr); echo $areas1; ?></td>
 							<td><?php $pluckerss1 = array_sum($pluckersu_arr); echo $pluckerss1; ?></td>
 							<td><?php echo round(($pluckerss1/$areas1), 2); ?></td>
-							<td><?php $leafs1 = array_sum($leafu_arr) + $cpus; echo $leafs1; ?></td>
+							<td><?php $leafs1 = array_sum($leafu_arr) /*+ $cpus*/; echo $leafs1; ?></td>
 							<td><?php echo round(($leafs1/$pluckerss1), 2); ?></td>
 							<td></td>
 							<td><?php echo round(($ballo_num1 / $leafs1), 2); ?></td>
@@ -326,7 +330,7 @@ if(isset($_POST['date_submit'])) {
 							<td><?php $areas2 = array_sum($areap_arr); echo $areas2; ?></td>
 							<td><?php $pluckerss2 = array_sum($pluckersp_arr); echo $pluckerss2; ?></td>
 							<td><?php echo round(($pluckerss2/$areas2), 2); ?></td>
-							<td><?php $leafs2 = array_sum($leafp_arr) + $cpps; echo $leafs2; ?></td>
+							<td><?php $leafs2 = array_sum($leafp_arr) /*+ $cpps*/; echo $leafs2; ?></td>
 							<td><?php echo round(($leafs2/$pluckerss2), 2); ?></td>
 							<td></td>
 							<td><?php echo round(($ballo_num2 / $leafs2), 2); ?></td>
