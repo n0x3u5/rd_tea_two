@@ -7,6 +7,105 @@
 	}
 ?>
 
+<?php
+	$connection = make_connection();
+	if(isset($_POST['dt_submit'])) {
+		$req_date = date('Y-m-d', strtotime($_POST['date_value']));
+		$_SESSION['date'] = $req_date;
+
+		$query = "SELECT * FROM cp_table WHERE rec_date='{$req_date}'";
+
+		$result = mysqli_query($connection, $query);
+    confirm_query($result);
+
+		$_SESSION['cp_record'] = mysqli_fetch_assoc($result);
+	  //var_dump($_SESSION['cp_record']);
+
+	}
+	else {
+		$req_date = NULL;
+		$result = NULL;
+	}
+
+	if(isset($_POST['add_submit'])) {
+
+		$rec_dt = $_SESSION['date'];
+
+		$cpp_qty = (int) mysqli_real_escape_string($connection, $_POST['cpp_qty2']);
+		$cpp_bal = (int) mysqli_real_escape_string($connection, $_POST['cpp_bal2']);
+		$cpu_qty = (float) mysqli_real_escape_string($connection, $_POST['cpu_qty2']);
+		$cpu_bal = (float) mysqli_real_escape_string($connection, $_POST['cpu_bal2']);
+		$cp_hr_from = mysqli_real_escape_string($connection, $_POST['start_time2']);
+		$cp_hr_to = mysqli_real_escape_string($connection, $_POST['end_time2']);
+
+		$q_in = "INSERT INTO cp_table (rec_date, prune_cp_qty, unprune_cp_qty, prune_bm, unprune_bm, time_from, time_to) VALUES ('{$rec_dt}', {$cpp_qty}, {$cpp_bal}, {$cpu_qty}, {$cpu_bal}, '{$cp_hr_from}', '{$cp_hr_to}') ";
+
+		$r_in = mysqli_query($connection, $q_in);
+		confirm_query($r_in);
+
+		if(mysqli_affected_rows($connection) > 0) {
+			echo "Inserted Successfully!";
+		}
+		else {
+			echo "No record affected! Check your Submission Properly!";
+		}
+
+		$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
+
+ }
+
+
+ if(isset($_POST['edit_submit'])) {
+
+	$rec_dt = $_SESSION['date'];
+	$rec_id = $_SESSION['cp_record']['id'];
+
+	$cpp_qty = (int) mysqli_real_escape_string($connection, $_POST['cpp_qty1']);
+	$cpp_bal = (int) mysqli_real_escape_string($connection, $_POST['cpp_bal1']);
+	$cpu_qty = (float) mysqli_real_escape_string($connection, $_POST['cpu_qty1']);
+	$cpu_bal = (float) mysqli_real_escape_string($connection, $_POST['cpu_bal1']);
+	$cp_hr_from = mysqli_real_escape_string($connection, $_POST['start_time1']);
+	$cp_hr_to = mysqli_real_escape_string($connection, $_POST['end_time1']);
+
+	$q_in = "UPDATE cp_table SET prune_cp_qty = {$cpp_qty}, unprune_cp_qty = {$cpu_qty}, prune_bm = {$cpp_bal}, unprune_bm = {$cpu_bal}, time_from = '{$cp_hr_from}', time_to = '{$cp_hr_to}' WHERE id = {$rec_id}";
+
+	$r_in = mysqli_query($connection, $q_in);
+	confirm_query($r_in);
+
+	if(mysqli_affected_rows($connection) > 0) {
+		echo "Updated Successfully!";
+	}
+	else {
+		echo "No record affected! Check your Submission Properly!";
+	}
+
+	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
+
+ }
+
+ if(isset($_POST['del_entry'])) {
+	$rec_dt = $_SESSION['date'];
+	$rec_id = $_SESSION['cp_record']['id'];
+
+	$q_del = "DELETE FROM leaf_chit_table WHERE id='{$rec_id}'";
+	//var_dump($q_del);
+
+	$r_del = mysqli_query($connection, $q_del);
+  confirm_query($r_del);
+
+	if(mysqli_affected_rows($connection) > 0) {
+		echo "Deleted Successfully!";
+	}
+	else {
+		echo "No record affected! Check your Submission Properly!";
+	}
+
+	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
+
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html>
@@ -52,11 +151,11 @@
 											<span class="input-group-addon">
 													<i class="glyphicon glyphicon-calendar"></i>
 											</span>
-											<input type="text" name="date_value" class="form-control" id="datepicker"  onChange="enable_add()" required>
+											<input type="text" name="date_value" class="form-control" id="datepicker"  onChange="enable_add()" <?php if(isset($_POST['dt_submit'])) { ?> value="<?php echo $_POST['date_value']; ?>"<?php } else { ?>placeholder="Date (dd-mm-yyyy)" <?php } ?> required>
 										</div>
 								</div>
 									<label for="selct_sec" class="col-sm-2"></label>
-									<input type="submit" style="margin-left:10px" id="selct_sec" name="dt_cat_submit" value="Submit" class="btn btn-default" onclick="enable_tab()">
+									<input type="submit" style="margin-left:10px" id="selct_sec" name="dt_submit" value="Submit" class="btn btn-default" onclick="enable_tab()">
               </form>
             </div>
 			<div class="tab-container">
@@ -67,43 +166,44 @@
 				<div class="tab-content" style="background-color:#FFFFFF">
 
 					<div class="tab-pane active" id="tab1">
-						<form class="form-horizontal" action="" method="post">
+						<form class="form-horizontal" action="cash_plucking_entry.php" method="post">
+							<?php if(isset($_SESSION['cp_record'])) { $rec = $_SESSION['cp_record']; } else { $rec = NULL; }?>
 							<div class="form-group">
 								<label for="cp_qty_prn1" class="col-sm-3 control-label">Cash Plucking Quantity(Pruned):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cp_qty_prn1" placeholder="Cash Plucking Quantity" name="cp_qty_prn">
+									<input type="text" class="form-control" name="cpp_qty1" id="cp_qty_prn1" name="cp_qty_prn" <?php if(isset($rec)) {?>value="<?php echo $rec['prune_cp_qty']; ?>" <?php } else {?>placeholder=<?php  echo "\"Cash Plucking Quantity\""?> <?php } ?>>
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label for="ballo_count_prn1" class="col-sm-3 control-label">Ballometer Count(Pruned):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" placeholder=" Ballometer Count" id="ballo_count_prn1" name="ballo_count_prn">
+									<input type="text" class="form-control" name="cpp_bal1" id="ballo_count_prn1" name="ballo_count_prn" <?php if(isset($rec)) {?>value="<?php echo $rec['prune_bm']; ?>" <?php } else {?>placeholder=<?php  echo "\"Ballometer Count\""?> <?php } ?>>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cp_qty_unprune1" class="col-sm-3 control-label">Cash Plucking Quantity (Unpruned):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cp_qty_unprune1" placeholder="Cash Plucking Quantity" name="cp_qty_unprn">
+									<input type="text" class="form-control" name="cpu_qty1" id="cp_qty_unprune1" name="cp_qty_unprn" <?php if(isset($rec)) {?>value="<?php echo $rec['unprune_cp_qty']; ?>" <?php } else {?>placeholder=<?php  echo "\"Cash Plucking Quantity\""?> <?php } ?>>
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label for="ballo_count_unprune1" class="col-sm-3 control-label">Ballometer Count(Unpruned):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="ballo_count_unprune1" placeholder="Ballometer Count" name="ballo_count_unprune">
+									<input type="text" class="form-control" name="cpu_bal1" id="ballo_count_unprune1" name="ballo_count_unprune" <?php if(isset($rec)) {?>value="<?php echo $rec['unprune_bm']; ?>" <?php } else {?>placeholder=<?php  echo "\"Ballometer Count\""?> <?php } ?>>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cp_hr_from" class="col-sm-3 control-label timepicker">Start Time (CashPlucking):</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cp_hr_from1" name="cp_hr_from">
+									<input type="text" class="form-control" name="start_time1" id="cp_hr_from1" name="cp_hr_from1" <?php if(isset($rec)) {?>value="<?php echo $rec['time_from']; ?>" <?php } else {?>placeholder=<?php  echo "\"hh:mm P\""?> <?php } ?>>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cp_hr_to" class="col-sm-3 control-label">End Time (CashPlucking):</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cp_hr_to1" name="cp_hr_to">
+									<input type="text" class="form-control" name="end_time1" id="cp_hr_to1" name="cp_hr_to1" <?php if(isset($rec)) {?>value="<?php echo $rec['time_to']; ?>" <?php } else {?>placeholder=<?php  echo "\"hh:mm P\""?> <?php } ?>>
 								</div>
 							</div>
 							<div class="row">
@@ -137,43 +237,43 @@
 
 
 					<div class="tab-pane" id="tab2">
-						<form class="form-horizontal" action="" method="post">
+						<form class="form-horizontal" action="cash_plucking_entry.php" method="post">
 							<div class="form-group">
 								<label for="cp_qty_prn2" class="col-sm-3 control-label">Cash Plucking Quantity (Pruned):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cp_qty_prn2" placeholder="Cash Plucking Quantity" name="cp_qty_prn">
+									<input type="text" class="form-control" name="cpp_qty2" id="cp_qty_prn2" placeholder="Cash Plucking Quantity">
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label for="ballo_count_prn2" class="col-sm-3 control-label">Ballometer Count(Pruned):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="ballo_count_prn2" placeholder="Ballometer Count" name="ballo_count_prn">
+									<input type="text" class="form-control" name="cpp_bal2" id="ballo_count_prn2" placeholder="Ballometer Count">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cp_qty_unprune2" class="col-sm-3 control-label">Cash Plucking Quantity (Unpruned):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cp_qty_unprune2" placeholder="Cash Plucking Quantity" name="cp_qty_unprn">
+									<input type="text" class="form-control" name="cpu_qty2" id="cp_qty_unprune2" placeholder="Cash Plucking Quantity">
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label for="ballo_count_unprune2" class="col-sm-3 control-label">Ballometer Count(Unpruned):</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="ballo_count_unprune2" placeholder="Ballometer Count" name="ballo_count_unprune">
+									<input type="text" class="form-control" name="cpu_bal2" id="ballo_count_unprune2" placeholder="Ballometer Count">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cp_hr_from" class="col-sm-3 control-label">Start Time (CashPlucking):</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cp_hr_from2" name="cp_hr_from">
+									<input type="text" class="form-control" name="start_time2" id="cp_hr_from2" placeholder="hh:mm P">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cp_hr_to" class="col-sm-3 control-label">End Time (CashPlucking):</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" id="cp_hr_to2" name="cp_hr_to">
+									<input type="text" class="form-control" name="end_time2" id="cp_hr_to2" placeholder="hh:mm P">
 								</div>
 							</div>
 

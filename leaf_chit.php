@@ -30,6 +30,12 @@ if(isset($_POST['date_submit'])) {
 		$q_chit = "select * from leaf_chit_table where  rec_dt = '{$req_date}'";
 		$r_chit = mysqli_query($connection, $q_chit);
 		confirm_query($r_chit);
+
+		$q_cp = "select * from cp_table where  rec_date = '{$req_date}'";
+		$r_cp = mysqli_query($connection, $q_cp);
+		confirm_query($r_cp);
+		$cp_record = mysqli_fetch_assoc($r_cp);
+		//var_dump($cp_record);
 		// $day_chit =mysqli_fetch_assoc($r);
 		//
 		// //var_dump($last_dt);
@@ -190,9 +196,10 @@ if(isset($_POST['date_submit'])) {
 								// 				$exp_lab_count = explode("¥", $day_chit['lab_cat_mandays']);
 								// 				//echo "Other details of '{$lcsn_arr[$i]}' :<br>"."Plucke Area:{$exp_plkd_area[$index]}";
 								// 				//echo "  Plucked Leaf: {$exp_leaf_qty[$index]} "." Labour Count: {$exp_lab_count[$index]}";
-								$ballo_num1 = $ballo_num2 = 0;
+								$ballo_num1 = $ballo_num2 = 0; $pruned_rows_set = 0; $unpruned_rows_set = 0; $rows_set = 0;
 								while($daily_chit = mysqli_fetch_assoc($r_chit)) {
 									if($daily_chit['prune_stats'] == 'UNPRUNED') {
+										$unpruned_rows_set = $rows_set = 1;
 										//$cp_qtyu_arr[] = $daily_chit['cp_qty'];
 										?>
 												<tr>
@@ -243,6 +250,7 @@ if(isset($_POST['date_submit'])) {
 										}
 									else {
 										//$cp_qtyp_arr[] = $daily_chit['cp_qty'];
+										$pruned_rows_set = $rows_set = 1;
 										?>
 												<tr>
 													<td><?php echo $daily_chit['lab_cat'];//echo $lcsn_arr[$i]; ?></td>
@@ -283,6 +291,8 @@ if(isset($_POST['date_submit'])) {
 								// 		}
 								// 	}
 								// }
+								if($rows_set) {
+									if($cp_record != null) {
 						?>
 						<tr>
 							<td>Cashpluckers</td>
@@ -292,24 +302,25 @@ if(isset($_POST['date_submit'])) {
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><?php //$cpus = array_sum($cp_qtyu_arr); echo $cpus; ?></td>
+							<td><?php $cpu = $cp_record['unprune_cp_qty']; echo $cpu ?></td>
+							<td></td>
+							<td></td>
+							<td><?php $cub = $cp_record['unprune_bm']; echo $cub; $cub_n = $cub * $cpu;?></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
+							<td><?php $cpp = $cp_record['prune_cp_qty']; echo $cpp;?></td>
 							<td></td>
 							<td></td>
-							<td></td>
-							<td><?php //$cpps = array_sum($cp_qtyp_arr); echo $cpps; ?></td>
-							<td></td>
+							<td><?php $cpb = $cp_record['prune_bm']; echo $cpb; $cpb_n = $cpb * $cpp;?></td>
 							<td></td>
 							<td></td>
-							<td></td>
-							<td></td>
-							<td><?php //echo $cpps + $cpus; ?></td>
+							<td><?php echo $cpp + $cpu; ?></td>
 						</tr>
+						<?php } ?>
 					</tbody>
 					<tfoot>
 						<tr>
@@ -317,29 +328,50 @@ if(isset($_POST['date_submit'])) {
 							<td></td>
 							<td></td>
 							<td></td>
+							<?php if($unpruned_rows_set) { ?>
 							<td><?php $areas1 = array_sum($areau_arr); echo $areas1; ?></td>
 							<td><?php $pluckerss1 = array_sum($pluckersu_arr); echo $pluckerss1; ?></td>
 							<td><?php echo round(($pluckerss1/$areas1), 2); ?></td>
-							<td><?php $leafs1 = array_sum($leafu_arr) /*+ $cpus*/; echo $leafs1; ?></td>
+							<td><?php if(isset($cpu)){$leafs1 = array_sum($leafu_arr) + $cpu; echo $leafs1;} else { $leafs1 = array_sum($leafu_arr); echo $leafs1; }?></td>
 							<td><?php echo round(($leafs1/$pluckerss1), 2); ?></td>
 							<td></td>
-							<td><?php echo round(($ballo_num1 / $leafs1), 2); ?></td>
+							<td><?php if(isset($cub_n)){echo round((($ballo_num1 + $cub_n) / $leafs1), 2);} else { echo round(($ballo_num1 / $leafs1), 2); } ?></td>
+							<?php } else {?>
 							<td></td>
 							<td></td>
 							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<?php } ?>
+							<td></td>
+							<td></td>
+							<td></td>
+							<?php if($pruned_rows_set) { ?>
 							<td><?php $areas2 = array_sum($areap_arr); echo $areas2; ?></td>
 							<td><?php $pluckerss2 = array_sum($pluckersp_arr); echo $pluckerss2; ?></td>
 							<td><?php echo round(($pluckerss2/$areas2), 2); ?></td>
-							<td><?php $leafs2 = array_sum($leafp_arr) /*+ $cpps*/; echo $leafs2; ?></td>
+							<td><?php if(isset($cpp)) {$leafs2 = array_sum($leafp_arr) + $cpp; echo $leafs2;} else { $leafs2 = array_sum($leafp_arr); echo $leafs2; } ?></td>
 							<td><?php echo round(($leafs2/$pluckerss2), 2); ?></td>
 							<td></td>
-							<td><?php echo round(($ballo_num2 / $leafs2), 2); ?></td>
-							<td><?php echo $areas1 + $areas2; ?></td>
-							<td><?php echo $pluckerss1 + $pluckerss2; ?></td>
-							<td><?php echo $leafs1 + $leafs2; ?></td>
+							<td><?php if(isset($cpb_n)){echo round((($ballo_num2 + $cpb_n) / $leafs2), 2);} else { echo round(($ballo_num2 / $leafs2), 2); } ?></td>
+							<?php } else { ?>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<?php } ?>
+							<td><?php if(!isset($areas1)) {echo $areas2;} elseif (!isset($areas2)) { echo $areas1; } else { echo $areas1 + $areas2; } ?></td>
+							<td><?php if(!isset($pluckerss1)) {echo $pluckerss2;} elseif (!isset($pluckerss2)) { echo $pluckerss1; } else { echo $pluckerss1 + $pluckerss2; }?></td>
+							<td><?php if(!isset($leafs1)) {echo $leafs2;} elseif (!isset($leafs2)) { echo $leafs1; } else { echo $leafs1 + $leafs2; }?></td>
 						</tr>
 					</tfoot>
-				<?php }//end of isset $_POST[date_submit] ?>
+				<?php }
+				}//end of isset $_POST[date_submit] ?>
 				</table>
 			</div>
     </div>
