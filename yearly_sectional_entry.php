@@ -324,12 +324,7 @@
 									}
 									else { $man_soil = NULL; $fill_prune = NULL; }
 								?>
-								<div class="form-group" style="margin-top:30px">
-  								<label for="prune_type1" class="col-sm-3 control-label">Prune Type:</label>
-  								<div class="col-sm-4">
-  									<input type="text" name="prune" class="form-control" id="prune_type1" <?php if(isset($fill_prune)) { ?> value="<?php echo htmlentities($fill_prune['prune']); ?>"<?php } else { ?>placeholder=<?php echo "\"Prune Type\""; ?> <?php } ?> >
-  								</div>
-  							</div>
+
   							<div class="form-group">
   								<label for="tipp1" class="col-sm-3 control-label">Tipping:</label>
   								<div class="col-sm-4">
@@ -367,19 +362,19 @@
                   </div>
                 </div>
 								<div class="form-group">
-									<label for="man_n1" class="col-sm-3 control-label">N (Manuring):</label>
+									<label for="man_n1" class="col-sm-3 control-label">N Dose (Manuring):</label>
 									<div class="col-sm-4">
 										<input type="text" class="form-control" id="man_n1" name="n" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['n']); ?>"<?php } else { ?>placeholder=<?php echo "\"N (Manuring)\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="man_p1" class="col-sm-3 control-label">P (Manuring):</label>
+									<label for="man_p1" class="col-sm-3 control-label">P Dose (Manuring):</label>
 									<div class="col-sm-4">
 										<input type="text" class="form-control" id="man_p1" name="p" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['p']); ?>"<?php } else { ?>placeholder=<?php echo "\"P (Manuring)\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="man_k1" class="col-sm-3 control-label">K (Manuring):</label>
+									<label for="man_k1" class="col-sm-3 control-label">K Dose (Manuring):</label>
 									<div class="col-sm-4">
 										<input type="text" class="form-control" id="man_k1" name="k" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['k']); ?>"<?php } else { ?>placeholder=<?php echo "\"K (Manuring)\""; ?> <?php } ?> >
 									</div>
@@ -403,13 +398,13 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="avp1" class="col-sm-3 control-label">Av P (in ppm):</label>
+									<label for="avp1" class="col-sm-3 control-label">Avbl P (in ppm):</label>
 									<div class="col-sm-4">
 										<input type="text" class="form-control" id="avp1" name="avbl_P" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['avbl_P']); ?>"<?php } else { ?>placeholder=<?php echo "\"Avbl P\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="Avk1" class="col-sm-3 control-label">Av K (in ppm):</label>
+									<label for="Avk1" class="col-sm-3 control-label">Avbl K (in ppm):</label>
 									<div class="col-sm-4">
 										<input type="text" class="form-control" id="avk1" name="avbl_K" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['avbl_K']); ?>"<?php } else { ?>placeholder=<?php echo "\"Avbl K\""; ?> <?php } ?> >
 									</div>
@@ -466,12 +461,6 @@
 
 						<div class="tab-pane" id="tab2">
   						<form class="form-horizontal" action="yearly_sectional_entry.php" method="post">
-                <div class="form-group" style="margin-top:30px">
-  								<label for="prune_type" class="col-sm-3 control-label">Prune Type:</label>
-  								<div class="col-sm-4">
-  									<input type="text" name="prune" placeholder="Prune Type" class="form-control" id="prune_type">
-  								</div>
-  							</div>
   							<div class="form-group">
   								<label for="tipp" class="col-sm-3 control-label">Tipping:</label>
   								<div class="col-sm-4">
@@ -545,13 +534,13 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="avp2" class="col-sm-3 control-label">Av P (in ppm):</label>
+									<label for="avp2" class="col-sm-3 control-label">Avbl P (in ppm):</label>
 									<div class="col-sm-4">
 										<input type="text" class="form-control" id="avp2" placeholder="Av P" name="avbl_P">
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="Avk2" class="col-sm-3 control-label">Av K (in ppm):</label>
+									<label for="Avk2" class="col-sm-3 control-label">Avbl K (in ppm):</label>
 									<div class="col-sm-4">
 										<input type="text" class="form-control" id="avk2"  placeholder="Av K" name="avbl_K">
 									</div>
