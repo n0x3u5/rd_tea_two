@@ -6,6 +6,58 @@
 		redirect_to("index.php");
 	}
 ?>
+
+<?php
+$connection = make_connection();
+
+//var_dump($_POST); echo "<br>";
+if(isset($_POST['yr_sec_submit'])) {
+	$req_ssn = $_POST['short_sec_name'];
+	$req_start_yr = $_POST['start_yr'];
+	$req_end_yr = $_POST['end_yr'];
+
+	// var_dump($req_ssn); var_dump($req_start_yr); var_dump($req_end_yr);
+
+	// $_SESSION['ssn'] = $req_ssn;
+	// $_SESSION['yr_1'] = $req_start_yr;
+	// $_SESSION['yr_2'] = $req_end_yr;
+	$q_header = "select * from sections where short_sec_name = '{$req_ssn}'";
+	//var_dump($q_header);
+	$r_header = mysqli_query($connection, $q_header);
+	confirm_query($r_header);
+
+	$header = mysqli_fetch_assoc($r_header);
+	//var_dump($header);
+
+	$q_prune = "select * from yearly_prune_infilling where short_sec_name = '{$req_ssn}' and year between $req_start_yr and $req_end_yr";
+	//var_dump($q_prune);
+	$r_prune = mysqli_query($connection, $q_prune);
+	confirm_query($r_prune);
+
+	//$prune = mysqli_fetch_assoc($r_prune);
+	//var_dump($prune);
+
+	$q_soil = "select * from yearly_soil_manuring where short_sec_name = '{$req_ssn}' and year between $req_start_yr and $req_end_yr";
+	//var_dump($q_soil);
+	$r_soil = mysqli_query($connection, $q_soil);
+	confirm_query($r_soil);
+
+	//$soil = mysqli_fetch_assoc($r_soil);
+	//var_dump($soil);
+}
+else {
+	$req_ssn = NULL;
+	$req_start_yr = NULL;
+	$req_end_yr = NULL;
+	$result = NULL;
+
+	$soil = NULL;
+	$prune = NULL;
+	$header = NULL;
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,54 +94,82 @@
             <div class="jumbotron" style="background:#FF7043;margin-left:-15px;margin-right: -15px;">
                 <h1>Sectional Review </h1>
                 <p style="color: #FFFFFF">(Yearly)</p>
-								<form action="" class="form form-horizotal">
+								<form action="sectional_yearly_review.php" class="form form-horizotal" method="post">
 									<div class="row">
 										<div class="form-group col-sm-5">
-											<label for="year">Start Year:</label>
+											<label for="section">Select section:</label>
 											<div>
-											<input type="text" id="year1" class="form-control">
+												<select id="division" name ="short_sec_name" class="form-control" >
+													 <?php
+															$q = "SELECT short_sec_name FROM sections";
+															$result = mysqli_query($connection, $q);
 
+															confirm_query($result);
+
+															echo "<option id=\"opt0\" value=\"Select a section\">Select a section</option>";
+															while($sec_values = mysqli_fetch_assoc($result)) {
+													?>
+																<option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(($req_ssn != NULL) && ($req_ssn == $sec_values['short_sec_name'])) { echo "selected";} ?> ><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
+													<?php
+															}
+													?>
+												</select>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group col-sm-5" >
-											<label for="year2">End Year:</label>
+											<label for="year1">Start Year:</label>
 											<div>
-											<input type="text" id="year2" class="form-control">
+											<input type="text" id="year1" class="form-control" name="start_yr"<?php if($req_start_yr != NULL) { ?> value="<?php echo "$req_start_yr"; ?>"<?php } else {?>  placeholder=<?php echo "\"Select start Year\""; ?><?php } ?> required>
 
 											</div>
 										</div>
 									</div>
 
-									<input type="submit" value="Get data" class="btn btn-default">
+									<div class="row">
+										<div class="form-group col-sm-5" >
+											<label for="year2">End Year:</label>
+											<div>
+											<input type="text" id="year1" class="form-control" name="end_yr"<?php if($req_end_yr != NULL) { ?> value="<?php echo "$req_end_yr"; ?>"<?php } else {?>  placeholder=<?php echo "\"Select end Year\""; ?><?php } ?> required>
+
+											</div>
+										</div>
+									</div>
+
+									<input type="submit" name="yr_sec_submit" value="Get data" class="btn btn-default">
 							</form>
             </div>
 
+						<?php if($header != NULL) {?>
             <div class="row">
-                <div class="col-sm-2 card_style"><h4>Section Name</h4><p> 1west</p></div>
-                <div class="col-sm-2 card_style"><h4>Jat/Clone</h4><p> Genus</p></div>
-                <div class="col-sm-2 card_style"><h4>Shade(temp) Species</h4><p>bioregions</p></div>
-                <div class="col-sm-2 card_style"><h4>Shade (perm.) Species</h4><p>Acer saccharum</p></div>
+                <div class="col-sm-2 card_style"><h4>Section Name</h4><p> <?php echo $header['sec_name']; ?> </p></div>
+                <div class="col-sm-2 card_style"><h4>Jat/Clone</h4><p> <?php echo $header['jat']; ?> </p></div>
+                <div class="col-sm-2 card_style"><h4>Shade(temp) Species</h4><p> <?php echo $header['shade_spcs_temp']; ?> </p></div>
+                <div class="col-sm-2 card_style"><h4>Shade (perm.) Species</h4><p> <?php echo $header['shade_spcs_perm']; ?> </p></div>
             </div>
             <div class="row">
-							<div class="col-sm-2 card_style"><h4>Frame(in Inch) HEight</h4><p>10"</p></div>
-							<div class="col-sm-2 card_style"><h4>Bush(in Inch)<br>Height</h4><p> 7"</p></div>
-							<div class="col-sm-2 card_style"><h4>Area</h4>(in Hectare)<p> 120</p></div>
-							<div class="col-sm-2 card_style"><h4>Year of Planting</h4><p> 1972</p></div>
+							<div class="col-sm-2 card_style"><h4>Frame(in Inch) HEight</h4><p> <?php echo htmlentities($header['frame_height']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Bush(in Inch)<br>Height</h4><p> <?php echo htmlentities($header['bush_height']); ?> </p></div>
+			        <div class="col-sm-2 card_style"><h4>Temporary shade spacing</h4><p> <?php echo htmlentities($header['temp_shd_spcing']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Permanent Shade Spacing</h4><p> <?php echo htmlentities($header['perm_shd_spcing']); ?> </p></div>
 						</div>
 						<div class="row">
-							<div class="col-sm-2 card_style"><h4>Plant spacing</h4><p> 3"</p></div>
-			        <div class="col-sm-2 card_style"><h4>TEmporary shade spacing</h4><p> 2"</p></div>
-							<div class="col-sm-2 card_style"><h4>Permanent Shade Spacing</h4><p> 3"</p></div>
-							<div class="col-sm-2 card_style"><h4>Ext./<br>Replant</h4><p> Y</p></div>
+							<div class="col-sm-2 card_style"><h4>Plant spacing</h4><p> <?php echo htmlentities($header['plant_spacing']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Area</h4>(in Hectare)<p> <?php echo htmlentities($header['total_area']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Year of Planting</h4><p> <?php echo htmlentities($header['yr_of_plant']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Ext./<br>Replant</h4><p> <?php echo htmlentities($header['ext_rplnt']); ?> </p></div>
 						</div>
 						<div class="row">
-							<div class="col-sm-2 card_style"><h4>Plant Density</h4><p> Poor</p></div>
-							<div class="col-sm-2 card_style"><h4>Drain-status</h4><p> medium</p></div>
-							<div class="col-sm-2 card_style"><h4>Bush<br>popolation</h4><p> Poor</p></div>
-							<div class="col-sm-2 card_style"><h4>Soil type and<br>topography</h4><p>rich</p></div>
+							<div class="col-sm-2 card_style"><h4>Plant Density per Ha.</h4><p> <?php echo htmlentities($header['plant_density']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Drain-status</h4><p> <?php echo htmlentities($header['drain_stats']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Total Bush<br>popolation</h4><p> <?php echo htmlentities($header['bush_pop']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Soil type and<br>topography</h4><p> <?php echo htmlentities($header['soil_topo']); ?> </p></div>
 						</div>
+
+						<?php
+						}
+						?>
 
             <div class="tab-container" style="margin-top:10px;">
                 <ul class="nav nav-tabs nav-justified">
@@ -117,78 +197,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+																	<?php
+																		if(isset($_POST['yr_sec_submit'])) {
+																			while($prune = mysqli_fetch_assoc($r_prune)) {
+																	?>
                                     <tr>
-
-                                        <td   style="text-align:center">27-06-2015</td>
-                                        <td   style="text-align:center">2</td>
-                                        <td   style="text-align:center">3</td>
-                                        <td   style="text-align:center">4</td>
-                                        <td   style="text-align:center">5</td>
-                                        <td   style="text-align:center">6</td>
-                                        <td   style="text-align:center">7</td>
-                                        <td   style="text-align:center">8</td>
-                                        <td   style="text-align:center">Demand is increasing, Need more labour to prune the land faster.</td>
+                                        <td   style="text-align:center"> <?php echo $prune['year']; ?> </td>
+                                        <td   style="text-align:center"> <?php echo $prune['prune']; ?> </td>
+                                        <td   style="text-align:center"> <?php echo $prune['tipping']; ?> </td>
+                                        <td   style="text-align:center"> <?php echo $prune['made_tea']; ?> </td>
+                                        <td   style="text-align:center"> <?php echo $prune['vacancy']; ?> </td>
+                                        <td   style="text-align:center"> <?php echo $prune['shade_status']; ?> </td>
+                                        <td   style="text-align:center"> <?php echo $prune['infill_tea']; ?> </td>
+                                        <td   style="text-align:center"> <?php echo $prune['infill_shade']; ?> </td>
+                                        <td   style="text-align:center"> <?php echo $prune['remarks']; ?> </td>
                                     </tr>
-                                    <tr>
-
-                                        <td   style="text-align:center">28-06-2015</td>
-                                        <td   style="text-align:center">23</td>
-                                        <td   style="text-align:center">34</td>
-                                        <td   style="text-align:center">45</td>
-                                        <td   style="text-align:center">56</td>
-                                        <td   style="text-align:center">67</td>
-                                        <td   style="text-align:center">78</td>
-                                        <td   style="text-align:center">89</td>
-                                        <td   style="text-align:center">The draining system is not performing properly.</td>
-                                    </tr>
-																		<tr>
-
-                                        <td   style="text-align:center">29-06-2015</td>
-                                        <td   style="text-align:center">23</td>
-                                        <td   style="text-align:center">34</td>
-                                        <td   style="text-align:center">45</td>
-                                        <td   style="text-align:center">56</td>
-                                        <td   style="text-align:center">67</td>
-                                        <td   style="text-align:center">78</td>
-                                        <td   style="text-align:center">89</td>
-                                        <td   style="text-align:center">The draining system is not performing properly.</td>
-                                    </tr>
-																		<tr>
-
-                                        <td   style="text-align:center">30-06-2015</td>
-                                        <td   style="text-align:center">23</td>
-                                        <td   style="text-align:center">34</td>
-                                        <td   style="text-align:center">45</td>
-                                        <td   style="text-align:center">56</td>
-                                        <td   style="text-align:center">67</td>
-                                        <td   style="text-align:center">78</td>
-                                        <td   style="text-align:center">89</td>
-                                        <td   style="text-align:center">The draining system is not performing properly.</td>
-                                    </tr>
-																		<tr>
-
-                                        <td   style="text-align:center">01-07-2015</td>
-                                        <td   style="text-align:center">23</td>
-                                        <td   style="text-align:center">34</td>
-                                        <td   style="text-align:center">45</td>
-                                        <td   style="text-align:center">56</td>
-                                        <td   style="text-align:center">67</td>
-                                        <td   style="text-align:center">78</td>
-                                        <td   style="text-align:center">89</td>
-                                        <td   style="text-align:center">The draining system is not performing properly.</td>
-                                    </tr>
-																		<tr>
-
-                                        <td   style="text-align:center">02-07-2015</td>
-                                        <td   style="text-align:center">23</td>
-                                        <td   style="text-align:center">34</td>
-                                        <td   style="text-align:center">45</td>
-                                        <td   style="text-align:center">56</td>
-                                        <td   style="text-align:center">67</td>
-                                        <td   style="text-align:center">78</td>
-                                        <td   style="text-align:center">89</td>
-                                        <td   style="text-align:center">The draining system is not performing properly.</td>
-                                    </tr>
+																	<?php
+																			}
+																		}
+																	?>
                                 </tbody>
                             </table>
                     </div>
@@ -197,14 +224,12 @@
                             <thead>
                                 <tr>
                                     <th rowspan="2">Year</th>
-                                    <th rowspan="2">Made Tea(in Kg/Ha)</th>
                                     <th colspan="3">Manuring Kg/Ha</th>
                                     <th rowspan="2">Top(in pH)</th>
                                     <th rowspan="2">SUb (in pH)</th>
                                     <th rowspan="2">Org C  (in %)</th>
-                                    <th rowspan="2">Av P(in ppm)</th>
-                                    <th rowspan="2">Av P (in ppm)</th>
-                                    <th rowspan="2">Av k (in ppm)</th>
+                                    <th rowspan="2">Avbl P(in ppm)</th>
+                                    <th rowspan="2">Avbl k (in ppm)</th>
                                     <th rowspan="2">Avbl N (in %)</th>
                                     <th rowspan="2">Avbl S(in ppm)</th>
 
@@ -216,22 +241,27 @@
                                 </tr>
                             </thead>
                             <tbody>
+															<?php
+																if(isset($_POST['yr_sec_submit'])) {
+																	while($soil = mysqli_fetch_assoc($r_soil)) {
+															?>
                                 <tr>
-
-                                    <td   style="text-align:center">1970</td>
-                                    <td   style="text-align:center">2</td>
-                                    <td   style="text-align:center">3</td>
-                                    <td   style="text-align:center">4</td>
-                                    <td   style="text-align:center">5</td>
-                                    <td   style="text-align:center">6</td>
-                                    <td   style="text-align:center">7</td>
-                                    <td   style="text-align:center">8</td>
-                                    <td   style="text-align:center">9</td>
-                                    <td   style="text-align:center">10</td>
-                                    <td   style="text-align:center">11</td>
-                                    <td   style="text-align:center">12</td>
-                                    <td   style="text-align:center">13</td>
+                                    <td   style="text-align:center"> <?php echo $soil['year']; ?> </td>
+                                    <td   style="text-align:center"> <?php echo $soil['n']; ?> </td>
+                                    <td   style="text-align:center"> <?php echo $soil['p']; ?> </td>
+                                    <td   style="text-align:center"> <?php echo $soil['k']; ?> </td>
+                                    <td   style="text-align:center"> <?php echo $soil['top_pH']; ?> </td>
+                                    <td   style="text-align:center"> <?php echo $soil['sub_pH']; ?> </td>
+                                    <td   style="text-align:center"> <?php echo $soil['org_C']; ?> </td>
+                                    <td   style="text-align:center"> <?php echo $soil['avbl_P']; ?> </td>
+                                    <td   style="text-align:center"> <?php echo $soil['avbl_K']; ?> </td>
+                                    <td   style="text-align:center"> <?php echo $soil['avbl_N']; ?> </td>
+                                    <td   style="text-align:center"> <?php echo $soil['avbl_S']; ?> </td>
                                 </tr>
+															<?php
+																	}
+																}
+															?>
                             </tbody>
                         </table>
                     </div>

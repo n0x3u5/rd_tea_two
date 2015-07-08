@@ -97,26 +97,8 @@
                 <h1>Divisional Weather Details </h1>
                 <p></p>
                 <p></p>
-                <!-- <h3 style="color:#fff">Division</h3> -->
-
                 <form style="" action="weather.php" method="post">
-                    <!-- <select id="division" name="div_name" class="form-control input-group" style="height:60%;">
-                    <option></option>
-									  <option <?php //if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
-									  <option <?php //if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
-									  <option <?php //if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
-									  <option <?php //if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
-			              </select> -->
-
 			              <div>
-										<!-- <select id="start_year" name="year_value" class="form-control input-group">
-												<option>Select year</option>
-												<option <?php //if($req_year == 2015) { echo "selected"; }  ?> >2015</option>
-												<option <?php //if($req_year == 2016) { echo "selected"; }  ?> >2016</option>
-												<option <?php //if($req_year == 2017) { echo "selected"; }  ?> >2017</option>
-												<option <?php //if($req_year == 2018) { echo "selected"; }  ?> >2018</option>
-												<option <?php //if($req_year == 2019) { echo "selected"; }  ?> >2019</option>
-										</select> -->
 										<div class="form-group">
 											<p style="color:#B3E5FC">Start date</p>
 											<div class="input-group">
@@ -139,13 +121,9 @@
 												<input type="text" name="end_date_value" class="form-control" id="datepicker2" <?php if($req_end_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_end_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 											</div>
 										</div>
-
 			              </div>
-
                   <button type="submit" name="div_date_submit" class="btn btn-default">Get Data</button>
-
                 </form>
-
             </div>
 
             <div class="card_style" style="background-color:#FFF">
