@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 				<link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+				<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 				<link rel="stylesheet" href="css/stylesheet.css">
 				<style rel="stylesheet">
 					.card_style{
@@ -22,6 +23,11 @@
 						margin-bottom:1%;
 						background-color:#FFFFFF;
 						border-style: outset;
+					}
+					.nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:active, .nav-tabs.nav-justified > .active > a:enabled {
+					background-color: #BF360C !important;
+					border-bottom-color: #5D4037;
+					color: #FFFFFF;
 					}
 				</style>
         <link rel="icon" href="images/logo_rdtea.png"/>
@@ -33,9 +39,31 @@
             nav_echoer($page_id);
         ?>
         <div class="container">
-            <div class="jumbotron" style="background:#303F9F;margin-left:-15px;margin-right: -15px;">
+            <div class="jumbotron" style="background:#FF7043;margin-left:-15px;margin-right: -15px;">
                 <h1>Sectional Review </h1>
-                <p style="color:">(Yearly)</p>
+                <p style="color: #FFFFFF">(Yearly)</p>
+								<form action="" class="form form-horizotal">
+									<div class="row">
+										<div class="form-group col-sm-5">
+											<label for="year">Start Year:</label>
+											<div>
+											<input type="text" id="year1" class="form-control">
+
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-sm-5" >
+											<label for="year2">End Year:</label>
+											<div>
+											<input type="text" id="year2" class="form-control">
+
+											</div>
+										</div>
+									</div>
+
+									<input type="submit" value="Get data" class="btn btn-default">
+							</form>
             </div>
 
             <div class="row">
@@ -71,7 +99,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab1">
                             <table  id="prune_year" class="display table table-hover" border="1" cellspacing="0" width="100%">
-                                <thead  style="background-color:#A5D6A7">
+                                <thead >
                                     <tr>
                                         <th rowspan="2"   style="text-align:center padding:2 0 2 0 ">Year</th>
                                         <th rowspan="2"   style="text-align:center">Prune</th>
@@ -166,7 +194,7 @@
                     </div>
                     <div class="tab-pane" id="tab2">
                         <table  id="soil_year" class="table table-hover display" border="1" cellspacing="0" width="100%">
-                            <thead  style="background-color:#A5D6A7">
+                            <thead>
                                 <tr>
                                     <th rowspan="2">Year</th>
                                     <th rowspan="2">Made Tea(in Kg/Ha)</th>
@@ -216,6 +244,9 @@
         <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
         <script src="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js">
         </script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment-with-locales.min.js"></script>
+				<script src="scripts/bootstrap-datetimepicker.min.js"></script>
+
         <script>
             $(document).ready(function() {
 							$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -228,6 +259,10 @@
 							});
                $('#prune_year').dataTable({"scrollX": true});
                $('#soil_year').dataTable({"scrollX": true});
+							$('#year1, #year2').datetimepicker({
+								locale:'en',
+								format:'YYYY'
+							});
             });
         </script>
     </body>
