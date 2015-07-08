@@ -48,7 +48,15 @@
                         <h4>Enter the following details and hit submit to add a new user to the Information Network.</h4>
                         <div>
                             <form action="form_process_insert.php" class="form-horizontal" method="post">
+
 															<div class="form-group" style="margin-top:30px;">
+																<label for="f_name" class="col-sm-3 control-label">Division:</label>
+																<div class="input-group">
+																    <input class="form-control" name="division" type="text" placeholder="Division" required>
+																    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+																</div>
+															</div>
+															<div class="form-group">
 																<label for="desig" class="col-sm-3 control-label">Designation:</label>
 																<div class="input-group">
 																    <input class="form-control" name="desig" type="text" placeholder="Designation" required>
@@ -79,11 +87,11 @@
 														<div class="form-group">
 															<label for="level" class="col-sm-3 control-label">Level:</label>
 															<div class="input-group">
-																<select class="form-control">
+																<select class="form-control" name = "level">
 																	<option value="NULL">Select level</option>
-																	<option>1</option>
-																	<option>2</option>
-																	<option>3</option>
+																	<option value = "1">1</option>
+																	<option value = "2">2</option>
+																	<option value = "3">3</option>
 																</select>
 																	<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 															</div>

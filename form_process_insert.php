@@ -11,14 +11,15 @@
 	//$query = "SELECT * FROM users";
 
 	//$id = mysqli_insert_id($connection) + 1;
-	$designation = $_POST["desig"];
-	$first_name = $_POST["f_name"];
-	$middle_name = $_POST["m_name"];
-	$last_name = $_POST["l_name"];
-	$level=$_POST["level"];
-	$e_mail = $_POST["email"];
-	$passwd = $_POST["pwd"];//password_encrypt($_POST["pwd"]);
-	$cnfpwd = $_POST["cnfpwd"];//password_encrypt($_POST["cnfpwd"]);
+	$division = mysqli_real_escape_string($connection, $_POST["division"]);
+	$designation = mysqli_real_escape_string($connection, $_POST["desig"]);
+	$first_name = mysqli_real_escape_string($connection, $_POST["f_name"]);
+	$middle_name = mysqli_real_escape_string($connection, $_POST["m_name"]);
+	$last_name = mysqli_real_escape_string($connection, $_POST["l_name"]);
+	$level = (int) mysqli_real_escape_string($connection, $_POST["level"]);
+	$e_mail = mysqli_real_escape_string($connection, $_POST["email"]);
+	$passwd = mysqli_real_escape_string($connection, $_POST["pwd"]);//password_encrypt($_POST["pwd"]);
+	$cnfpwd = mysqli_real_escape_string($connection, $_POST["cnfpwd"]);//password_encrypt($_POST["cnfpwd"]);
 
 	if( $passwd == $cnfpwd){
 		if(strlen($passwd) >= 5 && strlen($passwd) <= 15) {
@@ -28,11 +29,11 @@
 
 				//2. perform database query
 				$query = "INSERT INTO users (";
-				$query .= "designation, level,";
+				$query .= "division, designation, level,";
 				$query .= " first_name, middle_name, last_name,";
 				$query .= " e_mail, password";
 				$query .= ") VALUES (";
-				$query .= "'{$designation}', {$level},";
+				$query .= "'{$division}', '{$designation}', {$level},";
 				$query .= " '{$first_name}', '{$middle_name}', '{$last_name}',";
 				$query .= " '{$e_mail}', '{$hash_passwd}'";
 				$query .= ")";
