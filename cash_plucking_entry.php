@@ -20,11 +20,12 @@
 
 		$_SESSION['cp_record'] = mysqli_fetch_assoc($result);
 	  //var_dump($_SESSION['cp_record']);
-
+		$set = 1;
 	}
 	else {
 		$req_date = NULL;
 		$result = NULL;
+		$set =0;
 	}
 
 	if(isset($_POST['add_submit'])) {
@@ -43,12 +44,20 @@
 		$r_in = mysqli_query($connection, $q_in);
 		confirm_query($r_in);
 
-		if(mysqli_affected_rows($connection) > 0) {
-			echo "Inserted Successfully!";
-		}
-		else {
-			echo "No record affected! Check your Submission Properly!";
-		}
+		if(mysqli_affected_rows($connection) > 0) { ?>
+			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+  			<strong>Success!</strong> Inserted Successfully!
+			</div>
+		<?php }
+		else { ?>
+			<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Sorry!</strong> No row affected!
+			</div>
+
+
+		<?php }
 
 		$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
 
@@ -56,9 +65,12 @@
 
 
  if(isset($_POST['edit_submit'])) {
-
 	$rec_dt = $_SESSION['date'];
-	$rec_id = $_SESSION['cp_record']['id'];
+	if(isset($rec_id)) {
+		$rec_id = $_SESSION['cp_record']['id'];
+	} else {
+		$rec_id = 0;
+	}
 
 	$cpp_qty = (int) mysqli_real_escape_string($connection, $_POST['cpp_qty1']);
 	$cpp_bal = (int) mysqli_real_escape_string($connection, $_POST['cpp_bal1']);
@@ -72,12 +84,18 @@
 	$r_in = mysqli_query($connection, $q_in);
 	confirm_query($r_in);
 
-	if(mysqli_affected_rows($connection) > 0) {
-		echo "Updated Successfully!";
-	}
-	else {
-		echo "No record affected! Check your Submission Properly!";
-	}
+	if(mysqli_affected_rows($connection) > 0) { ?>
+		<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+			<strong>Success!</strong> Edited Successfully!
+		</div>
+	<?php }
+	else { ?>
+		<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+			<strong>Sorry!</strong> No row affected!
+		</div>
+<?php }
 
 	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
 
@@ -85,20 +103,30 @@
 
  if(isset($_POST['del_entry'])) {
 	$rec_dt = $_SESSION['date'];
-	$rec_id = $_SESSION['cp_record']['id'];
 
-	$q_del = "DELETE FROM leaf_chit_table WHERE id='{$rec_id}'";
-	//var_dump($q_del);
+	if(isset($_SESSION['cp_record'])) {
+		$rec_id = $_SESSION['cp_record']['id'];
+	} else {
+		$rec_id = 0;
+	}
+
+	$q_del = "DELETE FROM leaf_chit_table WHERE id={$rec_id}";
 
 	$r_del = mysqli_query($connection, $q_del);
   confirm_query($r_del);
 
-	if(mysqli_affected_rows($connection) > 0) {
-		echo "Deleted Successfully!";
-	}
-	else {
-		echo "No record affected! Check your Submission Properly!";
-	}
+	if(mysqli_affected_rows($connection) > 0) { ?>
+		<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+			<strong>Success!</strong> Deleted Successfully!
+		</div>
+	<?php }
+	else { ?>
+		<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+			<strong>Sorry!</strong> No row affected!
+		</div>
+<?php }
 
 	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
 
@@ -160,12 +188,12 @@
             </div>
 			<div class="tab-container">
 	            <ul class="nav nav-tabs nav-justified">
-	                <li class="active" id="actv_one"><a href="#tab1" data-toggle="tab" id="link_one">Edit Entry</a></li>
+	                <li id="actv_one"><a href="#tab1" data-toggle="tab" id="link_one">Edit Entry</a></li>
 	                <li id="actv_two"><a href="#tab2" data-toggle="tab" id="link_two">Add Entry</a></li>
 	            </ul>
 				<div class="tab-content" style="background-color:#FFFFFF">
 
-					<div class="tab-pane active" id="tab1">
+					<div class="tab-pane" id="tab1">
 						<form class="form-horizontal" action="cash_plucking_entry.php" method="post">
 							<?php if(isset($_SESSION['cp_record'])) { $rec = $_SESSION['cp_record']; } else { $rec = NULL; }?>
 							<div class="form-group">
@@ -197,13 +225,13 @@
 							<div class="form-group">
 								<label for="cp_hr_from" class="col-sm-3 control-label timepicker">Start Time (CashPlucking):</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="start_time1" id="cp_hr_from1" name="cp_hr_from1" <?php if(isset($rec)) {?>value="<?php echo $rec['time_from']; ?>" <?php } else {?>placeholder=<?php  echo "\"hh:mm P\""?> <?php } ?>>
+									<input type="text" class="form-control" name="start_time1" id="cp_hr_from1" name="cp_hr_from1" <?php if(isset($rec)) {?>value="<?php $set2 = 1; echo $rec['time_from']; ?>" <?php } else {?>placeholder=<?php $set2 = 2; echo "\"hh:mm P\""?> <?php } ?> required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cp_hr_to" class="col-sm-3 control-label">End Time (CashPlucking):</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="end_time1" id="cp_hr_to1" name="cp_hr_to1" <?php if(isset($rec)) {?>value="<?php echo $rec['time_to']; ?>" <?php } else {?>placeholder=<?php  echo "\"hh:mm P\""?> <?php } ?>>
+									<input type="text" class="form-control" name="end_time1" id="cp_hr_to1" name="cp_hr_to1" <?php if(isset($rec)) {?>value="<?php echo $rec['time_to']; ?>" <?php } else {?>placeholder=<?php  echo "\"hh:mm P\""?> <?php } ?> required>
 								</div>
 							</div>
 							<div class="row">
@@ -267,13 +295,13 @@
 							<div class="form-group">
 								<label for="cp_hr_from" class="col-sm-3 control-label">Start Time (CashPlucking):</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="start_time2" id="cp_hr_from2" placeholder="hh:mm P">
+									<input type="text" class="form-control" name="start_time2" id="cp_hr_from2" placeholder="hh:mm P" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="cp_hr_to" class="col-sm-3 control-label">End Time (CashPlucking):</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="end_time2" id="cp_hr_to2" placeholder="hh:mm P">
+									<input type="text" class="form-control" name="end_time2" id="cp_hr_to2" placeholder="hh:mm P" required>
 								</div>
 							</div>
 
@@ -338,6 +366,42 @@
 				});
 
 		</script>
+		<script>
+
+			document.getElementById('link_one').disabled=true;
+			document.getElementById('link_two').disabled=true;
+
+		</script>
+		<?php
+		if(isset($set2)){
+		echo"<script>		var submit_chk=$set2; submit_chk2=$set; </script>";}
+		?>
+
+					<script>
+
+						if(submit_chk==1 && submit_chk2)
+							{
+								document.getElementById('link_one').disabled=false;
+								var a1=document.getElementById('tab1');
+								a1.setAttribute('class','active');
+								var b1=document.getElementById('actv_one');
+								b1.style.background='#4A148C';
+								var c1=document.getElementById('link_one');
+								c1.style.color='#FFFFFF';
+
+
+							}
+						if(submit_chk==2 && submit_chk2){
+								document.getElementById('link_two').disabled=false;
+								var a2=document.getElementById('tab2');
+								a2.setAttribute('class','active');
+								var b2=document.getElementById('actv_two');
+								b2.style.background='#4A148C';
+								var c2=document.getElementById('link_two');
+								c2.style.color='#FFFFFF';
+							}
+
+					</script>
 
 	  </body>
 </html>

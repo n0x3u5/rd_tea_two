@@ -67,12 +67,20 @@
 	$r_in = mysqli_query($connection, $q_in);
 	confirm_query($r_in);
 
-	if(mysqli_affected_rows($connection) > 0) {
-		echo "Inserted Successfully!";
-	}
-	else {
-		echo "No record affected! Check your Submission Properly!";
-	}
+	if(mysqli_affected_rows($connection) > 0) { ?>
+		<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+			<strong>Success!</strong> Inserted Successfully!
+		</div>
+	<?php }
+	else { ?>
+		<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+			<strong>Sorry!</strong> No row affected!
+		</div>
+
+
+	<?php }
 
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
 
@@ -104,13 +112,18 @@
 	$r_up = mysqli_query($connection, $q_up);
 	confirm_query($r_up);
 
-	if(mysqli_affected_rows($connection) > 0) {
-		echo "Updated Successfully!";
-	}
-	else {
-		echo "No record affected! Check your Submission Properly!";
-	}
-
+	if(mysqli_affected_rows($connection) > 0) { ?>
+		<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+			<strong>Success!</strong> Edited Successfully!
+		</div>
+	<?php }
+	else { ?>
+		<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+			<strong>Sorry!</strong> No row affected!
+		</div>
+	<?php }
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
 
  }
@@ -125,12 +138,18 @@
 	$r_del = mysqli_query($connection, $q_del);
   confirm_query($r_del);
 
-	if(mysqli_affected_rows($connection) > 0) {
-		echo "Deleted Successfully!";
-	}
-	else {
-		echo "No record affected! Check your Submission Properly!";
-	}
+	if(mysqli_affected_rows($connection) > 0) { ?>
+		<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+			<strong>Success!</strong> Deleted Successfully!
+		</div>
+	<?php }
+	else { ?>
+		<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+			<strong>Sorry!</strong> No row affected!
+		</div>
+<?php }
 
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
 
@@ -232,7 +251,9 @@
 								<label for="short_sec_name" class="col-sm-3 control-label">Short Section Name:</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="short_sec_name1" name="short_sec_name" <?php if (isset($daily)) { $csv = comma_sep_val($daily['short_sec_name']); $set2 = 1;?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php $set2 = 2; echo "\"Select section name.\""; ?><?php } //comma separeted value?>  >
+
 								</div>
+								<p class="text-danger"> * Use commas or tabs</p>
 							</div>
 							<div class="form-group">
 
@@ -241,6 +262,7 @@
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="dt_lst_plkd1" name="dt_lst_plkd" <?php if (isset($daily)) { $csv = comma_sep_val($daily['dt_lst_plkd']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Date (dd-mm-yyyy)\""; ?><?php } //comma separeted value ?> >
 								</div>
+								<p class="text-danger"> * Use commas or tabs</p>
 							</div>
 							<div class="form-group">
 								<label for="plkd_area" class="col-sm-3 control-label">Area Plucked:</label>
@@ -266,6 +288,7 @@
 
 									<input type="text" class="form-control" id="task1" name="task" <?php if(isset($daily)) { $csv = comma_sep_val($daily['task']); ?>value="<?php echo $csv; ?>" <?php } else {?>placeholder=<?php  echo "\"Task\""?> <?php } ?>  >
 								</div>
+								<p class="text-danger"> * Use commas or tabs</p>
 							</div>
 							<div class="form-group">
 							  <label for="ballo_count" class="col-sm-3 control-label">Ballometer Count:</label>
@@ -312,43 +335,46 @@
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="short_sec_name2" name="short_sec_name">
 								</div>
+								<p class="text-danger"> * Use commas or tabs</p>
 							</div>
 							<div class="form-group">
 
 								<label for="dt_lst_plkd" class="col-sm-3 control-label">Date Last Plucked:</label>
 
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="dt_lst_plkd2" name="dt_lst_plkd">
+									<input type="text" class="form-control" id="dt_lst_plkd2" name="dt_lst_plkd" required>
 								</div>
+								<p class="text-danger"> * Use commas or tabs</p>
 							</div>
 							<div class="form-group">
 								<label for="plkd_area" class="col-sm-3 control-label">Area Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="plkd_area2" name="plkd_area">
+									<input type="text" class="form-control" id="plkd_area2" name="plkd_area" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="leaf" class="col-sm-3 control-label">Leaf Plucked:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="leaf2" name="plkd_leaf">
+									<input type="text" class="form-control" id="leaf2" name="plkd_leaf" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="mandays" class="col-sm-3 control-label">Mandays:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="mandays2" name="mandays">
+									<input type="text" class="form-control" id="mandays2" name="mandays" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="task" class="col-sm-3 control-label">Task:</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="task2" name="task">
+									<input type="text" class="form-control" id="task2" name="task" required>
 								</div>
+								<p class="text-danger"> * Use commas or tabs</p>
 							</div>
 							<div class="form-group">
 							  <label for="ballo_count" class="col-sm-3 control-label">Ballometer Count:</label>
 							  <div class="col-sm-4">
-							    <input type="text" class="form-control" id="ballo_count2" name="ballo_count">
+							    <input type="text" class="form-control" id="ballo_count2" name="ballo_count" required>
 							  </div>
 							</div>
 

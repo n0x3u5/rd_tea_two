@@ -56,12 +56,20 @@
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
-		if(mysqli_affected_rows($connection) > 0) {
-			echo "Inserted Successfully!";
-		}
-		else {
-			echo "No record affected! Check your input!";
-		}
+		if(mysqli_affected_rows($connection) > 0) { ?>
+			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+  			<strong>Success!</strong> Inserted Successfully!
+			</div>
+		<?php }
+		else { ?>
+			<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Sorry!</strong> No row affected!
+			</div>
+
+
+		<?php }
 
 		$q = "select * from weather_change where id = (select max(id) from weather_change)";
 		$r = mysqli_query($connection, $q);
@@ -102,13 +110,18 @@
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
-		if(mysqli_affected_rows($connection) > 0) {
-			echo "Updated Successfully!";
-		}
-		else {
-			echo "No record affected! Check your input!";
-		}
-
+		if(mysqli_affected_rows($connection) > 0) { ?>
+			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+  			<strong>Success!</strong> Edited Successfully!
+			</div>
+		<?php }
+		else { ?>
+			<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Sorry!</strong> No row affected!
+			</div>
+<?php }
 		$q = "select * from weather_change where id = (select max(id) from weather_change)";
 		$r = mysqli_query($connection, $q);
 		confirm_query($r);
@@ -131,13 +144,18 @@
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
-		if(mysqli_affected_rows($connection) > 0) {
-			echo "Deleted Successfully!";
-		}
-		else {
-			echo "No record affected! Check your input!";
-		}
-
+		if(mysqli_affected_rows($connection) > 0) { ?>
+			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+  			<strong>Success!</strong> Deleted Successfully!
+			</div>
+		<?php }
+		else { ?>
+			<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Sorry!</strong> No row affected!
+			</div>
+<?php }
 		$q = "select * from weather_change where id = (select max(id) from weather_change)";
 		$r = mysqli_query($connection, $q);
 		confirm_query($r);
@@ -253,8 +271,26 @@
                         <label for="weath_cond">Weather Condition</label>
                         <input type="text" name="weather_cond"  <?php if (isset($daily)) { ?> value="<?php echo $daily['weather_cond']; ?>" <?php } else { ?> placeholder= <?php echo "\"Weather Condition\""; ?> <?php } ?>  class="form form-control weath_cond">
                       </div>
-                      <input type="submit" id="edit_weather" name="edit_submit" class="btn btn-success" value="Edit Entry" style="margin:10px 0 10px 0px;position:relative;" onclick="edit_check()">
-                      <input type="submit" id="delete_weather" name="del_entry" class="btn btn-danger" value="Delete Entry">
+                      <input type="submit" id="edit_weather" name="edit_submit" class="btn btn-success" value="Edit Entry" style="margin:10px 0 10px 0px;position:relative;">
+                      <input type="button" id="delete_weather" class="btn btn-danger" value="Delete Entry"  data-toggle="modal" data-target="#deleteModal">
+											<!-- Modal -->
+												<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												  <div class="modal-dialog" role="document">
+												    <div class="modal-content">
+												      <div class="modal-header">
+												        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												        <h4 class="modal-title" id="myModalLabel">Remove Entry</h4>
+												      </div>
+												      <div class="modal-body">
+												        Are really sure?
+												      </div>
+												      <div class="modal-footer">
+												        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												        <input type="submit" name="del_entry" class="btn btn-danger" value="Yes! Delete it!">
+												      </div>
+												    </div>
+												  </div>
+												</div>
                   </form>
                 </div>
 

@@ -35,12 +35,14 @@
 
 		$_SESSION['prune_infill'] = mysqli_fetch_assoc($r_prune);
 		// var_dump($_SESSION['prune_infill']);
+		$set = 1;
 	}
 	else {
 		$req_date = NULL;
 		$req_ssn = NULL;
 		$r_soil = NULL;
 		$r_prune = NULL;
+		$set = 0;
 	}
 ?>
 
@@ -49,7 +51,7 @@
 		$short_sec_name = $_SESSION['ssn'];
 		$year = $_SESSION['yr'];
 
-		$prune = mysqli_real_escape_string($connection, $_POST['prune']);
+		// $prune = mysqli_real_escape_string($connection, $_POST['prune']);
 		$tipping = mysqli_real_escape_string($connection, $_POST['tipping']);
 		$made_tea = mysqli_real_escape_string($connection, $_POST['made_tea']);
 		$vacancy = (float) mysqli_real_escape_string($connection, $_POST['vacancy']);
@@ -69,7 +71,7 @@
 		$avbl_N = mysqli_real_escape_string($connection, $_POST['avbl_N']);
 		$avbl_S = mysqli_real_escape_string($connection, $_POST['avbl_S']);
 
-		$q_prune_in = "INSERT INTO yearly_prune_infilling (short_sec_name, year, prune, tipping, made_tea, vacancy, shade_status, infill_tea, infill_shade, remarks) VALUES ('{$short_sec_name}', {$year}, '{$prune}', '{$tipping}', {$made_tea}, {$vacancy}, '{$shade_status}', {$infill_tea}, {$infill_shade}, '{$remarks}')";
+		$q_prune_in = "INSERT INTO yearly_prune_infilling (short_sec_name, year, tipping, made_tea, vacancy, shade_status, infill_tea, infill_shade, remarks) VALUES ('{$short_sec_name}', {$year}, '{$tipping}', {$made_tea}, {$vacancy}, '{$shade_status}', {$infill_tea}, {$infill_shade}, '{$remarks}')";
 
 		$r_prune_in = mysqli_query($connection, $q_prune_in);
 		confirm_query($r_prune_in);
@@ -93,12 +95,19 @@
 			$flag_soil = 0;
 		}
 
-		if($flag_soil == 1 || $flag_prune == 1) {
-			echo "Inserted Successfully!";
-		}
-		elseif ($flag_soil == 0 && $flag_prune == 0) {
-			echo "No record affected! Check your Submission Properly!";
-		}
+		if($flag_soil == 1 || $flag_prune == 1) {?>
+			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Success!</strong> Inserted Successfully!
+			</div>
+		<?php }
+		elseif ($flag_soil == 0 && $flag_prune == 0) { ?>
+			<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Sorry!</strong> No row affected!
+			</div>
+
+		<?php }
 
 		$_SESSION['soil_manure'] = NULL;
 		$_SESSION['prune_infill'] = NULL;
@@ -115,7 +124,7 @@
 		$prune_id = $_SESSION['prune_infill']['id'];
 
 
-		$prune = mysqli_real_escape_string($connection, $_POST['prune']);
+		//$prune = mysqli_real_escape_string($connection, $_POST['prune']);
 		$tipping = mysqli_real_escape_string($connection, $_POST['tipping']);
 		$made_tea = mysqli_real_escape_string($connection, $_POST['made_tea']);
 		$vacancy = (float) mysqli_real_escape_string($connection, $_POST['vacancy']);
@@ -135,7 +144,7 @@
 		$avbl_N = mysqli_real_escape_string($connection, $_POST['avbl_N']);
 		$avbl_S = mysqli_real_escape_string($connection, $_POST['avbl_S']);
 
-		$q_prune_up = "UPDATE yearly_prune_infilling SET short_sec_name='{$short_sec_name}', year={$year}, prune='{$prune}', tipping='{$tipping}', made_tea={$made_tea}, vacancy={$vacancy}, shade_status='{$shade_status}', infill_tea={$infill_tea}, infill_shade={$infill_shade}, remarks='{$remarks}' WHERE id = {$prune_id}";
+		$q_prune_up = "UPDATE yearly_prune_infilling SET short_sec_name='{$short_sec_name}', year={$year}, tipping='{$tipping}', made_tea={$made_tea}, vacancy={$vacancy}, shade_status='{$shade_status}', infill_tea={$infill_tea}, infill_shade={$infill_shade}, remarks='{$remarks}' WHERE id = {$prune_id}";
 
 		$r_prune_up = mysqli_query($connection, $q_prune_up);
 		confirm_query($r_prune_up);
@@ -159,12 +168,18 @@
 			$flag_soil = 0;
 		}
 
-		if($flag_soil == 1 || $flag_prune == 1) {
-			echo "Updated Successfully!";
-		}
-		elseif ($flag_soil == 0 && $flag_prune == 0) {
-			echo "No record affected! Check your Submission Properly!";
-		}
+		if($flag_soil == 1 || $flag_prune == 1) {?>
+			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Success!</strong> Edited Successfully!
+			</div>
+		<?php }
+		elseif ($flag_soil == 0 && $flag_prune == 0) { ?>
+			<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Sorry!</strong> No row affected!
+			</div>
+		<?php }
 
 		$_SESSION['soil_manure'] = NULL;
 		$_SESSION['prune_infill'] = NULL;
@@ -202,12 +217,18 @@
 			$flag_soil = 0;
 		}
 
-		if($flag_soil == 1 || $flag_prune == 1) {
-			echo "Deleted Successfully!";
-		}
-		elseif ($flag_soil == 0 && $flag_prune == 0) {
-			echo "No record affected! Check your Submission Properly!";
-		}
+		if($flag_soil == 1 || $flag_prune == 1) {?>
+			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Success!</strong> Deleted Successfully!
+			</div>
+		<?php }
+		elseif ($flag_soil == 0 && $flag_prune == 0) {?>
+			<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Sorry!</strong> No row affected!
+			</div>
+		<?php }
 
 		$_SESSION['soil_manure'] = NULL;
 		$_SESSION['prune_infill'] = NULL;
@@ -272,7 +293,7 @@
                       <div class="form-group col-sm-6">
                         <label for="section">Select section:</label>
                         <div>
-													<select id="division" name ="short_sec_name" class="form-control" onchange="enable_add()" >
+													<select id="section" name ="short_sec_name" class="form-control" onchange="enable_add()" >
 														<?php
 																$q = "SELECT * FROM sections";
 																$result = mysqli_query($connection, $q);
@@ -308,14 +329,14 @@
               </div>
   			<div class="tab-container">
   	            <ul class="nav nav-tabs nav-justified">
-  	                <li class="active" id="actv_one"><a href="#tab1" data-toggle="tab" id="link_one">Edit Entry</a></li>
+  	                <li id="actv_one"><a href="#tab1" data-toggle="tab" id="link_one">Edit Entry</a></li>
   	                <li id="actv_two"><a href="#tab2" data-toggle="tab" id="link_two">Add Entry</a></li>
   	            </ul>
   				<div class="tab-content" style="background-color:#FFFFFF">
 
 
 
-  					<div class="tab-pane active" id="tab1">
+  					<div class="tab-pane" id="tab1">
   						<form class="form-horizontal" action="yearly_sectional_entry.php" method="post">
 								<?php
 									if(isset($_SESSION['prune_infill']) && isset($_SESSION['soil_manure'])) {
@@ -327,7 +348,7 @@
   							<div class="form-group">
   								<label for="tipp1" class="col-sm-3 control-label">Tipping:</label>
   								<div class="col-sm-4">
-  									<input type="text" name="tipping" class="form-control" id="tipp1" <?php if(isset($fill_prune)) { ?> value="<?php echo htmlentities($fill_prune['tipping']); ?>"<?php } else { ?>placeholder=<?php echo "\"Tipping\""; ?> <?php } ?> >
+  									<input type="text" name="tipping" class="form-control" id="tipp1" <?php if(isset($fill_prune)) { ?> value="<?php  $set2 = 1; echo htmlentities($fill_prune['tipping']); ?>"<?php } else { ?>placeholder=<?php $set2 = 2; echo "\"Tipping\""; ?> <?php } ?> >
   								</div>
   							</div>
   							<div class="form-group">
@@ -463,13 +484,13 @@
   							<div class="form-group">
   								<label for="tipp" class="col-sm-3 control-label">Tipping:</label>
   								<div class="col-sm-4">
-  									<input type="text" name="tipping" placeholder="Tipping" class="form-control" id="tipp">
+  									<input type="text" name="tipping" placeholder="Tipping" class="form-control" id="tipp" required>
   								</div>
   							</div>
   							<div class="form-group">
   								<label for="Md_tea" class="col-sm-3 control-label">Made Tea (Kg/Ha):</label>
   								<div class="col-sm-4">
-  									<input type="text" name="made_tea" placeholder="Made Tea (Kg/Ha)" class="form-control" id="Md_tea" >
+  									<input type="text" name="made_tea" placeholder="Made Tea (Kg/Ha)" class="form-control" id="Md_tea" required>
   								</div>
   							</div>
   							<div class="form-group">
@@ -481,7 +502,7 @@
   							<div class="form-group">
   								<label for="shd_sts" class="col-sm-3 control-label">Shade Status:</label>
   								<div class="col-sm-4">
-  									<input type="text" class="form-control" placeholder="Shade Status" id="shd_sts" name="shade_status">
+  									<input type="text" class="form-control" placeholder="Shade Status" id="shd_sts" name="shade_status" required>
   								</div>
   							</div>
   							<div class="form-group">
@@ -497,39 +518,39 @@
                   </div>
                 </div>
 								<div class="form-group">
-									<label for="man_n2" class="col-sm-3 control-label">N (Manuring):</label>
+									<label for="man_n2" class="col-sm-3 control-label">N Dose (Manuring):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" placeholder="N (Manuring)" id="man_n2" name="n">
+										<input type="text" class="form-control" placeholder="N (Manuring)" id="man_n2" name="n" >
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="man_p2" class="col-sm-3 control-label">P (Manuring):</label>
+									<label for="man_p2" class="col-sm-3 control-label">P Dose (Manuring):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="man_p2" placeholder="P (Manuring)" name="p">
+										<input type="text" class="form-control" id="man_p2" placeholder="P (Manuring)" name="p" required>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="man_k2" class="col-sm-3 control-label">K (Manuring):</label>
+									<label for="man_k2" class="col-sm-3 control-label">K Dose (Manuring):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="man_k2" placeholder="K (Manuring)" name="k">
+										<input type="text" class="form-control" id="man_k2" placeholder="K (Manuring)" name="k" >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="top2" class="col-sm-3 control-label">Top (in pH):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="top2" placeholder="Top (in pH)" name="top_pH">
+										<input type="text" class="form-control" id="top2" placeholder="Top (in pH)" name="top_pH" >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="sub2" class="col-sm-3 control-label">Sub (in pH):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="sub2" placeholder="Sub (in pH)" name="sub_pH">
+										<input type="text" class="form-control" id="sub2" placeholder="Sub (in pH)" name="sub_pH" >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="orgc2" class="col-sm-3 control-label">Org C (in %):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="orgc2" placeholder="Org C" name="org_C">
+										<input type="text" class="form-control" id="orgc2" placeholder="Org C" name="org_C" >
 									</div>
 								</div>
 								<div class="form-group">
@@ -547,13 +568,13 @@
 								<div class="form-group">
 									<label for="avbln2" class="col-sm-3 control-label">Avbl N (in ppm):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="avbln2" placeholder="Avbl N" name="avbl_N">
+										<input type="text" class="form-control" id="avbln2" placeholder="Avbl N" name="avbl_N" >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="avbls2" class="col-sm-3 control-label">Avbl S (in ppm):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="avbls2" placeholder="Avbl S" name="avbl_S">
+										<input type="text" class="form-control" id="avbls2" placeholder="Avbl S" name="avbl_S" >
 									</div>
 								</div>
                 <div class="form-group">
@@ -582,5 +603,54 @@
 				});
 			});
       </script>
+			<script>
+				document.getElementById('select_sec_date').disabled=true;
+				document.getElementById('link_one').disabled=true;
+				document.getElementById('link_two').disabled=true;
+				if(document.getElementById('section').value!='Select a section')
+				{
+					document.getElementById('select_sec_date').disabled=false;
+				}
+				function enable_add(){
+						if(document.getElementById('section').value!='Select a section')
+					{
+						document.getElementById('select_sec_date').disabled=false;
+					}
+					else {
+						document.getElementById('select_sec_date').disabled=true;
+					}
+				}
+
+			</script>
+			<?php
+			if(isset($set2)){
+			echo"<script>		var submit_chk=$set2; submit_chk2=$set; </script>";}
+			?>
+
+						<script>
+
+							if(submit_chk==1 && submit_chk2)
+								{
+									document.getElementById('link_one').disabled=false;
+									var a1=document.getElementById('tab1');
+									a1.setAttribute('class','active');
+									var b1=document.getElementById('actv_one');
+									b1.style.background='#4A148C';
+									var c1=document.getElementById('link_one');
+									c1.style.color='#FFFFFF';
+
+
+								}
+							if(submit_chk==2 && submit_chk2){
+									document.getElementById('link_two').disabled=false;
+									var a2=document.getElementById('tab2');
+									a2.setAttribute('class','active');
+									var b2=document.getElementById('actv_two');
+									b2.style.background='#4A148C';
+									var c2=document.getElementById('link_two');
+									c2.style.color='#FFFFFF';
+								}
+
+						</script>
     </body>
 </html>

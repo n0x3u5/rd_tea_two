@@ -81,6 +81,7 @@ else {
 					border-bottom-color: #5D4037;
 					color: #FFFFFF;
 					}
+
 				</style>
         <link rel="icon" href="images/logo_rdtea.png"/>
         <?php $page_id = 4;?>
@@ -91,13 +92,13 @@ else {
             nav_echoer($page_id);
         ?>
         <div class="container">
-            <div class="jumbotron" style="background:#FF7043;margin-left:-15px;margin-right: -15px;">
-                <h1>Sectional Review </h1>
-                <p style="color: #FFFFFF">(Yearly)</p>
+            <div class="jumbotron" style="background:#FFA000;margin-left:-15px;margin-right: -15px;">
+                <h1 style="color:#3A3A3D">Sectional Review </h1>
+                <p style="color:#3A3A3D">(Yearly)</p>
 								<form action="sectional_yearly_review.php" class="form form-horizotal" method="post">
 									<div class="row">
 										<div class="form-group col-sm-5">
-											<label for="section">Select section:</label>
+											<label for="section" style="color:#FFF8E1">Select section:</label>
 											<div>
 												<select id="division" name ="short_sec_name" class="form-control" >
 													 <?php
@@ -119,7 +120,7 @@ else {
 									</div>
 									<div class="row">
 										<div class="form-group col-sm-5" >
-											<label for="year1">Start Year:</label>
+											<label for="year1" style="color:#FFF8E1">Start Year:</label>
 											<div>
 											<input type="text" id="year1" class="form-control" name="start_yr"<?php if($req_start_yr != NULL) { ?> value="<?php echo "$req_start_yr"; ?>"<?php } else {?>  placeholder=<?php echo "\"Select start Year\""; ?><?php } ?> required>
 
@@ -129,7 +130,7 @@ else {
 
 									<div class="row">
 										<div class="form-group col-sm-5" >
-											<label for="year2">End Year:</label>
+											<label for="year2" style="color:#FFF8E1">End Year:</label>
 											<div>
 											<input type="text" id="year1" class="form-control" name="end_yr"<?php if($req_end_yr != NULL) { ?> value="<?php echo "$req_end_yr"; ?>"<?php } else {?>  placeholder=<?php echo "\"Select end Year\""; ?><?php } ?> required>
 
@@ -182,7 +183,7 @@ else {
                                 <thead >
                                     <tr>
                                         <th rowspan="2"   style="text-align:center padding:2 0 2 0 ">Year</th>
-                                        <th rowspan="2"   style="text-align:center">Prune</th>
+                                        <!-- <th rowspan="2"   style="text-align:center">Prune</th> -->
                                         <th rowspan="2"   style="text-align:center">Tipping</th>
                                         <th rowspan="2"   style="text-align:center">Made Tea<br>(in Kg/Ha)</th>
                                         <th rowspan="2"   style="text-align:center">Vacancy<br>(in %)</th>
@@ -200,10 +201,11 @@ else {
 																	<?php
 																		if(isset($_POST['yr_sec_submit'])) {
 																			while($prune = mysqli_fetch_assoc($r_prune)) {
+
 																	?>
                                     <tr>
                                         <td   style="text-align:center"> <?php echo $prune['year']; ?> </td>
-                                        <td   style="text-align:center"> <?php echo $prune['prune']; ?> </td>
+                                        <!-- <td   style="text-align:center"> <?php //echo $prune['prune']; ?> </td> -->
                                         <td   style="text-align:center"> <?php echo $prune['tipping']; ?> </td>
                                         <td   style="text-align:center"> <?php echo $prune['made_tea']; ?> </td>
                                         <td   style="text-align:center"> <?php echo $prune['vacancy']; ?> </td>

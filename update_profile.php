@@ -79,26 +79,40 @@
 
 							//mysqli_free_result($result);
 					}
-					else {
-						echo "Your password lengthe must be of 5 to 15 charecters!";
-
-						$check_flag = 0;
+					else { ?>
+						<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+							<strong>Stronger your passowrd!</strong> Add a password of length in between 5 to 15 !
+						</div>
+					<?php	$check_flag = 0;
 					}
 			}
-			else {
-				echo "npwd and cnfpwd missmatch!";
-				$check_flag = 0;
+			else { ?>
+				<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+					<strong>Password missmatch!</strong> Make sure the passowrd you have retyped is the same!
+				</div>
+
+				<?php $check_flag = 0;
 			}
 		}
-		else{
-			echo "old pwd mismatch!";
-			$check_flag = 0;
+		else{ ?>
+			<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Wrong Password!</strong> Your password is incorrect!
+			</div>
+
+			<?php $check_flag = 0;
 		}
 	}
+	if($check_flag==1)
+	{?>
+		<div class=" container alert alert-success alert-dismissible" role="alert" style="border-color:green">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+			<strong>Success!</strong> Your Profile is updated, The changes will be shown after the next login.
+		</div>
 
-
-
-?>
+	<?php } ?>
 
 <!DOCTYPE html>
 <html>
@@ -161,12 +175,7 @@
                     </div>
                 </form>
 
-								<?php
-									echo"<script>
-										if(  $check_flag===1 )
-										{	window.alert('Update successful! The updated information will be displayed on your next log in!');	}
-											</script>";
-									?>
+
 
             </div>
         </div>
