@@ -1,6 +1,6 @@
 <?php
-	require_once('/includes/sessions.php');
-	require_once('/includes/functions.php');
+	require_once('includes/sessions.php');
+	require_once('includes/functions.php');
 
 	if(isset($_SESSION['user'])){
 		redirect_to("update_profile.php");

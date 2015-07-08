@@ -1,6 +1,6 @@
 <?php
-	require_once('/includes/sessions.php'); //starting the session
-	require_once('/includes/functions.php');//including funtion files
+	require_once('includes/sessions.php'); //starting the session
+	require_once('includes/functions.php');//including funtion files
 ?>
 
 <?php

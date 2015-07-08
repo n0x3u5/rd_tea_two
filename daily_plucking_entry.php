@@ -1,6 +1,6 @@
 <?php
-	require_once('/includes/sessions.php');
-	require_once('/includes/functions.php');
+	require_once('includes/sessions.php');
+	require_once('includes/functions.php');
 
 	if(!isset($_SESSION['user'])) {
 		redirect_to("index.php");
@@ -233,7 +233,7 @@
 				<div class="tab-content" style="background-color:#FFFFFF">
 
 
-					
+
 					<div class="tab-pane" id="tab1">
 						<form class="form-horizontal" action="daily_plucking_entry.php" method="post">
 							<?php if(isset($_SESSION['blue_bk_plk'])) { $daily = $_SESSION['blue_bk_plk']; } else { $daily = NULL; }?>
