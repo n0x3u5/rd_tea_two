@@ -364,7 +364,7 @@
                             </select>
                         </div>
 
-                                <button type="button" class="btn btn-danger" name="rmv_sec_submit" data-toggle="modal" data-target="#confirmModal" style="margin-top:10px;">Remove a Section</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" style="margin-top:10px;">Remove a Section</button>
                                 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -375,12 +375,13 @@
                                       <div class="modal-body">Are you absolutely sure you want to delete this record?</div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <input type="submit" class="btn btn-danger" value="Yes, I'm sure!">
+                                        <input type="submit" name="rmv_sec_submit" class="btn btn-danger" value="Yes, I'm sure!">
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                                <?php if(isset($_POST['rmv_sec_submit'])) {
+                                <?php
+                                  if(isset($_POST['rmv_sec_submit'])) {
                                     $ssn = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
 
                                     $q = "DELETE FROM sections WHERE short_sec_name = '{$ssn}'";
