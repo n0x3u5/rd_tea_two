@@ -143,27 +143,27 @@ else {
 
 						<?php if($header != NULL) {?>
             <div class="row">
-                <div class="col-sm-2 card_style"><h4>Section Name</h4><p> <?php echo $header['sec_name']; ?> </p></div>
-                <div class="col-sm-2 card_style"><h4>Jat/Clone</h4><p> <?php echo $header['jat']; ?> </p></div>
-                <div class="col-sm-2 card_style"><h4>Shade(temp) Species</h4><p> <?php echo $header['shade_spcs_temp']; ?> </p></div>
-                <div class="col-sm-2 card_style"><h4>Shade (perm.) Species</h4><p> <?php echo $header['shade_spcs_perm']; ?> </p></div>
-            </div>
-            <div class="row">
-							<div class="col-sm-2 card_style"><h4>Frame(in Inch) HEight</h4><p> <?php echo htmlentities($header['frame_height']); ?> </p></div>
-							<div class="col-sm-2 card_style"><h4>Bush(in Inch)<br>Height</h4><p> <?php echo htmlentities($header['bush_height']); ?> </p></div>
-			        <div class="col-sm-2 card_style"><h4>Temporary shade spacing</h4><p> <?php echo htmlentities($header['temp_shd_spcing']); ?> </p></div>
-							<div class="col-sm-2 card_style"><h4>Permanent Shade Spacing</h4><p> <?php echo htmlentities($header['perm_shd_spcing']); ?> </p></div>
-						</div>
-						<div class="row">
-							<div class="col-sm-2 card_style"><h4>Plant spacing</h4><p> <?php echo htmlentities($header['plant_spacing']); ?> </p></div>
+              <div class="col-sm-2 card_style"><h4>Section Name</h4><p> <?php echo $header['sec_name']; ?> </p></div>
 							<div class="col-sm-2 card_style"><h4>Area</h4>(in Hectare)<p> <?php echo htmlentities($header['total_area']); ?> </p></div>
 							<div class="col-sm-2 card_style"><h4>Year of Planting</h4><p> <?php echo htmlentities($header['yr_of_plant']); ?> </p></div>
-							<div class="col-sm-2 card_style"><h4>Ext./<br>Replant</h4><p> <?php echo htmlentities($header['ext_rplnt']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Plant spacing</h4><p> <?php echo htmlentities($header['plant_spacing']); ?> </p></div>
+            </div>
+            <div class="row">
+							<div class="col-sm-2 card_style"><h4>Shade (perm.) Species</h4><p> <?php echo $header['shade_spcs_perm']; ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Permanent Shade Spacing</h4><p> <?php echo htmlentities($header['perm_shd_spcing']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Shade(temp) Species</h4><p> <?php echo $header['shade_spcs_temp']; ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Temporary shade spacing</h4><p> <?php echo htmlentities($header['temp_shd_spcing']); ?> </p></div>
 						</div>
 						<div class="row">
+							<div class="col-sm-2 card_style"><h4>Jat/Clone</h4><p> <?php echo $header['jat']; ?> </p></div>
 							<div class="col-sm-2 card_style"><h4>Plant Density per Ha.</h4><p> <?php echo htmlentities($header['plant_density']); ?> </p></div>
-							<div class="col-sm-2 card_style"><h4>Drain-status</h4><p> <?php echo htmlentities($header['drain_stats']); ?> </p></div>
 							<div class="col-sm-2 card_style"><h4>Total Bush<br>popolation</h4><p> <?php echo htmlentities($header['bush_pop']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Drain-status</h4><p> <?php echo htmlentities($header['drain_stats']); ?> </p></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-2 card_style"><h4>Frame(in Inch) HEight</h4><p> <?php echo htmlentities($header['frame_height']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Bush(in Inch)<br>Height</h4><p> <?php echo htmlentities($header['bush_height']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Ext./<br>Replant</h4><p> <?php echo htmlentities($header['ext_rplnt']); ?> </p></div>
 							<div class="col-sm-2 card_style"><h4>Soil type and<br>topography</h4><p> <?php echo htmlentities($header['soil_topo']); ?> </p></div>
 						</div>
 
