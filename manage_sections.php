@@ -56,7 +56,13 @@
 
 		}
 		else {
-			echo "No record affected! Check your input!";
+      echo "
+      <div class='container'>
+      <div class='alert alert-danger alert-dismissible' role='alert' style='border: 2px solid red'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Sorry!</strong> No row affected!
+      </div>
+      <div>";
 		}
   }
 
@@ -122,7 +128,13 @@
       <div>";
 		}
 		else {
-			echo "No record affected! Check your input!";
+      echo "
+      <div class='container'>
+      <div class='alert alert-danger alert-dismissible' role='alert' style='border: 2px solid red'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Sorry!</strong> No row affected!
+      </div>
+      <div>";
 		}
     // mysqli_free_result($req_result);
     //
@@ -130,7 +142,39 @@
     $_SESSION['upd_ssn'] = NULL;
   }
 ?>
+<?php
+  if(isset($_POST['rmv_sec_submit'])) {
+    $ssn = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
 
+    $q = "DELETE FROM sections WHERE short_sec_name = '{$ssn}'";
+    $result = mysqli_query($connection, $q);
+
+    confirm_query($result);
+    if(mysqli_affected_rows($connection) > 0) {
+      echo "
+      <div class='container'>
+      <div class='alert alert-success alert-dismissible' role='alert' style='border: 2px solid #4DB6AC'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Success!</strong> Deleted sucessfully!
+      </div>
+      <div>";
+
+    }
+    else {
+      echo "
+      <div class='container'>
+      <div class='alert alert-danger alert-dismissible' role='alert' style='border: 2px solid red'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong>Sorry!</strong> No row affected!
+      </div>
+      <div>";
+
+    }
+  }
+  else {
+    $ssn = NULL;
+  }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -395,31 +439,7 @@
                                     </div>
                                   </div>
                                 </div>
-                                <?php
-                                  if(isset($_POST['rmv_sec_submit'])) {
-                                    $ssn = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
 
-                                    $q = "DELETE FROM sections WHERE short_sec_name = '{$ssn}'";
-                                    $result = mysqli_query($connection, $q);
-
-                                    confirm_query($result);
-                                    if(mysqli_affected_rows($connection) > 0) {
-                                      echo "
-                                      <div class='container'>
-                                      <div class='alert alert-success alert-dismissible' role='alert' style='border: 2px solid #4DB6AC'>
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-                                        <strong>Success!</strong> Deleted sucessfully!
-                                      </div>
-                                      <div>";
-                                		}
-                                		else {
-                                			echo "No record affected! Check your input!";
-                                		}
-                                  }
-                                  else {
-                                    $ssn = NULL;
-                                  }
-                                ?>
                         </form>
                     </div>
 

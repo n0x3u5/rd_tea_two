@@ -8,6 +8,7 @@
 	if(isset($_SESSION['user_lvl']) && $_SESSION['user_lvl'] == 3) {
 		redirect_to("update_profile.php");
 	}
+	$connection = make_connection();
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,23 +19,25 @@
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="icon" href="images/logo_rdtea.png"/>
         <title>R.D. Tea | Manage Users</title>
-        <?php $page_id = 1;?>
+				<?php $page_id = 1;?>
     </head>
     <body>
         <?php
             include("nav_bar.php");
-            nav_echoer($page_id);
+             nav_echoer($page_id);
         ?>
         <div class="container">
-            <div class="jumbotron">
+					<div class="alert alert-danger alert-dismissible" role="alert" style="border-color:red">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<strong>Success</strong> Deleted sucessfully.
+					</div>
+				    <div class="jumbotron">
                 <h1>Manage Users</h1>
                 <p>Perform administrative actions to moderate access to the Information Network</p>
             </div>
-						<div class="alert alert-danger alert-dismissible" role="alert" style="border: 2px solid #EF9A9A">
-  						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  						<strong>Success!</strong> Deleted sucessfully!
-						</div>
-            <div class="tab-container">
+
+
+						<div class="tab-container">
                 <ul class="nav nav-tabs nav-justified">
                     <li class="active"><a href="#tab1" data-toggle="tab">Add User</a></li>
                     <li><a href="#tab2" data-toggle="tab">Remove User</a></li>
@@ -76,7 +79,12 @@
 														<div class="form-group">
 															<label for="level" class="col-sm-3 control-label">Level:</label>
 															<div class="input-group">
-																	<input class="form-control" name="level" type="text" placeholder="Level" required>
+																<select class="form-control">
+																	<option value="NULL">Select Section</option>
+																	<option>1</option>
+																	<option>2</option>
+																	<option>3</option>
+																</select>
 																	<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 															</div>
 														</div>
@@ -117,6 +125,18 @@
                             <form action="form_process_delete.php" method="post">
                                 <div class="input-group">
 																		<select  id="emailid" name ="emailid" class="form-control" required>
+																			<option value="NULL">Select email-id</option>
+																			<?php
+																					$q = "SELECT * FROM users";
+																					$r = mysqli_query($connection, $q);
+
+																					confirm_query($r);
+																					while($user_values = mysqli_fetch_assoc($r)) {
+																			?>
+																						<option value="<?php echo htmlentities($user_values['e_mail']); ?>"><?php echo htmlentities($user_values['e_mail']); ?></option>
+																			<?php
+																					}
+																			?>
 																		</select>
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
                                 </div>

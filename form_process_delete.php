@@ -17,7 +17,7 @@
 
 			//retrieving data from form input and session
 
-			$email = $_POST["email"];
+			$email = $_POST["emailid"];
 			//echo "email =".$email."<br>";
 
 			//echo "session user=". $_SESSION["user"];

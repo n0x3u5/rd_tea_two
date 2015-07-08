@@ -9,6 +9,9 @@
 		redirect_to("update_profile.php");
 	}
 ?>
+<?php
+		$connection = make_connection();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -73,8 +76,13 @@
 														<div class="form-group">
 															<label for="level" class="col-sm-3 control-label">Level:</label>
 															<div class="input-group">
-																	<input class="form-control" name="level" type="text" placeholder="Level" required>
-																	<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+																<select class="form-control">
+																	<option value="NULL">Select Section</option>
+																	<option>1</option>
+																	<option>2</option>
+																	<option>3</option>
+																</select>
+																<span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
 															</div>
 														</div>
 															<div class="form-group">
@@ -114,6 +122,19 @@
                             <form action="form_process_delete.php" method="post">
                                 <div class="input-group">
 																		<select  id="emailid" name ="emailid" class="form-control" required>
+																			<option value="NULL">Select email-id</option>
+																			<?php
+																					$q = "SELECT * FROM users";
+																					$r = mysqli_query($connection, $q);
+
+																					confirm_query($r);
+																					while($user_values = mysqli_fetch_assoc($r)) {
+																			?>
+																						<option value="<?php echo htmlentities($user_values['e_mail']); ?>"><?php echo htmlentities($user_values['e_mail']); ?></option>
+																			<?php
+																					}
+																			?>
+
 																		</select>
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
                                 </div>
