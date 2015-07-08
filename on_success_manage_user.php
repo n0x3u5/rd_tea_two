@@ -80,7 +80,7 @@
 															<label for="level" class="col-sm-3 control-label">Level:</label>
 															<div class="input-group">
 																<select class="form-control">
-																	<option value="NULL">Select Section</option>
+																	<option value="NULL">Select level</option>
 																	<option>1</option>
 																	<option>2</option>
 																	<option>3</option>
