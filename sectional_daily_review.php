@@ -163,7 +163,7 @@
 																			<td><?php	echo round($plk_rev['plkd_leaf']/$plk_rev['plkd_area']);	?></td>
 																			<td><?php	echo round($plk_rev['mandays']/$plk_rev['plkd_area'], 2);	?></td>
 																			<td><?php	echo round($plk_rev['plkd_leaf']/$plk_rev['mandays'], 2);	?></td>
-																  		<td>11</td>
+																  		<td><?php	echo $plk_rev['rnd_days'];	?></td>
 																	</tr>
 															<?php
 																  }
