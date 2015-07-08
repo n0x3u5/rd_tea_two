@@ -374,19 +374,11 @@ if(isset($_POST['date_submit'])) {
 				}//end of isset $_POST[date_submit] ?>
 				</table>
 			</div>
-			<div class="card_style">
-				<table class="table table-hover">
-					<thead>
-							<th style="text-align:center">Cashplucking Hour from</th>
-							<th style="text-align:center">Cashplucking Hour to</th>
-
-					</thead>
-					<tbody>
-						<td style="text-align:center">4:00 PM</td>
-						<td style="text-align:center"> 5:00 PM</td>
-					</tbody>
-				</table>
+			<?php if (isset($cp_record)) {?>
+			<div class="card_style" style="padding: 20px;">
+					<h4>Cash plucking was done from <?php echo $cp_record['time_from']; ?> to <?php echo $cp_record['time_to']; ?></h4>
 			</div>
+			<?php } ?>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
