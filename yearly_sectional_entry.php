@@ -7,6 +7,215 @@
 	}
 ?>
 
+<?php
+	$connection = make_connection();
+	// var_dump($_POST);echo "<br><hr>";
+	if(isset($_POST["dt_sec_submit"])) {
+		$req_yr = (int) $_POST["year"];
+		$req_ssn = $_POST["short_sec_name"];
+		$_SESSION['ssn'] = $req_ssn;
+		$_SESSION['yr'] = $req_yr;
+
+		// echo "<br>got year =".$req_yr."<br>";
+		// echo "<br>got ssn =" .$req_ssn."<br>";
+
+		$q_soil = "SELECT * FROM yearly_soil_manuring WHERE short_sec_name='{$req_ssn}' and year='{$req_yr}'";
+		// var_dump($q_soil);
+		$r_soil = mysqli_query($connection, $q_soil);
+    confirm_query($r_soil);
+
+		$_SESSION['soil_manure'] = mysqli_fetch_assoc($r_soil);
+		// var_dump($_SESSION['soil_manure']);
+
+
+		$q_prune = "SELECT * FROM yearly_prune_infilling WHERE short_sec_name='{$req_ssn}' and year='{$req_yr}'";
+		// var_dump($q_prune);
+		$r_prune = mysqli_query($connection, $q_prune);
+    confirm_query($r_prune);
+
+		$_SESSION['prune_infill'] = mysqli_fetch_assoc($r_prune);
+		// var_dump($_SESSION['prune_infill']);
+	}
+	else {
+		$req_date = NULL;
+		$req_ssn = NULL;
+		$r_soil = NULL;
+		$r_prune = NULL;
+	}
+?>
+
+<?php //insertion
+	if(isset($_POST['add_submit'])) {
+		$short_sec_name = $_SESSION['ssn'];
+		$year = $_SESSION['yr'];
+
+		$prune = mysqli_real_escape_string($connection, $_POST['prune']);
+		$tipping = mysqli_real_escape_string($connection, $_POST['tipping']);
+		$made_tea = mysqli_real_escape_string($connection, $_POST['made_tea']);
+		$vacancy = (float) mysqli_real_escape_string($connection, $_POST['vacancy']);
+		$shade_status = mysqli_real_escape_string($connection, $_POST['shade_status']);
+		$infill_tea = (int) mysqli_real_escape_string($connection, $_POST['infill_tea']);
+		$infill_shade = (int) mysqli_real_escape_string($connection, $_POST['infill_shade']);
+		$remarks = mysqli_real_escape_string($connection, $_POST['remarks']);
+
+		$n = (int) mysqli_real_escape_string($connection, $_POST['n']);
+		$p = (int) mysqli_real_escape_string($connection, $_POST['p']);
+		$k = (int) mysqli_real_escape_string($connection, $_POST['k']);
+		$top_pH = (float) mysqli_real_escape_string($connection, $_POST['top_pH']);
+		$sub_pH = (float) mysqli_real_escape_string($connection, $_POST['sub_pH']);
+		$org_C = (float) mysqli_real_escape_string($connection, $_POST['org_C']);
+		$avbl_P = mysqli_real_escape_string($connection, $_POST['avbl_P']);
+		$avbl_K = mysqli_real_escape_string($connection, $_POST['avbl_K']);
+		$avbl_N = mysqli_real_escape_string($connection, $_POST['avbl_N']);
+		$avbl_S = mysqli_real_escape_string($connection, $_POST['avbl_S']);
+
+		$q_prune_in = "INSERT INTO yearly_prune_infilling (short_sec_name, year, prune, tipping, made_tea, vacancy, shade_status, infill_tea, infill_shade, remarks) VALUES ('{$short_sec_name}', {$year}, '{$prune}', '{$tipping}', {$made_tea}, {$vacancy}, '{$shade_status}', {$infill_tea}, {$infill_shade}, '{$remarks}')";
+
+		$r_prune_in = mysqli_query($connection, $q_prune_in);
+		confirm_query($r_prune_in);
+
+		if(mysqli_affected_rows($connection) > 0) {
+			$flag_prune = 1;
+		}
+		else {
+			$flag_prune = 0;
+		}
+
+		$q_soil_in = "INSERT INTO yearly_soil_manuring (short_sec_name, year, n, p, k, top_pH, sub_pH, org_C, avbl_P, avbl_K, avbl_N, avbl_S) VALUES ('{$short_sec_name}', {$year}, {$n}, {$p}, {$k}, {$top_pH}, {$sub_pH}, {$org_C}, '{$avbl_P}', '{$avbl_K}', '{$avbl_N}', '{$avbl_S}')";
+
+		$r_soil_in = mysqli_query($connection, $q_soil_in);
+		confirm_query($r_soil_in);
+
+		if(mysqli_affected_rows($connection) > 0) {
+			$flag_soil = 1;
+		}
+		else {
+			$flag_soil = 0;
+		}
+
+		if($flag_soil == 1 || $flag_prune == 1) {
+			echo "Inserted Successfully!";
+		}
+		elseif ($flag_soil == 0 && $flag_prune == 0) {
+			echo "No record affected! Check your Submission Properly!";
+		}
+
+		$_SESSION['soil_manure'] = NULL;
+		$_SESSION['prune_infill'] = NULL;
+		$_SESSION['ssn'] = NULL;
+		$_SESSION['yr'] = NULL;
+	}
+?>
+
+<?php //insertion
+	if(isset($_POST['edit_submit'])) {
+		$short_sec_name = $_SESSION['ssn'];
+		$year = $_SESSION['yr'];
+		$soil_id = $_SESSION['soil_manure']['id'];
+		$prune_id = $_SESSION['prune_infill']['id'];
+
+
+		$prune = mysqli_real_escape_string($connection, $_POST['prune']);
+		$tipping = mysqli_real_escape_string($connection, $_POST['tipping']);
+		$made_tea = mysqli_real_escape_string($connection, $_POST['made_tea']);
+		$vacancy = (float) mysqli_real_escape_string($connection, $_POST['vacancy']);
+		$shade_status = mysqli_real_escape_string($connection, $_POST['shade_status']);
+		$infill_tea = (int) mysqli_real_escape_string($connection, $_POST['infill_tea']);
+		$infill_shade = (int) mysqli_real_escape_string($connection, $_POST['infill_shade']);
+		$remarks = mysqli_real_escape_string($connection, $_POST['remarks']);
+
+		$n = (int) mysqli_real_escape_string($connection, $_POST['n']);
+		$p = (int) mysqli_real_escape_string($connection, $_POST['p']);
+		$k = (int) mysqli_real_escape_string($connection, $_POST['k']);
+		$top_pH = (float) mysqli_real_escape_string($connection, $_POST['top_pH']);
+		$sub_pH = (float) mysqli_real_escape_string($connection, $_POST['sub_pH']);
+		$org_C = (float) mysqli_real_escape_string($connection, $_POST['org_C']);
+		$avbl_P = mysqli_real_escape_string($connection, $_POST['avbl_P']);
+		$avbl_K = mysqli_real_escape_string($connection, $_POST['avbl_K']);
+		$avbl_N = mysqli_real_escape_string($connection, $_POST['avbl_N']);
+		$avbl_S = mysqli_real_escape_string($connection, $_POST['avbl_S']);
+
+		$q_prune_up = "UPDATE yearly_prune_infilling SET short_sec_name='{$short_sec_name}', year={$year}, prune='{$prune}', tipping='{$tipping}', made_tea={$made_tea}, vacancy={$vacancy}, shade_status='{$shade_status}', infill_tea={$infill_tea}, infill_shade={$infill_shade}, remarks='{$remarks}' WHERE id = {$prune_id}";
+
+		$r_prune_up = mysqli_query($connection, $q_prune_up);
+		confirm_query($r_prune_up);
+
+		if(mysqli_affected_rows($connection) > 0) {
+			$flag_prune = 1;
+		}
+		else {
+			$flag_prune = 0;
+		}
+
+		$q_soil_up = "UPDATE yearly_soil_manuring SET short_sec_name='{$short_sec_name}', year={$year}, n={$n}, p={$p}, k={$k}, top_pH={$top_pH}, sub_pH={$sub_pH}, org_C={$org_C}, avbl_P='{$avbl_P}', avbl_K='{$avbl_K}', avbl_N='{$avbl_N}', avbl_S='{$avbl_S}' WHERE id = {$soil_id}";
+
+		$r_soil_up = mysqli_query($connection, $q_soil_up);
+		confirm_query($r_soil_up);
+
+		if(mysqli_affected_rows($connection) > 0) {
+			$flag_soil = 1;
+		}
+		else {
+			$flag_soil = 0;
+		}
+
+		if($flag_soil == 1 || $flag_prune == 1) {
+			echo "Updated Successfully!";
+		}
+		elseif ($flag_soil == 0 && $flag_prune == 0) {
+			echo "No record affected! Check your Submission Properly!";
+		}
+
+		$_SESSION['soil_manure'] = NULL;
+		$_SESSION['prune_infill'] = NULL;
+		$_SESSION['ssn'] = NULL;
+		$_SESSION['yr'] = NULL;
+	}
+?>
+
+<?php
+	if(isset($_POST['del_entry'])) {
+		$short_sec_name = $_SESSION['ssn'];
+		$year = $_SESSION['yr'];
+
+		$q_prune_del = "DELETE FROM yearly_prune_infilling WHERE short_sec_name='{$short_sec_name}' and year='{$year}'";
+		//var_dump($q_prune_del);
+		$r_prune_del = mysqli_query($connection, $q_prune_del);
+    confirm_query($r_prune_del);
+
+		if(mysqli_affected_rows($connection) > 0) {
+			$flag_prune = 1;
+		}
+		else {
+			$flag_prune = 0;
+		}
+
+		$q_soil_del = "DELETE FROM yearly_soil_manuring WHERE short_sec_name='{$short_sec_name}' and year='{$year}'";
+		//var_dump($q_soil_del);
+		$r_soil_del = mysqli_query($connection, $q_soil_del);
+    confirm_query($r_soil_del);
+
+		if(mysqli_affected_rows($connection) > 0) {
+			$flag_soil = 1;
+		}
+		else {
+			$flag_soil = 0;
+		}
+
+		if($flag_soil == 1 || $flag_prune == 1) {
+			echo "Deleted Successfully!";
+		}
+		elseif ($flag_soil == 0 && $flag_prune == 0) {
+			echo "No record affected! Check your Submission Properly!";
+		}
+
+		$_SESSION['soil_manure'] = NULL;
+		$_SESSION['prune_infill'] = NULL;
+		$_SESSION['ssn'] = NULL;
+		$_SESSION['yr'] = NULL;
+	}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,16 +267,28 @@
       <div class="container">
               <div class="jumbotron">
                   <h1>Yearly Sectional Entry</h1>
-                  <form action="" method="post" class="form-horizontal" style="margin-top: 30px;">
+                  <form action="yearly_sectional_entry.php" method="post" class="form-horizontal" style="margin-top: 30px;">
                     <div class="row col-sm-12">
                       <div class="form-group col-sm-6">
                         <label for="section">Select section:</label>
                         <div>
-        									<select id="section" name ="short_sec_name" class="col-sm-3 form-control" style="margin-top:10px;"required>
-        										<option>Select section</option>
-                            <!-- <option>2</option>
-                            <option>3</option> -->
-        									</select>
+													<select id="division" name ="short_sec_name" class="form-control" onchange="enable_add()" >
+														<?php
+																$q = "SELECT * FROM sections";
+																$result = mysqli_query($connection, $q);
+
+																confirm_query($result);
+																//$_POST['sec_short_nm'] = NULL;
+
+																echo "<option id=\"opt0\" value=\"Select a section\">Select a section</option>";
+																while($sec_values = mysqli_fetch_assoc($result)) {
+														?>
+																	<option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST["dt_sec_submit"]) && ($_SESSION['ssn'] == $sec_values['short_sec_name'])) { echo "selected";} ?> ><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
+														<?php
+																}
+
+														?>
+													</select>
                         </div>
                       </div>
                     </div>
@@ -75,13 +296,12 @@
                       <div class="form-group col-sm-6">
                         <label for="year">Select Year:</label>
                         <div>
-                        <input type="text" id="year" class="form-control">
-
+                        <input type="text" id="year" name="year" class="form-control" <?php if(isset($_POST['dt_sec_submit']) && isset($_SESSION['yr'])) { ?> value="<?php echo $_SESSION['yr']; ?>"<?php } else {?>  placeholder=<?php echo "\"Select a Year\""; ?><?php } ?> required>
                         </div>
                       </div>
                     </div>
                        <div class="form-group">
-    									    <input type="submit" id="selct_sec" name="dt_sec_submit" value="Add Data" class="btn btn-default" style="margin-top:10px;">
+    									    <input type="submit" id="select_sec_date" name="dt_sec_submit" value="Submit" class="btn btn-default" style="margin-top:10px;">
                        </div>
 
                   </form>
@@ -93,123 +313,126 @@
   	                <li id="actv_two"><a href="#tab2" data-toggle="tab" id="link_two">Add Entry</a></li>
   	            </ul>
   				<div class="tab-content" style="background-color:#FFFFFF">
-  					<div class="tab-pane active" id="tab1">
-  						<form class="form-horizontal" action="" method="post">
 
-                <div class="form-group" style="margin-top:30px">
-  								<label for="prune_type" class="col-sm-3 control-label">Prune Type:</label>
+
+
+  					<div class="tab-pane active" id="tab1">
+  						<form class="form-horizontal" action="yearly_sectional_entry.php" method="post">
+								<?php
+									if(isset($_SESSION['prune_infill']) && isset($_SESSION['soil_manure'])) {
+										$man_soil = $_SESSION['soil_manure']; $fill_prune = $_SESSION['prune_infill'];
+									}
+									else { $man_soil = NULL; $fill_prune = NULL; }
+								?>
+								<div class="form-group" style="margin-top:30px">
+  								<label for="prune_type1" class="col-sm-3 control-label">Prune Type:</label>
   								<div class="col-sm-4">
-  									<input type="text" placeholder="Prune Type" name="prn_type" class="form-control" id="prune_type">
+  									<input type="text" name="prune" class="form-control" id="prune_type1" <?php if(isset($fill_prune)) { ?> value="<?php echo htmlentities($fill_prune['prune']); ?>"<?php } else { ?>placeholder=<?php echo "\"Prune Type\""; ?> <?php } ?> >
   								</div>
   							</div>
   							<div class="form-group">
-  								<label for="tipp" class="col-sm-3 control-label">Tipping:</label>
+  								<label for="tipp1" class="col-sm-3 control-label">Tipping:</label>
   								<div class="col-sm-4">
-  									<input type="text" name="tip_hght" placeholder=" Tipping" class="form-control" id="tipp">
+  									<input type="text" name="tipping" class="form-control" id="tipp1" <?php if(isset($fill_prune)) { ?> value="<?php echo htmlentities($fill_prune['tipping']); ?>"<?php } else { ?>placeholder=<?php echo "\"Tipping\""; ?> <?php } ?> >
   								</div>
   							</div>
   							<div class="form-group">
-  								<label for="Md_tea" class="col-sm-3 control-label">Made Tea (Kg/Ha):</label>
+  								<label for="Md_tea1" class="col-sm-3 control-label">Made Tea (Kg/Ha):</label>
   								<div class="col-sm-4">
-  									<input type="text" name="md_t" placeholder=" Made Tea (Kg/Ha)" class="form-control" id="Md_tea" >
+  									<input type="text" name="made_tea" class="form-control" id="Md_tea1" <?php if(isset($fill_prune)) { ?> value="<?php echo htmlentities($fill_prune['made_tea']); ?>"<?php } else { ?>placeholder=<?php echo "\"Made tea (kg/ha)\""; ?> <?php } ?> >
   								</div>
   							</div>
   							<div class="form-group">
-  								<label for="vcp" class="col-sm-3 control-label">Vacancy (in %):</label>
+  								<label for="vcp1" class="col-sm-3 control-label">Vacancy (in %):</label>
   								<div class="col-sm-4">
-  									<input type="text" name="vacancy_p" placeholder="Vacancy (in %)" class="form-control" id="vcp">
+  									<input type="text" name="vacancy" class="form-control" id="vcp1" <?php if(isset($fill_prune)) { ?> value="<?php echo htmlentities($fill_prune['vacancy']); ?>"<?php } else { ?>placeholder=<?php echo "\"Vacancy (in %)\""; ?> <?php } ?> >
   								</div>
   							</div>
   							<div class="form-group">
-  								<label for="shd_sts" class="col-sm-3 control-label">Shade Status:</label>
+  								<label for="shd_sts1" class="col-sm-3 control-label">Shade Status:</label>
   								<div class="col-sm-4">
-  									<input type="text" class="form-control" placeholder="Shade Status" id="shd_sts" name="shade_sts">
+  									<input type="text" class="form-control" id="shd_sts1" name="shade_status" <?php if(isset($fill_prune)) { ?> value="<?php echo htmlentities($fill_prune['shade_status']); ?>"<?php } else { ?>placeholder=<?php echo "\"Shade Status\""; ?> <?php } ?> >
   								</div>
   							</div>
   							<div class="form-group">
-  								<label for="infill_t" class="col-sm-3 control-label">Infill (Tea):</label>
+  								<label for="infill_t1" class="col-sm-3 control-label">Infill (Tea):</label>
   								<div class="col-sm-4">
-  									<input type="text" placeholder="Infill (Tea)" class="form-control" id="infill_t" name="inf_t">
+  									<input type="text" class="form-control" id="infill_t1" name="infill_tea" <?php if(isset($fill_prune)) { ?> value="<?php echo htmlentities($fill_prune['infill_tea']); ?>"<?php } else { ?>placeholder=<?php echo "\"Infill (Tea)\""; ?> <?php } ?> >
   								</div>
   							</div>
                 <div class="form-group">
-                  <label for="infill_shd" class="col-sm-3 control-label">Infill (Shade):</label>
+                  <label for="infill_shd1" class="col-sm-3 control-label">Infill (Shade):</label>
                   <div class="col-sm-4">
-                    <input type="text" placeholder=" Infill (Shade):" class="form-control" id="infill_shd" name="infill_shade">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="Remarks_prn_1" class="col-sm-3 control-label">Remarks for Pruning:</label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control" placeholder="Remarks" id="Remarks_prn_1" name="Remarks_prn_1">
+                    <input type="text" class="form-control" id="infill_shd1" placeholder="Infill (Shade)" name="infill_shade" <?php if(isset($fill_prune)) { ?> value="<?php echo htmlentities($fill_prune['infill_shade']); ?>"<?php } else { ?>placeholder=<?php echo "\"Infill (Shade)\""; ?> <?php } ?> >
                   </div>
                 </div>
 								<div class="form-group">
-									<label for="man_n1" class="col-sm-3 control-label">Na (Manuring):</label>
+									<label for="man_n1" class="col-sm-3 control-label">N (Manuring):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control"placeholder="Na (Manuring)" id="man_n1" name="man_n1">
+										<input type="text" class="form-control" id="man_n1" name="n" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['n']); ?>"<?php } else { ?>placeholder=<?php echo "\"N (Manuring)\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="man_p1" class="col-sm-3 control-label">P (Manuring):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control"  placeholder="P (Manuring)" id="man_p1" name="man_p1">
+										<input type="text" class="form-control" id="man_p1" name="p" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['p']); ?>"<?php } else { ?>placeholder=<?php echo "\"P (Manuring)\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="man_k1" class="col-sm-3 control-label">K (Manuring):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="man_k1" placeholder="K (Manuring)" name="man_k1">
+										<input type="text" class="form-control" id="man_k1" name="k" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['k']); ?>"<?php } else { ?>placeholder=<?php echo "\"K (Manuring)\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="top1" class="col-sm-3 control-label">Top (in pH):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" placeholder="Top (in pH)" id="top1" name="top1">
+										<input type="text" class="form-control" id="top1" name="top_pH" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['top_pH']); ?>"<?php } else { ?>placeholder=<?php echo "\"Top pH\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="sub1" class="col-sm-3 control-label">Sub (in pH):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="sub1" placeholder="Sub (in pH)" name="sub1">
+										<input type="text" class="form-control" id="sub1" name="sub_pH"  <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['sub_pH']); ?>"<?php } else { ?>placeholder=<?php echo "\"Sub pH\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="orgc1" class="col-sm-3 control-label">Org C (in %):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="orgc1" placeholder="Org C " name="orgc1">
+										<input type="text" class="form-control" id="orgc1" name="org_C" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['org_C']); ?>"<?php } else { ?>placeholder=<?php echo "\"Org C\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="avp1" class="col-sm-3 control-label">Av P (in ppm):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="avp1" placeholder="Av P" name="avp1">
+										<input type="text" class="form-control" id="avp1" name="avbl_P" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['avbl_P']); ?>"<?php } else { ?>placeholder=<?php echo "\"Avbl P\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="Avk1" class="col-sm-3 control-label">Av K (in ppm):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="avk1" placeholder="Av K " name="avk1">
+										<input type="text" class="form-control" id="avk1" name="avbl_K" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['avbl_K']); ?>"<?php } else { ?>placeholder=<?php echo "\"Avbl K\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="avbln1" class="col-sm-3 control-label">Avbl N (in ppm):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="avbln1" placeholder="Avbl N" name="avbln1">
+										<input type="text" class="form-control" id="avbln1" name="avbl_N" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['avbl_N']); ?>"<?php } else { ?>placeholder=<?php echo "\"Avbl N\""; ?> <?php } ?> >
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="avbls1" class="col-sm-3 control-label">Avbl S (in ppm):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="avbls1" placeholder="Avbl S" name="avbls1">
+										<input type="text" class="form-control" id="avbls1" name="avbl_S" <?php if(isset($man_soil)) { ?> value="<?php echo htmlentities($man_soil['avbl_S']); ?>"<?php } else { ?>placeholder=<?php echo "\"Avbl S\""; ?> <?php } ?> >
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="remarks_soil_2" class="col-sm-3 control-label">Remarks for Soil Analysis:</label>
-									<div class="col-sm-4">
-										<input type="text" class="form-control"placeholder="Remarks" id="remarks_soil_2" name="remarks_soil_2">
-									</div>
-								</div>
+                <div class="form-group">
+                  <label for="Remarks1" class="col-sm-3 control-label">Remarks:</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="Remarks1" name="remarks" <?php if(isset($fill_prune)) { ?> value="<?php echo htmlentities($fill_prune['remarks']); ?>"<?php } else { ?>placeholder=<?php echo "\"Remarks\""; ?> <?php } ?> >
+                  </div>
+                </div>
+
   							<div class="row">
   								<div class="col-sm-1 col-sm-offset-2">
   									<button type="button" value="Delete Entry" id="delete_entry" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" style="margin-top:20px;">Delete Entry</button>
@@ -237,42 +460,46 @@
   							</div>
               </form>
   					</div>
-  					<div class="tab-pane" id="tab2">
-  						<form class="form-horizontal" action="daily_plucking_entry.php" method="post">
+
+
+
+
+						<div class="tab-pane" id="tab2">
+  						<form class="form-horizontal" action="yearly_sectional_entry.php" method="post">
                 <div class="form-group" style="margin-top:30px">
   								<label for="prune_type" class="col-sm-3 control-label">Prune Type:</label>
   								<div class="col-sm-4">
-  									<input type="text" name="prn_type" placeholder="Prune Type" class="form-control" id="prune_type">
+  									<input type="text" name="prune" placeholder="Prune Type" class="form-control" id="prune_type">
   								</div>
   							</div>
   							<div class="form-group">
   								<label for="tipp" class="col-sm-3 control-label">Tipping:</label>
   								<div class="col-sm-4">
-  									<input type="text" name="tip_hght" placeholder="Tipping" class="form-control" id="tipp">
+  									<input type="text" name="tipping" placeholder="Tipping" class="form-control" id="tipp">
   								</div>
   							</div>
   							<div class="form-group">
   								<label for="Md_tea" class="col-sm-3 control-label">Made Tea (Kg/Ha):</label>
   								<div class="col-sm-4">
-  									<input type="text" name="md_t" placeholder="Made Tea (Kg/Ha)" class="form-control" id="Md_tea" >
+  									<input type="text" name="made_tea" placeholder="Made Tea (Kg/Ha)" class="form-control" id="Md_tea" >
   								</div>
   							</div>
   							<div class="form-group">
   								<label for="vcp" class="col-sm-3 control-label">Vacancy (in %):</label>
   								<div class="col-sm-4">
-  									<input type="text" name="vacancy_p" placeholder="Vacancy (in %)" class="form-control" id="vcp">
+  									<input type="text" name="vacancy" placeholder="Vacancy (in %)" class="form-control" id="vcp">
   								</div>
   							</div>
   							<div class="form-group">
   								<label for="shd_sts" class="col-sm-3 control-label">Shade Status:</label>
   								<div class="col-sm-4">
-  									<input type="text" class="form-control" placeholder="Shade Status" id="shd_sts" name="shade_sts">
+  									<input type="text" class="form-control" placeholder="Shade Status" id="shd_sts" name="shade_status">
   								</div>
   							</div>
   							<div class="form-group">
   								<label for="infill_t" class="col-sm-3 control-label">Infill (Tea):</label>
   								<div class="col-sm-4">
-  									<input type="text" class="form-control" placeholder="Infill (Tea)" id="infill_t" name="inf_t">
+  									<input type="text" class="form-control" placeholder="Infill (Tea)" id="infill_t" name="infill_tea">
   								</div>
   							</div>
                 <div class="form-group">
@@ -281,78 +508,72 @@
                     <input type="text" class="form-control" id="infill_shd" placeholder="Infill (Shade)" name="infill_shade">
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="Remarks_prn_2" class="col-sm-3 control-label">Remarks for Pruning:</label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control" id="Remarks_prn_2" placeholder="Remarks" name="Remarks_prn_2">
-                  </div>
-                </div>
 								<div class="form-group">
-									<label for="man_n2" class="col-sm-3 control-label">Na (Manuring):</label>
+									<label for="man_n2" class="col-sm-3 control-label">N (Manuring):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" placeholder="Na (Manuring)" id="man_n2" name="man_n2">
+										<input type="text" class="form-control" placeholder="N (Manuring)" id="man_n2" name="n">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="man_p2" class="col-sm-3 control-label">P (Manuring):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="man_p2" placeholder="P (Manuring)" name="man_p2">
+										<input type="text" class="form-control" id="man_p2" placeholder="P (Manuring)" name="p">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="man_k2" class="col-sm-3 control-label">K (Manuring):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="man_k2" placeholder="K (Manuring)" name="man_k2">
+										<input type="text" class="form-control" id="man_k2" placeholder="K (Manuring)" name="k">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="top2" class="col-sm-3 control-label">Top (in pH):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="top2" placeholder="Top (in pH)" name="top2">
+										<input type="text" class="form-control" id="top2" placeholder="Top (in pH)" name="top_pH">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="sub2" class="col-sm-3 control-label">Sub (in pH):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="sub2" placeholder="Sub (in pH)" name="sub2">
+										<input type="text" class="form-control" id="sub2" placeholder="Sub (in pH)" name="sub_pH">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="orgc2" class="col-sm-3 control-label">Org C (in %):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="orgc2" placeholder="Org C" name="orgc2">
+										<input type="text" class="form-control" id="orgc2" placeholder="Org C" name="org_C">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="avp2" class="col-sm-3 control-label">Av P (in ppm):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="avp2" placeholder="Av P" name="avp2">
+										<input type="text" class="form-control" id="avp2" placeholder="Av P" name="avbl_P">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="Avk2" class="col-sm-3 control-label">Av K (in ppm):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="avk2"  placeholder="Av K" name="avk2">
+										<input type="text" class="form-control" id="avk2"  placeholder="Av K" name="avbl_K">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="avbln2" class="col-sm-3 control-label">Avbl N (in ppm):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="avbln2" placeholder="Avbl N" name="avbln2">
+										<input type="text" class="form-control" id="avbln2" placeholder="Avbl N" name="avbl_N">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="avbls2" class="col-sm-3 control-label">Avbl S (in ppm):</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" id="avbls2" placeholder="Avbl S" name="avbls2">
+										<input type="text" class="form-control" id="avbls2" placeholder="Avbl S" name="avbl_S">
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="remarks_soil_2" class="col-sm-3 control-label">Remarks for Soil Analysis:</label>
-									<div class="col-sm-4">
-										<input type="text" class="form-control" placeholder="Remarks" id="remarks_soil_2" name="remarks_soil_2">
-									</div>
-								</div>
+                <div class="form-group">
+                  <label for="Remarks2" class="col-sm-3 control-label">Remarks:</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="Remarks_prn_2" placeholder="Remarks" name="remarks">
+                  </div>
+                </div>
 
             		<input type="submit" id="add_entry" name="add_submit" value="Add Entry" class="btn btn-success"style="margin-top:20px">
   		    		</form>

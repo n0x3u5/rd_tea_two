@@ -231,6 +231,9 @@
 	                <li id="actv_two"><a href="#tab2" data-toggle="tab" id="link_two">Add Entry</a></li>
 	            </ul>
 				<div class="tab-content" style="background-color:#FFFFFF">
+
+
+					
 					<div class="tab-pane" id="tab1">
 						<form class="form-horizontal" action="daily_plucking_entry.php" method="post">
 							<?php if(isset($_SESSION['blue_bk_plk'])) { $daily = $_SESSION['blue_bk_plk']; } else { $daily = NULL; }?>
