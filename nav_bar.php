@@ -17,14 +17,28 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li <?php if($page_id == 1) {?> class="active"><a href="#"> <?php } else { ?> ><a href="manage_users.php"> <?php } ?> Manage Users</a></li>
-                        <li <?php if($page_id == 2) {?> class="active"><a href="#"> <?php } else { ?> ><a href="manage_sections.php"> <?php } ?> Manage Sections</a></li>
-                        <li <?php if($page_id == 7 || $page_id == 8 || $page_id == 9) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Entry <span class="caret"></span></a>
+                        <?php if ($_SESSION['user_lvl'] < 3) { ?><li <?php if($page_id == 1) {?> class="active"><a href="manage_users.php"> <?php } else { ?> ><a href="manage_users.php"> <?php } ?> Manage Users</a></li> <?php } ?>
+                        <li <?php if($page_id == 2 || $page_id == 13) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Garden Management<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="daily_plucking_entry.php">Plucking Entry</a></li>
-                                <li><a href="daily_spraying_entry.php">Spraying Entry</a></li>
+                              <!-- <li class="navbar-text">Plucking</li> -->
+                              <li><a href="manage_sections.php">Manage Sections</a></li>
+                              <li><a href="manage_labour_categories.php">Manage Labour Categories</a></li>
+                            </ul>
+                        </li>
+                        <li <?php if($page_id == 7 || $page_id == 8 || $page_id == 9 || $page_id == 15) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Entry<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <!-- <li class="navbar-text">Plucking</li> -->
+                                <li><a href="cash_plucking_entry.php">Daily Cash Plucking Entry</a></li>
+                                <li><a href="daily_plucking_entry.php">Daily Plucking Entry</a></li>
+                                <li><a href="leaf_chit_entry.php">Leaf Chit Entry</a></li>
+                                <!-- <li><a href="daily_spraying_entry.php">Spraying Entry</a></li> -->
+                                <li role="separator" class="divider"></li>
+                                <!-- <li class="navbar-text">Weather</li> -->
                                 <li><a href="weather_input.php">Weather Entry</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="yearly_sectional_entry.php">Yearly Sectional Entry</a></li>
                             </ul>
                         </li>
                         <li <?php if($page_id == 4 || $page_id == 5 || $page_id == 6 || $page_id == 10 || $page_id == 11) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
@@ -35,9 +49,16 @@
                                 <li><a href="weather.php">Weather Report</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="leaf_chit.php">Leaf Chit</a></li>
-                                <li><a href="spray_chit.php">Spraying Chit</a></li>
+                                <!-- <li><a href="spray_chit.php">Spraying Chit</a></li> -->
                             </ul>
                         </li>
+                        <?php if ($_SESSION['user_lvl'] < 3) { ?><li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Action Logs<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="navbar-text">Coming Soon!</a></li>
+                                <!-- <li><a href="spray_chit.php">Spraying Chit</a></li> -->
+                            </ul>
+                        </li><?php } ?>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li <?php if($page_id == 3) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
@@ -45,9 +66,6 @@
                         <ul class="dropdown-menu">
                             <li><a href="form_process_logout.php">Log Out</a></li>
                             <li><a href="update_profile.php">Your Profile</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
                         </ul>
                         </li>
                     </ul>

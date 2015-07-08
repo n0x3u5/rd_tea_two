@@ -257,7 +257,7 @@
           }
 
 	      </style>
-        <?php $page_id = 13;?>
+        <?php $page_id = 12;?>
     </head>
     <body>
          <?php
