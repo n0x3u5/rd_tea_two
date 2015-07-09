@@ -100,7 +100,7 @@ else {
 										<div class="form-group col-sm-5">
 											<label for="section" style="color:#FFF8E1">Select section:</label>
 											<div>
-												<select id="division" name ="short_sec_name" class="form-control" >
+												<select id="section" name ="short_sec_name" class="form-control" onChange="enable_add()" >
 													 <?php
 															$q = "SELECT short_sec_name FROM sections";
 															$result = mysqli_query($connection, $q);
@@ -138,7 +138,7 @@ else {
 										</div>
 									</div>
 
-									<input type="submit" name="yr_sec_submit" value="Get data" class="btn btn-default">
+									<input type="submit" id="hide_me" name="yr_sec_submit" value="Get data" class="btn btn-default">
 							</form>
             </div>
 
@@ -297,6 +297,18 @@ else {
 							});
             });
         </script>
+				<script>
+				document.getElementById('hide_me').disabled=true;
+				function enable_add() {
+					if(document.getElementById('section').value!='Select a section')
+					{
+						document.getElementById('hide_me').disabled=false;
+					}
+					else {
+						document.getElementById('hide_me').disabled=true;
+					}
+				}
+				</script>
     </body>
 </html>
 <?php

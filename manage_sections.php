@@ -299,19 +299,20 @@
                                     </div>
                                   </div>
                                   <div class="form-group">
-                                    <label for="shade_species_perm_" class="col-sm-2" style="padding-top:15px;">shade species permanent:</label>
-
-                                    <div class="input-group" class="col-sm-10">
-                                        <input type="text" class="form-control" id="shade_species_perm_" name="shade_species_perm" value="<?php echo $sec['shade_spcs_perm']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
-                                    </div>
-                                  </div>
-                                  <div class="form-group">
                                     <label for="Temp_Shade_spacing_" class="col-sm-2" style="padding-top:15px;">Temp. Shade spacing:</label>
 
                                     <div class="input-group" class="col-sm-10">
                                         <input type="text" class="form-control" id="Temp_Shade_spacing_" name="Temp_Shade_spacing" value="<?php echo $sec['perm_shd_spcing']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
                                     </div>
                                   </div>
+                                  <div class="form-group">
+                                    <label for="shade_species_perm_" class="col-sm-2" style="padding-top:15px;">shade species permanent:</label>
+
+                                    <div class="input-group" class="col-sm-10">
+                                        <input type="text" class="form-control" id="shade_species_perm_" name="shade_species_perm" value="<?php echo $sec['shade_spcs_perm']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
+                                    </div>
+                                  </div>
+
                                   <div class="form-group">
                                     <label for="Perm_Shade_spacing_" class="col-sm-2" style="padding-top:15px;">Perm Shade spacing:</label>
 
@@ -485,17 +486,18 @@
                                   <input type="text" class="form-control" name="shade_species_temp" placeholder="Shade Species Temporary" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="Temp_Shade_spacing" class="col-sm-3" style="padding-top:15px">Temp. Shade Spacing:</label>
+                                <div class="input-group col-sm-6">
+                                  <input type="text" class="form-control" name="Temp_Shade_spacing" placeholder="Temporary Shade spacing"><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="shade_species_perm" class="col-sm-3" style="padding-top:15px">Shade species perm.:</label>
                                 <div class="input-group col-sm-6">
 
                                   <input type="text" class="form-control" name="shade_species_perm" placeholder="Shade Species Permanent" ><span class="input-group-addon"><i class="glyphicon glyphicon-tree-deciduous"></i></span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Temp_Shade_spacing" class="col-sm-3" style="padding-top:15px">Temp. Shade Spacing:</label>
-                                <div class="input-group col-sm-6">
-                                  <input type="text" class="form-control" name="Temp_Shade_spacing" placeholder="Temporary Shade spacing"><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
                                 </div>
                             </div>
                             <div class="form-group">

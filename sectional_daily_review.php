@@ -79,7 +79,7 @@
 									<div class="row">
                   <div class="form-group col-sm-6">
                     <!-- <label class="sr-only" for="sec_select">Email address</label> -->
-										<select id="division" name ="short_sec_name" class="form-control">
+										<select id="section" name ="short_sec_name" class="form-control" onChange="enable_add()">
 											<option>Select a section</option>
 			                <?php
 			                    $q = "SELECT * FROM sections";
@@ -88,7 +88,6 @@
 			                    confirm_query($r);
 			                    //$_POST['sec_short_nm'] = NULL;
 
-			                    echo "<option id=\"opt0\" value=NULL></option>";
 			                    while($sec_values = mysqli_fetch_assoc($r)) {
 			                ?>
 			                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST["sec_date_submit"]) && ($_POST['short_sec_name'] == $sec_values['short_sec_name'])) { echo "selected";} ?> ><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
@@ -104,7 +103,7 @@
 											<span class="input-group-addon">
 													<i class="glyphicon glyphicon-calendar"></i>
 											</span>
-											<input type="text" name="start_date_value" class="form-control" id="datepicker1" <?php if($req_start_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_start_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
+											<input type="text" name="start_date_value" class="form-control" id="datepicker1" <?php if($req_start_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_start_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?>  required>
 
 										</div>
 									</div>
@@ -120,7 +119,7 @@
 
 										</div>
 									</div>
-                  <button type="submit" name='sec_date_submit' value="section and date range" class="btn btn-default" style="margin-top:0px;">Get Data</button>
+                  <button type="submit" name='sec_date_submit' value="section and date range" class="btn btn-default" id="hide_me" style="margin-top:0px;">Get Data</button>
                 </form>
 
             </div>
@@ -344,6 +343,18 @@
 						$(function() {
 							$( "#datepicker1, #datepicker2" ).datepicker({dateFormat: 'dd-mm-yy'});
 						});
+				</script>
+				<script>
+				document.getElementById('hide_me').disabled=true;
+				function enable_add() {
+					if(document.getElementById('section').value!='Select a section')
+					{
+						document.getElementById('hide_me').disabled=false;
+					}
+					else {
+						document.getElementById('hide_me').disabled=true;
+					}
+				}
 				</script>
     </body>
 </html>
