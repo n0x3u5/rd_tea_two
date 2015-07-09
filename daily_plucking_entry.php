@@ -46,7 +46,7 @@
 
 
 
-		$q_prune = "SELECT prune_style from sections where short_sec_name = '$req_ssn'";
+		$q_prune = "SELECT prune_style from sections where  division = '{$_SESSION['current_div']}' and short_sec_name = '$req_ssn'";
 		//var_dump($q_prune);
 		$r_prune = mysqli_query($connection, $q_prune);
 		confirm_query($r_prune);
@@ -237,7 +237,7 @@
                 <form action="daily_plucking_entry.php" method="post" class="form form-group form-inline" style="margin-top: 30px;">
 									<select id="division" name ="short_sec_name" class="form-control" onchange="enable_add()" required>
 										<?php
-												$q = "SELECT * FROM sections";
+												$q = "SELECT * FROM sections where division = '{$_SESSION['current_div']}'";
 												$result = mysqli_query($connection, $q);
 
 												confirm_query($result);

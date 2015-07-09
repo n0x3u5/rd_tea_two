@@ -83,7 +83,7 @@
 										<select id="section" name ="short_sec_name" class="form-control" onChange="enable_add()">
 											<option>Select a section</option>
 			                <?php
-			                    $q = "SELECT * FROM sections";
+			                    $q = "SELECT * FROM sections where division = '{$_SESSION['current_div']}'";
 			                    $r = mysqli_query($connection, $q);
 
 			                    confirm_query($r);

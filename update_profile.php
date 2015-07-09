@@ -14,13 +14,15 @@
 	$check_flag = 0;
 
 	// var_dump($_SESSION['flag_div_chk']);
-	if($_SESSION['flag_div_chk'] == 1) {
-		echo "You aren't permitted to perform that action!";
+	if(isset($_SESSION['flag_div_chk'])) {
+		if($_SESSION['flag_div_chk'] == 1) {
+			echo "You aren't permitted to perform that action!";
+			$_SESSION['flag_div_chk'] = 0;
+		}
+		else {
+			$_SESSION['flag_div_chk'] = 0;
+		}
 	}
-	else {
-		$_SESSION['flag_div_chk'] = 0;
-	}
-
 	if(isset($_SESSION["user_email"])){
 		$email = $_SESSION["user_email"];
 	}

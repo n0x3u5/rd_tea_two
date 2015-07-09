@@ -346,8 +346,9 @@
 					  autocomplete: {
 					    source: [ <?php
 													if(isset($_POST['dt_cat_submit'])){
+														$current_division = $_SESSION['current_div'];
 														if($_SESSION['prune_stats'] == "UNPRUNED") {
-															$q_pstat= "select short_sec_name from sections where prune_style in (select prune_style from prune_style_stats where prune_stat = 'UNPRUNED')";
+															$q_pstat= "select short_sec_name from sections where division = '$current_division' and prune_style in (select prune_style from prune_style_stats where prune_stat = 'UNPRUNED')";
 
 															$r_pstat = mysqli_query($connection, $q_pstat);
 															confirm_query($r_pstat);
@@ -360,7 +361,7 @@
 
 														}
 														else if($_SESSION['prune_stats'] == "PRUNED") {
-															$q_pstat= "select short_sec_name from sections where prune_style in (select prune_style from prune_style_stats where prune_stat = 'PRUNED')";
+															$q_pstat= "select short_sec_name from sections where division = '$current_division' and prune_style in (select prune_style from prune_style_stats where prune_stat = 'PRUNED')";
 
 															$r_pstat = mysqli_query($connection, $q_pstat);
 															confirm_query($r_pstat);

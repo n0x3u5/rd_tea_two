@@ -22,7 +22,7 @@ if(isset($_POST['yr_sec_submit'])) {
 	// $_SESSION['ssn'] = $req_ssn;
 	// $_SESSION['yr_1'] = $req_start_yr;
 	// $_SESSION['yr_2'] = $req_end_yr;
-	$q_header = "select * from sections where short_sec_name = '{$req_ssn}'"; //and division = '{$req_div}'";
+	$q_header = "select * from sections where short_sec_name = '{$req_ssn}' and division = '{$_SESSION['current_div']}'"; //and division = '{$req_div}'";
 	//var_dump($q_header);
 	$r_header = mysqli_query($connection, $q_header);
 	confirm_query($r_header);
@@ -30,7 +30,7 @@ if(isset($_POST['yr_sec_submit'])) {
 	$header = mysqli_fetch_assoc($r_header);
 	//var_dump($header);
 
-	$q_prune = "select * from yearly_prune_infilling where short_sec_name = '{$req_ssn}' and division = '{$_SESSION['div_name']}' and year between $req_start_yr and $req_end_yr";
+	$q_prune = "select * from yearly_prune_infilling where short_sec_name = '{$req_ssn}' and division = '{$req_div}' and year between $req_start_yr and $req_end_yr";
 	//var_dump($q_prune);
 	$r_prune = mysqli_query($connection, $q_prune);
 	confirm_query($r_prune);
@@ -38,7 +38,7 @@ if(isset($_POST['yr_sec_submit'])) {
 	//$prune = mysqli_fetch_assoc($r_prune);
 	//var_dump($prune);
 
-	$q_soil = "select * from yearly_soil_manuring where short_sec_name = '{$req_ssn}' and division = '{$_SESSION['div_name']}' and year between $req_start_yr and $req_end_yr";
+	$q_soil = "select * from yearly_soil_manuring where short_sec_name = '{$req_ssn}' and division = '{$req_div}' and year between $req_start_yr and $req_end_yr";
 	//var_dump($q_soil);
 	$r_soil = mysqli_query($connection, $q_soil);
 	confirm_query($r_soil);
@@ -103,7 +103,7 @@ else {
 											<div>
 												<select id="section" name ="short_sec_name" class="form-control" onChange="enable_add()" >
 													 <?php
-															$q = "SELECT short_sec_name FROM sections";
+															$q = "SELECT short_sec_name FROM sections WHERE division = '{$_SESSION['current_div']}'";
 															$result = mysqli_query($connection, $q);
 
 															confirm_query($result);
@@ -184,7 +184,7 @@ else {
                                 <thead >
                                     <tr>
                                         <th rowspan="2"   style="text-align:center padding:2 0 2 0 ">Year</th>
-                                        <!-- <th rowspan="2"   style="text-align:center">Prune</th> -->
+                                        <th rowspan="2"   style="text-align:center">Prune</th>
                                         <th rowspan="2"   style="text-align:center">Tipping</th>
                                         <th rowspan="2"   style="text-align:center">Made Tea<br>(in Kg/Ha)</th>
                                         <th rowspan="2"   style="text-align:center">Vacancy<br>(in %)</th>
@@ -206,7 +206,7 @@ else {
 																	?>
                                     <tr>
                                         <td   style="text-align:center"> <?php echo $prune['year']; ?> </td>
-                                        <!-- <td   style="text-align:center"> <?php //echo $prune['prune']; ?> </td> -->
+                                        <td   style="text-align:center"> <?php echo $prune['prune']; ?> </td>
                                         <td   style="text-align:center"> <?php echo $prune['tipping']; ?> </td>
                                         <td   style="text-align:center"> <?php echo $prune['made_tea']; ?> </td>
                                         <td   style="text-align:center"> <?php echo $prune['vacancy']; ?> </td>

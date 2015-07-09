@@ -314,7 +314,7 @@
                         <div>
 													<select id="section" name ="short_sec_name" class="form-control" onchange="enable_add()" >
 														<?php
-																$q = "SELECT * FROM sections";
+																$q = "SELECT * FROM sections WHERE division = '{$_SESSION['div_name']}'";
 																$result = mysqli_query($connection, $q);
 
 																confirm_query($result);

@@ -10,8 +10,16 @@
 <?php
 
   $connection = make_connection();
+  if($_SESSION["user_div"] == "ALL") {
+    $req_div = $_SESSION["current_div"];
+  }
+  else {
+    $req_div = $_SESSION["user_div"];
+  }
+  $_SESSION['div_name'] = $req_div;
 
   if(isset($_POST["section_submit"])) {
+
     $sec_nm = mysqli_real_escape_string($connection, $_POST["sec_nm"]);
     $sec_shrt_nm = mysqli_real_escape_string($connection, $_POST["sec_short_nm"]);
     $sec_area = (float) mysqli_real_escape_string($connection, $_POST["sec_area"]);
@@ -32,11 +40,11 @@
     $ext_rplnt = (int) mysqli_real_escape_string($connection, $_POST["ext_rplnt"]);
 
     $q_in = "INSERT INTO sections ";
-    $q_in .= "(sec_name, short_sec_name, total_area, jat,";
+    $q_in .= "(division, sec_name, short_sec_name, total_area, jat,";
     $q_in .= " shade_spcs_temp, shade_spcs_perm, frame_height, bush_height,";
     $q_in .= " yr_of_plant, plant_spacing,temp_shd_spcing, perm_shd_spcing,";
     $q_in .= " plant_density, bush_pop, drain_stats, soil_topo, ext_rplnt, prune_style)";
-    $q_in .= " VALUES ('{$sec_nm}', '{$sec_shrt_nm}', {$sec_area}, '{$jat}', '{$shd_spcs_tmp}', '{$shd_spcs_perm}',";
+    $q_in .= " VALUES ('{$_SESSION['div_name']}', '{$sec_nm}', '{$sec_shrt_nm}', {$sec_area}, '{$jat}', '{$shd_spcs_tmp}', '{$shd_spcs_perm}',";
     $q_in .= " {$frame_ht}, {$bush_ht}, {$plntng_yr}, {$plnt_spcing}, {$tmp_shd_spcing}, {$prm_shd_spcing},";
     $q_in .= " {$plnt_dens}, {$bsh_popu}, '{$drn_stats}', '{$soil_topo}', {$ext_rplnt}, '{$stats}' )";
 
@@ -64,6 +72,7 @@
       </div>
       <div>";
 		}
+    $_SESSION['div_name'] = NULL;
   }
 
 
@@ -73,7 +82,7 @@
   if(isset($_POST["update_submit"])) {
     //var_dump($_POST);
     $req_ssn = mysqli_real_escape_string($connection, $_SESSION['upd_ssn']);
-    $q_req_ssn = "SELECT * FROM sections WHERE short_sec_name = '{$req_ssn}'";
+    $q_req_ssn = "SELECT * FROM sections WHERE short_sec_name = '{$req_ssn}' AND division = '{$_SESSION['div_name']}'";
     //var_dump($q_req_ssn);
 
     $req_result = mysqli_query($connection, $q_req_ssn);
@@ -104,7 +113,7 @@
     $ext_rplnt = (int) mysqli_real_escape_string($connection, $_POST["ext_rplnt"]);
 
     $q_up = "UPDATE sections SET ";
-    $q_up .= "sec_name = '{$sec_nm}', short_sec_name = '{$sec_shrt_nm}', total_area = {$sec_area} , jat = '{$jat}',";
+    $q_up .= " division ='{$_SESSION['div_name']}', sec_name = '{$sec_nm}', short_sec_name = '{$sec_shrt_nm}', total_area = {$sec_area} , jat = '{$jat}',";
     $q_up .= " shade_spcs_temp = '{$shd_spcs_tmp}', shade_spcs_perm = '{$shd_spcs_perm}',";
     $q_up .= " frame_height = {$frame_ht}, bush_height = {$bush_ht},";
     $q_up .= " yr_of_plant = {$plntng_yr}, plant_spacing = {$plnt_spcing},";
@@ -140,13 +149,14 @@
     //
     // mysqli_free_result($result_up);
     $_SESSION['upd_ssn'] = NULL;
+    $_SESSION['div_name'] = NULL;
   }
 ?>
 <?php
   if(isset($_POST['rmv_sec_submit'])) {
     $ssn = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
 
-    $q = "DELETE FROM sections WHERE short_sec_name = '{$ssn}'";
+    $q = "DELETE FROM sections WHERE short_sec_name = '{$ssn}' and division = '{$_SESSION['div_name']}'";
     $result = mysqli_query($connection, $q);
 
     confirm_query($result);
@@ -170,6 +180,7 @@
       <div>";
 
     }
+    $_SESSION['div_name'] = NULL;
   }
   else {
     $ssn = NULL;
@@ -185,6 +196,7 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="icon" href="images/logo_rdtea.png"/>
+
         <?php $page_id = 2;?>
         <style>
         .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:active, .nav-tabs.nav-justified > .active > a:enabled {
@@ -203,7 +215,20 @@
             <div class="jumbotron" style="background:#006064;margin-left: -15px;margin-right: -15px;">
                 <h1>Manage Sections</h1>
                 <p style="color:#B2DFDB">Add or remove a section</p>
+              <form action="manage_sections.php" method="post">
+                <input type="submit" class="btn btn-success" id="hide_me" value="Show Fields" name = "hide_me">
+              </form>
             </div>
+
+            <?php
+              if(isset($_POST['div_submit'])) {
+                echo "Please press the \"Show Fields\" button above!";
+              }
+              elseif(isset($_POST['hide_me'])) {
+
+
+            ?>
+
             <div class="tab-container">
                 <ul class="nav nav-tabs nav-justified">
                     <li class="active"><a href="#tab1" data-toggle="tab">View and Update Section</a></li>
@@ -217,7 +242,7 @@
                                   $ssnV = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
                                   $_SESSION['upd_ssn'] = $ssnV;
                                   //echo "ssnV=".$ssnV;
-                                  $q2 = " SELECT * FROM sections WHERE short_sec_name = '{$ssnV}'";
+                                  $q2 = " SELECT * FROM sections WHERE short_sec_name = '{$ssnV}' and division='{$_SESSION['div_name']}'";
 
                                   $result = mysqli_query($connection, $q2);
                                   confirm_query($result);
@@ -234,7 +259,7 @@
                               <span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
                               <select  class="form-control" name="sec_short_name" form="view_update_section" required>
                                 <?php
-                                    $q = "SELECT * FROM sections";
+                                    $q = "SELECT * FROM sections where division = '{$_SESSION['div_name']}'";
                                     $result = mysqli_query($connection, $q);
 
                                     confirm_query($result);
@@ -397,6 +422,9 @@
                     </div>
 
                     <div class="tab-pane" id="tab2">
+                      <?php
+                        var_dump($_SESSION['div_name']);
+                      ?>
                         <form id="remove_section" action="manage_sections.php" method="post" size="10">
                         <label for="sec_short_name"> Select Section:</label>
                         <div class="input-group">
@@ -404,7 +432,7 @@
                             <select class="form-control" name="sec_short_name" form="remove_section" required>
 
                                 <?php
-                                  $q = "SELECT * FROM sections";
+                                  $q = "SELECT * FROM sections where division = '{$_SESSION['div_name']}'";
                                   $result = mysqli_query($connection, $q);
 
                                   confirm_query($result);
@@ -572,6 +600,9 @@
 
               </div>
             </div>
+            <?php
+              }
+             ?>
           </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
