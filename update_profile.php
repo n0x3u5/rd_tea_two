@@ -82,7 +82,7 @@
 					else { ?>
 						<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
-							<strong>Stronger your passowrd!</strong> Add a password of length in between 5 to 15 !
+							<strong>Strengthen your passowrd!</strong> Add a password of length in between 5 to 15 !
 						</div>
 					<?php	$check_flag = 0;
 					}
@@ -106,13 +106,21 @@
 		}
 	}
 	if($check_flag==1)
-	{?>
-		<div class=" container alert alert-success alert-dismissible" role="alert" style="border-color:green">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
-			<strong>Success!</strong> Your Profile is updated, The changes will be shown after the next login.
-		</div>
+	{
+		if(mysqli_affected_rows($connection) > 0) { ?>
+			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Success!</strong> Your Profile is updated, The changes will be shown after the next login.
 
-	<?php } ?>
+			</div>
+		<?php }
+		else { ?>
+			<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+				<strong>Sorry!</strong> No row affected!
+			</div>
+			<?php }
+	 } ?>
 
 <!DOCTYPE html>
 <html>

@@ -23,12 +23,20 @@
 
     $r_in = mysqli_query($connection, $q_in);
     confirm_query($r_in);
-    if(mysqli_affected_rows($connection) > 0) {
-			echo "Inserted Successfully!";
-		}
-		else {
-			echo "No record affected! Check your input!";
-		}
+    if(mysqli_affected_rows($connection) > 0) { ?>
+      <div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong> Inserted Successfully!
+      </div>
+    <?php }
+    else { ?>
+      <div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+        <strong>Sorry!</strong> No row affected!
+      </div>
+
+
+    <?php }
   }
 
 
@@ -60,12 +68,18 @@
     //var_dump($r_up);
 
     confirm_query($r_up);
-    if(mysqli_affected_rows($connection) > 0) {
-			echo "Updated Successfully!";
-		}
-		else {
-			echo "No record affected! Check your input!";
-		}
+    if(mysqli_affected_rows($connection) > 0) { ?>
+      <div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong> Edited Successfully!
+      </div>
+    <?php }
+    else { ?>
+      <div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+        <strong>Sorry!</strong> No row affected!
+      </div>
+<?php }
     // mysqli_free_result($req_result);
     //
     // mysqli_free_result($result_up);
@@ -79,12 +93,18 @@
     $r_del = mysqli_query($connection, $q_del);
 
     confirm_query($r_del);
-    if(mysqli_affected_rows($connection) > 0) {
-			echo "Deleted Successfully!";
-		}
-		else {
-			echo "No record affected! Check your input!";
-		}
+    if(mysqli_affected_rows($connection) > 0) { ?>
+      <div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong> Deleted Successfully!
+      </div>
+    <?php }
+    else { ?>
+      <div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
+        <strong>Sorry!</strong> No row affected!
+      </div>
+  <?php }
   }
   else {
     $lcsn = NULL;
@@ -166,17 +186,19 @@
                                       ?>
                                   </select>
                                   <p></p>
-                                  <input type="submit" class="btn btn-info" name="view_submit" value="Rename">
+                                  <input type="submit" class="btn btn-info" name="view_submit" value="Rename" onclick="show()">
                                 </div>
                             </div>
-
+                          <?php if(isset($_POST['view_submit'])){ ?>
+                            <div class="row">
                               <div class="form-group">
                                 <label for="actual_name" class="col-sm-2 col-sm-offset-1">Full Group Name:</label>
                                 <div class="col-sm-4">
                                 <input type="text" name ="labour_cat" id="actual_name" class="form-control" <?php if($cat_view != NULL) { ?>value="<?php echo $cat_view['labour_cat']; ?>" <?php } else { ?>placeholder=<?php echo "\"labour category\""; ?> <?php } ?> >
                                 </div>
                               </div>
-
+                            </div>
+                            <div class="row">
                               <div class="form-group">
                                 <label for="actual_name" class="col-sm-2 col-sm-offset-1">Group name in Short:</label>
                                 <div class="col-sm-4">
@@ -184,6 +206,8 @@
                                 </div>
                               </div>
                               <input type="submit" class="btn btn-success col-sm-offset-3" name="edit_submit" value="Confirm Changes">
+                            </div>
+                          <?php } ?>
                         </form>
 
 
@@ -269,6 +293,7 @@
                 opt.value = tb2.value;
             }
         </script>
+
     </body>
 </html>
 
