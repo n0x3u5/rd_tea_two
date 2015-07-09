@@ -8,6 +8,7 @@
 	$connection = make_connection(); //creating the connection
 		if(isset($_POST['login_submit'])){ //-----------------------------------------------------
 			//2. perform database query
+			$_SESSION['login'] = "Yes";
 			$query = "SELECT * ";
 			$query .= "FROM users ";
 			$result = mysqli_query($connection, $query);
@@ -22,6 +23,7 @@
 
 		}
 		else {
+			$_SESSION['login'] = NULL;
 			$result = NULL;
 			$email = NULL;
 			$password = NULL;
@@ -71,23 +73,34 @@
 
 				$_SESSION["user_lvl"] = $users["level"];
 				$_SESSION["user_email"] = $users["e_mail"];
+				$_SESSION["user_div"] = $users["division"];
 				$_SESSION["user"] = $users["first_name"] . ($users["middle_name"] == ""? " " : " " . $users["middle_name"] . " ") . $users["last_name"];
 			}
 			else {
 				$_SESSION["user_lvl"] = NULL;
 				$_SESSION["user_email"] = NULL;
 				$_SESSION["user"] = NULL;
+				$_SESSION["user_div"] = NULL;
 				$_SESSION["message"] = "password/email error!";
 			}
 
 			//echo "session level = <br> <br>".$_SESSION["user_lvl"]."<br><br>";
-			if($_SESSION["user_lvl"]!= NULL && $_SESSION["user_lvl"] != 3 ) {
-				 redirect_to("manage_users.php");
-				 //echo  session_msg() . "<br>" ;
+			if( $_SESSION["user_lvl"] == 0) {
+				redirect_to("weather.php");
+			}
+			if( $_SESSION["user_lvl"] == 1 ) {
+				//echo session_msg() . "<br>"; //. $_SESSION["user_lvl"];
+				redirect_to("leaf_chit.php");
+			}
+			else if($_SESSION["user_lvl"] == 2 ) {
+				redirect_to("manage_users.php");
+				//echo  session_msg() . "<br>" ;
 			}
 			else if( $_SESSION["user_lvl"] == 3 ) {
+				//echo $_SESSION['user']." ".$_SESSION['user_lvl'];
+
 				//echo session_msg() . "<br>"; //. $_SESSION["user_lvl"];
-				redirect_to("update_profile.php");
+				redirect_to("sectional_daily_review.php");
 			}
 			else {
 				echo  session_msg() . "<br>"; //. $_SESSION["user_lvl"];

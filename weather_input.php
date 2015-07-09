@@ -5,6 +5,17 @@
 	if(!isset($_SESSION['user'])) {
 		redirect_to("index.php");
 	}
+
+	// var_dump($_SESSION['user_div']);
+	// var_dump($_SESSION['current_div']);
+	//var_dump($_POST['current_div']);
+	if(($_SESSION['user_div'] != "ALL") && ($_SESSION['user_div'] != $_SESSION['current_div'])) {
+		$_SESSION['flag_div_chk'] = 1;
+		redirect_to("update_profile.php");
+	}
+	else {
+		$_SESSION['flag_div_chk'] = 0;
+	}
 ?>
 <?php
 	$connection = make_connection();
@@ -12,8 +23,14 @@
 	//var_dump($_POST);echo "<br><hr>";
 	if(isset($_POST["dt_sec_submit"])){
 		$req_date = date('Y-m-d', strtotime($_POST["date_value"]));
-		//$req_div_name = $_POST["div_name"];
-		//$_SESSION['div_name'] = $req_div_name;
+		// var_dump($_SESSION['user_div']);
+		if($_SESSION["user_div"] == "ALL") {
+			$req_div = $_SESSION["current_div"];
+		}
+		else {
+			$req_div = $_SESSION["user_div"];
+		}
+		$_SESSION['div_name'] = $req_div;
 		$_SESSION['date'] = $req_date;
 
 
@@ -21,8 +38,8 @@
 		// echo "<br>got div_name =" .$req_div_name."<br>";
 		// var_dump($req_date);echo "<br>"; var_dump($req_div_name);
 
-		$query = "SELECT * FROM daily_weather WHERE division='Hansqua' and record_date='{$req_date}'";
-
+		$query = "SELECT * FROM daily_weather WHERE division='{$_SESSION['div_name']}' and record_date='{$req_date}' and division = '{$_SESSION['div_name']}'";
+		// var_dump($query);
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
 
@@ -39,9 +56,9 @@
 
 <?php
 	if (isset($_POST['add_submit'])) {
-		$division = "Hansqua"; //$_SESSION['div_name'];
+		$division = $_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
-
+		//echo "division :".$division."<br>";
 		$rain_day = (float) mysqli_real_escape_string($connection, $_POST["rain_day"]);
 		$rain_night = (float) mysqli_real_escape_string($connection, $_POST["rain_night"]);
 		$temp_max = (float) mysqli_real_escape_string($connection, $_POST["temp_max"]);
@@ -53,7 +70,7 @@
 		$query .= " division, record_date, rain_day, rain_night, temp_max, temp_min,";
 		$query .= " sun_shine_hr, weather_cond )";
 		$query .= " VALUES ('{$division}', '{$record_date}', {$rain_day}, {$rain_night}, {$temp_max}, {$temp_min}, {$sun_shine_hr}, '{$weather_cond}')";
-
+		// var_dump($query);
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
 		if(mysqli_affected_rows($connection) > 0) { ?>
@@ -85,11 +102,12 @@
 
 		$_SESSION['daily_weather'] = NULL;
 		$_SESSION['date'] = NULL;
+		$_SESSION['div_name'] = NULL;
 	}
 
 	if(isset($_POST['edit_submit'])) {
 
-		$division = "Hansqua"; //$_SESSION['div_name'];
+		$division = $_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
 		$req_id = $_SESSION['daily_weather']['id'];
 
@@ -106,7 +124,7 @@
 		$query .= " division='{$division}', record_date='{$record_date}', rain_day={$rain_day}, rain_night={$rain_night},";
 		$query .= " temp_max={$temp_max}, temp_min={$temp_min}, sun_shine_hr={$sun_shine_hr}, weather_cond='{$weather_cond}' WHERE id={$typed_req_id}";
 
-		//var_dump($query);
+		// var_dump($query);
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
@@ -134,14 +152,15 @@
 
 		$_SESSION['daily_weather'] = NULL;
 		$_SESSION['date'] = NULL;
+		$_SESSION['div_name'] = NULL;
 	}
 
 	if(isset($_POST['del_entry'])) {
-		$division = "Hansqua"; //$_SESSION['div_name'];
+		$division = $_SESSION['div_name'];
 		$record_date = $_SESSION['date'];
 
 		$query = "DELETE FROM daily_weather WHERE division='{$division}' and record_date='{$record_date}'";
-
+		// var_dump($query);
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
 		if(mysqli_affected_rows($connection) > 0) { ?>
@@ -168,6 +187,7 @@
 
 		$_SESSION['daily_weather'] = NULL;
 		$_SESSION['date'] = NULL;
+		$_SESSION['div_name'] = NULL;
 	}
 ?>
 
@@ -406,6 +426,7 @@
 								}
 						</script>"
 					?>
+
     </body>
 </html>
 <?php

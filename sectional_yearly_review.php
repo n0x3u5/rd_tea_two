@@ -12,6 +12,7 @@ $connection = make_connection();
 
 //var_dump($_POST); echo "<br>";
 if(isset($_POST['yr_sec_submit'])) {
+	$req_div = $_SESSION['current_div'];
 	$req_ssn = $_POST['short_sec_name'];
 	$req_start_yr = $_POST['start_yr'];
 	$req_end_yr = $_POST['end_yr'];
@@ -21,7 +22,7 @@ if(isset($_POST['yr_sec_submit'])) {
 	// $_SESSION['ssn'] = $req_ssn;
 	// $_SESSION['yr_1'] = $req_start_yr;
 	// $_SESSION['yr_2'] = $req_end_yr;
-	$q_header = "select * from sections where short_sec_name = '{$req_ssn}'";
+	$q_header = "select * from sections where short_sec_name = '{$req_ssn}'"; //and division = '{$req_div}'";
 	//var_dump($q_header);
 	$r_header = mysqli_query($connection, $q_header);
 	confirm_query($r_header);
@@ -29,7 +30,7 @@ if(isset($_POST['yr_sec_submit'])) {
 	$header = mysqli_fetch_assoc($r_header);
 	//var_dump($header);
 
-	$q_prune = "select * from yearly_prune_infilling where short_sec_name = '{$req_ssn}' and year between $req_start_yr and $req_end_yr";
+	$q_prune = "select * from yearly_prune_infilling where short_sec_name = '{$req_ssn}' and division = '{$_SESSION['div_name']}' and year between $req_start_yr and $req_end_yr";
 	//var_dump($q_prune);
 	$r_prune = mysqli_query($connection, $q_prune);
 	confirm_query($r_prune);
@@ -37,7 +38,7 @@ if(isset($_POST['yr_sec_submit'])) {
 	//$prune = mysqli_fetch_assoc($r_prune);
 	//var_dump($prune);
 
-	$q_soil = "select * from yearly_soil_manuring where short_sec_name = '{$req_ssn}' and year between $req_start_yr and $req_end_yr";
+	$q_soil = "select * from yearly_soil_manuring where short_sec_name = '{$req_ssn}' and division = '{$_SESSION['div_name']}' and year between $req_start_yr and $req_end_yr";
 	//var_dump($q_soil);
 	$r_soil = mysqli_query($connection, $q_soil);
 	confirm_query($r_soil);

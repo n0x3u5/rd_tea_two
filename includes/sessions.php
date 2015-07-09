@@ -8,15 +8,17 @@
   //     exit("Exiting");
   //   }
   //  }
- function session_msg() {
-	if(isset($_SESSION["message"])) {
-		$output = "<div class=\"message\">";
-		$output .= htmlentities($_SESSION["message"]);
-		$output .= "</div>";
+  //$_SESSION['flag_div_chk'] = 0;
 
-		$_SESSION["message"] = NULL;
-		return $output;
-	}
+  function session_msg() {
+	  if(isset($_SESSION["message"])) {
+  		$output = "<div class=\"message\">";
+  		$output .= htmlentities($_SESSION["message"]);
+  		$output .= "</div>";
+
+  		$_SESSION["message"] = NULL;
+  		return $output;
+	  }
  }
 
 ?>

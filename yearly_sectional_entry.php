@@ -5,6 +5,14 @@
 	if(!isset($_SESSION['user'])) {
 		redirect_to("index.php");
 	}
+
+	if(($_SESSION['user_div'] != "ALL") && ($_SESSION['user_div'] != $_SESSION['current_div'])) {
+		$_SESSION['flag_div_chk'] = 1;
+		redirect_to("update_profile.php");
+	}
+	else {
+		$_SESSION['flag_div_chk'] = 0;
+	}
 ?>
 
 <?php
@@ -16,10 +24,18 @@
 		$_SESSION['ssn'] = $req_ssn;
 		$_SESSION['yr'] = $req_yr;
 
+		if($_SESSION["user_div"] == "ALL") {
+			$req_div = $_SESSION["current_div"];
+		}
+		else {
+			$req_div = $_SESSION["user_div"];
+		}
+		$_SESSION['div_name'] = $req_div;
+
 		// echo "<br>got year =".$req_yr."<br>";
 		// echo "<br>got ssn =" .$req_ssn."<br>";
 
-		$q_soil = "SELECT * FROM yearly_soil_manuring WHERE short_sec_name='{$req_ssn}' and year='{$req_yr}'";
+		$q_soil = "SELECT * FROM yearly_soil_manuring WHERE short_sec_name='{$req_ssn}' and year='{$req_yr}'and division = '{$_SESSION['div_name']}'";
 		// var_dump($q_soil);
 		$r_soil = mysqli_query($connection, $q_soil);
     confirm_query($r_soil);
@@ -28,7 +44,7 @@
 		// var_dump($_SESSION['soil_manure']);
 
 
-		$q_prune = "SELECT * FROM yearly_prune_infilling WHERE short_sec_name='{$req_ssn}' and year='{$req_yr}'";
+		$q_prune = "SELECT * FROM yearly_prune_infilling WHERE short_sec_name='{$req_ssn}' and year='{$req_yr}' and division = '{$_SESSION['div_name']}'";
 		// var_dump($q_prune);
 		$r_prune = mysqli_query($connection, $q_prune);
     confirm_query($r_prune);
@@ -51,9 +67,9 @@
 		$short_sec_name = $_SESSION['ssn'];
 		$year = $_SESSION['yr'];
 
-		// $prune = mysqli_real_escape_string($connection, $_POST['prune']);
+		$prune = mysqli_real_escape_string($connection, $_POST['prune']);
 		$tipping = mysqli_real_escape_string($connection, $_POST['tipping']);
-		$made_tea = mysqli_real_escape_string($connection, $_POST['made_tea']);
+		$made_tea = (float) mysqli_real_escape_string($connection, $_POST['made_tea']);
 		$vacancy = (float) mysqli_real_escape_string($connection, $_POST['vacancy']);
 		$shade_status = mysqli_real_escape_string($connection, $_POST['shade_status']);
 		$infill_tea = (int) mysqli_real_escape_string($connection, $_POST['infill_tea']);
@@ -71,7 +87,7 @@
 		$avbl_N = mysqli_real_escape_string($connection, $_POST['avbl_N']);
 		$avbl_S = mysqli_real_escape_string($connection, $_POST['avbl_S']);
 
-		$q_prune_in = "INSERT INTO yearly_prune_infilling (short_sec_name, year, tipping, made_tea, vacancy, shade_status, infill_tea, infill_shade, remarks) VALUES ('{$short_sec_name}', {$year}, '{$tipping}', {$made_tea}, {$vacancy}, '{$shade_status}', {$infill_tea}, {$infill_shade}, '{$remarks}')";
+		$q_prune_in = "INSERT INTO yearly_prune_infilling (division, short_sec_name, year, prune, tipping, made_tea, vacancy, shade_status, infill_tea, infill_shade, remarks) VALUES ('{$_SESSION['div_name']}', '{$short_sec_name}', {$year}, '{$prune}', '{$tipping}', {$made_tea}, {$vacancy}, '{$shade_status}', {$infill_tea}, {$infill_shade}, '{$remarks}')";
 
 		$r_prune_in = mysqli_query($connection, $q_prune_in);
 		confirm_query($r_prune_in);
@@ -83,7 +99,7 @@
 			$flag_prune = 0;
 		}
 
-		$q_soil_in = "INSERT INTO yearly_soil_manuring (short_sec_name, year, n, p, k, top_pH, sub_pH, org_C, avbl_P, avbl_K, avbl_N, avbl_S) VALUES ('{$short_sec_name}', {$year}, {$n}, {$p}, {$k}, {$top_pH}, {$sub_pH}, {$org_C}, '{$avbl_P}', '{$avbl_K}', '{$avbl_N}', '{$avbl_S}')";
+		$q_soil_in = "INSERT INTO yearly_soil_manuring (division, short_sec_name, year, n, p, k, top_pH, sub_pH, org_C, avbl_P, avbl_K, avbl_N, avbl_S) VALUES ('{$_SESSION['div_name']}', '{$short_sec_name}', {$year}, {$n}, {$p}, {$k}, {$top_pH}, {$sub_pH}, {$org_C}, '{$avbl_P}', '{$avbl_K}', '{$avbl_N}', '{$avbl_S}')";
 
 		$r_soil_in = mysqli_query($connection, $q_soil_in);
 		confirm_query($r_soil_in);
@@ -113,10 +129,11 @@
 		$_SESSION['prune_infill'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['yr'] = NULL;
+		$_SESSION['div_name'] = NULL;
 	}
 ?>
 
-<?php //insertion
+<?php //update
 	if(isset($_POST['edit_submit'])) {
 		$short_sec_name = $_SESSION['ssn'];
 		$year = $_SESSION['yr'];
@@ -124,9 +141,9 @@
 		$prune_id = $_SESSION['prune_infill']['id'];
 
 
-		//$prune = mysqli_real_escape_string($connection, $_POST['prune']);
+		$prune = mysqli_real_escape_string($connection, $_POST['prune']);
 		$tipping = mysqli_real_escape_string($connection, $_POST['tipping']);
-		$made_tea = mysqli_real_escape_string($connection, $_POST['made_tea']);
+		$made_tea =(float) mysqli_real_escape_string($connection, $_POST['made_tea']);
 		$vacancy = (float) mysqli_real_escape_string($connection, $_POST['vacancy']);
 		$shade_status = mysqli_real_escape_string($connection, $_POST['shade_status']);
 		$infill_tea = (int) mysqli_real_escape_string($connection, $_POST['infill_tea']);
@@ -144,7 +161,7 @@
 		$avbl_N = mysqli_real_escape_string($connection, $_POST['avbl_N']);
 		$avbl_S = mysqli_real_escape_string($connection, $_POST['avbl_S']);
 
-		$q_prune_up = "UPDATE yearly_prune_infilling SET short_sec_name='{$short_sec_name}', year={$year}, tipping='{$tipping}', made_tea={$made_tea}, vacancy={$vacancy}, shade_status='{$shade_status}', infill_tea={$infill_tea}, infill_shade={$infill_shade}, remarks='{$remarks}' WHERE id = {$prune_id}";
+		$q_prune_up = "UPDATE yearly_prune_infilling SET division='{$_SESSION['div_name']}', short_sec_name='{$short_sec_name}', year={$year}, prune='{$prune}', tipping='{$tipping}', made_tea={$made_tea}, vacancy={$vacancy}, shade_status='{$shade_status}', infill_tea={$infill_tea}, infill_shade={$infill_shade}, remarks='{$remarks}' WHERE id = {$prune_id}";
 
 		$r_prune_up = mysqli_query($connection, $q_prune_up);
 		confirm_query($r_prune_up);
@@ -156,7 +173,7 @@
 			$flag_prune = 0;
 		}
 
-		$q_soil_up = "UPDATE yearly_soil_manuring SET short_sec_name='{$short_sec_name}', year={$year}, n={$n}, p={$p}, k={$k}, top_pH={$top_pH}, sub_pH={$sub_pH}, org_C={$org_C}, avbl_P='{$avbl_P}', avbl_K='{$avbl_K}', avbl_N='{$avbl_N}', avbl_S='{$avbl_S}' WHERE id = {$soil_id}";
+		$q_soil_up = "UPDATE yearly_soil_manuring SET division='{$_SESSION['div_name']}', short_sec_name='{$short_sec_name}', year={$year}, n={$n}, p={$p}, k={$k}, top_pH={$top_pH}, sub_pH={$sub_pH}, org_C={$org_C}, avbl_P='{$avbl_P}', avbl_K='{$avbl_K}', avbl_N='{$avbl_N}', avbl_S='{$avbl_S}' WHERE id = {$soil_id}";
 
 		$r_soil_up = mysqli_query($connection, $q_soil_up);
 		confirm_query($r_soil_up);
@@ -185,6 +202,7 @@
 		$_SESSION['prune_infill'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['yr'] = NULL;
+		$_SESSION['div_name'] = NULL;
 	}
 ?>
 
@@ -193,7 +211,7 @@
 		$short_sec_name = $_SESSION['ssn'];
 		$year = $_SESSION['yr'];
 
-		$q_prune_del = "DELETE FROM yearly_prune_infilling WHERE short_sec_name='{$short_sec_name}' and year='{$year}'";
+		$q_prune_del = "DELETE FROM yearly_prune_infilling WHERE short_sec_name='{$short_sec_name}' and year='{$year}' and division = '{$_SESSION['div_name']}'";
 		//var_dump($q_prune_del);
 		$r_prune_del = mysqli_query($connection, $q_prune_del);
     confirm_query($r_prune_del);
@@ -205,7 +223,7 @@
 			$flag_prune = 0;
 		}
 
-		$q_soil_del = "DELETE FROM yearly_soil_manuring WHERE short_sec_name='{$short_sec_name}' and year='{$year}'";
+		$q_soil_del = "DELETE FROM yearly_soil_manuring WHERE short_sec_name='{$short_sec_name}' and year='{$year}' and division = '{$_SESSION['div_name']}'";
 		//var_dump($q_soil_del);
 		$r_soil_del = mysqli_query($connection, $q_soil_del);
     confirm_query($r_soil_del);
@@ -217,7 +235,7 @@
 			$flag_soil = 0;
 		}
 
-		if($flag_soil == 1 || $flag_prune == 1) {?>
+		if($flag_soil == 1 || $flag_prune == 1) { ?>
 			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
 				<strong>Success!</strong> Deleted Successfully!
@@ -234,6 +252,7 @@
 		$_SESSION['prune_infill'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['yr'] = NULL;
+		$_SESSION['div_name'] = NULL;
 	}
 ?>
 
@@ -345,6 +364,12 @@
 									else { $man_soil = NULL; $fill_prune = NULL; }
 								?>
 
+								<div class="form-group">
+  								<label for="prune1" class="col-sm-3 control-label">Prune style:</label>
+  								<div class="col-sm-4">
+  									<input type="text" name="prune" class="form-control" id="prune1" <?php if(isset($fill_prune)) { ?> value="<?php echo htmlentities($fill_prune['prune']); ?>"<?php } else { ?>placeholder=<?php echo "\"Tipping\""; ?> <?php } ?> >
+  								</div>
+  							</div>
   							<div class="form-group">
   								<label for="tipp1" class="col-sm-3 control-label">Tipping:</label>
   								<div class="col-sm-4">
@@ -481,6 +506,12 @@
 
 						<div class="tab-pane" id="tab2">
   						<form class="form-horizontal" action="yearly_sectional_entry.php" method="post">
+								<div class="form-group">
+  								<label for="prune2" class="col-sm-3 control-label">Prune style:</label>
+  								<div class="col-sm-4">
+  									<input type="text" name="prune" placeholder="Prune" class="form-control" id="prune2" required>
+  								</div>
+  							</div>
   							<div class="form-group">
   								<label for="tipp" class="col-sm-3 control-label">Tipping:</label>
   								<div class="col-sm-4">

@@ -12,6 +12,7 @@
 
 	//var_dump($_POST); echo "<br>";
 if(isset($_POST['date_submit'])) {
+		$req_div = $_SESSION['current_div'];
 		//$req_div_name = $_POST['div_name'];
 		//$req_year = $_POST['year_value'];
 		$req_date = date('Y-m-d', strtotime( $_POST['date_value']));
@@ -27,11 +28,11 @@ if(isset($_POST['date_submit'])) {
 		// }
 		//var_dump($lcsn_arr); echo "<br>".count($lcsn_arr)."<br>";
 
-		$q_chit = "select * from leaf_chit_table where  rec_dt = '{$req_date}'";
+		$q_chit = "select * from leaf_chit_table where  rec_dt = '{$req_date}' and division = '{$req_div}'";
 		$r_chit = mysqli_query($connection, $q_chit);
 		confirm_query($r_chit);
 
-		$q_cp = "select * from cp_table where  rec_date = '{$req_date}'";
+		$q_cp = "select * from cp_table where  rec_date = '{$req_date}' and division = '{$req_div}'";
 		$r_cp = mysqli_query($connection, $q_cp);
 		confirm_query($r_cp);
 		$cp_record = mysqli_fetch_assoc($r_cp);

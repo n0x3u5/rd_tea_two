@@ -1,13 +1,21 @@
 <?php
 	require_once('includes/sessions.php');
 	require_once('includes/functions.php');
-
+?>
+<?php
+	//var_dump($_SESSION);
 	if(!isset($_SESSION['user'])) {
 		redirect_to("index.php");
 	}
-?>
 
-<?php
+	if(($_SESSION['user_div'] != "ALL") && ($_SESSION['user_div'] != $_SESSION['current_div'])) {
+		$_SESSION['flag_div_chk'] = 1;
+		redirect_to("update_profile.php");
+	}
+	else {
+		$_SESSION['flag_div_chk'] = 0;
+	}
+
 	$connection = make_connection();
 	if(isset($_POST['dt_cat_submit'])) {
 		$req_lcsn = $_POST['lab_cat'];
@@ -16,10 +24,18 @@
 		$req_date = date('Y-m-d', strtotime($_POST['date_value']));
 		$_SESSION['date'] = $req_date;
 
-		$query = "SELECT * FROM leaf_chit_table WHERE lab_cat ='{$req_lcsn}' and rec_dt='{$req_date}'";
+		if($_SESSION["user_div"] == "ALL") {
+			$req_div = $_SESSION["current_div"];
+		}
+		else {
+			$req_div = $_SESSION["user_div"];
+		}
+		$_SESSION['div_name'] = $req_div;
+
+		$query = "SELECT * FROM leaf_chit_table WHERE lab_cat ='{$req_lcsn}' and rec_dt='{$req_date}' and division ='{$_SESSION['div_name']}'";
 
 		$result = mysqli_query($connection, $query);
-    confirm_query($result);
+		confirm_query($result);
 
 		$_SESSION['leaf_chit'] = mysqli_fetch_assoc($result);
 
@@ -29,10 +45,10 @@
 		// var_dump($req_date);
 
 
-	  //var_dump($query);
+		//var_dump($query);
 		//
-	  // $result = mysqli_query($connection, $query);
-	  // confirm_query($result);
+		// $result = mysqli_query($connection, $query);
+		// confirm_query($result);
 		$set = 1;
 
 	}
@@ -62,7 +78,7 @@
 	// $cp_hr_from = mysqli_real_escape_string($connection, $_POST['cp_hr_from']);
 	// $cp_hr_to = mysqli_real_escape_string($connection, $_POST['cp_hr_to']);
 
-	$q_in = "INSERT INTO leaf_chit_table (division, prune_stats, lab_cat, rec_dt, short_sec_name, dt_lst_plkd, plkd_area, plkd_leaf, mandays, task, ballo_count) VALUES ('Hansqua', '{$prune_stats}', '{$lab_cat}', '{$rec_dt}',  '{$short_sec_name}', '{$dt_lst_plkd}', {$plkd_area}, {$plkd_leaf}, {$mandays}, '{$task}', {$ballo_count}) ";
+	$q_in = "INSERT INTO leaf_chit_table (division, prune_stats, lab_cat, rec_dt, short_sec_name, dt_lst_plkd, plkd_area, plkd_leaf, mandays, task, ballo_count) VALUES ('{$_SESSION['div_name']}', '{$prune_stats}', '{$lab_cat}', '{$rec_dt}',  '{$short_sec_name}', '{$dt_lst_plkd}', {$plkd_area}, {$plkd_leaf}, {$mandays}, '{$task}', {$ballo_count}) ";
 
 	$r_in = mysqli_query($connection, $q_in);
 	confirm_query($r_in);
@@ -83,6 +99,7 @@
 	<?php }
 
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
+	$_SESSION['div_name'] = NULL;
 
  }
 
@@ -108,7 +125,7 @@
 	// $cp_hr_from = mysqli_real_escape_string($connection, $_POST['cp_hr_from']);
 	// $cp_hr_to = mysqli_real_escape_string($connection, $_POST['cp_hr_to']);
 
-	$q_up = "UPDATE leaf_chit_table SET prune_stats='{$prune_stats}', lab_cat='{$lab_cat}', rec_dt='{$rec_dt}', short_sec_name = '{$short_sec_name}', dt_lst_plkd = '{$dt_lst_plkd}', plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf}, mandays = {$mandays}, task = '{$task}', ballo_count = {$ballo_count} where id = $req_id ";
+	$q_up = "UPDATE leaf_chit_table SET division='{$_SESSION['div_name']}', prune_stats='{$prune_stats}', lab_cat='{$lab_cat}', rec_dt='{$rec_dt}', short_sec_name = '{$short_sec_name}', dt_lst_plkd = '{$dt_lst_plkd}', plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf}, mandays = {$mandays}, task = '{$task}', ballo_count = {$ballo_count} where id = $req_id ";
 	$r_up = mysqli_query($connection, $q_up);
 	confirm_query($r_up);
 
@@ -125,6 +142,7 @@
 		</div>
 	<?php }
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
+	$_SESSION['div_name'] = NULL;
 
  }
 
@@ -132,11 +150,11 @@
 	$lab_cat = $_SESSION['lcsn'];
 	$rec_dt = $_SESSION['date'];
 
-	$q_del = "DELETE FROM leaf_chit_table WHERE lab_cat ='{$lab_cat}' and rec_dt='{$rec_dt}'";
+	$q_del = "DELETE FROM leaf_chit_table WHERE lab_cat ='{$lab_cat}' and rec_dt='{$rec_dt}' and division='{$_SESSION['div_name']}'";
 	//var_dump($q_del);
 
 	$r_del = mysqli_query($connection, $q_del);
-  confirm_query($r_del);
+	confirm_query($r_del);
 
 	if(mysqli_affected_rows($connection) > 0) { ?>
 		<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
@@ -152,11 +170,10 @@
 <?php }
 
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
-
+	$_SESSION['div_name'] = NULL;
 }
 
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -191,6 +208,7 @@
             include("nav_bar.php");
             nav_echoer($page_id);
         ?>
+
     <div class="container">
             <div class="jumbotron">
                 <h1>Leaf Chit Entry</h1>

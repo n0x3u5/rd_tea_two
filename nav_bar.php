@@ -60,6 +60,32 @@
                             </ul>
                         </li><?php } ?>
                     </ul>
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="navbar-form navbar-left" role="search">
+                      <?php
+                        //var_dump($_POST);
+                        if(isset($_SESSION["login"])){
+                          if($_SESSION['user_div'] == "ALL") {
+                            $_SESSION['current_div'] = 'Hansqua';
+                          }
+                          else {
+                            $_SESSION['current_div'] = $_SESSION['user_div'];
+                          }
+                          $_SESSION['login'] = NULL;
+                        }
+                        else if(isset($_POST["div_submit"])) {
+                          $_SESSION['current_div'] = $_POST['select_div'];
+                        }
+                      ?>
+                      <div class="form-group">
+                        <select class="form-control" name="select_div">
+                          <option <?php if($_SESSION['current_div'] == 'Hansqua') { echo "selected"; } ?> >Hansqua</option>
+                          <option <?php if($_SESSION['current_div'] == 'Bidhannagar') { echo "selected"; } ?> >Bidhannagar</option>
+                          <option <?php if($_SESSION['current_div'] == 'Kishoribag') { echo "selected"; } ?> >Kishoribag</option>
+                          <option <?php if($_SESSION['current_div'] == 'Balasan') { echo "selected"; } ?> >Balasan</option>
+                        </select>
+                      </div>
+                      <button type="submit" class="btn btn-default" id="crnt_div_sbmt" name="div_submit">Submit</button>
+                    </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li <?php if($page_id == 3) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Signed in as <?php if(isset($_SESSION)) { echo $_SESSION['user']; } else { echo "Invalid User!"; } ?> <span class="caret"></span></a>

@@ -12,6 +12,7 @@
 
 	//var_dump($_POST); echo "<br>";
 	if(isset($_POST['sec_date_submit'])) {
+		$req_div = $_SESSION['current_div'];
 		$req_start_date = $_POST['start_date_value'];
 		$req_end_date = $_POST['end_date_value'];
 		$req_ssn = $_POST['short_sec_name'];
@@ -25,7 +26,7 @@
 	  confirm_query($result_spray);
 		//var_dump($req_day_spray);
 
-		$query_pluck = "select * from blue_bk_plk where short_sec_name ='$req_ssn' and rec_dt between '$from' and '$to'";
+		$query_pluck = "select * from blue_bk_plk where short_sec_name ='$req_ssn' and division='{$req_div}' and rec_dt between '$from' and '$to'";
 
 		$result_pluck = mysqli_query($connection, $query_pluck);
 		confirm_query($result_pluck);

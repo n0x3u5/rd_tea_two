@@ -12,14 +12,14 @@
 
 	//var_dump($_POST); echo "<br>";
 	if(isset($_POST['div_date_submit'])) {
-		//$req_div_name = $_POST['div_name'];
+		$req_div = $_SESSION['current_div'];
 		//$req_year = $_POST['year_value'];
 		$req_start_date = $_POST['start_date_value'];
 		$req_end_date = $_POST['end_date_value'];
 
 		$from = date('Y-m-d', strtotime($req_start_date));
 	  $to = date('Y-m-d', strtotime($req_end_date));
-	  $query = "select * from daily_weather where division = 'Hansqua' and record_date between '$from' and '$to'";
+	  $query = "select * from daily_weather where division = '{$req_div}' and record_date between '$from' and '$to'";
 
 
 	  //var_dump($query);
