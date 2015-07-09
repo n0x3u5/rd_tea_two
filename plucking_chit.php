@@ -153,3 +153,6 @@
 		</script>
   </body>
 </html>
+<?php
+	end_connection($connection);
+?>
