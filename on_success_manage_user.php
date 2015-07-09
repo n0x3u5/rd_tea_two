@@ -53,8 +53,15 @@
 															<div class="form-group" style="margin-top:30px;">
 																<label for="f_name" class="col-sm-3 control-label">Division:</label>
 																<div class="input-group">
-																    <input class="form-control" name="division" type="text" placeholder="Division" required>
-																    <span class="input-group-addon"><i class="glyphicon glyphicon-user" ></i></span>
+																	<select class="form-control" id="hideone" onChange="enable_add1()">
+																		<option>Select Division</option>
+																		<option>All</option>
+																		<option>Balsan</option>
+																		<option>Bidhannagar</option>
+																		<option>Hansqua</option>
+																		<option>Kishoribag</option>
+																	</select>
+																	<span class="input-group-addon"><i class="glyphicon glyphicon-th-list" ></i></span>
 																</div>
 															</div>
 															<div class="form-group">
@@ -88,8 +95,8 @@
 														<div class="form-group">
 															<label for="level" class="col-sm-3 control-label">Level:</label>
 															<div class="input-group">
-																<select class="form-control" name = "level">
-																	<option value="NULL">Select level</option>
+																<select class="form-control" name = "level" id="hidetwo"  onChange='enable_add2()'>
+																	<option>Select level</option>
 																	<option value = "1">1</option>
 																	<option value = "2">2</option>
 																	<option value = "3">3</option>
@@ -133,8 +140,8 @@
                         <div>
                             <form action="form_process_delete.php" method="post">
                                 <div class="input-group">
-																		<select  id="emailid" name ="emailid" class="form-control" required>
-																			<option value="NULL">Select email-id</option>
+																		<select  id="emailid" name ="emailid" class="form-control" required onChange='enable_add3()'>
+																			<option>Select email-id</option>
 																			<?php
 																					$q = "SELECT * FROM users";
 																					$r = mysqli_query($connection, $q);
@@ -149,7 +156,7 @@
 																		</select>
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope" ></i></span>
                                 </div>
-                                <button type="button" name="email_submit" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal">Remove</button>
+                                <button type="button" id="rm_hide" name="email_submit" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" >Remove</button>
                                 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -176,7 +183,38 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+				<script>
+					document.getElementById('sbm').disabled=true;
+					document.getElementById('rm_hide').disabled=true;
+					function enable_add1() {
+						if((document.getElementById('hideone').value!='Select Division') && (document.getElementById('hidetwo').value!='Select level'))
+						{
+									document.getElementById('sbm').disabled=false;
+						}
+						else {
+									document.getElementById('sbm').disabled=true;
+							}
 
+					}
+					function enable_add2() {
+						if((document.getElementById('hidetwo').value!='Select level') && (document.getElementById('hideone').value!='Select Division'))
+						{
+									document.getElementById('sbm').disabled=false;
+						}
+						else {
+								document.getElementById('sbm').disabled=true;
+						}
+					}
+					function enable_add3(){
+						if(document.getElementById('emailid').value!='Select email-id')
+						{
+							document.getElementById('rm_hide').disabled=false;
+						}
+						else {
+							document.getElementById('rm_hide').disabled=true;
+						}
+					}
+				</script>
     </body>
 </html>
 <?php

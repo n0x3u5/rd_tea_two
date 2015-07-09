@@ -12,7 +12,6 @@
   $connection = make_connection();
 
   if(isset($_POST["add_submit"])) {
-
     $labour_cat = mysqli_real_escape_string($connection, $_POST["labour_cat"]);
     $lcsn = mysqli_real_escape_string($connection, $_POST["lcsn"]);
 
@@ -175,7 +174,7 @@
 
                                         confirm_query($r_lab_cat);
 
-                                        echo "<option value=\"select a group\">Select a Group</option>";
+                                        echo "<option value=\"NULL\">Select a Group</option>";
                                         while($lab_cats = mysqli_fetch_assoc($r_lab_cat)) {
                                       ?>
 
@@ -189,7 +188,7 @@
                                   <input type="submit" class="btn btn-info" name="view_submit" value="Rename" onclick="show()">
                                 </div>
                             </div>
-                          <?php if(isset($_POST['view_submit'])){ ?>
+                          <?php if(isset($_POST['lab_cat_snm']) && $_POST['lab_cat_snm'] != 'NULL'){ ?>
                             <div class="row">
                               <div class="form-group">
                                 <label for="actual_name" class="col-sm-2 col-sm-offset-1">Full Group Name:</label>
@@ -261,13 +260,13 @@
                           <div class="form-group">
                             <label for="actual_name" class="col-sm-2 col-sm-offset-1">Full Group Name:</label>
                             <div class="col-sm-4">
-                            <input type="text" id="actual_name" name="labour_cat" class="form-control">
+                            <input type="text" id="actual_name" name="labour_cat" class="form-control" required>
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="actual_name" class="col-sm-2 col-sm-offset-1">Group name in Short:</label>
                             <div class="col-sm-4">
-                            <input type="text" id="actual_name" name="lcsn" class="form-control">
+                            <input type="text" id="actual_name" name="lcsn" class="form-control" required>
                             </div>
                           </div>
 
