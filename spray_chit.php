@@ -18,7 +18,9 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.6/css/dataTables.responsive.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <style>
-
+					#spray_chit th ,#spray_chit td{
+						text-align: center;
+					}
         </style>
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="icon" href="images/logo_rdtea.png"/>
@@ -33,8 +35,25 @@
             <div class="jumbotron" style="background:#6D4C41;margin-left:-15px;margin-right: -15px;">
                 <h1>Spray Chit</h1>
                 <p></p>
-								<h3 style="color:#FFFFFF">Hansqua Tea Garden</h3>
+								<h4 style="color:#FFFFFF; margin-bottom:25px;">Hansqua Tea Garden</h4>
                 <p></p>
+								<div class="row">
+									<div class="form-group col-sm-6">
+										<label for="">Select Hz / DB:</label>
+										<select class="form-control" id="hide_one" onChange="enable_add()" required>
+											<option>Select Hz/Db</option>
+											<option>HZ</option>
+											<option>DB</option>
+										</select>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-sm-6">
+										<label for="">Select date:</label>
+										<input type="text" id="datepicker" class="form-control" required>
+									</div>
+								</div>
+								<input type="button" value="Get data" class="btn btn-success" id="hide_me">
             </div>
             <div class="col-sm-12" style="background:#FFFFFF">
               <form class="form-group" style="padding-top:20px;">
@@ -76,7 +95,6 @@
                     </tbody>
 
                   </table>
-                <input type="submit" name="dt_sec_submit" class="btn btn-default" value="Click to Add" style="width:auto; margin:0;">
               </form>
             </div>
 
@@ -92,6 +110,7 @@
 				<script src="https://cdn.datatables.net/fixedcolumns/3.0.4/js/dataTables.fixedColumns.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/1.0.6/js/dataTables.responsive.js"></script>
         <script>
+							document.getElementById('hide_me').disabled=true;
 							$(document).ready( function () {
 							var table = $('#spray_chit').DataTable( {
 									"scrollY": "300px",
@@ -100,7 +119,19 @@
 									"paging": false
 							} );
 							new $.fn.dataTable.FixedColumns( table );
+							$("#datepicker").datepicker({
+								dateFormat: "dd-mm-yy"
+							});
 						} );
+						function enable_add() {
+							if(document.getElementById('hide_one').value!='Select Hz/Db')
+							{
+								document.getElementById('hide_me').disabled=false;
+							}
+							else{
+									document.getElementById('hide_me').disabled=true;
+							}
+						}
         </script>
 
     </body>
