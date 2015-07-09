@@ -148,7 +148,7 @@ if(isset($_POST['date_submit'])) {
 							<th>Plkrs.</th>
 							<th>Plkrs<br/>per<br/>Hec.</th>
 							<th>Leaf<br/>Plkd</th>
-							<th>Avg.<br/>Prod.</th>
+							<th>Leaf<br/>per<br>Plucker</th>
 							<th>Task</th>
 							<th>Bal.<br>Cnt.</th>
 							<!--------------------------------------------------------------------->
@@ -159,7 +159,7 @@ if(isset($_POST['date_submit'])) {
 							<th>Plkrs.</th>
 							<th>Plkrs.<br/>per<br/>Hec.</th>
 							<th>Leaf<br/>Plkd</th>
-							<th>Avg.<br/>Prod.</th>
+							<th>Leaf<br/>per<br>Plucker</th>
 							<th>Task</th>
 							<th>Bal.<br>Cnt.</th>
 							<!--------------------------------------------------------------------->

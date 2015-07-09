@@ -62,7 +62,7 @@
 	// $cp_hr_from = mysqli_real_escape_string($connection, $_POST['cp_hr_from']);
 	// $cp_hr_to = mysqli_real_escape_string($connection, $_POST['cp_hr_to']);
 
-	$q_in = "INSERT INTO leaf_chit_table (prune_stats, lab_cat, rec_dt, short_sec_name, dt_lst_plkd, plkd_area, plkd_leaf, mandays, task, ballo_count) VALUES ('{$prune_stats}', '{$lab_cat}', '{$rec_dt}',  '{$short_sec_name}', '{$dt_lst_plkd}', {$plkd_area}, {$plkd_leaf}, {$mandays}, '{$task}', {$ballo_count}) ";
+	$q_in = "INSERT INTO leaf_chit_table (division, prune_stats, lab_cat, rec_dt, short_sec_name, dt_lst_plkd, plkd_area, plkd_leaf, mandays, task, ballo_count) VALUES ('Hansqua', '{$prune_stats}', '{$lab_cat}', '{$rec_dt}',  '{$short_sec_name}', '{$dt_lst_plkd}', {$plkd_area}, {$plkd_leaf}, {$mandays}, '{$task}', {$ballo_count}) ";
 
 	$r_in = mysqli_query($connection, $q_in);
 	confirm_query($r_in);

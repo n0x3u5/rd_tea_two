@@ -30,9 +30,9 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Entry<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <!-- <li class="navbar-text">Plucking</li> -->
-                                <li><a href="cash_plucking_entry.php">Daily Cash Plucking Entry</a></li>
                                 <li><a href="daily_plucking_entry.php">Daily Plucking Entry</a></li>
                                 <li><a href="leaf_chit_entry.php">Leaf Chit Entry</a></li>
+                                <li><a href="cash_plucking_entry.php">Daily Cash Plucking Entry</a></li>
                                 <!-- <li><a href="daily_spraying_entry.php">Spraying Entry</a></li> -->
                                 <li role="separator" class="divider"></li>
                                 <!-- <li class="navbar-text">Weather</li> -->
