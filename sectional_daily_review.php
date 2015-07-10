@@ -78,25 +78,25 @@
                 <h3 style="color:#fff">Section:</h3>
                 <form class=" form-horizontal" action="sectional_daily_review.php" method="post">
 									<div class="row">
-                  <div class="form-group col-sm-6">
+                  	<div class="form-group col-sm-6">
                     <!-- <label class="sr-only" for="sec_select">Email address</label> -->
-										<select id="section" name ="short_sec_name" class="form-control" onChange="enable_add()">
-											<option>Select a section</option>
-			                <?php
-			                    $q = "SELECT * FROM sections where division = '{$_SESSION['current_div']}'";
-			                    $r = mysqli_query($connection, $q);
+											<select id="section" name="short_sec_name" class="form-control" onChange="enable_add()">
+												<option>Select a section</option>
+				                <?php
+				                    $q = "SELECT * FROM sections where division = '{$_SESSION['current_div']}'";
+				                    $r = mysqli_query($connection, $q);
 
-			                    confirm_query($r);
-			                    //$_POST['sec_short_nm'] = NULL;
+				                    confirm_query($r);
+				                    //$_POST['sec_short_nm'] = NULL;
 
-			                    while($sec_values = mysqli_fetch_assoc($r)) {
-			                ?>
-			                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST["sec_date_submit"]) && ($_POST['short_sec_name'] == $sec_values['short_sec_name'])) { echo "selected";} ?> ><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
-			                <?php
-			                    }
-			                ?>
-			              </select>
-                  </div>
+				                    while($sec_values = mysqli_fetch_assoc($r)) {
+				                ?>
+				                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST["sec_date_submit"]) && ($_POST['short_sec_name'] == $sec_values['short_sec_name'])) { echo "selected";} ?> ><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
+				                <?php
+				                    }
+				                ?>
+				              </select>
+                  	</div>
 									</div>
 									<div class="form-group">
 										<p style="color:#B3E5FC">Start date</p>
@@ -176,142 +176,41 @@
                          <table  id="spray_day" class="table table-hover display" border="1" cellspacing="0" width="100%">
                              <thead style="border: solid 2px green">
                                  <tr>
-                                    <th>Date</th>
-                                    <th>section</th>
-                                    <th>Hz Area</th>
-                                    <th>D area</th>
-                                    <th>Mandays</th>
-                                    <th>DR hz<br/>(mixer)</th>
-                                    <th>DR Hz<br/>(paniwala)</th>
-                                    <th>DRUM<br/>(Short)</th>
-                                    <th>Mandays<br/>(MR DBLY)</th>
-                                    <th>NL Mandays<br/>(DR DBLY)</th>
-                                    <th>Mandays<br/>(DR DUbly)</th>
-                                    <th>Mandays<br/>(M/C Dubly)</th>
-                                    <th>DR Dbly<br/>(Mixer)</th>
-                                    <th>DR dbly<br/>(Paniwala)</th>
-                                    <th>Cocktail</th>
-                                    <th>Pest and <br/>Disease</th>
-                                    <th>Intensity Of<br/>Infection</th>
-                                    <th>No Drums<br/>Sprayed</th>
-                                    <th>INS 1</th>
-                                    <th>DOSE</th>
-                                    <th>INS 1<br/> (QTY)</th>
-                                    <th>INS 2</th>
-                                    <th>DOSE</th>
-                                    <th>INS 2<br/>(QTY)</th>
-                                    <th>ACC 3</th>
-                                    <th>DOSE</th>
-                                    <th>ACC 3 <br/>(QTY)</th>
-                                    <th>SYTH 4</th>
-                                    <th>DOSE</th>
-                                    <th>SYTH 4<br/>(QTY)</th>
-                                    <th>STR 5</th>
-                                    <th>DOSE</th>
-                                    <th>STR 5<br/>(QTY)</th>
-                                    <th>FNG 6</th>
-                                    <th>DOSE</th>
-                                    <th>FNG 6<br/>(QTY)</th>
-                                    <th>WDC 7</th>
-                                    <th>DOSE</th>
-                                    <th>WDC 7<br/>(QTY)</th>
-                                    <th>WDC 8</th>
-                                    <th>DOSE</th>
-                                    <th>WDC 8<br/>(QTY)</th>
-                                    <th>UREA</th>
-                                    <th>DOSE</th>
-                                    <th>NTR 9<br/>(QTY)</th>
-                                    <th>ZINC</th>
-                                    <th>DOSE</th>
-                                    <th>NTR 10<br/>(QTY)</th>
-                                    <th>BORON</th>
-                                    <th>DOSE</th>
-                                    <th>NTR 11<br/>(QTY)</th>
-																		<th>Other1<br/>Name</th>
-                                    <th>Othrer1<br/> DOSE</th>
-                                    <th>Other1<br/>(QTY)</th>
-																		<th>Other2<br/>Name</th>
-                                    <th>Othrer2<br/> DOSE</th>
-                                    <th>Other2<br/>(QTY)</th>
-																		<th>Other3<br/>Name</th>
-                                    <th>Othrer3<br/> DOSE</th>
-                                    <th>Other3<br/>(QTY)</th>
+																	 <th>Date</th>
+																	 <th>Item</th>
+						                       <th>cocktail</th>
+						                       <th>Section</th>
+						                       <th>spot/Full</th>
+						                       <th>Pest/<br/>Disease</th>
+						                       <th>Intensity</th>
+						                       <th>Area<br/>( in Ha.)</th>
+						 											<th>Issued Qty</th>
+						 											<th>Unit<br/>(Kg/lt.)</th>
+						 											<th>No of Drums</th>
+						 											<th>Mandays<br/> (DR rated)</th>
+						 											<th>Mandays<br/>(Supervisory)</th>
+
+
                                 </tr>
                              </thead>
 														<tbody>
-															<?php
-															 //echo "need some post value to be checked";
-																//var_dump($_POST);
-																if(isset($_POST['sec_date_submit'])) {
-																	while($req_day_spray = mysqli_fetch_assoc($result_spray)) {
-																		//var_dump($req_day_spray); echo "<hr>";
-															?>
-																		<tr>
-																			<td><?php echo $req_day_spray['record_date']; ?></td>
-																			<td><?php echo $req_day_spray['short_sec_name']; ?></td>
-																			<td><?php echo $req_day_spray['hz_area']; ?></td>
-																			<td><?php echo $req_day_spray['db_area']; ?></td>
-																			<td><?php echo $req_day_spray['hz_mandays']; ?></td>
-																			<td><?php echo $req_day_spray['dr_hz_mix']; ?></td>
-																			<td><?php echo $req_day_spray['dr_hz_pani']; ?></td>
-																			<td><?php echo $req_day_spray['drum_short']; ?></td>
-																			<td><?php echo $req_day_spray['mr_db_mnds']; ?></td>
-																			<td><?php echo $req_day_spray['dr_db_nl_mnds']; ?></td>
-																			<td><?php echo $req_day_spray['dr_db_mnds']; ?></td>
-																			<td><?php echo $req_day_spray['mc_db_mnds']; ?></td>
-																			<td><?php echo $req_day_spray['dr_db_mix']; ?></td>
-																			<td><?php echo $req_day_spray['dr_db_pani']; ?></td>
-																			<td><?php echo $req_day_spray['cocktail']; ?></td>
-																			<td><?php echo $req_day_spray['pest_disease']; ?></td>
-																			<td><?php echo $req_day_spray['infctn_intensity']; ?></td>
-																			<td><?php echo $req_day_spray['drums_sprayed']; ?></td>
-																			<td><?php echo $req_day_spray['ins1_nm']; ?></td>
-																			<td><?php echo $req_day_spray['ins1_dose']; ?></td>
-																			<td><?php echo $req_day_spray['ins1_qty']; ?></td>
-																			<td><?php echo $req_day_spray['ins2_nm']; ?></td>
-																			<td><?php echo $req_day_spray['ins2_dose']; ?></td>
-																			<td><?php echo $req_day_spray['ins2_qty']; ?></td>
-																			<td><?php echo $req_day_spray['acc3_nm']; ?></td>
-																			<td><?php echo $req_day_spray['acc3_dose']; ?></td>
-																			<td><?php echo $req_day_spray['acc3_qty']; ?></td>
-																			<td><?php echo $req_day_spray['synth4_nm']; ?></td>
-																			<td><?php echo $req_day_spray['synth4_dose']; ?></td>
-																			<td><?php echo $req_day_spray['synth4_qty']; ?></td>
-																			<td><?php echo $req_day_spray['str5_nm']; ?></td>
-																			<td><?php echo $req_day_spray['str5_dose']; ?></td>
-																			<td><?php echo $req_day_spray['str5_qty']; ?></td>
-																			<td><?php echo $req_day_spray['fng6_nm']; ?></td>
-																			<td><?php echo $req_day_spray['fng6_dose']; ?></td>
-																			<td><?php echo $req_day_spray['fng6_qty']; ?></td>
-																			<td><?php echo $req_day_spray['wdc7_nm']; ?></td>
-																			<td><?php echo $req_day_spray['wdc7_dose']; ?></td>
-																			<td><?php echo $req_day_spray['wdc7_qty']; ?></td>
-																			<td><?php echo $req_day_spray['wdc8_nm']; ?></td>
-																			<td><?php echo $req_day_spray['wdc8_dose']; ?></td>
-																			<td><?php echo $req_day_spray['wdc8_qty']; ?></td>
-																			<td><?php echo $req_day_spray['urea']; ?></td>
-																			<td><?php echo $req_day_spray['u_dose']; ?></td>
-																			<td><?php echo $req_day_spray['ntr9_qty']; ?></td>
-																			<td><?php echo $req_day_spray['zinc']; ?></td>
-																			<td><?php echo $req_day_spray['z_dose']; ?></td>
-																			<td><?php echo $req_day_spray['ntr10_qty']; ?></td>
-																			<td><?php echo $req_day_spray['boron']; ?></td>
-																			<td><?php echo $req_day_spray['b_dose']; ?></td>
-																			<td><?php echo $req_day_spray['ntr11_qty']; ?></td>
-																			<td><?php echo $req_day_spray['othr1_nm']; ?></td>
-																			<td><?php echo $req_day_spray['othr1_dose']; ?></td>
-																			<td><?php echo $req_day_spray['othr1_qty']; ?></td>
-																			<td><?php echo $req_day_spray['othr2_nm']; ?></td>
-																			<td><?php echo $req_day_spray['othr2_dose']; ?></td>
-																			<td><?php echo $req_day_spray['othr2_qty']; ?></td>
-																			<td><?php echo $req_day_spray['othr3_nm']; ?></td>
-																			<td><?php echo $req_day_spray['othr3_dose']; ?></td>
-																			<td><?php echo $req_day_spray['othr3_qty']; ?></td>
-																		</tr>
-															<?php
-																	}
-																}
-															?>
+															<tr>
+																<td>23-09-2015</td>
+																<td>abcd</td>
+																<td>y</td>
+																<td>1EXTA</td>
+																<td>full</td>
+																<td>xyz</td>
+																<td>33</td>
+																<td>250</td>
+																<td>11</td>
+																<td>k</td>
+																<td>6</td>
+																<td>245</td>
+																<td>5</td>
+
+															</tr>
+
 														</tbody>
                         </table>
                     </div>
@@ -346,7 +245,10 @@
 						});
 				</script>
 				<script>
-				document.getElementById('hide_me').disabled=true;
+					if(document.getElementById('datepicker1').value=='')
+					{
+							document.getElementById('hide_me').disabled=true;
+					}
 				function enable_add() {
 					if(document.getElementById('section').value!='Select a section')
 					{
