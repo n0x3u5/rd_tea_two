@@ -172,31 +172,6 @@ if(isset($_POST['date_submit'])) {
 					<tbody>
 						<?php
 							if(isset($_POST['date_submit'])) {
-								// for($i=0;$i<count($lcsn_arr);$i++) {
-								// 	//echo "<br><br>Iterator i:";var_dump($i);
-								// 	$query = "select * from daily_plucking where rec_dt='{$req_date}'";
-								// 	//var_dump($query);
-								// 	$result = mysqli_query($connection, $query);
-								// 	confirm_query($result);
-								//
-								// 	while($day_chit = mysqli_fetch_assoc($result)){
-								// 		//var_dump($day_chit); echo "<hr>";
-								// 		$exp_lab_cat = explode("¥", $day_chit['labour_cat']);
-								// 		// echo "<br>lcsn :";var_dump($lcsn_arr[$i]);
-								// 		//echo "<br>lcsn :".$lcsn_arr[$i]."<br>";
-								// 		// echo "<br>exp_lab_cat :";var_dump($exp_lab_cat);
-								// 		// echo "<br>in_arr :";var_dump(in_array($lcsn_arr[$i], $exp_lab_cat));
-								// 		if(in_array($lcsn_arr[$i], $exp_lab_cat)){
-								// 			if($day_chit['prune_status'] == 'U') {
-								// 				//echo "<br>This will go to Prune Section <br>";
-								// 				$index = array_search($lcsn_arr[$i], $exp_lab_cat);
-								// 				//echo $day_chit['short_sec_name']."   ".$day_chit['labour_cat']."  index value :".$index."<br>";
-								//
-								// 				$exp_plkd_area = explode("¥", $day_chit['lab_cat_plkd_area']);
-								// 				$exp_leaf_qty = explode("¥", $day_chit['lab_cat_leaf_qty']);
-								// 				$exp_lab_count = explode("¥", $day_chit['lab_cat_mandays']);
-								// 				//echo "Other details of '{$lcsn_arr[$i]}' :<br>"."Plucke Area:{$exp_plkd_area[$index]}";
-								// 				//echo "  Plucked Leaf: {$exp_leaf_qty[$index]} "." Labour Count: {$exp_lab_count[$index]}";
 								$ballo_num1 = $ballo_num2 = 0; $pruned_rows_set = 0; $unpruned_rows_set = 0; $rows_set = 0;
 								while($daily_chit = mysqli_fetch_assoc($r_chit)) {
 									if($daily_chit['prune_stats'] == 'UNPRUNED') {
@@ -236,18 +211,6 @@ if(isset($_POST['date_submit'])) {
 													<td><?php echo $leaf1 +$leaf2; ?></td>
 												</tr>
 										<?php
-											// }
-											// elseif($day_chit['prune_status'] != 'U' && $day_chit['prune_status'] != 'UP') {
-											// 	// echo "<br> this will go to the Unpruned section!<br>";
-											// 	$index = array_search($lcsn_arr[$i], $exp_lab_cat);
-											// 	// echo $day_chit['short_sec_name']."   ".$day_chit['labour_cat']."  index value :".$index."<br>";
-											//
-											// 	$exp_plkd_area = explode("¥", $day_chit['lab_cat_plkd_area']);
-											// 	$exp_leaf_qty = explode("¥", $day_chit['lab_cat_leaf_qty']);
-											// 	$exp_lab_count = explode("¥", $day_chit['lab_cat_mandays']);
-											//
-											// 	// echo "Other details of '$lcsn_arr[$i]' :<br>"."Plucke Area:{$exp_plkd_area[$index]}";
-											// 	// echo "  Plucked Leaf: {$exp_leaf_qty[$index]} "." Labour Count: {$exp_lab_count[$index]}";
 										}
 									else {
 										//$cp_qtyp_arr[] = $daily_chit['cp_qty'];

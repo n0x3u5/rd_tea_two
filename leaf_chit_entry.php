@@ -70,7 +70,7 @@
 	$dt_lst_plkd = explode_implode($dt_lst_plkd);
 	$plkd_area = (float) mysqli_real_escape_string($connection, $_POST['plkd_area']);
 	$plkd_leaf = (float) mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
-	$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
+	$mandays = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
 	$task = mysqli_real_escape_string($connection, $_POST['task']);
 	$task = explode_implode($task);
 	$ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
@@ -117,7 +117,7 @@
 	$dt_lst_plkd = explode_implode($dt_lst_plkd);
 	$plkd_area = (float) mysqli_real_escape_string($connection, $_POST['plkd_area']);
 	$plkd_leaf = (float) mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
-	$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
+	$mandays = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
 	$task = mysqli_real_escape_string($connection, $_POST['task']);
 	$task = explode_implode($task);
 	$ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
