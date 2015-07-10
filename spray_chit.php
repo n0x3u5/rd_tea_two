@@ -11,7 +11,14 @@
 	if(isset($_POST['date_submit'])) {
 		$req_div = $_SESSION['current_div'];
 		$req_date = date('Y-m-d', strtotime( $_POST['date_value']));
-		var_dump($_POST);
+		$req_hz_db = $_POST['hz_db'];
+
+		$q_chit = "select * from blue_bk_spray_chit where rec_dt = '{$req_date}' and hz_db = '{$req_hz_db}' and division = '{$req_div}'";
+		$r_chit = mysqli_query($connection, $q_chit);
+		confirm_query($r_chit);
+	} else {
+		$rec_div = NULL;
+		$req_date = NULL;
 	}
 ?>
 <!DOCTYPE html>
@@ -50,17 +57,17 @@
 						<div class="row">
 							<div class="form-group col-sm-6">
 								<label for="">Select Hz / DB:</label>
-								<select class="form-control" id="hide_one" onChange="enable_add()" required>
-									<option>Select Hz/Db</option>
-									<option>HZ</option>
-									<option>DB</option>
+								<select class="form-control" id="hide_one" name="hz_db" onChange="enable_add()" required>
+									<option <?php if(!isset($_POST['date_submit'])) {echo "selected";} ?> >Select Hz/Db</option>
+									<option <?php if(isset($_POST['date_submit']) && $req_hz_db == "HZ") {echo "selected";} ?> >HZ</option>
+									<option <?php if(isset($_POST['date_submit']) && $req_hz_db == "DB") {echo "selected";} ?> >DB</option>
 								</select>
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group col-sm-6">
 								<label for="">Select date:</label>
-								<input type="text" id="datepicker" name="date_value" class="form-control" required>
+								<input type="text" id="datepicker" name="date_value" class="form-control" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> required>
 							</div>
 						</div>
 						<input type="submit" value="Get data" name="date_submit" class="btn btn-success" id="hide_me">
@@ -71,31 +78,69 @@
           <table id="spray_chit" class=" display table table-hover table-striped " border="1" cellspacing="0" width="100%">
             <thead style="2px solid green">
 							<th>Item</th>
-              <th>cocktail</th>
               <th>Section</th>
               <th>spot/Full</th>
               <th>Pest/<br/>Disease</th>
               <th>Intensity</th>
               <th>Area<br/>( in Ha.)</th>
 							<th>Issued Qty</th>
-							<th>Unit<br/>(Kg/lt.)</th>
 							<th>No of Drums</th>
-							<th>Mandays<br/> (DR rated)</th>
+							<th>Mandays<br/> (D/rated)</th>
 							<th>Mandays<br/>(Supervisory)</th>
             </thead>
             <tbody>
+						<?php
+							if (isset($_POST['date_submit'])) {
+								while ($spc_record = mysqli_fetch_assoc($r_chit)) {
+									$item = explode("¥", $spc_record['chem']);
+									$chemical_index = 0;
+									foreach ($item as $chemical) {
+						?>
+							<tr>
+								<td><?php	echo $chemical; ?></td>
+								<td><?php echo $spc_record['short_sec_name']; ?></td>
+								<td><?php echo $spc_record['spot_full']; ?></td>
+								<td>
+								<?php
+									$pest = explode("¥", $spc_record['pest']);
+									echo $pest[$chemical_index];
+								?>
+								</td>
+								<td>
+								<?php
+									$intensity = explode("¥", $spc_record['intensity']);
+									echo $intensity[$chemical_index];
+								?>
+								</td>
+								<td><?php echo $spc_record['area']; ?></td>
+								<td>
+								<?php
+									$qty = explode("¥", $spc_record['qty_unit']);
+									echo $qty[$chemical_index];
+								?>
+								</td>
+								<td><?php echo $spc_record['no_drms']; ?></td>
+								<td><?php echo $spc_record['dr_mnds']; ?></td>
+								<td><?php echo $spc_record['sup_mnds']; ?></td>
+							</tr>
+						<?php
+										$chemical_index++;
+									}
+								}
+							}
+						?>
+							<!-- <tr>
 								<td>abcd</td>
-								<td>y</td>
 								<td>1EXTA</td>
 								<td>full</td>
 								<td>xyz</td>
 								<td>33</td>
 								<td>250</td>
-								<td>11</td>
-								<td>k</td>
+								<td>11 kg</td>
 								<td>6</td>
 								<td>245</td>
 								<td>5</td>
+							</tr> -->
             </tbody>
           </table>
         </form>
@@ -112,8 +157,7 @@
 			document.getElementById('hide_me').disabled=true;
 			$(document).ready( function () {
 				var table = $('#spray_chit').DataTable( {
-						"scrollY": "300px",
-						"scrollX": "100%",
+						"scrollX": true,
 						"scrollCollapse": true,
 						"paging": false
 				} );
