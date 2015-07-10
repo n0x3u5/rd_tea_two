@@ -423,7 +423,7 @@
 
                     <div class="tab-pane" id="tab2">
                       <?php
-                        var_dump($_SESSION['div_name']);
+                        //var_dump($_SESSION['div_name']);
                       ?>
                         <form id="remove_section" action="manage_sections.php" method="post" size="10">
                         <label for="sec_short_name"> Select Section:</label>
