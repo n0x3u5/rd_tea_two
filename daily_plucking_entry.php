@@ -77,7 +77,7 @@
 
 		$plkd_leaf = (float) mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
 
-		$mandays = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
+		$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
 
 		$rounddays = (int) mysqli_real_escape_string($connection, $_POST['rounddays']);
 
@@ -131,7 +131,7 @@
 
 		$plkd_leaf = (float) mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
 
-		$mandays = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
+		$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
 
 		$rounddays = (int) mysqli_real_escape_string($connection, $_POST['rounddays']);
 
