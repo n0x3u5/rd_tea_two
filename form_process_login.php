@@ -77,7 +77,7 @@
 				$_SESSION["user"] = $users["first_name"] . ($users["middle_name"] == ""? " " : " " . $users["middle_name"] . " ") . $users["last_name"];
 			}
 			else {
-				$_SESSION["user_lvl"] = NULL;
+				$_SESSION["user_lvl"] = 101;
 				$_SESSION["user_email"] = NULL;
 				$_SESSION["user"] = NULL;
 				$_SESSION["user_div"] = NULL;
@@ -102,7 +102,7 @@
 				//echo session_msg() . "<br>"; //. $_SESSION["user_lvl"];
 				redirect_to("sectional_daily_review.php");
 			}
-			else {
+			else if($_SESSION["user_lvl"] == 101) {
 				echo  session_msg() . "<br>"; //. $_SESSION["user_lvl"];
 				 redirect_to("login_attempt1.php");
 			}
