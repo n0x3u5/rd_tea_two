@@ -224,9 +224,7 @@
               if(isset($_POST['div_submit'])) {
                 echo "Please press the \"Show Fields\" button above!";
               }
-              elseif(isset($_POST['hide_me'])) {
-
-
+              elseif(isset($_POST['hide_me']) || isset($_POST['view_submit'])) {
             ?>
 
             <div class="tab-container">
@@ -239,6 +237,7 @@
                     <div class="tab-pane active" id="tab1">
                         <form id="view_update_section" class="form-horizontal" action="manage_sections.php" method="post" size="10">
                           <?php if(isset($_POST['view_submit'])) {
+                                  //echo "VIEW SUBMIT PRESSED! to fetch section details!<br>";
                                   $ssnV = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
                                   $_SESSION['upd_ssn'] = $ssnV;
                                   //echo "ssnV=".$ssnV;
@@ -268,7 +267,6 @@
                                     echo "<option id=\"opt0\" value=\"Select a section...\">Select a section...</option>";
                                     while($sec_values = mysqli_fetch_assoc($result)) {
                                 ?>
-
                                       <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST['view_submit']) && $_SESSION['upd_ssn'] == $sec_values['short_sec_name']) { echo "selected"; } ?> ><?php echo htmlentities($sec_values['sec_name']) ?></option>
                                   <?php
                                     }
@@ -281,6 +279,7 @@
 
                                   <?php
                                     if(isset($_POST['view_submit'])) {
+                                      //echo "VIEW SUBMIT PRESSED! to show the fields!<br>";
                                   ?>
                                     <div class="form-group">
                                       <label for="textbox1" class="col-sm-2" style="padding-top:15px;">Section Name:</label>
