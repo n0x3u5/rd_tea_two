@@ -67,7 +67,7 @@
         <link rel="stylesheet" href="css/stylesheet.css">
 				<link rel="icon" href="images/logo_rdtea.png"/>
 		<style>
-			.btn-default{
+			#get_data_btn{
 				margin-top:10px;
 			}
 			.dataTables_length{
@@ -122,7 +122,7 @@
 											</div>
 										</div>
 			              </div>
-                  <button type="submit" name="div_date_submit" class="btn btn-default">Get Data</button>
+                  <button type="submit" name="div_date_submit" id="get_data_btn" class="btn btn-default">Get Data</button>
                 </form>
             </div>
 
