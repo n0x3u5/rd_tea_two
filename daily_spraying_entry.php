@@ -84,7 +84,7 @@
                 <div class="row">
 									<div class="form-group col-sm-6">
 										<label>Select a section:</label>
-										<select class="form-control" id="hide_one" onChange="enable_add()">
+										<select name="sec_short_name" class="form-control" id="hide_one" onChange="enable_add()">
 												<option>Select a section</option>
 												<option>1EXT A</option>
 												<option>4W</option>
@@ -95,7 +95,7 @@
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Select Hazri / Dubly:</label>
-										<select class="form-control" id="hide_two" onChange="enable_add()">
+										<select name="hz_db" class="form-control" id="hide_two" onChange="enable_add()">
 												<option>Select Hz/Db</option>
 												<option>HZ</option>
 												<option>DB</option>
@@ -119,27 +119,28 @@
             <div class="tab-content">
               <div class="tab-pane active" id="tab1">
 	                <form class="form-horizontal" action="daily_spraying_entry.php" method="post">
-	                	<div class="form-group" style="margin-top:30px">
-											<label class="col-sm-2 col-sm-offset-1 control-level">Select Item / Items :</label>
-											<div class="col-sm-4">
-												<input name="" type="text" class="form-control" id="item1">
-											</div>
-											<p class="text-danger"> * Use commas or tabs</p>
-										</div>
-										<div class="form-group">
+										<div class="form-group" style="margin-top:30px">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Cocktail:</label>
 											<div class="col-sm-4">
-												<select  name=""  class="form-control" id="hide_1" onChange="enable_add_one()">
+												<select  name="cocktail"  class="form-control" id="hide_1" onChange="enable_add_one()">
 													<option>Select Yes / No :</option>
 													<option>Y</option>
 													<option>N</option>
 												</select>
 											</div>
 										</div>
+	                	<div class="form-group" >
+											<label class="col-sm-2 col-sm-offset-1 control-level">Select Item / Items :</label>
+											<div class="col-sm-4">
+												<input name="chem" type="text" class="form-control" id="item1">
+											</div>
+											<p class="text-danger"> * Use commas or tabs</p>
+										</div>
+
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Select Spot / Full:</label>
 											<div class="col-sm-4">
-												<select name=""  class="form-control" id="hide_2" onChange="enable_add_one()">
+												<select name="spot_full"  class="form-control" id="hide_2" onChange="enable_add_one()">
 													<option>Select Spot / Full :</option>
 													<option>Spot</option>
 													<option>Full</option>
@@ -147,30 +148,30 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 col-sm-offset-1 control-level">Select Pastes / Diseases :</label>
+											<label class="col-sm-2 col-sm-offset-1 control-level">Select Pests / Diseases :</label>
 											<div class="col-sm-4">
-												<input name="" type="text" class="form-control" id="paste1">
+												<input name="pest" type="text" class="form-control" id="paste1">
 											</div>
 											<p class="text-danger"> * Use commas or tabs</p>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Select Intencity :</label>
 											<div class="col-sm-4">
-												<input name=""  type="text" class="form-control" id="intcty1">
+												<input name="intencity"  type="text" class="form-control" id="intcty1">
 											</div>
 											<p class="text-danger"> * Use commas or tabs</p>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Select Quantity :</label>
 											<div class="col-sm-4">
-												<input name="" type="text" class="form-control" id="qty1">
+												<input name="qty_unit" type="text" class="form-control" id="qty1">
 											</div>
 											<p class="text-danger"> * Use commas or tabs</p>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Select Area :</label>
 											<div class="col-sm-4">
-												<input name="" type="text" class="form-control">
+												<input name="area" type="text" class="form-control">
 											</div>
 										</div>
 										<!-- <div class="form-group">
@@ -191,19 +192,19 @@
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">No of Drums (sprayed) :</label>
 											<div class="col-sm-4">
-												<input name="" type="text" class="form-control">
+												<input name="no_drums" type="text" class="form-control">
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Mandays (D Rated):</label>
 											<div class="col-sm-4">
-												<input name="" type="text" class="form-control">
+												<input name="dr__mnds" type="text" class="form-control">
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Mandays (Supervisory) :</label>
 											<div class="col-sm-4">
-												<input name="" type="text" class="form-control">
+												<input name="sup_mnds" type="text" class="form-control">
 											</div>
 										</div>
 
@@ -239,16 +240,9 @@
               <div class="tab-pane" id="tab2">
                 <form class="form-horizontal" action="daily_spraying_entry.php" method="post">
 									<div class="form-group" style="margin-top:30px">
-										<label class="col-sm-2 col-sm-offset-1 control-level">Select Item / Items :</label>
-										<div class="col-sm-4">
-											<input name="" type="text" class="form-control" id="item2">
-										</div>
-										<p class="text-danger"> * Use commas or tabs</p>
-									</div>
-									<div class="form-group">
 										<label class="col-sm-2 col-sm-offset-1 control-level">Cocktail:</label>
 										<div class="col-sm-4">
-											<select  name=""class="form-control" onChange="enable_add_two()" id="hide_11">
+											<select  name="cocktail"class="form-control" onChange="enable_add_two()" id="hide_11">
 												<option>Select Yes / No :</option>
 												<option>Y</option>
 												<option>N</option>
@@ -256,9 +250,17 @@
 										</div>
 									</div>
 									<div class="form-group">
+										<label class="col-sm-2 col-sm-offset-1 control-level">Select Item / Items :</label>
+										<div class="col-sm-4">
+											<input name="chem" type="text" class="form-control" id="item2">
+										</div>
+										<p class="text-danger"> * Use commas or tabs</p>
+									</div>
+
+									<div class="form-group">
 										<label class="col-sm-2 col-sm-offset-1 control-level">Select Spot / Full:</label>
 										<div class="col-sm-4">
-											<select name="" class="form-control" onChange="enable_add_two()" id="hide_12">
+											<select name="spot_full" class="form-control" onChange="enable_add_two()" id="hide_12">
 												<option>Select Spot / Full :</option>
 												<option>Spot</option>
 												<option>Full</option>
@@ -266,23 +268,23 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 col-sm-offset-1 control-level">Select Pastes / Diseases :</label>
+										<label class="col-sm-2 col-sm-offset-1 control-level">Select Pests / Diseases :</label>
 										<div class="col-sm-4">
-											<input name="" type="text" class="form-control" id="paste2">
+											<input name="pest" type="text" class="form-control" id="paste2">
 										</div>
 										<p class="text-danger"> * Use commas or tabs</p>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 col-sm-offset-1 control-level">Select Intencity :</label>
 										<div class="col-sm-4">
-											<input name="" type="text" class="form-control" id="paste2">
+											<input name="intensity" type="text" class="form-control" id="paste2">
 											</div>
 											<p class="text-danger"> * Use commas or tabs</p>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 col-sm-offset-1 control-level">Select Quantity :</label>
 										<div class="col-sm-4">
-											<input name="" type="text" class="form-control" id="qty2">
+											<input name="qty_unit" type="text" class="form-control" id="qty2">
 										</div>
 										<p class="text-danger"> * Use commas or tabs</p>
 									</div>
@@ -299,26 +301,26 @@
 									<div class="form-group">
 										<label class="col-sm-2 col-sm-offset-1 control-level">Select Area :</label>
 										<div class="col-sm-4">
-											<input name="" type="text" class="form-control">
+											<input name="area" type="text" class="form-control">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="col-sm-2 col-sm-offset-1 control-level">No of Drums (sprayed) :</label>
 										<div class="col-sm-4">
-											<input name="" type="text" class="form-control">
+											<input name="no_drums" type="text" class="form-control">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 col-sm-offset-1 control-level">Mandays (D Rated):</label>
 										<div class="col-sm-4">
-											<input name="" type="text" class="form-control">
+											<input name="dr_mnds" type="text" class="form-control">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 col-sm-offset-1 control-level">Mandays (Supervisory) :</label>
 										<div class="col-sm-4">
-											<input name="" type="text" class="form-control">
+											<input name="sup_mnds" type="text" class="form-control">
 										</div>
 									</div>
 									<div class="col-sm-2 col-sm-offset-3">
@@ -337,8 +339,21 @@
     		<script>
     				$(function() {
     				$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
-						$('#item1,#paste1,#qty1,#item2,#paste2,#qty2,#intcty1,#intcty2').tokenfield({});
+						$('#item1,#item2,#paste1,#qty1,#paste2,#qty2').tokenfield({});
+
+
+
+
+						$('#intcty1,#intcty2').tokenfield({
+								autocomplete :{
+										source:['Low','Medium','High'],
+										delay:100
+								},
+								showAutocompleteOnFocus: true
+						});
+
     				});
+
     		</script>
 
 					<script>
@@ -370,6 +385,8 @@
 							document.getElementById('delete_entry').disabled=true;
 							document.getElementById('edit_entry').disabled=true;
 						}
+
+
 					}
 					function enable_add_two() {
 
@@ -382,6 +399,17 @@
 							document.getElementById('add_entry').disabled=true;
 
 						}
+						// $('#item2').on('tokenfield:createtoken',function (e)	{
+						//
+						// 	if(document.getElementById('hide_11').value=='N')
+						// 	{
+						// 		event.preventDefault()
+						// 	}
+						// 	else{
+						// 		// $('#item2').tokenfield({})
+						// 	}
+						// }).tokenfield();
+
 					}
 					</script>
 
