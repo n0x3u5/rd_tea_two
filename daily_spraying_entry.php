@@ -10,9 +10,142 @@
 	$connection = make_connection();
 
 	//var_dump($_POST);echo "<br><hr>";
+	if(isset($_POST["dt_sec_submit"])){
+		$req_date = date('Y-m-d', strtotime($_POST["date_value"]));
+		$req_ssn = $_POST["short_sec_name"];
+		$req_hz_db = $_POST["hz_db"];
+		$_SESSION['ssn'] = $req_ssn;
+		$_SESSION['date'] = $req_date;
+		$_SESSION['hz_db'] = $req_hz_db;
 
-//echo "5 l + 5";
+		if($_SESSION["user_div"] == "ALL") {
+			$req_div = $_SESSION["current_div"];
+		}
+		else {
+			$req_div = $_SESSION["user_div"];
+		}
+		$_SESSION['div_name'] = $req_div;
+
+
+		// echo "<br>got date =".$req_date."<br>";
+		// echo "<br>got ssn =" .$req_ssn."<br>";
+		// echo "<br>got hz_db =".$req_hz_db."<br>";
+		// var_dump($req_date);echo "<br>"; var_dump($req_ssn);
+
+		$query = "SELECT * FROM blue_bk_spray_chit WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}' and division='{$_SESSION['div_name']}'";
+		//var_dump($query);
+		$result = mysqli_query($connection, $query);
+		confirm_query($result);
+
+		$_SESSION['blue_bk_spray_chit'] = mysqli_fetch_assoc($result);
+
+		// $set = 1;
+	}
+	else {
+		$req_date = NULL;
+		$req_ssn = NULL;
+		$req_hz_db = NULL;
+	}
 ?>
+
+<?php //insertion
+	// if (isset($_POST['add_submit'])) {
+	// 	$short_sec_name = $_SESSION['ssn'];
+	// 	$rec_dt = $_SESSION['date'];
+	// 	$hz_db = $_SESSION['hz_db'];
+	//
+	// 	$chem = mysqli_real_escape_string($connection, $_POST['chem']);
+	// 	$cocktail = mysqli_real_escape_string($connection, $_POST['cocktail']);
+	// 	$spot_full = mysqli_real_escape_string($connection, $_POST['mandays']);
+	// 	$rounddays = (int) mysqli_real_escape_string($connection, $_POST['rounddays']);
+	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
+	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
+	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
+	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
+	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
+	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
+	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
+	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
+	//
+	//
+	// 	$prune = $_SESSION['prune_stats']['prune_style'];
+	//
+	//
+	// 	$q_in = "INSERT INTO blue_bk_plk (division, short_sec_name, rec_dt, plkd_area, plkd_leaf, mandays, prune_style, rnd_days)";
+	// 	$q_in .= " VALUES ('{$_SESSION['div_name']}', '$short_sec_name', '$rec_dt', $plkd_area, $plkd_leaf, $mandays, '$prune', $rounddays)";
+	//
+	// 	//var_dump($q_in);
+	// 	$result_in = mysqli_query($connection, $q_in);
+	//
+  //   confirm_query($result_in);
+	//
+	//
+	// 	$_SESSION['blue_bk_plk'] = NULL;
+	// 	$_SESSION['ssn'] = NULL;
+	// 	$_SESSION['date'] = NULL;
+	// 	$_SESSION['div_name'] = NULL;
+	// }
+ ?>
+ <?php //updating
+
+	// if(isset($_POST['edit_submit'])) {
+	//
+	// 	// $query = "SELECT * FROM blue_bk_plk WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}'";
+	// 	//
+	// 	// $result = mysqli_query($connection, $query);
+  //   // confirm_query($result);
+	//
+	// 	$short_sec_name = $_SESSION['ssn'];
+	// 	$rec_dt = $_SESSION['date'];
+	// 	$req_id = $_SESSION['blue_bk_plk']['id'];
+	//
+	//
+	// 	$plkd_area = (float) mysqli_real_escape_string($connection, $_POST['plkd_area']);
+	//
+	// 	$plkd_leaf = (float) mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
+	//
+	// 	$mandays = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
+	//
+	// 	$rounddays = (int) mysqli_real_escape_string($connection, $_POST['rounddays']);
+	//
+	// 	$q_up = "UPDATE blue_bk_plk SET";
+	// 	$q_up .= " division='{$_SESSION['div_name']}', short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}',";
+	// 	$q_up .= " plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf},";
+	// 	$q_up .= " mandays={$mandays}, rnd_days={$rounddays} WHERE id ={$req_id}";
+	//
+	// 	//var_dump($q_up);
+	// 	$result_up = mysqli_query($connection, $q_up);
+	//
+  //   confirm_query($result_up);
+	//
+	// 	$_SESSION['blue_bk_plk'] = NULL;
+	// 	$_SESSION['ssn'] = NULL;
+	// 	$_SESSION['date'] = NULL;
+	// 	$_SESSION['div_name'] = NULL;
+	// }
+ ?>
+ <?php //DELETE
+ //var_dump($_POST);
+	// if(isset($_POST['del_entry'])){
+	// 	$short_sec_name = $_SESSION['ssn'];
+	// 	$rec_dt = $_SESSION['date'];
+	//
+	// 	$q_del = "DELETE FROM blue_bk_plk WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and division='{$_SESSION['div_name']}'";
+	// 	//var_dump($q_del);
+	//
+	// 	$r_del = mysqli_query($connection, $q_del);
+  //   confirm_query($r_del);
+	//
+	//
+	// 	$_SESSION['blue_bk_plk'] = NULL;
+	// 	$_SESSION['ssn'] = NULL;
+	// 	$_SESSION['date'] = NULL;
+	// 	$_SESSION['div_name'] = NULL;
+	// }
+
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -84,11 +217,22 @@
                 <div class="row">
 									<div class="form-group col-sm-6">
 										<label>Select a section:</label>
-										<select name="sec_short_name" class="form-control" id="hide_one" onChange="enable_add()">
+										<select name="short_sec_name" class="form-control" id="hide_one" onChange="enable_add()">
 												<option>Select a section</option>
-												<option>1EXT A</option>
-												<option>4W</option>
-												<option>3EXT</option>
+												<?php
+														$q = "SELECT * FROM sections where division = '{$_SESSION['current_div']}'";
+														$result = mysqli_query($connection, $q);
+
+														confirm_query($result);
+														//$_POST['sec_short_nm'] = NULL;
+
+														//echo "<option id=\"opt0\" value=\"Select a section...\">Select a section...</option>";
+														while($sec_values = mysqli_fetch_assoc($result)) {
+												?>
+															<option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST["dt_sec_submit"]) && ($_SESSION['ssn'] == $sec_values['short_sec_name'])) { echo "selected";} ?> ><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
+												<?php
+														}
+												?>
 										</select>
 									</div>
 								</div>
@@ -97,15 +241,15 @@
 										<label>Select Hazri / Dubly:</label>
 										<select name="hz_db" class="form-control" id="hide_two" onChange="enable_add()">
 												<option>Select Hz/Db</option>
-												<option>HZ</option>
-												<option>DB</option>
+												<option <?php if(($req_hz_db != NULL) && ($_POST['hz_db'] == 'HZ')){ echo "selected"; } ?> >HZ</option>
+												<option <?php if(($req_hz_db != NULL) && ($_POST['hz_db'] == 'DB')){ echo "selected"; } ?> >DB</option>
 										</select>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Select a date:</label>
-										<input type=text class="form-control" id="datepicker" required>
+										<input type="text" name="date_value" class="form-control" id="datepicker" <?php if($req_date !=NULL) { ?>value="<?php echo date('d-m-Y', strtotime($req_date));?>" <?php } else { ?>placeholder="Date (dd-mm-yyyy)"<?php } ?> onChange="enable_add()" required>
 									</div>
 								</div>
 								<button type="submit" id="hide_me" name="dt_sec_submit" class="btn btn-success" style="margin-top:-1px;">Submit</button>
@@ -118,21 +262,23 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab1">
-	                <form class="form-horizontal" action="daily_spraying_entry.php" method="post">
+
+									<form class="form-horizontal" action="daily_spraying_entry.php" method="post">
+										<?php if(isset($_SESSION['blue_bk_spray_chit'])) { $daily = $_SESSION['blue_bk_spray_chit']; } else { $daily = NULL; }?>
 										<div class="form-group" style="margin-top:30px">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Cocktail:</label>
 											<div class="col-sm-4">
 												<select  name="cocktail"  class="form-control" id="hide_1" onChange="enable_add_one()">
 													<option>Select Yes / No :</option>
-													<option>Y</option>
-													<option>N</option>
+													<option <?php if($daily != NULL && $daily['cocktail'] == 'Y') { echo "selected"; } ?> >Y</option>
+													<option <?php if($daily != NULL && $daily['cocktail'] == 'N') { echo "selected"; } ?> >N</option>
 												</select>
 											</div>
 										</div>
 	                	<div class="form-group" >
-											<label class="col-sm-2 col-sm-offset-1 control-level">Select Item / Items :</label>
+											<label class="col-sm-2 col-sm-offset-1 control-level">Select Item(s) :</label>
 											<div class="col-sm-4">
-												<input name="chem" type="text" class="form-control" id="item1">
+												<input name="chem" type="text" class="form-control" id="item1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['chem']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select Chemical name.\""; ?><?php } //comma separeted value?>  >
 											</div>
 											<p class="text-danger"> * Use commas or tabs</p>
 										</div>
@@ -142,36 +288,36 @@
 											<div class="col-sm-4">
 												<select name="spot_full"  class="form-control" id="hide_2" onChange="enable_add_one()">
 													<option>Select Spot / Full :</option>
-													<option>Spot</option>
-													<option>Full</option>
+													<option <?php if($daily != NULL && $daily['spot_full'] == 'Spot') { echo "selected"; } ?> >Spot</option>
+													<option <?php if($daily != NULL && $daily['spot_full'] == 'Full') { echo "selected"; } ?> >Full</option>
 												</select>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Select Pests / Diseases :</label>
 											<div class="col-sm-4">
-												<input name="pest" type="text" class="form-control" id="paste1">
+												<input name="pest" type="text" class="form-control" id="paste1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['pest']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select Pests/Diseases.\""; ?><?php } //comma separeted value?>  >
 											</div>
 											<p class="text-danger"> * Use commas or tabs</p>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Select Intencity :</label>
 											<div class="col-sm-4">
-												<input name="intencity"  type="text" class="form-control" id="intcty1">
+												<input name="intensity"  type="text" class="form-control" id="intsty1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['intensity']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select intensity.\""; ?><?php } //comma separeted value?>  >
 											</div>
 											<p class="text-danger"> * Use commas or tabs</p>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Select Quantity :</label>
 											<div class="col-sm-4">
-												<input name="qty_unit" type="text" class="form-control" id="qty1">
+												<input name="qty_unit" type="text" class="form-control" id="qty1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['qty_unit']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select quantity with unit.\""; ?><?php } //comma separeted value?>  >
 											</div>
-											<p class="text-danger"> * Use commas or tabs</p>
+											<p class="text-danger"> * Use commas or tabs and mention kg/l</p>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Select Area :</label>
 											<div class="col-sm-4">
-												<input name="area" type="text" class="form-control">
+												<input name="area" type="text" class="form-control" <?php if(isset($daily)) {?>value="<?php echo $daily['area']; ?>" <?php } else {?>placeholder=<?php  echo "\"Area sprayed\""?> <?php } ?> >
 											</div>
 										</div>
 										<!-- <div class="form-group">
@@ -192,51 +338,52 @@
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">No of Drums (sprayed) :</label>
 											<div class="col-sm-4">
-												<input name="no_drums" type="text" class="form-control">
+												<input name="no_drms" type="text" class="form-control" <?php if(isset($daily)) {?>value="<?php echo $daily['no_drms']; ?>" <?php } else {?>placeholder=<?php  echo "\"Number of drums\""?> <?php } ?> >
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Mandays (D Rated):</label>
 											<div class="col-sm-4">
-												<input name="dr__mnds" type="text" class="form-control">
+												<input name="dr_mnds" type="text" class="form-control" <?php if(isset($daily)) {?>value="<?php echo $daily['dr_mnds']; ?>" <?php } else {?>placeholder=<?php  echo "\"Daily rated Mandays\""?> <?php } ?> >
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Mandays (Supervisory) :</label>
 											<div class="col-sm-4">
-												<input name="sup_mnds" type="text" class="form-control">
+												<input name="sup_mnds" type="text" class="form-control" <?php if(isset($daily)) {?>value="<?php echo $daily['sup_mnds']; ?>" <?php } else {?>placeholder=<?php  echo "\"Supervisory Mandays\""?> <?php } ?> >
 											</div>
 										</div>
 
-																	<div class="row">
-
-																		<div class="col-sm-1 col-sm-offset-2">
-																			<button type="button" value="Delete Entry" id="delete_entry" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" style="margin-top:20px;">Delete Entry</button>
-																		</div>
-																				<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModallabel">
-																					<div class="modal-dialog" role="document">
-																						<div class="modal-content">
-																							<div class="modal-header">
-																								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																								<h4 class="modal-title" id="myModalLabel">Confirm Delete?</h4>
-																							</div>
-																							<div class="modal-body">
-																								<p>Are you sure you wish to delete this entry?</p>
-																							</div>
-																							<div class="modal-footer">
-																								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-																								<input type="submit"  name="del_entry" class="btn btn-danger" value="Confirm Delete">
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-																		<div class="col-sm-2 col-sm-offset-3">
-																			  <input type="submit" id="edit_entry" name="edit_submit" value="Edit Entry" class="btn btn-success" style="margin-top:20px;">
-																		</div>
+											<div class="row">
+												<div class="col-sm-1 col-sm-offset-2">
+													<button type="button" value="Delete Entry" id="delete_entry" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" style="margin-top:20px;">Delete Entry</button>
+												</div>
+														<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModallabel">
+															<div class="modal-dialog" role="document">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																		<h4 class="modal-title" id="myModalLabel">Confirm Delete?</h4>
 																	</div>
+																	<div class="modal-body">
+																		<p>Are you sure you wish to delete this entry?</p>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																		<input type="submit"  name="del_entry" class="btn btn-danger" value="Confirm Delete">
+																	</div>
+																</div>
+															</div>
+														</div>
+												<div class="col-sm-2 col-sm-offset-3">
+													  <input type="submit" id="edit_entry" name="edit_submit" value="Edit Entry" class="btn btn-success" style="margin-top:20px;">
+												</div>
+											</div>
 									</form>
-
               </div>
+
+
+
               <div class="tab-pane" id="tab2">
                 <form class="form-horizontal" action="daily_spraying_entry.php" method="post">
 									<div class="form-group" style="margin-top:30px">
@@ -341,12 +488,9 @@
     				$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
 						$('#item1,#item2,#paste1,#qty1,#paste2,#qty2').tokenfield({});
 
-
-
-
 						$('#intcty1,#intcty2').tokenfield({
 								autocomplete :{
-										source:['Low','Medium','High'],
+										source:['L','M','H'],
 										delay:100
 								},
 								showAutocompleteOnFocus: true
@@ -361,7 +505,7 @@
 					function enable_add() {
 
 
-						if(document.getElementById('hide_one')!='Select a section' && document.getElementById('hide_two').value!='Select Hz/Db')
+						if(document.getElementById('hide_one').value!='Select a section' && document.getElementById('hide_two').value!='Select Hz/Db')
 						{
 								document.getElementById('hide_me').disabled=false;
 						}
