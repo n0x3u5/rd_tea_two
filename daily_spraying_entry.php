@@ -39,12 +39,13 @@
 
 		$_SESSION['blue_bk_spray_chit'] = mysqli_fetch_assoc($result);
 
-		// $set = 1;
+		 $set = 1;
 	}
 	else {
 		$req_date = NULL;
 		$req_ssn = NULL;
 		$req_hz_db = NULL;
+		 $set = 0;
 	}
 ?>
 
@@ -180,8 +181,8 @@
       <meta charset="utf-8">
       <title>R.D. Tea | Daily Spraying Entry</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 			<link rel="stylesheet" href="css/bootstrap-tokenfield.css" type="text/css">
       <link rel="stylesheet" href="css/stylesheet.css">
       <style>
@@ -285,11 +286,11 @@
         	</div>
           <div class="col-sm-12 card_style" style="padding-bottom:15px;">
             <ul class="nav nav-tabs nav-justified">
-              <li  class="active" id="ac_one"><a href="#tab1" data-toggle="tab" id="take1">Update or Delete Record</a></li>
+              <li  id="ac_one"><a href="#tab1" data-toggle="tab" id="take1">Update or Delete Record</a></li>
               <li id="ac_two"><a href="#tab2" data-toggle="tab" id="take2">Add Record</a></li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane active" id="tab1">
+              <div class="tab-pane" id="tab1">
 
 									<form class="form-horizontal" action="daily_spraying_entry.php" method="post">
 										<?php if(isset($_SESSION['blue_bk_spray_chit'])) { $daily = $_SESSION['blue_bk_spray_chit']; } else { $daily = NULL; }?>
@@ -306,7 +307,7 @@
 	                	<div class="form-group" >
 											<label class="col-sm-2 col-sm-offset-1 control-level">Select Item(s) :</label>
 											<div class="col-sm-4">
-												<input name="chem" type="text" class="form-control" id="item1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['chem']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select Chemical name.\""; ?><?php } //comma separeted value?>  >
+												<input name="chem" type="text" class="form-control" id="item1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['chem']);  ?> value="<?php echo $csv; ?>" <?php $set2 = 1; } else { ?>placeholder=<?php echo "\"Select Chemical name.\""; ?><?php $set2 = 2; } //comma separeted value?>  >
 											</div>
 											<p class="text-danger"> * Use commas or tabs</p>
 										</div>
@@ -529,7 +530,26 @@
     		</script>
 
 					<script>
-					document.getElementById('hide_me').disabled=true;
+
+						if(document.getElementById('datepicker').value!=''){
+							document.getElementById('hide_me').disabled=false;
+						}
+						else {
+							document.getElementById('hide_me').disabled=true;
+						}
+					if(document.getElementById('item1').value!='')
+					{
+						document.getElementById('delete_entry').disabled=false;
+						document.getElementById('edit_entry').disabled=false;
+							document.getElementById('add_entry').disabled=false;
+
+					}
+					else{
+						document.getElementById('delete_entry').disabled=true;
+						document.getElementById('edit_entry').disabled=true;
+							document.getElementById('add_entry').disabled=true;
+
+					}
 					function enable_add() {
 
 
@@ -542,9 +562,7 @@
 						}
 
 					}
-					document.getElementById('delete_entry').disabled=true;
-					document.getElementById('edit_entry').disabled=true;
-						document.getElementById('add_entry').disabled=true;
+
 
 					function enable_add_one() {
 
@@ -571,19 +589,41 @@
 							document.getElementById('add_entry').disabled=true;
 
 						}
-						// $('#item2').on('tokenfield:createtoken',function (e)	{
-						//
-						// 	if(document.getElementById('hide_11').value=='N')
-						// 	{
-						// 		event.preventDefault()
-						// 	}
-						// 	else{
-						// 		// $('#item2').tokenfield({})
-						// 	}
-						// }).tokenfield();
 
 					}
 					</script>
+					<?php
+					if(isset($set2)){
+					echo"<script>		var submit_chk=$set2; submit_chk2=$set; </script>";}
+					?>
+
+								<script>
+										document.getElementById('take1').disabled=true;
+										document.getElementById('take2').disabled=true;
+									if(submit_chk==1 && submit_chk2)
+										{
+											document.getElementById('ac_one').disabled=false;
+											var a1=document.getElementById('tab1');
+											a1.setAttribute('class','active');
+											var b1=document.getElementById('take1');
+											b1.style.background='#3E2723' ;
+											var c1=document.getElementById('take1');
+											c1.style.color='#FFFFFF';
+
+
+										}
+									if(submit_chk==2 && submit_chk2){
+											document.getElementById('ac_two').disabled=false;
+											var a2=document.getElementById('tab2');
+											a2.setAttribute('class','active');
+											var b2=document.getElementById('take2');
+											b2.style.background='#3E2723';
+											var c2=document.getElementById('take2');
+											c2.style.color='#FFFFFF';
+										}
+
+								</script>
+
 
         </body>
     </body>
