@@ -34,7 +34,7 @@
 				}
 				</style>
 				<style>
-				@media screen and (min-width: 400px) {
+
 						.abt_dev{
 							width:80%;
 							/*margin-left:36%;
@@ -42,7 +42,7 @@
 							margin: auto;
 							text-align: center;
 						}
-				}
+
 				.tinjon{
 					color:#1B5E20;
 
