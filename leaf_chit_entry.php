@@ -357,10 +357,10 @@
 							</div>
 							<div class="form-group">
 
-								<label for="dt_lst_plkd" class="col-sm-3 control-label">Date Last Plucked:</label>
+								<label for="dt_lst_plkd" class="col-sm-3 control-label">Dates Last Plucked:</label>
 
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="dt_lst_plkd2" name="dt_lst_plkd" required>
+									<input type="text" class="form-control" id="dt_lst_plkd2" name="dt_lst_plkd" required placeholder="dd-mm-yyyy">
 								</div>
 								<p class="text-danger"> * Use commas or tabs</p>
 							</div>

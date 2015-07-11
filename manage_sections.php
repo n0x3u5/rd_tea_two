@@ -256,7 +256,8 @@
                           <label for="sec_short_name">Select The Section:</label>
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-grain"></i></span>
-                              <select  class="form-control" name="sec_short_name" form="view_update_section" required>
+                              <select  class="form-control" id="hide_one" name="sec_short_name" form="view_update_section" required onChange="enable_add()">
+                                <option>Select a seciton</option>
                                 <?php
                                     $q = "SELECT * FROM sections where division = '{$_SESSION['div_name']}'";
                                     $result = mysqli_query($connection, $q);
@@ -264,7 +265,7 @@
                                     confirm_query($result);
                                     //$_POST['sec_short_nm'] = NULL;
 
-                                    echo "<option id=\"opt0\" value=\"Select a section...\">Select a section...</option>";
+
                                     while($sec_values = mysqli_fetch_assoc($result)) {
                                 ?>
                                       <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST['view_submit']) && $_SESSION['upd_ssn'] == $sec_values['short_sec_name']) { echo "selected"; } ?> ><?php echo htmlentities($sec_values['sec_name']) ?></option>
@@ -274,7 +275,7 @@
                               </select>
                           </div>
 
-                                  <input type="submit" class="btn btn-info" name="view_submit" value="View a Section">
+                                  <input id="view" type="submit" class="btn btn-info" name="view_submit" value="View a Section">
                                   <p></p>
 
                                   <?php
@@ -428,16 +429,14 @@
                         <label for="sec_short_name"> Select Section:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-remove-sign"></i></span>
-                            <select class="form-control" name="sec_short_name" form="remove_section" required>
-
+                            <select id="hide_two" class="form-control" name="sec_short_name" form="remove_section" required onChange="enable_add()">
+                                <option>Select a section</option>
                                 <?php
                                   $q = "SELECT * FROM sections where division = '{$_SESSION['div_name']}'";
                                   $result = mysqli_query($connection, $q);
 
                                   confirm_query($result);
                                   //$_POST['sec_short_nm'] = NULL;
-
-                                  echo "<option id=\"opt0\" value=\"Select a section...\">Select a section...</option>";
                                   while($sec_values = mysqli_fetch_assoc($result)) {
                                 ?>
 
@@ -451,7 +450,7 @@
                             </select>
                         </div>
 
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" style="margin-top:10px;">Remove a Section</button>
+                                <button type="button" id="remv" class="btn btn-danger" data-toggle="modal" data-target="#confirmModal" style="margin-top:10px;">Remove a Section</button>
                                 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -607,14 +606,37 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <script type="text/javascript">
-            // var tb1 = document.getElementById('textbox1');
-            // var tb2 = document.getElementById('textbox2');
-            // var opt = document.getElementById('opt0');
-            // if(tb2!=null) {
-            //     opt.text = tb1.value;
-            //     opt.value = tb2.value;
-            // }
+        <script>
+          if(document.getElementById('hide_one').value!='Select a seciton')
+          {
+            document.getElementById('view').disabled=false;
+          }else {
+            document.getElementById('view').disabled=true;
+          }
+          if(document.getElementById('hide_two').value!='Select a section')
+          {
+            document.getElementById('remv').disabled=false;
+          }else {
+            document.getElementById('remv').disabled=true;
+          }
+          function enable_add() {
+            if(document.getElementById('hide_one').value!='Select a seciton')
+            {
+              document.getElementById('view').disabled=false;
+            }else {
+              document.getElementById('view').disabled=true;
+            }
+            if(document.getElementById('hide_two').value!='Select a section')
+            {
+              document.getElementById('remv').disabled=false;
+            }else {
+              document.getElementById('remv').disabled=true;
+            }
+
+          }
+
+
+
         </script>
     </body>
 </html>

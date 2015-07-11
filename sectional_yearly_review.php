@@ -299,7 +299,13 @@ else {
             });
         </script>
 				<script>
+				if(document.getElementById('year1').value!='')
+				{
+					document.getElementById('hide_me').disabled=false;
+				}
+			else {
 				document.getElementById('hide_me').disabled=true;
+			}
 				function enable_add() {
 					if(document.getElementById('section').value!='Select a section')
 					{
