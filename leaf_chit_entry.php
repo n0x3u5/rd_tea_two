@@ -492,7 +492,12 @@
 		?>
 
 					<script>
-
+								// function chk() {
+								// 	var a=$('#dt_lst_plkd2').tokenfield('getTokens');
+								// 	window.alert(a);
+								// 	var b=a.length;
+								// 	window.alert(b);
+								// }
 						if(submit_chk==1 && submit_chk2)
 							{
 								document.getElementById('link_one').disabled=false;
