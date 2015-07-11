@@ -81,7 +81,6 @@
               <th>Section</th>
               <th>spot/Full</th>
               <th>Pest/<br/>Disease</th>
-              <th>Intensity</th>
               <th>Area<br/>( in Ha.)</th>
 							<th>Issued Qty</th>
 							<th>No of Drums</th>
@@ -93,53 +92,42 @@
 							if (isset($_POST['date_submit'])) {
 								while ($spc_record = mysqli_fetch_assoc($r_chit)) {
 									$item = explode("¥", $spc_record['chem']);
+									echo"<br>Item Array";var_dump($item);
+									// if(in_array("CHEM1",$item)) {
+									// 	echo array_search("CHEM1", $item);
+									// }
 									$chemical_index = 0;
 									foreach ($item as $chemical) {
-						?>
-							<tr>
-								<td><?php	echo $chemical; ?></td>
-								<td><?php echo $spc_record['short_sec_name']; ?></td>
-								<td><?php echo $spc_record['spot_full']; ?></td>
-								<td>
-								<?php
-									$pest = explode("¥", $spc_record['pest']);
-									echo $pest[$chemical_index];
-								?>
-								</td>
-								<td>
-								<?php
-									$intensity = explode("¥", $spc_record['intensity']);
-									echo $intensity[$chemical_index];
-								?>
-								</td>
-								<td><?php echo $spc_record['area']; ?></td>
-								<td>
-								<?php
-									$qty = explode("¥", $spc_record['qty_unit']);
-									echo $qty[$chemical_index];
-								?>
-								</td>
-								<td><?php echo $spc_record['no_drms']; ?></td>
-								<td><?php echo $spc_record['dr_mnds']; ?></td>
-								<td><?php echo $spc_record['sup_mnds']; ?></td>
-							</tr>
-						<?php
+										if(in_array("CHEM1",$item)) {
+											echo array_search("CHEM1", $item);
+										}
+										echo $chemical."<br>";
 										$chemical_index++;
 									}
 								}
 							}
 						?>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
 							<!-- <tr>
-								<td>abcd</td>
-								<td>1EXTA</td>
-								<td>full</td>
-								<td>xyz</td>
-								<td>33</td>
-								<td>250</td>
-								<td>11 kg</td>
-								<td>6</td>
-								<td>245</td>
-								<td>5</td>
+								<td>CHEM1</td>
+								<td>4W, 1EXTB</td>
+								<td>Full, Spot</td>
+								<td>Pest1, Pest1</td>
+								<td>13.00, 3.12</td>
+								<td>12 kg, 4 kg</td>
+								<td>45, 32</td>
+								<td>32, 23.9</td>
+								<td>12.0, 44.1</td>
 							</tr> -->
             </tbody>
           </table>
@@ -158,6 +146,7 @@
 			$(document).ready( function () {
 				var table = $('#spray_chit').DataTable( {
 						"scrollX": true,
+						"order": [],
 						"scrollCollapse": true,
 						"paging": false
 				} );
