@@ -21,16 +21,28 @@
 	  $to = date('Y-m-d', strtotime($req_end_date));
 
 		//var_dump($req_day_spray);
+		if($req_ssn == 'ALL') {
+			$query_pluck = "select * from blue_bk_plk where division='{$req_div}' and rec_dt between '$from' and '$to'";
 
-		$query_pluck = "select * from blue_bk_plk where short_sec_name ='$req_ssn' and division='{$req_div}' and rec_dt between '$from' and '$to'";
+			$result_pluck = mysqli_query($connection, $query_pluck);
+			confirm_query($result_pluck);
 
-		$result_pluck = mysqli_query($connection, $query_pluck);
-		confirm_query($result_pluck);
+			$query_spray = "select * from blue_bk_spray_chit where division='{$req_div}' and rec_dt between '$from' and '$to'";
 
-		$query_spray = "select * from blue_bk_spray_chit where short_sec_name ='$req_ssn' and division='{$req_div}' and rec_dt between '$from' and '$to'";
+			$result_spray = mysqli_query($connection, $query_spray);
+			confirm_query($result_spray);
+		}
+		else {
+			$query_pluck = "select * from blue_bk_plk where short_sec_name ='$req_ssn' and division='{$req_div}' and rec_dt between '$from' and '$to'";
 
-		$result_spray = mysqli_query($connection, $query_spray);
-		confirm_query($result_spray);
+			$result_pluck = mysqli_query($connection, $query_pluck);
+			confirm_query($result_pluck);
+
+			$query_spray = "select * from blue_bk_spray_chit where short_sec_name ='$req_ssn' and division='{$req_div}' and rec_dt between '$from' and '$to'";
+
+			$result_spray = mysqli_query($connection, $query_spray);
+			confirm_query($result_spray);
+		}
 		// echo "<br> header processing ends. <hr>";
 
 	}
@@ -88,7 +100,9 @@
 
 				                    confirm_query($r);
 				                    //$_POST['sec_short_nm'] = NULL;
-
+												?>
+														<option <?php if(isset($_POST['sec_date_submit']) && ($_POST['short_sec_name'] ==  'ALL')) { echo "selected"; } ?> >ALL</option>
+												<?php
 				                    while($sec_values = mysqli_fetch_assoc($r)) {
 				                ?>
 				                      <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>" <?php if(isset($_POST["sec_date_submit"]) && ($_POST['short_sec_name'] == $sec_values['short_sec_name'])) { echo "selected";} ?> ><?php echo htmlentities($sec_values['short_sec_name']); ?></option>
