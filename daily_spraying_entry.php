@@ -32,7 +32,7 @@
 		// echo "<br>got hz_db =".$req_hz_db."<br>";
 		// var_dump($req_date);echo "<br>"; var_dump($req_ssn);
 
-		$query = "SELECT * FROM blue_bk_spray_chit WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}' and division='{$_SESSION['div_name']}'";
+		$query = "SELECT * FROM blue_bk_spray_chit WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}' and hz_db='{$req_hz_db}' and division='{$_SESSION['div_name']}'";
 		//var_dump($query);
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
@@ -49,99 +49,127 @@
 ?>
 
 <?php //insertion
-	// if (isset($_POST['add_submit'])) {
-	// 	$short_sec_name = $_SESSION['ssn'];
-	// 	$rec_dt = $_SESSION['date'];
-	// 	$hz_db = $_SESSION['hz_db'];
-	//
-	// 	$chem = mysqli_real_escape_string($connection, $_POST['chem']);
-	// 	$cocktail = mysqli_real_escape_string($connection, $_POST['cocktail']);
-	// 	$spot_full = mysqli_real_escape_string($connection, $_POST['mandays']);
-	// 	$rounddays = (int) mysqli_real_escape_string($connection, $_POST['rounddays']);
-	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
-	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
-	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
-	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
-	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
-	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
-	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
-	// 	$spot_full = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
-	//
-	//
-	// 	$prune = $_SESSION['prune_stats']['prune_style'];
-	//
-	//
-	// 	$q_in = "INSERT INTO blue_bk_plk (division, short_sec_name, rec_dt, plkd_area, plkd_leaf, mandays, prune_style, rnd_days)";
-	// 	$q_in .= " VALUES ('{$_SESSION['div_name']}', '$short_sec_name', '$rec_dt', $plkd_area, $plkd_leaf, $mandays, '$prune', $rounddays)";
-	//
-	// 	//var_dump($q_in);
-	// 	$result_in = mysqli_query($connection, $q_in);
-	//
-  //   confirm_query($result_in);
-	//
-	//
-	// 	$_SESSION['blue_bk_plk'] = NULL;
-	// 	$_SESSION['ssn'] = NULL;
-	// 	$_SESSION['date'] = NULL;
-	// 	$_SESSION['div_name'] = NULL;
-	// }
+	if (isset($_POST['add_submit'])) {
+		$short_sec_name = $_SESSION['ssn'];
+		$rec_dt = $_SESSION['date'];
+		$hz_db = $_SESSION['hz_db'];
+
+
+
+		$chem = mysqli_real_escape_string($connection, $_POST['chem']);
+		$chem = explode_implode($chem);
+		$cocktail = mysqli_real_escape_string($connection, $_POST['cocktail']);
+		$spot_full = mysqli_real_escape_string($connection, $_POST['spot_full']);
+		$pest = mysqli_real_escape_string($connection, $_POST['pest']);
+		$pest = explode_implode($pest);
+		$intensity = mysqli_real_escape_string($connection, $_POST['intensity']);
+		$intensity = explode_implode($intensity);
+		$qty_unit = mysqli_real_escape_string($connection, $_POST['qty_unit']);
+		$qty_unit = explode_implode($qty_unit);
+		$area = (float) mysqli_real_escape_string($connection, $_POST['area']);
+		$no_drms = (float) mysqli_real_escape_string($connection, $_POST['no_drms']);
+		$dr_mnds = (float) mysqli_real_escape_string($connection, $_POST['dr_mnds']);
+		$sup_mnds = (float) mysqli_real_escape_string($connection, $_POST['sup_mnds']);
+
+
+		$q_in = "INSERT INTO blue_bk_spray_chit (division, short_sec_name, rec_dt, hz_db, chem, cocktail, spot_full, pest, intensity, qty_unit, area, no_drms, dr_mnds, sup_mnds)";
+		$q_in .= " VALUES ('{$_SESSION['div_name']}', '{$short_sec_name}', '{$rec_dt}', '{$hz_db}', '{$chem}', '{$cocktail}', '{$spot_full}', '{$pest}', '{$intensity}', '{$qty_unit}', {$area}, {$no_drms}, {$dr_mnds}, {$sup_mnds})";
+
+		//var_dump($q_in);
+		$r_in = mysqli_query($connection, $q_in);
+
+    confirm_query($r_in);
+
+		if(mysqli_affected_rows($connection) > 0) {
+			echo "Inserted Successfully!";
+		}
+		else {
+			echo "No rows effected!";
+		}
+
+
+		$_SESSION['blue_bk_spray_chit'] = NULL;
+		$_SESSION['ssn'] = NULL;
+		$_SESSION['date'] = NULL;
+		$_SESSION['hz_db'] = NULL;
+		$_SESSION['div_name'] = NULL;
+	}
  ?>
  <?php //updating
 
-	// if(isset($_POST['edit_submit'])) {
-	//
-	// 	// $query = "SELECT * FROM blue_bk_plk WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}'";
-	// 	//
-	// 	// $result = mysqli_query($connection, $query);
-  //   // confirm_query($result);
-	//
-	// 	$short_sec_name = $_SESSION['ssn'];
-	// 	$rec_dt = $_SESSION['date'];
-	// 	$req_id = $_SESSION['blue_bk_plk']['id'];
-	//
-	//
-	// 	$plkd_area = (float) mysqli_real_escape_string($connection, $_POST['plkd_area']);
-	//
-	// 	$plkd_leaf = (float) mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
-	//
-	// 	$mandays = (float) mysqli_real_escape_string($connection, $_POST['mandays']);
-	//
-	// 	$rounddays = (int) mysqli_real_escape_string($connection, $_POST['rounddays']);
-	//
-	// 	$q_up = "UPDATE blue_bk_plk SET";
-	// 	$q_up .= " division='{$_SESSION['div_name']}', short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}',";
-	// 	$q_up .= " plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf},";
-	// 	$q_up .= " mandays={$mandays}, rnd_days={$rounddays} WHERE id ={$req_id}";
-	//
-	// 	//var_dump($q_up);
-	// 	$result_up = mysqli_query($connection, $q_up);
-	//
-  //   confirm_query($result_up);
-	//
-	// 	$_SESSION['blue_bk_plk'] = NULL;
-	// 	$_SESSION['ssn'] = NULL;
-	// 	$_SESSION['date'] = NULL;
-	// 	$_SESSION['div_name'] = NULL;
-	// }
+	if(isset($_POST['edit_submit'])) {
+
+		$short_sec_name = $_SESSION['ssn'];
+		$rec_dt = $_SESSION['date'];
+		$hz_db = $_SESSION['hz_db'];
+		$req_id = $_SESSION['blue_bk_spray_chit']['id'];
+
+		$chem = mysqli_real_escape_string($connection, $_POST['chem']);
+		$chem = explode_implode($chem);
+		$cocktail = mysqli_real_escape_string($connection, $_POST['cocktail']);
+		$spot_full = mysqli_real_escape_string($connection, $_POST['spot_full']);
+		$pest = mysqli_real_escape_string($connection, $_POST['pest']);
+		$pest = explode_implode($pest);
+		$intensity = mysqli_real_escape_string($connection, $_POST['intensity']);
+		$intensity = explode_implode($intensity);
+		$qty_unit = mysqli_real_escape_string($connection, $_POST['qty_unit']);
+		$qty_unit = explode_implode($qty_unit);
+		$area = (float) mysqli_real_escape_string($connection, $_POST['area']);
+		$no_drms = (float) mysqli_real_escape_string($connection, $_POST['no_drms']);
+		$dr_mnds = (float) mysqli_real_escape_string($connection, $_POST['dr_mnds']);
+		$sup_mnds = (float) mysqli_real_escape_string($connection, $_POST['sup_mnds']);
+
+		$q_up = "UPDATE blue_bk_spray_chit SET";
+		$q_up .= " division='{$_SESSION['div_name']}', short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}',";
+		$q_up .= " hz_db='{$hz_db}', chem='{$chem}', cocktail='{$cocktail}', spot_full='{$spot_full}',";
+		$q_up .= " pest='{$pest}', intensity='{$intensity}', qty_unit='{$qty_unit}', area={$area}, no_drms={$no_drms}, dr_mnds={$dr_mnds}, sup_mnds={$sup_mnds} WHERE id ={$req_id}";
+
+		//var_dump($q_up);
+		$r_up = mysqli_query($connection, $q_up);
+
+    confirm_query($r_up);
+
+		if(mysqli_affected_rows($connection) > 0) {
+			echo "Updated Successfully!";
+		}
+		else {
+			echo "No rows effected!";
+		}
+
+			$_SESSION['blue_bk_spray_chit'] = NULL;
+			$_SESSION['ssn'] = NULL;
+			$_SESSION['date'] = NULL;
+			$_SESSION['hz_db'] = NULL;
+			$_SESSION['div_name'] = NULL;
+	}
  ?>
  <?php //DELETE
  //var_dump($_POST);
-	// if(isset($_POST['del_entry'])){
-	// 	$short_sec_name = $_SESSION['ssn'];
-	// 	$rec_dt = $_SESSION['date'];
-	//
-	// 	$q_del = "DELETE FROM blue_bk_plk WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and division='{$_SESSION['div_name']}'";
-	// 	//var_dump($q_del);
-	//
-	// 	$r_del = mysqli_query($connection, $q_del);
-  //   confirm_query($r_del);
-	//
-	//
-	// 	$_SESSION['blue_bk_plk'] = NULL;
-	// 	$_SESSION['ssn'] = NULL;
-	// 	$_SESSION['date'] = NULL;
-	// 	$_SESSION['div_name'] = NULL;
-	// }
+	if(isset($_POST['del_entry'])){
+		$short_sec_name = $_SESSION['ssn'];
+		$rec_dt = $_SESSION['date'];
+		$hz_db = $_SESSION['hz_db'];
+
+		$q_del = "DELETE FROM blue_bk_spray_chit WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and hz_db = '{$hz_db}' and division='{$_SESSION['div_name']}'";
+		//var_dump($q_del);
+
+		$r_del = mysqli_query($connection, $q_del);
+    confirm_query($r_del);
+
+		if(mysqli_affected_rows($connection) > 0) {
+			echo "Deleted Successfully!";
+		}
+		else {
+			echo "No rows effected!";
+		}
+
+
+		$_SESSION['blue_bk_spray_chit'] = NULL;
+		$_SESSION['ssn'] = NULL;
+		$_SESSION['date'] = NULL;
+		$_SESSION['hz_db'] = NULL;
+		$_SESSION['div_name'] = NULL;
+	}
 
 ?>
 
@@ -312,7 +340,7 @@
 											<div class="col-sm-4">
 												<input name="qty_unit" type="text" class="form-control" id="qty1" <?php if (isset($daily)) { $csv = comma_sep_val($daily['qty_unit']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Select quantity with unit.\""; ?><?php } //comma separeted value?>  >
 											</div>
-											<p class="text-danger"> * Use commas or tabs and mention kg/l</p>
+											<p class="text-danger"> * Use commas or tabs and also mention kg/l</p>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 col-sm-offset-1 control-level">Select Area :</label>
@@ -424,7 +452,7 @@
 									<div class="form-group">
 										<label class="col-sm-2 col-sm-offset-1 control-level">Select Intencity :</label>
 										<div class="col-sm-4">
-											<input name="intensity" type="text" class="form-control" id="paste2">
+											<input name="intensity" type="text" class="form-control" id="intsty2">
 											</div>
 											<p class="text-danger"> * Use commas or tabs</p>
 									</div>
@@ -455,7 +483,7 @@
 									<div class="form-group">
 										<label class="col-sm-2 col-sm-offset-1 control-level">No of Drums (sprayed) :</label>
 										<div class="col-sm-4">
-											<input name="no_drums" type="text" class="form-control">
+											<input name="no_drms" type="text" class="form-control">
 										</div>
 									</div>
 									<div class="form-group">
@@ -488,7 +516,7 @@
     				$( "#datepicker" ).datepicker({dateFormat: 'dd-mm-yy'});
 						$('#item1,#item2,#paste1,#qty1,#paste2,#qty2').tokenfield({});
 
-						$('#intcty1,#intcty2').tokenfield({
+						$('#intsty1,#intsty2').tokenfield({
 								autocomplete :{
 										source:['L','M','H'],
 										delay:100
