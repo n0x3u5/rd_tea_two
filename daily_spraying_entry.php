@@ -96,8 +96,33 @@
 				<strong>Sorry!</strong> No row affected!
 			</div>
 
-
 		<?php }
+		
+		// var_dump($_POST);
+		// $items  = explode("¥", $chem);
+		// $doses = explode("¥", $dose);
+		// $qtys = explode("¥", $qty_unit);
+		// $pests = explode("¥", $pest);
+		// //var_dump($chemicals);
+		// $chemical_index = 0;
+		// foreach ($items as $chemical) {
+		// 	var_dump($chemical);
+		// 	var_dump($doses[$chemical_index]);
+		// 	var_dump($qtys[$chemical_index]);
+		// 	var_dump($pests[$chemical_index]);
+		// 	$q_chit = "INSERT INTO spray_chit_table (division, chem, rec_dt, short_sec_name, hz_db, spot_full, area, pest, qty_unit, no_drums, dr_mnds, sup_mnds, dose) VALUES ('{$_SESSION['current_div']}', '{$chemical}', '{$rec_dt}', '{$short_sec_name}', '{$hz_db}', '{$spot_full}', {$area}, '{$pests[$chemical_index]}', '{$qtys[$chemical_index]}', {$no_drms}, {$dr_mnds}, {$sup_mnds},'{$doses[$chemical_index]}' )";
+		// 	$r_chit = mysqli_query($connection, $q_chit);
+		//
+		// 	confirm_query($r_chit);
+		//
+		// 	if(mysqli_affected_rows($connection) > 0) {
+		// 		echo "Inserted Successfully!";
+		// 	}
+		// 	else {
+		// 		echo "No rows effected!";
+		// 	}
+		// 	$chemical_index++;
+		// }
 
 		$_SESSION['blue_bk_spray_chit'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -172,7 +197,11 @@
 		$rec_dt = $_SESSION['date'];
 		$hz_db = $_SESSION['hz_db'];
 
-		$q_del = "DELETE FROM blue_bk_spray_chit WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and hz_db = '{$hz_db}' and division='{$_SESSION['current_div']}'";
+		//var_dump($_POST);
+		$chemical_string = explode_implode($_POST['chem']);
+		//var_dump($chemical_string);
+
+		$q_del = "DELETE FROM blue_bk_spray_chit WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and hz_db = '{$hz_db}' and division='{$_SESSION['current_div']}' and chem = '{$chemical_string}'";
 		//var_dump($q_del);
 
 		$r_del = mysqli_query($connection, $q_del);
@@ -195,7 +224,7 @@
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
 		$_SESSION['hz_db'] = NULL;
-		// $_SESSION['div_name'] = NULL;
+		$_SESSION['div_name'] = NULL;
 	}
 
 ?>

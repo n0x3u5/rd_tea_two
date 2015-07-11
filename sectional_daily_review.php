@@ -193,15 +193,18 @@
 																	 <th>Date</th>
 																	 <th>Hz/Db</th>
 																	 <th>Item</th>
+						 											<th>Dose<br/>(Kg/lt.)</th>
+						 											<th>Issued Qty<br/>(Kg/lt.)</th>
+						                       <th>Stikcer Name</th>
+ 						                       <th>Sticker Quantity</th>
 						                       <th>cocktail</th>
 						                       <th>Section</th>
 						                       <th>spot/Full</th>
 						                       <th>Pest/<br/>Disease</th>
 						                       <th>Intensity</th>
 						                       <th>Area<br/>( in Ha.)</th>
-						 											<th>Issued Qty with Unit<br/>(Kg/lt.)</th>
 						 											<th>No of Drums</th>
-						 											<th>Mandays<br/> (DR rated)</th>
+						 											<th>Mandays<br/>(DR rated)</th>
 						 											<th>Mandays<br/>(Supervisory)</th>
 
 
@@ -216,13 +219,16 @@
 																			<td><?php echo date('d-m-Y', strtotime($spray_rev['rec_dt'])); ?></td>
 																			<td><?php echo $spray_rev['hz_db']; ?></td>
 																			<td><?php $csv = comma_sep_val($spray_rev['chem']); ?> <?php echo $csv; ?></td>
+																			<td><?php $csv = comma_sep_val($spray_rev['dose']); ?> <?php echo $csv; ?></td>
+																			<td><?php $csv = comma_sep_val($spray_rev['qty_unit']); ?> <?php echo $csv; ?></td>
+																			<td><?php echo $spray_rev['sticker_nm']; ?></td>
+																			<td><?php echo $spray_rev['sticker_qty']; ?></td>
 																			<td><?php echo $spray_rev['cocktail']; ?></td>
 																			<td><?php echo $spray_rev['short_sec_name']; ?></td>
 																			<td><?php echo $spray_rev['spot_full']; ?></td>
 																			<td><?php $csv = comma_sep_val($spray_rev['pest']); ?> <?php echo $csv; ?></td>
 																			<td><?php $csv = comma_sep_val($spray_rev['intensity']); ?> <?php echo $csv; ?></td>
 																			<td><?php echo $spray_rev['area']; ?></td>
-																			<td><?php $csv = comma_sep_val($spray_rev['qty_unit']); ?> <?php echo $csv; ?></td>
 																			<td><?php echo $spray_rev['no_drms']; ?></td>
 																			<td><?php echo $spray_rev['dr_mnds']; ?></td>
 																			<td><?php echo $spray_rev['sup_mnds']; ?></td>
