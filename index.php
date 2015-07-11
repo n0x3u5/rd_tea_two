@@ -14,12 +14,28 @@
         <meta charset="utf-8">
 				<meta name="theme-color" content="#66BB6A">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+				<link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/lohitbengali.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link href='http://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet'>
         <link type="text/css" rel="stylesheet" href="css/login_style.css" />
         <link rel="icon" href="images/logo_rdtea.png"/>
         <title>R. D. Tea | Login</title>
+				<style>
+				@media screen and (min-width: 400px) {
+						.abt_dev{
+							width:80%;
+							/*margin-left:36%;
+							margin-top: 1%;*/
+							margin: auto;
+							text-align: center;
+						}
+				}
+				.tinjon{
+					color:#1B5E20;
 
+				}
+
+				</style>
     </head>
     <body>
 		<div class="container">
@@ -47,6 +63,11 @@
 					</div>
 				</form>
 			</div>
+		</div>
+		<div class=" abt_dev">
+
+						<p style="font-family: 'Lohit Bengali', sans-serif; font-size:0.85em;color:#81C784; font-weight:bold;  "> Coded by <span class="tinjon">&#x09E9 &#x099C&#x09A8</span> -- Dip Joydeep and Nakshatra (from AOT)</p>
+
 		</div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
