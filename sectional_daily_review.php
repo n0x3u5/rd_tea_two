@@ -19,11 +19,7 @@
 
 		$from = date('Y-m-d', strtotime($req_start_date));
 	  $to = date('Y-m-d', strtotime($req_end_date));
-	  $query_spray = "select * from daily_spraying where short_sec_name ='$req_ssn' and record_date between '$from' and '$to'";
-	  //var_dump($query_spray);
 
-	  $result_spray = mysqli_query($connection, $query_spray);
-	  confirm_query($result_spray);
 		//var_dump($req_day_spray);
 
 		$query_pluck = "select * from blue_bk_plk where short_sec_name ='$req_ssn' and division='{$req_div}' and rec_dt between '$from' and '$to'";
@@ -31,6 +27,10 @@
 		$result_pluck = mysqli_query($connection, $query_pluck);
 		confirm_query($result_pluck);
 
+		$query_spray = "select * from blue_bk_spray_chit where short_sec_name ='$req_ssn' and division='{$req_div}' and rec_dt between '$from' and '$to'";
+
+		$result_spray = mysqli_query($connection, $query_spray);
+		confirm_query($result_spray);
 		// echo "<br> header processing ends. <hr>";
 
 	}
@@ -177,6 +177,7 @@
                              <thead style="border: solid 2px green">
                                  <tr>
 																	 <th>Date</th>
+																	 <th>Hz/Db</th>
 																	 <th>Item</th>
 						                       <th>cocktail</th>
 						                       <th>Section</th>
@@ -184,8 +185,7 @@
 						                       <th>Pest/<br/>Disease</th>
 						                       <th>Intensity</th>
 						                       <th>Area<br/>( in Ha.)</th>
-						 											<th>Issued Qty</th>
-						 											<th>Unit<br/>(Kg/lt.)</th>
+						 											<th>Issued Qty with Unit<br/>(Kg/lt.)</th>
 						 											<th>No of Drums</th>
 						 											<th>Mandays<br/> (DR rated)</th>
 						 											<th>Mandays<br/>(Supervisory)</th>
@@ -194,23 +194,29 @@
                                 </tr>
                              </thead>
 														<tbody>
-															<tr>
-																<td>23-09-2015</td>
-																<td>abcd</td>
-																<td>y</td>
-																<td>1EXTA</td>
-																<td>full</td>
-																<td>xyz</td>
-																<td>33</td>
-																<td>250</td>
-																<td>11</td>
-																<td>k</td>
-																<td>6</td>
-																<td>245</td>
-																<td>5</td>
-
-															</tr>
-
+															<?php
+																if(isset($_POST['sec_date_submit'])) {
+																	while($spray_rev = mysqli_fetch_assoc($result_spray)) {
+															?>
+																		<tr>
+																			<td><?php echo date('d-m-Y', strtotime($spray_rev['rec_dt'])); ?></td>
+																			<td><?php echo $spray_rev['hz_db']; ?></td>
+																			<td><?php $csv = comma_sep_val($spray_rev['chem']); ?> <?php echo $csv; ?></td>
+																			<td><?php echo $spray_rev['cocktail']; ?></td>
+																			<td><?php echo $spray_rev['short_sec_name']; ?></td>
+																			<td><?php echo $spray_rev['spot_full']; ?></td>
+																			<td><?php $csv = comma_sep_val($spray_rev['pest']); ?> <?php echo $csv; ?></td>
+																			<td><?php $csv = comma_sep_val($spray_rev['intensity']); ?> <?php echo $csv; ?></td>
+																			<td><?php echo $spray_rev['area']; ?></td>
+																			<td><?php $csv = comma_sep_val($spray_rev['qty_unit']); ?> <?php echo $csv; ?></td>
+																			<td><?php echo $spray_rev['no_drms']; ?></td>
+																			<td><?php echo $spray_rev['dr_mnds']; ?></td>
+																			<td><?php echo $spray_rev['sup_mnds']; ?></td>
+																		</tr>
+															<?php
+																  }
+																}
+															?>
 														</tbody>
                         </table>
                     </div>
