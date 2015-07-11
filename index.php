@@ -63,7 +63,7 @@
 		</div>
 		<div class=" abt_dev">
 
-						<p style="font-family: 'Lohit Bengali', sans-serif; font-size:0.85em;color:#81C784; font-weight:bold;  "> Coded by <span class="tinjon">&#x09E9 &#x099C&#x09A8</span> -- Dip Joydeep and Nakshatra (from AOT)</p>
+						<p style="font-family: 'Lohit Bengali', sans-serif; font-size:0.85em;color:#81C784; font-weight:bold;  "> Coded by <span class="tinjon">&#x09E9 &#x099C&#x09A8</span> -- Dip Joydeep and Nakshatra (Aotians)</p>
 
 		</div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
