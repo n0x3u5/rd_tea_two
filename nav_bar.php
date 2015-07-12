@@ -33,7 +33,8 @@
                                 <li><a href="daily_plucking_entry.php">Daily Plucking Entry</a></li>
                                 <li><a href="leaf_chit_entry.php">Leaf Chit Entry</a></li>
                                 <li><a href="cash_plucking_entry.php">Daily Cash Plucking Entry</a></li>
-                                <!-- <li><a href="daily_spraying_entry.php">Spraying Entry</a></li> -->
+                                <li role="separator" class="divider"></li>
+                                <li><a href="daily_spraying_entry.php">Spraying Entry</a></li>
                                 <li role="separator" class="divider"></li>
                                 <!-- <li class="navbar-text">Weather</li> -->
                                 <li><a href="weather_input.php">Weather Entry</a></li>
