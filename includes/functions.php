@@ -30,7 +30,11 @@
 		if(!$result_set){
 			//failure
 			//$message = " creation error"
-			die("database query failed.". mysqli_error($connection));
+			$err="<div class='container alert alert-warning alert-dismissible' role='alert' style='border-color:black'>
+						<button type='button' class='close' data-dismiss='alert' aria-label='Close' ><span aria-hidden='true'>&times;</span></button>
+						<strong>Sorry!</strong> No row affected!
+					</div>";
+			die("database query failed.". mysqli_error($err));
 		}
 	}
 
