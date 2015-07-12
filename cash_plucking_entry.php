@@ -21,15 +21,15 @@
 		$req_date = date('Y-m-d', strtotime($_POST['date_value']));
 		$_SESSION['date'] = $req_date;
 
-		if($_SESSION["user_div"] == "ALL") {
-			$req_div = $_SESSION["current_div"];
-		}
-		else {
-			$req_div = $_SESSION["user_div"];
-		}
-		$_SESSION['div_name'] = $req_div;
+		// if($_SESSION["user_div"] == "ALL") {
+		// 	$req_div = $_SESSION["current_div"];
+		// }
+		// else {
+		// 	$req_div = $_SESSION["user_div"];
+		// }
+		// $_SESSION['div_name'] = $req_div;
 
-		$query = "SELECT * FROM cp_table WHERE rec_date='{$req_date}' and division='{$_SESSION['div_name']}'";
+		$query = "SELECT * FROM cp_table WHERE rec_date='{$req_date}' and division='{$_SESSION['current_div']}'";
 
 		$result = mysqli_query($connection, $query);
     confirm_query($result);
@@ -55,7 +55,7 @@
 		$cp_hr_from = mysqli_real_escape_string($connection, $_POST['start_time2']);
 		$cp_hr_to = mysqli_real_escape_string($connection, $_POST['end_time2']);
 
-		$q_in = "INSERT INTO cp_table (division, rec_date, prune_cp_qty, unprune_cp_qty, prune_bm, unprune_bm, time_from, time_to) VALUES ('{$_SESSION['div_name']}', '{$rec_dt}', {$cpp_qty}, {$cpp_bal}, {$cpu_qty}, {$cpu_bal}, '{$cp_hr_from}', '{$cp_hr_to}') ";
+		$q_in = "INSERT INTO cp_table (division, rec_date, prune_cp_qty, unprune_cp_qty, prune_bm, unprune_bm, time_from, time_to) VALUES ('{$_SESSION['current_div']}', '{$rec_dt}', {$cpp_qty}, {$cpp_bal}, {$cpu_qty}, {$cpu_bal}, '{$cp_hr_from}', '{$cp_hr_to}') ";
 
 		$r_in = mysqli_query($connection, $q_in);
 		confirm_query($r_in);
@@ -75,18 +75,14 @@
 
 		<?php }
 
-		$_SESSION['date'] = $_SESSION['cp_record'] = $_SESSION['div_name'] = NULL;
+		$_SESSION['date'] = $_SESSION['cp_record'] = NULL;//$_SESSION['div_name'] = NULL;
 
  }
 
 
  if(isset($_POST['edit_submit'])) {
 	$rec_dt = $_SESSION['date'];
-	if(isset($rec_id)) {
-		$rec_id = $_SESSION['cp_record']['id'];
-	} else {
-		$rec_id = 0;
-	}
+	$rec_id = $_SESSION['cp_record']['id'];
 
 	$cpp_qty = (int) mysqli_real_escape_string($connection, $_POST['cpp_qty1']);
 	$cpp_bal = (int) mysqli_real_escape_string($connection, $_POST['cpp_bal1']);
@@ -95,7 +91,7 @@
 	$cp_hr_from = mysqli_real_escape_string($connection, $_POST['start_time1']);
 	$cp_hr_to = mysqli_real_escape_string($connection, $_POST['end_time1']);
 
-	$q_in = "UPDATE cp_table SET division = '{$_SESSION['div_name']}', prune_cp_qty = {$cpp_qty}, unprune_cp_qty = {$cpu_qty}, prune_bm = {$cpp_bal}, unprune_bm = {$cpu_bal}, time_from = '{$cp_hr_from}', time_to = '{$cp_hr_to}' WHERE id = {$rec_id}";
+	$q_in = "UPDATE cp_table SET division = '{$_SESSION['current_div']}', prune_cp_qty = {$cpp_qty}, unprune_cp_qty = {$cpu_qty}, prune_bm = {$cpp_bal}, unprune_bm = {$cpu_bal}, time_from = '{$cp_hr_from}', time_to = '{$cp_hr_to}' WHERE id = {$rec_id}";
 
 	$r_in = mysqli_query($connection, $q_in);
 	confirm_query($r_in);
@@ -113,20 +109,20 @@
 		</div>
 <?php }
 
-	$_SESSION['date'] = $_SESSION['cp_record'] = $_SESSION['div_name'] = NULL;
+	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;// $_SESSION['div_name'] = NULL;
 
  }
 
  if(isset($_POST['del_entry'])) {
 	$rec_dt = $_SESSION['date'];
 
-	if(isset($_SESSION['cp_record'])) {
-		$rec_id = $_SESSION['cp_record']['id'];
-	} else {
-		$rec_id = 0;
-	}
+	// if(isset($_SESSION['cp_record'])) {
+	// 	$rec_id = $_SESSION['cp_record']['id'];
+	// } else {
+	// 	$rec_id = 0;
+	// }
 
-	$q_del = "DELETE FROM leaf_chit_table WHERE id={$rec_id} and division = '{$_SESSION['div_name']}'";
+	$q_del = "DELETE FROM cp_table WHERE rec_date='{$rec_dt}'/*id={$rec_id}*/ and division = '{$_SESSION['current_div']}'";
 
 	$r_del = mysqli_query($connection, $q_del);
   confirm_query($r_del);
@@ -144,7 +140,7 @@
 		</div>
 <?php }
 
-	$_SESSION['date'] = $_SESSION['cp_record'] = $_SESSION['div_name'] = NULL;
+	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;// $_SESSION['div_name'] = NULL;
 
 }
 

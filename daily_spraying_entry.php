@@ -5,6 +5,14 @@
 	if(!isset($_SESSION['user'])) {
 		redirect_to("index.php");
 	}
+	
+	if(($_SESSION['user_div'] != "ALL") && ($_SESSION['user_div'] != $_SESSION['current_div'])) {
+		$_SESSION['flag_div_chk'] = 1;
+		redirect_to("update_profile.php");
+	}
+	else {
+		$_SESSION['flag_div_chk'] = 0;
+	}
 ?>
 <?php
 	$connection = make_connection();
@@ -97,7 +105,7 @@
 			</div>
 
 		<?php }
-		
+
 		// var_dump($_POST);
 		// $items  = explode("¥", $chem);
 		// $doses = explode("¥", $dose);
@@ -224,7 +232,7 @@
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
 		$_SESSION['hz_db'] = NULL;
-		$_SESSION['div_name'] = NULL;
+		//$_SESSION['div_name'] = NULL;
 	}
 
 ?>

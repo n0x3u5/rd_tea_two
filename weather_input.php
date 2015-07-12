@@ -24,13 +24,13 @@
 	if(isset($_POST["dt_sec_submit"])){
 		$req_date = date('Y-m-d', strtotime($_POST["date_value"]));
 		// var_dump($_SESSION['user_div']);
-		if($_SESSION["user_div"] == "ALL") {
-			$req_div = $_SESSION["current_div"];
-		}
-		else {
-			$req_div = $_SESSION["user_div"];
-		}
-		$_SESSION['div_name'] = $req_div;
+		// if($_SESSION["user_div"] == "ALL") {
+		// 	$req_div = $_SESSION["current_div"];
+		// }
+		// else {
+		// 	$req_div = $_SESSION["user_div"];
+		// }
+		// $_SESSION['div_name'] = $req_div;
 		$_SESSION['date'] = $req_date;
 
 
@@ -38,7 +38,7 @@
 		// echo "<br>got div_name =" .$req_div_name."<br>";
 		// var_dump($req_date);echo "<br>"; var_dump($req_div_name);
 
-		$query = "SELECT * FROM daily_weather WHERE division='{$_SESSION['div_name']}' and record_date='{$req_date}' and division = '{$_SESSION['div_name']}'";
+		$query = "SELECT * FROM daily_weather WHERE division='{$_SESSION['current_div']}' and record_date='{$req_date}'";
 		// var_dump($query);
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
@@ -56,7 +56,7 @@
 
 <?php
 	if (isset($_POST['add_submit'])) {
-		$division = $_SESSION['div_name'];
+		$division = $_SESSION['current_div'];
 		$record_date = $_SESSION['date'];
 		//echo "division :".$division."<br>";
 		$rain_day = (float) mysqli_real_escape_string($connection, $_POST["rain_day"]);
@@ -102,12 +102,12 @@
 
 		$_SESSION['daily_weather'] = NULL;
 		$_SESSION['date'] = NULL;
-		$_SESSION['div_name'] = NULL;
+		// $_SESSION['div_name'] = NULL;
 	}
 
 	if(isset($_POST['edit_submit'])) {
 
-		$division = $_SESSION['div_name'];
+		$division = $_SESSION['current_div'];
 		$record_date = $_SESSION['date'];
 		$req_id = $_SESSION['daily_weather']['id'];
 
@@ -152,11 +152,11 @@
 
 		$_SESSION['daily_weather'] = NULL;
 		$_SESSION['date'] = NULL;
-		$_SESSION['div_name'] = NULL;
+		// $_SESSION['div_name'] = NULL;
 	}
 
 	if(isset($_POST['del_entry'])) {
-		$division = $_SESSION['div_name'];
+		$division = $_SESSION['current_div'];
 		$record_date = $_SESSION['date'];
 
 		$query = "DELETE FROM daily_weather WHERE division='{$division}' and record_date='{$record_date}'";
@@ -187,7 +187,7 @@
 
 		$_SESSION['daily_weather'] = NULL;
 		$_SESSION['date'] = NULL;
-		$_SESSION['div_name'] = NULL;
+		// $_SESSION['div_name'] = NULL;
 	}
 ?>
 

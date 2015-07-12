@@ -24,15 +24,15 @@
 		$req_date = date('Y-m-d', strtotime($_POST['date_value']));
 		$_SESSION['date'] = $req_date;
 
-		if($_SESSION["user_div"] == "ALL") {
-			$req_div = $_SESSION["current_div"];
-		}
-		else {
-			$req_div = $_SESSION["user_div"];
-		}
-		$_SESSION['div_name'] = $req_div;
+		// if($_SESSION["user_div"] == "ALL") {
+		// 	$req_div = $_SESSION["current_div"];
+		// }
+		// else {
+		// 	$req_div = $_SESSION["user_div"];
+		// }
+		// $_SESSION['div_name'] = $req_div;
 
-		$query = "SELECT * FROM leaf_chit_table WHERE lab_cat ='{$req_lcsn}' and rec_dt='{$req_date}' and division ='{$_SESSION['div_name']}'";
+		$query = "SELECT * FROM leaf_chit_table WHERE lab_cat ='{$req_lcsn}' and rec_dt='{$req_date}' and division ='{$_SESSION['current_div']}'";
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
@@ -78,7 +78,7 @@
 	// $cp_hr_from = mysqli_real_escape_string($connection, $_POST['cp_hr_from']);
 	// $cp_hr_to = mysqli_real_escape_string($connection, $_POST['cp_hr_to']);
 
-	$q_in = "INSERT INTO leaf_chit_table (division, prune_stats, lab_cat, rec_dt, short_sec_name, dt_lst_plkd, plkd_area, plkd_leaf, mandays, task, ballo_count) VALUES ('{$_SESSION['div_name']}', '{$prune_stats}', '{$lab_cat}', '{$rec_dt}',  '{$short_sec_name}', '{$dt_lst_plkd}', {$plkd_area}, {$plkd_leaf}, {$mandays}, '{$task}', {$ballo_count}) ";
+	$q_in = "INSERT INTO leaf_chit_table (division, prune_stats, lab_cat, rec_dt, short_sec_name, dt_lst_plkd, plkd_area, plkd_leaf, mandays, task, ballo_count) VALUES ('{$_SESSION['current_div']}', '{$prune_stats}', '{$lab_cat}', '{$rec_dt}',  '{$short_sec_name}', '{$dt_lst_plkd}', {$plkd_area}, {$plkd_leaf}, {$mandays}, '{$task}', {$ballo_count}) ";
 
 	$r_in = mysqli_query($connection, $q_in);
 	confirm_query($r_in);
@@ -99,7 +99,7 @@
 	<?php }
 
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
-	$_SESSION['div_name'] = NULL;
+	// $_SESSION['div_name'] = NULL;
 
  }
 
@@ -125,7 +125,7 @@
 	// $cp_hr_from = mysqli_real_escape_string($connection, $_POST['cp_hr_from']);
 	// $cp_hr_to = mysqli_real_escape_string($connection, $_POST['cp_hr_to']);
 
-	$q_up = "UPDATE leaf_chit_table SET division='{$_SESSION['div_name']}', prune_stats='{$prune_stats}', lab_cat='{$lab_cat}', rec_dt='{$rec_dt}', short_sec_name = '{$short_sec_name}', dt_lst_plkd = '{$dt_lst_plkd}', plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf}, mandays = {$mandays}, task = '{$task}', ballo_count = {$ballo_count} where id = $req_id ";
+	$q_up = "UPDATE leaf_chit_table SET division='{$_SESSION['current_div']}', prune_stats='{$prune_stats}', lab_cat='{$lab_cat}', rec_dt='{$rec_dt}', short_sec_name = '{$short_sec_name}', dt_lst_plkd = '{$dt_lst_plkd}', plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf}, mandays = {$mandays}, task = '{$task}', ballo_count = {$ballo_count} where id = $req_id ";
 	$r_up = mysqli_query($connection, $q_up);
 	confirm_query($r_up);
 
@@ -142,7 +142,7 @@
 		</div>
 	<?php }
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
-	$_SESSION['div_name'] = NULL;
+	// $_SESSION['div_name'] = NULL;
 
  }
 
@@ -150,7 +150,7 @@
 	$lab_cat = $_SESSION['lcsn'];
 	$rec_dt = $_SESSION['date'];
 
-	$q_del = "DELETE FROM leaf_chit_table WHERE lab_cat ='{$lab_cat}' and rec_dt='{$rec_dt}' and division='{$_SESSION['div_name']}'";
+	$q_del = "DELETE FROM leaf_chit_table WHERE lab_cat ='{$lab_cat}' and rec_dt='{$rec_dt}' and division='{$_SESSION['current_div']}'";
 	//var_dump($q_del);
 
 	$r_del = mysqli_query($connection, $q_del);
@@ -170,7 +170,7 @@
 <?php }
 
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
-	$_SESSION['div_name'] = NULL;
+	// $_SESSION['div_name'] = NULL;
 }
 
 ?>

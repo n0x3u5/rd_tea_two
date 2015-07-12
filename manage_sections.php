@@ -5,18 +5,26 @@
   if(!isset($_SESSION['user'])) {
     redirect_to("index.php");
   }
+  
+  if(($_SESSION['user_div'] != "ALL") && ($_SESSION['user_div'] != $_SESSION['current_div'])) {
+    $_SESSION['flag_div_chk'] = 1;
+    redirect_to("update_profile.php");
+  }
+  else {
+    $_SESSION['flag_div_chk'] = 0;
+  }
 ?>
 
 <?php
 
   $connection = make_connection();
-  if($_SESSION["user_div"] == "ALL") {
-    $req_div = $_SESSION["current_div"];
-  }
-  else {
-    $req_div = $_SESSION["user_div"];
-  }
-  $_SESSION['div_name'] = $req_div;
+  // if($_SESSION["user_div"] == "ALL") {
+  //   $req_div = $_SESSION["current_div"];
+  // }
+  // else {
+  //   $req_div = $_SESSION["user_div"];
+  // }
+  // $_SESSION['div_name'] = $req_div;
 
   if(isset($_POST["section_submit"])) {
 
@@ -44,7 +52,7 @@
     $q_in .= " shade_spcs_temp, shade_spcs_perm, frame_height, bush_height,";
     $q_in .= " yr_of_plant, plant_spacing,temp_shd_spcing, perm_shd_spcing,";
     $q_in .= " plant_density, bush_pop, drain_stats, soil_topo, ext_rplnt, prune_style)";
-    $q_in .= " VALUES ('{$_SESSION['div_name']}', '{$sec_nm}', '{$sec_shrt_nm}', {$sec_area}, '{$jat}', '{$shd_spcs_tmp}', '{$shd_spcs_perm}',";
+    $q_in .= " VALUES ('{$_SESSION['current_div']}', '{$sec_nm}', '{$sec_shrt_nm}', {$sec_area}, '{$jat}', '{$shd_spcs_tmp}', '{$shd_spcs_perm}',";
     $q_in .= " {$frame_ht}, {$bush_ht}, {$plntng_yr}, {$plnt_spcing}, {$tmp_shd_spcing}, {$prm_shd_spcing},";
     $q_in .= " {$plnt_dens}, {$bsh_popu}, '{$drn_stats}', '{$soil_topo}', {$ext_rplnt}, '{$stats}' )";
 
@@ -72,7 +80,7 @@
       </div>
       <div>";
 		}
-    $_SESSION['div_name'] = NULL;
+    // $_SESSION['div_name'] = NULL;
   }
 
 
@@ -82,7 +90,7 @@
   if(isset($_POST["update_submit"])) {
     //var_dump($_POST);
     $req_ssn = mysqli_real_escape_string($connection, $_SESSION['upd_ssn']);
-    $q_req_ssn = "SELECT * FROM sections WHERE short_sec_name = '{$req_ssn}' AND division = '{$_SESSION['div_name']}'";
+    $q_req_ssn = "SELECT * FROM sections WHERE short_sec_name = '{$req_ssn}' AND division = '{$_SESSION['current_div']}'";
     //var_dump($q_req_ssn);
 
     $req_result = mysqli_query($connection, $q_req_ssn);
@@ -113,7 +121,7 @@
     $ext_rplnt = (int) mysqli_real_escape_string($connection, $_POST["ext_rplnt"]);
 
     $q_up = "UPDATE sections SET ";
-    $q_up .= " division ='{$_SESSION['div_name']}', sec_name = '{$sec_nm}', short_sec_name = '{$sec_shrt_nm}', total_area = {$sec_area} , jat = '{$jat}',";
+    $q_up .= " division ='{$_SESSION['current_div']}', sec_name = '{$sec_nm}', short_sec_name = '{$sec_shrt_nm}', total_area = {$sec_area} , jat = '{$jat}',";
     $q_up .= " shade_spcs_temp = '{$shd_spcs_tmp}', shade_spcs_perm = '{$shd_spcs_perm}',";
     $q_up .= " frame_height = {$frame_ht}, bush_height = {$bush_ht},";
     $q_up .= " yr_of_plant = {$plntng_yr}, plant_spacing = {$plnt_spcing},";
@@ -149,14 +157,14 @@
     //
     // mysqli_free_result($result_up);
     $_SESSION['upd_ssn'] = NULL;
-    $_SESSION['div_name'] = NULL;
+    // $_SESSION['div_name'] = NULL;
   }
 ?>
 <?php
   if(isset($_POST['rmv_sec_submit'])) {
     $ssn = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
 
-    $q = "DELETE FROM sections WHERE short_sec_name = '{$ssn}' and division = '{$_SESSION['div_name']}'";
+    $q = "DELETE FROM sections WHERE short_sec_name = '{$ssn}' and division = '{$_SESSION['current_div']}'";
     $result = mysqli_query($connection, $q);
 
     confirm_query($result);
@@ -180,7 +188,7 @@
       <div>";
 
     }
-    $_SESSION['div_name'] = NULL;
+    // $_SESSION['div_name'] = NULL;
   }
   else {
     $ssn = NULL;
@@ -241,7 +249,7 @@
                                   $ssnV = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
                                   $_SESSION['upd_ssn'] = $ssnV;
                                   //echo "ssnV=".$ssnV;
-                                  $q2 = " SELECT * FROM sections WHERE short_sec_name = '{$ssnV}' and division='{$_SESSION['div_name']}'";
+                                  $q2 = " SELECT * FROM sections WHERE short_sec_name = '{$ssnV}' and division='{$_SESSION['current_div']}'";
 
                                   $result = mysqli_query($connection, $q2);
                                   confirm_query($result);
@@ -259,7 +267,7 @@
                               <select  class="form-control" id="hide_one" name="sec_short_name" form="view_update_section" required onChange="enable_add()">
                                 <option>Select a seciton</option>
                                 <?php
-                                    $q = "SELECT * FROM sections where division = '{$_SESSION['div_name']}'";
+                                    $q = "SELECT * FROM sections where division = '{$_SESSION['current_div']}'";
                                     $result = mysqli_query($connection, $q);
 
                                     confirm_query($result);
@@ -423,7 +431,7 @@
 
                     <div class="tab-pane" id="tab2">
                       <?php
-                        //var_dump($_SESSION['div_name']);
+                        //var_dump($_SESSION['current_div']);
                       ?>
                         <form id="remove_section" action="manage_sections.php" method="post" size="10">
                         <label for="sec_short_name"> Select Section:</label>
@@ -432,7 +440,7 @@
                             <select id="hide_two" class="form-control" name="sec_short_name" form="remove_section" required onChange="enable_add()">
                                 <option>Select a section</option>
                                 <?php
-                                  $q = "SELECT * FROM sections where division = '{$_SESSION['div_name']}'";
+                                  $q = "SELECT * FROM sections where division = '{$_SESSION['current_div']}'";
                                   $result = mysqli_query($connection, $q);
 
                                   confirm_query($result);

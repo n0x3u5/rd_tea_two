@@ -49,7 +49,7 @@
 															<div class="form-group" style="margin-top:30px;">
 																<label for="f_name" class="col-sm-3 control-label">Division:</label>
 																<div class="input-group">
-																    <select class="form-control" id="hideone" onChange="enable_add1()">
+																    <select class="form-control" name="division" id="hideone" onChange="enable_add1()">
 																			<option>Select Division</option>
 																			<option>All</option>
 																			<option>Balsan</option>

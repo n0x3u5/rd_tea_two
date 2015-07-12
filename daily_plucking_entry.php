@@ -24,20 +24,20 @@
 		$_SESSION['ssn'] = $req_ssn;
 		$_SESSION['date'] = $req_date;
 
-		if($_SESSION["user_div"] == "ALL") {
-			$req_div = $_SESSION["current_div"];
-		}
-		else {
-			$req_div = $_SESSION["user_div"];
-		}
-		$_SESSION['div_name'] = $req_div;
+		// if($_SESSION["user_div"] == "ALL") {
+		// 	$req_div = $_SESSION["current_div"];
+		// }
+		// else {
+		// 	$req_div = $_SESSION["user_div"];
+		// }
+		// $_SESSION['div_name'] = $req_div;
 
 
 		// echo "<br>got date =".$req_date."<br>";
 		// echo "<br>got ssn =" .$req_ssn."<br>";
 		// var_dump($req_date);echo "<br>"; var_dump($req_ssn);
 
-		$query = "SELECT * FROM blue_bk_plk WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}' and division='{$_SESSION['div_name']}'";
+		$query = "SELECT * FROM blue_bk_plk WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}' and division='{$_SESSION['current_div']}'";
 		//var_dump($query);
 		$result = mysqli_query($connection, $query);
     confirm_query($result);
@@ -86,7 +86,7 @@
 
 
 		$q_in = "INSERT INTO blue_bk_plk (division, short_sec_name, rec_dt, plkd_area, plkd_leaf, mandays, prune_style, rnd_days)";
-		$q_in .= " VALUES ('{$_SESSION['div_name']}', '$short_sec_name', '$rec_dt', $plkd_area, $plkd_leaf, $mandays, '$prune', $rounddays)";
+		$q_in .= " VALUES ('{$_SESSION['current_div']}', '$short_sec_name', '$rec_dt', $plkd_area, $plkd_leaf, $mandays, '$prune', $rounddays)";
 
 		//var_dump($q_in);
 		$result_in = mysqli_query($connection, $q_in);
@@ -110,7 +110,7 @@
 		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
-		$_SESSION['div_name'] = NULL;
+		// $_SESSION['div_name'] = NULL;
 	}
  ?>
  <?php //updating
@@ -136,7 +136,7 @@
 		$rounddays = (int) mysqli_real_escape_string($connection, $_POST['rounddays']);
 
 		$q_up = "UPDATE blue_bk_plk SET";
-		$q_up .= " division='{$_SESSION['div_name']}', short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}',";
+		$q_up .= " division='{$_SESSION['current_div']}', short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}',";
 		$q_up .= " plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf},";
 		$q_up .= " mandays={$mandays}, rnd_days={$rounddays} WHERE id ={$req_id}";
 
@@ -160,7 +160,7 @@
 		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
-		$_SESSION['div_name'] = NULL;
+		//$_SESSION['div_name'] = NULL;
 	}
  ?>
  <?php //DELETE
@@ -169,7 +169,7 @@
 		$short_sec_name = $_SESSION['ssn'];
 		$rec_dt = $_SESSION['date'];
 
-		$q_del = "DELETE FROM blue_bk_plk WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and division='{$_SESSION['div_name']}'";
+		$q_del = "DELETE FROM blue_bk_plk WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and division='{$_SESSION['current_div']}'";
 		//var_dump($q_del);
 
 		$r_del = mysqli_query($connection, $q_del);
@@ -191,7 +191,7 @@
 		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
-		$_SESSION['div_name'] = NULL;
+		//$_SESSION['div_name'] = NULL;
 	}
 
 ?>
