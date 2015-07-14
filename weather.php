@@ -262,6 +262,7 @@
         <script>
           $(document).ready(function() {
             $('#weather').dataTable({
+							"scrollX": true,
 							"aoColumns": [
 									{ "sType": "date-uk" },
 									null,

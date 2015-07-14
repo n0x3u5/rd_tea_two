@@ -5,7 +5,7 @@
 		define("DB_SERVER","localhost");
 		define("DB_USER","root");
 		define("DB_PASS","joydipnox");
-		define("DB_NAME","rd_tea_two");
+		define("DB_NAME","rdtealtd_one");
 	// 1. Creating a database connection_aborted
 		$connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
