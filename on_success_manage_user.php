@@ -53,7 +53,7 @@
 															<div class="form-group" style="margin-top:30px;">
 																<label for="f_name" class="col-sm-3 control-label">Division:</label>
 																<div class="input-group">
-																	<select class="form-control" id="hideone" onChange="enable_add1()">
+																	<select class="form-control" name="division" id="hideone" onChange="enable_add1()">
 																		<option>Select Division</option>
 																		<option>All</option>
 																		<option>Balsan</option>
@@ -143,7 +143,7 @@
 																		<select  id="emailid" name ="emailid" class="form-control" required onChange='enable_add3()'>
 																			<option>Select email-id</option>
 																			<?php
-																					$q = "SELECT * FROM users";
+																					$q = "SELECT * FROM users WHERE level > 0";
 																					$r = mysqli_query($connection, $q);
 
 																					confirm_query($r);
@@ -184,8 +184,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 				<script>
+				if(document.getElementById('desig').value!='')
+				{
+					document.getElementById('sbm').disabled=false;
+					document.getElementById('rm_hide').disabled=false;
+				}
+				else {
 					document.getElementById('sbm').disabled=true;
 					document.getElementById('rm_hide').disabled=true;
+				}
 					function enable_add1() {
 						if((document.getElementById('hideone').value!='Select Division') && (document.getElementById('hidetwo').value!='Select level'))
 						{

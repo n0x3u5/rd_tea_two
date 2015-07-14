@@ -63,7 +63,7 @@
 															<div class="form-group">
 																<label for="desig" class="col-sm-3 control-label">Designation:</label>
 																<div class="input-group">
-																    <input class="form-control" name="desig" type="text" placeholder="Designation" required>
+																    <input class="form-control" id="desig" name="desig" type="text" placeholder="Designation" required>
 																    <span class="input-group-addon"><i class="glyphicon glyphicon-star-empty" ></i></span>
 																</div>
 															</div>
@@ -139,7 +139,7 @@
 																		<select  id="emailid" name ="emailid" class="form-control" required onChange='enable_add3()'>
 																			<option>Select email-id</option>
 																			<?php
-																					$q = "SELECT * FROM users";
+																					$q = "SELECT * FROM users WHERE level > 0";
 																					$r = mysqli_query($connection, $q);
 
 																					confirm_query($r);
@@ -181,8 +181,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 				<script>
+				if(document.getElementById('desig').value!='')
+				{
+					document.getElementById('sbm').disabled=false;
+					document.getElementById('rm_hide').disabled=false;
+				}
+				else {
 					document.getElementById('sbm').disabled=true;
 					document.getElementById('rm_hide').disabled=true;
+				}
 					function enable_add1() {
 						if((document.getElementById('hideone').value!='Select Division') && (document.getElementById('hidetwo').value!='Select level'))
 						{

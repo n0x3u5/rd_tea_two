@@ -30,7 +30,27 @@
 		if(!$result_set){
 			//failure
 			//$message = " creation error"
-			die("database query failed.". mysqli_error($connection));
+			$err="
+							<!DOCTYPE html>
+							<html>
+								<head>
+									<meta charset='utf-8'>
+									<title>Error Occured</title>
+									<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+								</head>
+								<body>
+								<div class='container alert alert-danger' role='alert' style='border-color:red'>
+
+							<strong>Oops!</strong> Error occured! Please contact us.
+							<p><a href='manage_users.php'>Back to Manage User</a></p>
+						</div>
+						<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+						<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+
+								</body>
+							</html>";
+
+			die($err);
 		}
 	}
 
