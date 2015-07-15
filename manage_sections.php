@@ -5,7 +5,7 @@
   if(!isset($_SESSION['user'])) {
     redirect_to("index.php");
   }
-  
+
   if(($_SESSION['user_div'] != "ALL") && ($_SESSION['user_div'] != $_SESSION['current_div'])) {
     $_SESSION['flag_div_chk'] = 1;
     redirect_to("update_profile.php");
@@ -38,9 +38,9 @@
     $frame_ht = (float) mysqli_real_escape_string($connection, $_POST["Frame_Height"]);
     $bush_ht = (float) mysqli_real_escape_string($connection, $_POST["Bush_Height"]);
     $plntng_yr = mysqli_real_escape_string($connection, $_POST["Planting_year"]);
-    $plnt_spcing = (float) mysqli_real_escape_string($connection, $_POST["Plant_Spacing"]);
-    $tmp_shd_spcing = (float) mysqli_real_escape_string($connection, $_POST["Temp_Shade_spacing"]);
-    $prm_shd_spcing = (float) mysqli_real_escape_string($connection, $_POST["Perm_Shade_spacing"]);
+    $plnt_spcing = mysqli_real_escape_string($connection, $_POST["Plant_Spacing"]);
+    $tmp_shd_spcing = mysqli_real_escape_string($connection, $_POST["Temp_Shade_spacing"]);
+    $prm_shd_spcing = mysqli_real_escape_string($connection, $_POST["Perm_Shade_spacing"]);
     $plnt_dens = (float) mysqli_real_escape_string($connection, $_POST["Plant_Density"]);
     $bsh_popu = (int) mysqli_real_escape_string($connection, $_POST["Bush_Popu"]);
     $drn_stats = mysqli_real_escape_string($connection, $_POST["Drain_Status"]);
@@ -53,7 +53,7 @@
     $q_in .= " yr_of_plant, plant_spacing,temp_shd_spcing, perm_shd_spcing,";
     $q_in .= " plant_density, bush_pop, drain_stats, soil_topo, ext_rplnt, prune_style)";
     $q_in .= " VALUES ('{$_SESSION['current_div']}', '{$sec_nm}', '{$sec_shrt_nm}', {$sec_area}, '{$jat}', '{$shd_spcs_tmp}', '{$shd_spcs_perm}',";
-    $q_in .= " {$frame_ht}, {$bush_ht}, {$plntng_yr}, {$plnt_spcing}, {$tmp_shd_spcing}, {$prm_shd_spcing},";
+    $q_in .= " {$frame_ht}, {$bush_ht}, {$plntng_yr}, '{$plnt_spcing}', '{$tmp_shd_spcing}', '{$prm_shd_spcing}',";
     $q_in .= " {$plnt_dens}, {$bsh_popu}, '{$drn_stats}', '{$soil_topo}', {$ext_rplnt}, '{$stats}' )";
 
 
@@ -111,9 +111,9 @@
     $frame_ht = (float) mysqli_real_escape_string($connection, $_POST["Frame_Height"]);
     $bush_ht = (float) mysqli_real_escape_string($connection, $_POST["Bush_Height"]);
     $plntng_yr = mysqli_real_escape_string($connection, $_POST["Planting_year"]);
-    $plnt_spcing = (float) mysqli_real_escape_string($connection, $_POST["Plant_Spacing"]);
-    $tmp_shd_spcing = (float) mysqli_real_escape_string($connection, $_POST["Temp_Shade_spacing"]);
-    $prm_shd_spcing = (float) mysqli_real_escape_string($connection, $_POST["Perm_Shade_spacing"]);
+    $plnt_spcing = mysqli_real_escape_string($connection, $_POST["Plant_Spacing"]);
+    $tmp_shd_spcing = mysqli_real_escape_string($connection, $_POST["Temp_Shade_spacing"]);
+    $prm_shd_spcing = mysqli_real_escape_string($connection, $_POST["Perm_Shade_spacing"]);
     $plnt_dens = (float) mysqli_real_escape_string($connection, $_POST["Plant_Density"]);
     $bsh_popu = (int) mysqli_real_escape_string($connection, $_POST["Bush_Popu"]);
     $drn_stats = mysqli_real_escape_string($connection, $_POST["Drain_Status"]);
@@ -124,8 +124,8 @@
     $q_up .= " division ='{$_SESSION['current_div']}', sec_name = '{$sec_nm}', short_sec_name = '{$sec_shrt_nm}', total_area = {$sec_area} , jat = '{$jat}',";
     $q_up .= " shade_spcs_temp = '{$shd_spcs_tmp}', shade_spcs_perm = '{$shd_spcs_perm}',";
     $q_up .= " frame_height = {$frame_ht}, bush_height = {$bush_ht},";
-    $q_up .= " yr_of_plant = {$plntng_yr}, plant_spacing = {$plnt_spcing},";
-    $q_up .= " temp_shd_spcing = {$tmp_shd_spcing}, perm_shd_spcing = {$prm_shd_spcing},";
+    $q_up .= " yr_of_plant = {$plntng_yr}, plant_spacing = '{$plnt_spcing}',";
+    $q_up .= " temp_shd_spcing = '{$tmp_shd_spcing}', perm_shd_spcing = '{$prm_shd_spcing}',";
     $q_up .= " plant_density = {$plnt_dens}, bush_pop = {$bsh_popu}, drain_stats ='{$drn_stats}',";
     $q_up .= " soil_topo = '{$soil_topo}', ext_rplnt = {$ext_rplnt}, prune_style = '{$stats}'";
     $q_up .= " WHERE id = $req_ID";
