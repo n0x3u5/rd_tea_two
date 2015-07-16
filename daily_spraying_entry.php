@@ -5,7 +5,7 @@
 	if(!isset($_SESSION['user'])) {
 		redirect_to("index.php");
 	}
-	
+
 	if(($_SESSION['user_div'] != "ALL") && ($_SESSION['user_div'] != $_SESSION['current_div'])) {
 		$_SESSION['flag_div_chk'] = 1;
 		redirect_to("update_profile.php");
@@ -190,6 +190,19 @@
 				<strong>Sorry!</strong> No row affected!
 			</div>
 		<?php }
+
+		// $items  = explode("¥", $_SESSION['blue_bk_spray_chit']['chem']);
+		// $doses = explode("¥", $_SESSION['blue_bk_spray_chit']['dose']);
+		// $qtys = explode("¥", $_SESSION['blue_bk_spray_chit']['qty_unit']);
+		// $chemical_index = 0;
+		// foreach ($items as $chemical) {
+		// 	var_dump($chemical);
+		// 	var_dump($doses[$chemical_index]);
+		// 	var_dump($qtys[$chemical_index]);
+		//
+		//
+		// 		$chemical_index++;
+		// }
 
 			$_SESSION['blue_bk_spray_chit'] = NULL;
 			$_SESSION['ssn'] = NULL;
