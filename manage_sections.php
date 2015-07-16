@@ -45,7 +45,7 @@
     $bsh_popu = (int) mysqli_real_escape_string($connection, $_POST["Bush_Popu"]);
     $drn_stats = mysqli_real_escape_string($connection, $_POST["Drain_Status"]);
     $soil_topo = mysqli_real_escape_string($connection, $_POST["Soil_Topo"]);
-    $ext_rplnt = (int) mysqli_real_escape_string($connection, $_POST["ext_rplnt"]);
+    $ext_rplnt = mysqli_real_escape_string($connection, $_POST["ext_rplnt"]);
 
     $q_in = "INSERT INTO sections ";
     $q_in .= "(division, sec_name, short_sec_name, total_area, jat,";
@@ -54,7 +54,7 @@
     $q_in .= " plant_density, bush_pop, drain_stats, soil_topo, ext_rplnt, prune_style)";
     $q_in .= " VALUES ('{$_SESSION['current_div']}', '{$sec_nm}', '{$sec_shrt_nm}', {$sec_area}, '{$jat}', '{$shd_spcs_tmp}', '{$shd_spcs_perm}',";
     $q_in .= " {$frame_ht}, {$bush_ht}, {$plntng_yr}, '{$plnt_spcing}', '{$tmp_shd_spcing}', '{$prm_shd_spcing}',";
-    $q_in .= " {$plnt_dens}, {$bsh_popu}, '{$drn_stats}', '{$soil_topo}', {$ext_rplnt}, '{$stats}' )";
+    $q_in .= " {$plnt_dens}, {$bsh_popu}, '{$drn_stats}', '{$soil_topo}', '{$ext_rplnt}', '{$stats}' )";
 
 
     $result = mysqli_query($connection, $q_in);
@@ -118,7 +118,7 @@
     $bsh_popu = (int) mysqli_real_escape_string($connection, $_POST["Bush_Popu"]);
     $drn_stats = mysqli_real_escape_string($connection, $_POST["Drain_Status"]);
     $soil_topo = mysqli_real_escape_string($connection, $_POST["Soil_Topo"]);
-    $ext_rplnt = (int) mysqli_real_escape_string($connection, $_POST["ext_rplnt"]);
+    $ext_rplnt = mysqli_real_escape_string($connection, $_POST["ext_rplnt"]);
 
     $q_up = "UPDATE sections SET ";
     $q_up .= " division ='{$_SESSION['current_div']}', sec_name = '{$sec_nm}', short_sec_name = '{$sec_shrt_nm}', total_area = {$sec_area} , jat = '{$jat}',";
@@ -127,7 +127,7 @@
     $q_up .= " yr_of_plant = {$plntng_yr}, plant_spacing = '{$plnt_spcing}',";
     $q_up .= " temp_shd_spcing = '{$tmp_shd_spcing}', perm_shd_spcing = '{$prm_shd_spcing}',";
     $q_up .= " plant_density = {$plnt_dens}, bush_pop = {$bsh_popu}, drain_stats ='{$drn_stats}',";
-    $q_up .= " soil_topo = '{$soil_topo}', ext_rplnt = {$ext_rplnt}, prune_style = '{$stats}'";
+    $q_up .= " soil_topo = '{$soil_topo}', ext_rplnt = '{$ext_rplnt}', prune_style = '{$stats}'";
     $q_up .= " WHERE id = $req_ID";
 
     $result_up = mysqli_query($connection, $q_up);
@@ -416,7 +416,7 @@
                                     <label for="ext_rplnt_" class="col-sm-2" style="padding-top:15px;">Ext. / Replantation :</label>
 
                                       <div class="input-group" class="col-sm-10">
-                                          <input type="number" class="form-control" id="ext_rplnt_" name="ext_rplnt" value="<?php echo $sec['ext_rplnt']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                                          <input type="text" class="form-control" id="ext_rplnt_" name="ext_rplnt" value="<?php echo $sec['ext_rplnt']; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
                                       </div>
                                   </div>
                                   <input type="submit" class="btn btn-success" name="update_submit" value="Update Section">
@@ -593,7 +593,7 @@
                             <div class="form-group">
                                 <label for="ext_rplnt" class="col-sm-3" style="padding-top:15px">Ext / Replantation:</label>
                                 <div class="input-group col-sm-6">
-                                  <input type="number" class="form-control" name="ext_rplnt" placeholder="Extention/Replantation" ><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
+                                  <input type="text" class="form-control" name="ext_rplnt" placeholder="Extention/Replantation" ><span class="input-group-addon"><i class="glyphicon glyphicon-th-large"></i></span>
                                 </div>
                             </div>
 
