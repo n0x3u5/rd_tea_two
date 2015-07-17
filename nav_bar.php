@@ -26,7 +26,7 @@
                               <li><a href="manage_labour_categories.php">Manage Labour Categories</a></li>
                             </ul>
                         </li>
-                        <li <?php if($page_id == 7 || $page_id == 8 || $page_id == 9 || $page_id == 15) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
+                        <li <?php if($page_id == 7 || $page_id == 8 || $page_id == 9 || $page_id == 15 || $page_id == 14 || $page_id == 12) { ?> class="dropdown dropdown-active"> <?php } else { ?> class="dropdown"> <?php } ?>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Entry<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <!-- <li class="navbar-text">Plucking</li> -->
@@ -50,7 +50,7 @@
                                 <li><a href="weather.php">Weather Report</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="leaf_chit.php">Leaf Chit</a></li>
-                                <!-- <li><a href="spray_chit.php">Spraying Chit</a></li> -->
+                                <li><a href="spray_chit.php">Spray Chit</a></li>
                             </ul>
                         </li>
                         <?php if ($_SESSION['user_lvl'] < 3) { ?><li class="dropdown">
