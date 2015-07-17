@@ -85,13 +85,14 @@
 		$sticker_qty = mysqli_real_escape_string($connection, $_POST['sticker_qty']);
 
 
-		$q_in = "INSERT INTO blue_bk_spray_chit (division, short_sec_name, rec_dt, hz_db, chem, cocktail, spot_full, pest, intensity, qty_unit, area, no_drms, dr_mnds, sup_mnds, dose, sticker_nm, sticker_qty)";
-		$q_in .= " VALUES ('{$_SESSION['current_div']}', '{$short_sec_name}', '{$rec_dt}', '{$hz_db}', '{$chem}', '{$cocktail}', '{$spot_full}', '{$pest}', '{$intensity}', '{$qty_unit}', {$area}, {$no_drms}, {$dr_mnds}, {$sup_mnds}, '{$dose}', '{$sticker_nm}', '{$sticker_qty}')";
+		// $q_in = "INSERT INTO blue_bk_spray_chit (division, short_sec_name, rec_dt, hz_db, chem, cocktail, spot_full, pest, intensity, qty_unit, area, no_drms, dr_mnds, sup_mnds, dose, sticker_nm, sticker_qty)";
+		// $q_in .= " VALUES ('{$_SESSION['current_div']}', '{$short_sec_name}', '{$rec_dt}', '{$hz_db}', '{$chem}', '{$cocktail}', '{$spot_full}', '{$pest}', '{$intensity}', '{$qty_unit}', {$area}, {$no_drms}, {$dr_mnds}, {$sup_mnds}, '{$dose}', '{$sticker_nm}', '{$sticker_qty}')";
+		//
+		// //var_dump($q_in);
+		// $r_in = mysqli_query($connection, $q_in);
+		//
+    // confirm_query($r_in);
 
-		//var_dump($q_in);
-		$r_in = mysqli_query($connection, $q_in);
-
-    confirm_query($r_in);
 		if(mysqli_affected_rows($connection) > 0) { ?>
 			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
@@ -168,15 +169,15 @@
 		$sticker_qty = mysqli_real_escape_string($connection, $_POST['sticker_qty']);
 
 
-		$q_up = "UPDATE blue_bk_spray_chit SET";
-		$q_up .= " division='{$_SESSION['current_div']}', short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}',";
-		$q_up .= " hz_db='{$hz_db}', chem='{$chem}', cocktail='{$cocktail}', spot_full='{$spot_full}',";
-		$q_up .= " pest='{$pest}', intensity='{$intensity}', qty_unit='{$qty_unit}', area={$area}, no_drms={$no_drms}, dr_mnds={$dr_mnds}, sup_mnds={$sup_mnds}, dose='{$dose}', sticker_nm='{$sticker_nm}', sticker_qty='{$sticker_nm}' WHERE id ={$req_id}";
-
-		//var_dump($q_up);
-		$r_up = mysqli_query($connection, $q_up);
-
-    confirm_query($r_up);
+		// $q_up = "UPDATE blue_bk_spray_chit SET";
+		// $q_up .= " division='{$_SESSION['current_div']}', short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}',";
+		// $q_up .= " hz_db='{$hz_db}', chem='{$chem}', cocktail='{$cocktail}', spot_full='{$spot_full}',";
+		// $q_up .= " pest='{$pest}', intensity='{$intensity}', qty_unit='{$qty_unit}', area={$area}, no_drms={$no_drms}, dr_mnds={$dr_mnds}, sup_mnds={$sup_mnds}, dose='{$dose}', sticker_nm='{$sticker_nm}', sticker_qty='{$sticker_nm}' WHERE id ={$req_id}";
+		//
+		// //var_dump($q_up);
+		// $r_up = mysqli_query($connection, $q_up);
+		//
+    // confirm_query($r_up);
 
 		if(mysqli_affected_rows($connection) > 0) { ?>
 			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
@@ -191,18 +192,20 @@
 			</div>
 		<?php }
 
-		// $items  = explode("¥", $_SESSION['blue_bk_spray_chit']['chem']);
-		// $doses = explode("¥", $_SESSION['blue_bk_spray_chit']['dose']);
-		// $qtys = explode("¥", $_SESSION['blue_bk_spray_chit']['qty_unit']);
-		// $chemical_index = 0;
-		// foreach ($items as $chemical) {
-		// 	var_dump($chemical);
-		// 	var_dump($doses[$chemical_index]);
-		// 	var_dump($qtys[$chemical_index]);
-		//
-		//
-		// 		$chemical_index++;
-		// }
+		$items  = explode("¥", $_SESSION['blue_bk_spray_chit']['chem']);
+		$doses = explode("¥", $_SESSION['blue_bk_spray_chit']['dose']);
+		$qtys = explode("¥", $_SESSION['blue_bk_spray_chit']['qty_unit']);
+		$chemical_index = 0;
+		foreach ($items as $chemical) {
+			var_dump($chemical);
+			var_dump($doses[$chemical_index]);
+			var_dump($qtys[$chemical_index]);
+			$q_del_sprychit = "DELETE FROM spray_chit_table WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and hz_db = '{$hz_db}' and division='{$_SESSION['current_div']}' and chem = '{$chemical}' and qty_unit='{$qtys[$chemical_index]}' and no_drums='{$_SESSION['blue_bk_spray_chit']['no_drms']}' and dose={$doses[$chemical_index]}";
+
+			var_dump($q_del_sprychit);
+
+				$chemical_index++;
+		}
 
 			$_SESSION['blue_bk_spray_chit'] = NULL;
 			$_SESSION['ssn'] = NULL;
