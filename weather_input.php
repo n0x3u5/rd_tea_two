@@ -229,16 +229,6 @@
                 <p></p>
 				<form action="weather_input.php" method="post" class="form-horizontal">
 					<div class="form-group">
-						<!-- <label for="division" class="col-sm-1 control-label" style="margin-right:0;">Division</label>
-						<div class="col-sm-4">
-							<select id="division" name="div_name" class="form-control">
-							  <option></option>
-							  <option <?php //if($req_div_name == 'Balasan') { echo "selected"; }  ?> >Balasan</option>
-							  <option <?php //if($req_div_name == 'Bidhannagar') { echo "selected"; }  ?> >Bidhannagar</option>
-							  <option <?php //if($req_div_name == 'Hansqua') { echo "selected"; }  ?> >Hansqua</option>
-							  <option <?php //if($req_div_name == 'Kishoribag') { echo "selected"; }  ?> >Kishoribag</option>
-							</select>
-						</div> -->
 					</div>
 					<div class="form-group">
 						<label for="datepicker" class="col-sm-1 control-label" style="margin-top:5px;margin-right:0;">Date</label>

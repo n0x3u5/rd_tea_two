@@ -41,7 +41,6 @@
 			<img src="images/logo_rdtea.png" alt="Logo" title="Logo" width="138">
 			</div>
 			<h1 class="display1">R. D. Tea Ltd.</h1>
-			<!-- <p class="subhead">Hansqua Tea Garden</p> -->
 				<form action="form_process_login.php" method="post" role="form">
 					<div id="form-login-username" class="form-group">
 						<input id="username" class="form-control" name="email" type="email" size="18" alt="login" required />

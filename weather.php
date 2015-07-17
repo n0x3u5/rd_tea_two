@@ -12,39 +12,19 @@
 
 	//var_dump($_POST); echo "<br>";
 	if(isset($_POST['div_date_submit'])) {
-		$req_div = $_SESSION['current_div'];
 		//$req_year = $_POST['year_value'];
 		$req_start_date = $_POST['start_date_value'];
 		$req_end_date = $_POST['end_date_value'];
 
 		$from = date('Y-m-d', strtotime($req_start_date));
 	  $to = date('Y-m-d', strtotime($req_end_date));
-	  $query = "select * from daily_weather where division = '{$req_div}' and record_date between '$from' and '$to'";
+	  $query = "select * from daily_weather where division = '$_SESSION['current_div']' and record_date between '$from' and '$to'";
 
 
 	  //var_dump($query);
 
 	  $result = mysqli_query($connection, $query);
 	  confirm_query($result);
-
-	   //echo "<br>"; var_dump($result); echo "<br>";
-
-	  // while($weather = mysqli_fetch_assoc($result))
-	  // {
-	  //  echo "<br>"; var_dump($weather);  echo "<br>";
-	  // }
-
-		// $query = "SELECT * FROM daily_weather WHERE division='{$req_div_name}' and date('Y',strtotime('record_date')='{req_year}')";
-		//
-		// $result = mysqli_query($connection, $query);
-    // confirm_query($result);
-		//
-		// $_SESSION['daily_weather'] = mysqli_fetch_assoc($result);
-
-		//$db_year = date('Y', strtotime($_SESSION['daily_weather']['record_date']));
-
-		//echo "<br> year form db:".$db_year."<br>";
-		//echo "<br> div name : ".$req_div_name."<br> req year : ".$req_year ."<br>";
 	}
 	else {
 		//$req_div_name = NULL;
@@ -189,7 +169,7 @@
 																<tr>
 																	<td>
 																		<?php
-																				$query_sum= "SELECT SUM(rain_day) as day_sum FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
+																				$query_sum= "SELECT SUM(rain_day) as day_sum FROM daily_weather WHERE division='{$_SESSION['current_div']}' AND record_date BETWEEN '$from' AND '$to'";
 																				$result = mysqli_query($connection, $query_sum);
 																			  confirm_query($result);
 
@@ -200,7 +180,7 @@
 																	</td>
 																	<td>
 																		<?php
-																				$query_sum= "SELECT SUM(rain_night) as night_sum FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
+																				$query_sum= "SELECT SUM(rain_night) as night_sum FROM daily_weather WHERE division='{$_SESSION['current_div']}' AND record_date BETWEEN '$from' AND '$to'";
 																				$result = mysqli_query($connection, $query_sum);
 																			  confirm_query($result);
 
@@ -211,7 +191,7 @@
 																	</td>
 																	<td>
 																		<?php
-																				$query_avg= "SELECT AVG(temp_max) as max_temp_avg FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
+																				$query_avg= "SELECT AVG(temp_max) as max_temp_avg FROM daily_weather WHERE division='{$_SESSION['current_div']}' AND record_date BETWEEN '$from' AND '$to'";
 																				$result = mysqli_query($connection, $query_avg);
 																			  confirm_query($result);
 
@@ -221,7 +201,7 @@
 																	</td>
 																	<td>
 																		<?php
-																				$query_avg= "SELECT AVG(temp_min) as min_temp_avg FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
+																				$query_avg= "SELECT AVG(temp_min) as min_temp_avg FROM daily_weather WHERE division='{$_SESSION['current_div']}' AND record_date BETWEEN '$from' AND '$to'";
 																				$result = mysqli_query($connection, $query_avg);
 																			  confirm_query($result);
 
@@ -231,7 +211,7 @@
 																	</td>
 																	<td>
 																		<?php
-																				$query_avg= "SELECT AVG(sun_shine_hr) as sunshine_avg FROM daily_weather WHERE division='Hansqua' AND record_date BETWEEN '$from' AND '$to'";
+																				$query_avg= "SELECT AVG(sun_shine_hr) as sunshine_avg FROM daily_weather WHERE division='{$_SESSION['current_div']}' AND record_date BETWEEN '$from' AND '$to'";
 																				$result = mysqli_query($connection, $query_avg);
 																			  confirm_query($result);
 

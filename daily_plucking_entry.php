@@ -16,23 +16,12 @@
 ?>
 <?php
 	$connection = make_connection();
-
 	//var_dump($_POST);echo "<br><hr>";
 	if(isset($_POST["dt_sec_submit"])){
 		$req_date = date('Y-m-d', strtotime($_POST["date_value"]));
 		$req_ssn = $_POST["short_sec_name"];
 		$_SESSION['ssn'] = $req_ssn;
 		$_SESSION['date'] = $req_date;
-
-		// if($_SESSION["user_div"] == "ALL") {
-		// 	$req_div = $_SESSION["current_div"];
-		// }
-		// else {
-		// 	$req_div = $_SESSION["user_div"];
-		// }
-		// $_SESSION['div_name'] = $req_div;
-
-
 		// echo "<br>got date =".$req_date."<br>";
 		// echo "<br>got ssn =" .$req_ssn."<br>";
 		// var_dump($req_date);echo "<br>"; var_dump($req_ssn);
@@ -44,21 +33,12 @@
 
 		$_SESSION['blue_bk_plk'] = mysqli_fetch_assoc($result);
 
-
-
 		$q_prune = "SELECT prune_style from sections where  division = '{$_SESSION['current_div']}' and short_sec_name = '$req_ssn'";
 		//var_dump($q_prune);
 		$r_prune = mysqli_query($connection, $q_prune);
 		confirm_query($r_prune);
 
 		$_SESSION['prune_stats'] = mysqli_fetch_assoc($r_prune);
-		//var_dump($_SESSION['prune_status']);
-
-		// while($_SESSION['blue_bk_plk'] = mysqli_fetch_assoc($result))
-		// {
-		// 	var_dump($_SESSION['blue_bk_plk']);
-		// }
-		//$daily =mysqli_fetch_assoc($result);
 		$set = 1;
 	}
 	else {
@@ -74,13 +54,9 @@
 		$rec_dt = $_SESSION['date'];
 
 		$plkd_area = (float) mysqli_real_escape_string($connection, $_POST['plkd_area']);
-
 		$plkd_leaf = (float) mysqli_real_escape_string($connection, $_POST['plkd_leaf']);
-
 		$mandays = (int) mysqli_real_escape_string($connection, $_POST['mandays']);
-
 		$rounddays = (int) mysqli_real_escape_string($connection, $_POST['rounddays']);
-
 
 		$prune = $_SESSION['prune_stats']['prune_style'];
 
@@ -110,18 +86,11 @@
 		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
-		// $_SESSION['div_name'] = NULL;
 	}
  ?>
  <?php //updating
 
 	if(isset($_POST['edit_submit'])) {
-
-		// $query = "SELECT * FROM blue_bk_plk WHERE short_sec_name='{$req_ssn}' and rec_dt='{$req_date}'";
-		//
-		// $result = mysqli_query($connection, $query);
-    // confirm_query($result);
-
 		$short_sec_name = $_SESSION['ssn'];
 		$rec_dt = $_SESSION['date'];
 		$req_id = $_SESSION['blue_bk_plk']['id'];
@@ -160,7 +129,6 @@
 		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
-		//$_SESSION['div_name'] = NULL;
 	}
  ?>
  <?php //DELETE
@@ -191,9 +159,7 @@
 		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
-		//$_SESSION['div_name'] = NULL;
 	}
-
 ?>
 
 <!DOCTYPE html>
@@ -221,7 +187,6 @@
 					.jumbotron h1{
 						color:#EDD2D2;
 					}
-
 
 				</style>
         <?php $page_id = 7;?>
@@ -268,7 +233,6 @@
 	                <li id="actv_two"><a href="#tab2" data-toggle="tab" id="link_two">Add Entry</a></li>
 	            </ul>
 				<div class="tab-content" style="background-color:#FFFFFF">
-
 
 
 					<div class="tab-pane" id="tab1">
@@ -325,7 +289,6 @@
 							</div>
             </form>
 					</div>
-
 
 
 					<div class="tab-pane" id="tab2">
@@ -416,7 +379,6 @@
 								var c1=document.getElementById('link_one');
 								c1.style.color='#FFFFFF';
 
-
 							}
 						 if(submit_chk==2 && submit_chk2){
 
@@ -430,8 +392,6 @@
 							}
 
 					</script>
-
-
 
     </body>
 </html>

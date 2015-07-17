@@ -5,7 +5,7 @@
   if(!isset($_SESSION['user'])) {
     redirect_to("index.php");
   }
-  
+
   if(($_SESSION['user_div'] != "ALL") && ($_SESSION['user_div'] != $_SESSION['current_div'])) {
     $_SESSION['flag_div_chk'] = 1;
     redirect_to("update_profile.php");
@@ -16,15 +16,7 @@
 ?>
 
 <?php
-
   $connection = make_connection();
-  // if($_SESSION["user_div"] == "ALL") {
-  //   $req_div = $_SESSION["current_div"];
-  // }
-  // else {
-  //   $req_div = $_SESSION["user_div"];
-  // }
-  // $_SESSION['div_name'] = $req_div;
 
   if(isset($_POST["section_submit"])) {
 
@@ -56,12 +48,10 @@
     $q_in .= " {$frame_ht}, {$bush_ht}, {$plntng_yr}, {$plnt_spcing}, {$tmp_shd_spcing}, {$prm_shd_spcing},";
     $q_in .= " {$plnt_dens}, {$bsh_popu}, '{$drn_stats}', '{$soil_topo}', {$ext_rplnt}, '{$stats}' )";
 
-
     $result = mysqli_query($connection, $q_in);
 
     confirm_query($result);
     if(mysqli_affected_rows($connection) > 0) {
-
       echo "
       <div class='container'>
       <div class='alert alert-success alert-dismissible' role='alert' style='border: 2px solid #4DB6AC'>
@@ -80,13 +70,8 @@
       </div>
       <div>";
 		}
-    // $_SESSION['div_name'] = NULL;
   }
 
-
-
-
-  //an effort to run the update
   if(isset($_POST["update_submit"])) {
     //var_dump($_POST);
     $req_ssn = mysqli_real_escape_string($connection, $_SESSION['upd_ssn']);
@@ -153,11 +138,7 @@
       </div>
       <div>";
 		}
-    // mysqli_free_result($req_result);
-    //
-    // mysqli_free_result($result_up);
     $_SESSION['upd_ssn'] = NULL;
-    // $_SESSION['div_name'] = NULL;
   }
 ?>
 <?php
@@ -188,7 +169,6 @@
       <div>";
 
     }
-    // $_SESSION['div_name'] = NULL;
   }
   else {
     $ssn = NULL;
@@ -245,7 +225,6 @@
                     <div class="tab-pane active" id="tab1">
                         <form id="view_update_section" class="form-horizontal" action="manage_sections.php" method="post" size="10">
                           <?php if(isset($_POST['view_submit'])) {
-                                  //echo "VIEW SUBMIT PRESSED! to fetch section details!<br>";
                                   $ssnV = mysqli_real_escape_string($connection, $_POST['sec_short_name']);
                                   $_SESSION['upd_ssn'] = $ssnV;
                                   //echo "ssnV=".$ssnV;
@@ -288,7 +267,6 @@
 
                                   <?php
                                     if(isset($_POST['view_submit'])) {
-                                      //echo "VIEW SUBMIT PRESSED! to show the fields!<br>";
                                   ?>
                                     <div class="form-group">
                                       <label for="textbox1" class="col-sm-2" style="padding-top:15px;">Section Name:</label>
@@ -430,9 +408,6 @@
                     </div>
 
                     <div class="tab-pane" id="tab2">
-                      <?php
-                        //var_dump($_SESSION['current_div']);
-                      ?>
                         <form id="remove_section" action="manage_sections.php" method="post" size="10">
                         <label for="sec_short_name"> Select Section:</label>
                         <div class="input-group">
@@ -444,10 +419,8 @@
                                   $result = mysqli_query($connection, $q);
 
                                   confirm_query($result);
-                                  //$_POST['sec_short_nm'] = NULL;
                                   while($sec_values = mysqli_fetch_assoc($result)) {
                                 ?>
-
                                     <option value="<?php echo htmlentities($sec_values['short_sec_name']) ?>"><?php echo htmlentities($sec_values['sec_name']) ?></option>
 
                                 <?php
@@ -597,13 +570,9 @@
                                 </div>
                             </div>
 
-
                                 <input type="submit" class="btn btn-primary" name="section_submit" value="Add a Section">
                         </form>
-
-
                     </div>
-
               </div>
             </div>
             <?php
@@ -640,16 +609,11 @@
             }else {
               document.getElementById('remv').disabled=true;
             }
-
           }
-
-
-
         </script>
     </body>
 </html>
 
 <?php
-  //mysqli_free_result($result);
 	end_connection($connection);
 ?>

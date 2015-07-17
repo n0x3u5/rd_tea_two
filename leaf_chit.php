@@ -18,15 +18,6 @@ if(isset($_POST['date_submit'])) {
 		$req_date = date('Y-m-d', strtotime( $_POST['date_value']));
 
 		//echo "got date : ".$req_date."<br>";
-		// $q_lab_cat = "select lcsn from labour_categories";
-		// $r_lab_cat = mysqli_query($connection, $q_lab_cat);
-		// confirm_query($r_lab_cat);
-		// $i = 0;
-		// while($lab_lcsn = mysqli_fetch_assoc($r_lab_cat)){
-		// //var_dump($lab_arr);
-		// 	$lcsn_arr[$i++] = $lab_lcsn['lcsn'];
-		// }
-		//var_dump($lcsn_arr); echo "<br>".count($lcsn_arr)."<br>";
 
 		$q_chit = "select * from leaf_chit_table where  rec_dt = '{$req_date}' and division = '{$req_div}'";
 		$r_chit = mysqli_query($connection, $q_chit);
@@ -114,7 +105,6 @@ if(isset($_POST['date_submit'])) {
     <div class="container">
       <div class="jumbotron">
         <h1>Leaf Chit</h1>
-  			<h3>Hansqua Division</h3>
         <form class="form-inline" action="leaf_chit.php" method="post">
           <!-- <div class="form-group">
             <label class="sr-only" for="sectionPicker">Email address</label>

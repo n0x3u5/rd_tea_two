@@ -24,14 +24,6 @@
 		$_SESSION['ssn'] = $req_ssn;
 		$_SESSION['yr'] = $req_yr;
 
-		// if($_SESSION["user_div"] == "ALL") {
-		// 	$req_div = $_SESSION["current_div"];
-		// }
-		// else {
-		// 	$req_div = $_SESSION["user_div"];
-		// }
-		// $_SESSION['div_name'] = $req_div;
-
 		// echo "<br>got year =".$req_yr."<br>";
 		// echo "<br>got ssn =" .$req_ssn."<br>";
 
@@ -252,7 +244,6 @@
 		$_SESSION['prune_infill'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['yr'] = NULL;
-		// $_SESSION['div_name'] = NULL;
 	}
 ?>
 

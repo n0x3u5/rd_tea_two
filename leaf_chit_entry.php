@@ -24,14 +24,6 @@
 		$req_date = date('Y-m-d', strtotime($_POST['date_value']));
 		$_SESSION['date'] = $req_date;
 
-		// if($_SESSION["user_div"] == "ALL") {
-		// 	$req_div = $_SESSION["current_div"];
-		// }
-		// else {
-		// 	$req_div = $_SESSION["user_div"];
-		// }
-		// $_SESSION['div_name'] = $req_div;
-
 		$query = "SELECT * FROM leaf_chit_table WHERE lab_cat ='{$req_lcsn}' and rec_dt='{$req_date}' and division ='{$_SESSION['current_div']}'";
 
 		$result = mysqli_query($connection, $query);
@@ -39,16 +31,6 @@
 
 		$_SESSION['leaf_chit'] = mysqli_fetch_assoc($result);
 
-
-		// var_dump($_SESSION['lcsn']);
-		// var_dump($_SESSION['prune_stats']);
-		// var_dump($req_date);
-
-
-		//var_dump($query);
-		//
-		// $result = mysqli_query($connection, $query);
-		// confirm_query($result);
 		$set = 1;
 
 	}
@@ -74,9 +56,6 @@
 	$task = mysqli_real_escape_string($connection, $_POST['task']);
 	$task = explode_implode($task);
 	$ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
-	// $cp_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_qty']);
-	// $cp_hr_from = mysqli_real_escape_string($connection, $_POST['cp_hr_from']);
-	// $cp_hr_to = mysqli_real_escape_string($connection, $_POST['cp_hr_to']);
 
 	$q_in = "INSERT INTO leaf_chit_table (division, prune_stats, lab_cat, rec_dt, short_sec_name, dt_lst_plkd, plkd_area, plkd_leaf, mandays, task, ballo_count) VALUES ('{$_SESSION['current_div']}', '{$prune_stats}', '{$lab_cat}', '{$rec_dt}',  '{$short_sec_name}', '{$dt_lst_plkd}', {$plkd_area}, {$plkd_leaf}, {$mandays}, '{$task}', {$ballo_count}) ";
 
@@ -99,7 +78,6 @@
 	<?php }
 
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
-	// $_SESSION['div_name'] = NULL;
 
  }
 
@@ -121,9 +99,6 @@
 	$task = mysqli_real_escape_string($connection, $_POST['task']);
 	$task = explode_implode($task);
 	$ballo_count = (int) mysqli_real_escape_string($connection, $_POST['ballo_count']);
-	// $cp_qty = (float) mysqli_real_escape_string($connection, $_POST['cp_qty']);
-	// $cp_hr_from = mysqli_real_escape_string($connection, $_POST['cp_hr_from']);
-	// $cp_hr_to = mysqli_real_escape_string($connection, $_POST['cp_hr_to']);
 
 	$q_up = "UPDATE leaf_chit_table SET division='{$_SESSION['current_div']}', prune_stats='{$prune_stats}', lab_cat='{$lab_cat}', rec_dt='{$rec_dt}', short_sec_name = '{$short_sec_name}', dt_lst_plkd = '{$dt_lst_plkd}', plkd_area={$plkd_area}, plkd_leaf={$plkd_leaf}, mandays = {$mandays}, task = '{$task}', ballo_count = {$ballo_count} where id = $req_id ";
 	$r_up = mysqli_query($connection, $q_up);
@@ -142,7 +117,6 @@
 		</div>
 	<?php }
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
-	// $_SESSION['div_name'] = NULL;
 
  }
 
@@ -170,7 +144,6 @@
 <?php }
 
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
-	// $_SESSION['div_name'] = NULL;
 }
 
 ?>
@@ -344,8 +317,6 @@
             </form>
 					</div>
 
-
-
 					<div class="tab-pane" id="tab2">
 						<form class="form-horizontal" action="" method="post">
 							<div class="form-group">
@@ -395,7 +366,6 @@
 							    <input type="text" class="form-control" id="ballo_count2" name="ballo_count" required>
 							  </div>
 							</div>
-
 
           		<input type="submit" id="add_entry" name="add_submit" value="Add Entry" class="btn btn-success"style="margin-top:20px">
 		    		</form>
@@ -456,8 +426,6 @@
 																$prefix = ',';
 															}
 														}
-
-														// 	echo "'P Men I','P Men II','P Women I','P Women II','P Women III','P Women IV','T Women I','T Women II','T Women III','T Women IV','T Men I','T Men II','Incentive I','Incentive II','Gariwala'";
 													}
 												?> ],
 					    delay: 100
@@ -521,8 +489,6 @@
 							}
 
 					</script>
-
-
 
 	  </body>
 </html>

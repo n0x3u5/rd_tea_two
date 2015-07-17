@@ -41,8 +41,6 @@
 
 	$users = mysqli_fetch_assoc($result);
 
-	//echo "user designation =".$users["designation"]."<br>";
-
 	$_SESSION["user_id"]= $users["id"];
 
 	$old_pwd = $users['password'];
@@ -63,8 +61,6 @@
 				//echo "Updated successfully!";
 				$check_flag = 1;
 
-
-				//mysqli_free_result($result);
 		}
 		elseif (password_check($_POST['pwd'], $old_pwd) && $_POST['npwd'] != NULL) {
 			if($_POST['npwd'] === $_POST['cnfpwd']){
@@ -84,9 +80,6 @@
 							confirm_query($result);
 							//echo "Updated successfully!";
 							$check_flag = 1;
-
-
-							//mysqli_free_result($result);
 					}
 					else { ?>
 						<div class=" container alert alert-warning alert-dismissible" role="alert" style="border-color:yellow">
@@ -203,6 +196,5 @@
 </html>
 
 <?php
-	//mysqli_free_result($result);
 	end_connection($connection);
 ?>

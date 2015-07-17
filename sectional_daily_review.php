@@ -9,7 +9,6 @@
 
 <?php
 	$connection = make_connection();
-
 	//var_dump($_POST); echo "<br>";
 	if(isset($_POST['sec_date_submit'])) {
 		$req_div = $_SESSION['current_div'];
@@ -43,18 +42,13 @@
 			$result_spray = mysqli_query($connection, $query_spray);
 			confirm_query($result_spray);
 		}
-		// echo "<br> header processing ends. <hr>";
-
 	}
 	else {
-		//$req_div_name = NULL;
-		//$req_year = NULL;
 		$req_start_date = NULL;
 		$req_end_date = NULL;
 		$result_spray = NULL;
 	}
 ?>
-
 
 
 <!DOCTYPE html>
@@ -91,7 +85,6 @@
                 <form class=" form-horizontal" action="sectional_daily_review.php" method="post">
 									<div class="row">
                   	<div class="form-group col-sm-6">
-                    <!-- <label class="sr-only" for="sec_select">Email address</label> -->
 											<select id="section" name="short_sec_name" class="form-control" onChange="enable_add()">
 												<option>Select a section</option>
 				                <?php
@@ -99,7 +92,6 @@
 				                    $r = mysqli_query($connection, $q);
 
 				                    confirm_query($r);
-				                    //$_POST['sec_short_nm'] = NULL;
 												?>
 														<option <?php if(isset($_POST['sec_date_submit']) && ($_POST['short_sec_name'] ==  'ALL')) { echo "selected"; } ?> >ALL</option>
 												<?php
@@ -206,8 +198,6 @@
 						 											<th>No of Drums</th>
 						 											<th>Mandays<br/>(DR rated)</th>
 						 											<th>Mandays<br/>(Supervisory)</th>
-
-
                                 </tr>
                              </thead>
 														<tbody>
