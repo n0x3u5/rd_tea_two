@@ -85,13 +85,13 @@
 		$sticker_qty = mysqli_real_escape_string($connection, $_POST['sticker_qty']);
 
 
-		// $q_in = "INSERT INTO blue_bk_spray_chit (division, short_sec_name, rec_dt, hz_db, chem, cocktail, spot_full, pest, intensity, qty_unit, area, no_drms, dr_mnds, sup_mnds, dose, sticker_nm, sticker_qty)";
-		// $q_in .= " VALUES ('{$_SESSION['current_div']}', '{$short_sec_name}', '{$rec_dt}', '{$hz_db}', '{$chem}', '{$cocktail}', '{$spot_full}', '{$pest}', '{$intensity}', '{$qty_unit}', {$area}, {$no_drms}, {$dr_mnds}, {$sup_mnds}, '{$dose}', '{$sticker_nm}', '{$sticker_qty}')";
-		//
-		// //var_dump($q_in);
-		// $r_in = mysqli_query($connection, $q_in);
-		//
-    // confirm_query($r_in);
+		$q_in = "INSERT INTO blue_bk_spray_chit (division, short_sec_name, rec_dt, hz_db, chem, cocktail, spot_full, pest, intensity, qty_unit, area, no_drms, dr_mnds, sup_mnds, dose, sticker_nm, sticker_qty)";
+		$q_in .= " VALUES ('{$_SESSION['current_div']}', '{$short_sec_name}', '{$rec_dt}', '{$hz_db}', '{$chem}', '{$cocktail}', '{$spot_full}', '{$pest}', '{$intensity}', '{$qty_unit}', {$area}, {$no_drms}, {$dr_mnds}, {$sup_mnds}, '{$dose}', '{$sticker_nm}', '{$sticker_qty}')";
+
+		//var_dump($q_in);
+		$r_in = mysqli_query($connection, $q_in);
+
+    confirm_query($r_in);
 
 		if(mysqli_affected_rows($connection) > 0) { ?>
 			<div class=" container alert alert-success alert-dismissible" style="border-color:green" role="alert">
@@ -107,31 +107,31 @@
 
 		<?php }
 
-		// var_dump($_POST);
-		// $items  = explode("¥", $chem);
-		// $doses = explode("¥", $dose);
-		// $qtys = explode("¥", $qty_unit);
-		// $pests = explode("¥", $pest);
-		// //var_dump($chemicals);
-		// $chemical_index = 0;
-		// foreach ($items as $chemical) {
-		// 	var_dump($chemical);
-		// 	var_dump($doses[$chemical_index]);
-		// 	var_dump($qtys[$chemical_index]);
-		// 	var_dump($pests[$chemical_index]);
-		// 	$q_chit = "INSERT INTO spray_chit_table (division, chem, rec_dt, short_sec_name, hz_db, spot_full, area, pest, qty_unit, no_drums, dr_mnds, sup_mnds, dose) VALUES ('{$_SESSION['current_div']}', '{$chemical}', '{$rec_dt}', '{$short_sec_name}', '{$hz_db}', '{$spot_full}', {$area}, '{$pests[$chemical_index]}', '{$qtys[$chemical_index]}', {$no_drms}, {$dr_mnds}, {$sup_mnds},'{$doses[$chemical_index]}' )";
-		// 	$r_chit = mysqli_query($connection, $q_chit);
-		//
-		// 	confirm_query($r_chit);
-		//
-		// 	if(mysqli_affected_rows($connection) > 0) {
-		// 		echo "Inserted Successfully!";
-		// 	}
-		// 	else {
-		// 		echo "No rows effected!";
-		// 	}
-		// 	$chemical_index++;
-		// }
+		var_dump($_POST);
+		$items  = explode("¥", $chem);
+		$doses = explode("¥", $dose);
+		$qtys = explode("¥", $qty_unit);
+		$pests = explode("¥", $pest);
+		//var_dump($chemicals);
+		$chemical_index = 0;
+		foreach ($items as $chemical) {
+			var_dump($chemical);
+			var_dump($doses[$chemical_index]);
+			var_dump($qtys[$chemical_index]);
+			var_dump($pests[$chemical_index]);
+			$q_chit = "INSERT INTO spray_chit_table (division, chem, rec_dt, short_sec_name, hz_db, spot_full, area, pest, qty_unit, no_drums, dr_mnds, sup_mnds, dose) VALUES ('{$_SESSION['current_div']}', '{$chemical}', '{$rec_dt}', '{$short_sec_name}', '{$hz_db}', '{$spot_full}', {$area}, '{$pests[$chemical_index]}', '{$qtys[$chemical_index]}', {$no_drms}, {$dr_mnds}, {$sup_mnds},'{$doses[$chemical_index]}' )";
+			$r_chit = mysqli_query($connection, $q_chit);
+
+			confirm_query($r_chit);
+
+			if(mysqli_affected_rows($connection) > 0) {
+				echo "Inserted Successfully!";
+			}
+			else {
+				echo "No rows effected!";
+			}
+			$chemical_index++;
+		}
 
 		$_SESSION['blue_bk_spray_chit'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -192,20 +192,23 @@
 			</div>
 		<?php }
 
-		$items  = explode("¥", $_SESSION['blue_bk_spray_chit']['chem']);
-		$doses = explode("¥", $_SESSION['blue_bk_spray_chit']['dose']);
-		$qtys = explode("¥", $_SESSION['blue_bk_spray_chit']['qty_unit']);
-		$chemical_index = 0;
-		foreach ($items as $chemical) {
-			var_dump($chemical);
-			var_dump($doses[$chemical_index]);
-			var_dump($qtys[$chemical_index]);
-			$q_del_sprychit = "DELETE FROM spray_chit_table WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and hz_db = '{$hz_db}' and division='{$_SESSION['current_div']}' and chem = '{$chemical}' and qty_unit='{$qtys[$chemical_index]}' and no_drums='{$_SESSION['blue_bk_spray_chit']['no_drms']}' and dose={$doses[$chemical_index]}";
-
-			var_dump($q_del_sprychit);
-
-				$chemical_index++;
-		}
+		// $items  = explode("¥", $_SESSION['blue_bk_spray_chit']['chem']);
+		// $doses = explode("¥", $_SESSION['blue_bk_spray_chit']['dose']);
+		// $qtys = explode("¥", $_SESSION['blue_bk_spray_chit']['qty_unit']);
+		// $chemical_index = 0;
+		// foreach ($items as $chemical) {
+		// 	var_dump($chemical);
+		// 	var_dump($doses[$chemical_index]);
+		// 	var_dump($qtys[$chemical_index]);
+		// 	$q_del_sprychit = "DELETE FROM spray_chit_table WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and hz_db = '{$hz_db}' and division='{$_SESSION['current_div']}' and chem = '{$chemical}' and qty_unit='{$qtys[$chemical_index]}' and no_drums='{$_SESSION['blue_bk_spray_chit']['no_drms']}' and dose={$doses[$chemical_index]}";
+		//
+		// 	var_dump($q_del_sprychit);
+		// 	$r_del_sprychit = mysqli_query($connection, $q_del_sprychit);
+		//
+		// 	confirm_query($r_del_sprychit);
+		//
+		// 	$chemical_index++;
+		// }
 
 			$_SESSION['blue_bk_spray_chit'] = NULL;
 			$_SESSION['ssn'] = NULL;
@@ -243,6 +246,24 @@
 				<strong>Sorry!</strong> No row affected!
 			</div>
 	<?php }
+
+	$items  = explode("¥", $_SESSION['blue_bk_spray_chit']['chem']);
+	$doses = explode("¥", $_SESSION['blue_bk_spray_chit']['dose']);
+	$qtys = explode("¥", $_SESSION['blue_bk_spray_chit']['qty_unit']);
+	$chemical_index = 0;
+	foreach ($items as $chemical) {
+		var_dump($chemical);
+		var_dump($doses[$chemical_index]);
+		var_dump($qtys[$chemical_index]);
+		$q_del_sprychit = "DELETE FROM spray_chit_table WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and hz_db = '{$hz_db}' and division='{$_SESSION['current_div']}' and chem = '{$chemical}' and qty_unit='{$qtys[$chemical_index]}' and no_drums='{$_SESSION['blue_bk_spray_chit']['no_drms']}' and dose={$doses[$chemical_index]}";
+
+		var_dump($q_del_sprychit);
+		$r_del_sprychit = mysqli_query($connection, $q_del_sprychit);
+
+		confirm_query($r_del_sprychit);
+
+		$chemical_index++;
+	}
 
 		$_SESSION['blue_bk_spray_chit'] = NULL;
 		$_SESSION['ssn'] = NULL;
