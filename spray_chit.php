@@ -13,9 +13,9 @@
 		$req_date = date('Y-m-d', strtotime( $_POST['date_value']));
 		$req_hz_db = $_POST['hz_db'];
 
-		$q_chit = "select * from blue_bk_spray_chit where rec_dt = '{$req_date}' and hz_db = '{$req_hz_db}' and division = '{$req_div}'";
-		$r_chit = mysqli_query($connection, $q_chit);
-		confirm_query($r_chit);
+		$q_chemicals = "SELECT DISTINCT chem from spray_chit_table WHERE hz_db = '{$req_hz_db}'";
+		$r_chemicals = mysqli_query($connection, $q_chemicals);
+		confirm_query($r_chemicals);
 	} else {
 		$rec_div = NULL;
 		$req_date = NULL;
@@ -82,41 +82,35 @@
               <th>spot/Full</th>
               <th>Pest/<br/>Disease</th>
               <th>Area<br/>( in Ha.)</th>
-							<th>Issued Qty</th>
+							<th>Dose</th>
 							<th>No of Drums</th>
+							<th>Issued Qty</th>
 							<th>Mandays<br/> (D/rated)</th>
 							<th>Mandays<br/>(Supervisory)</th>
             </thead>
             <tbody>
 						<?php
-							if (isset($_POST['date_submit'])) {
-								while ($spc_record = mysqli_fetch_assoc($r_chit)) {
-									$item = explode("¥", $spc_record['chem']);
-									echo"<br>Item Array";var_dump($item);
-									// if(in_array("CHEM1",$item)) {
-									// 	echo array_search("CHEM1", $item);
-									// }
-									$chemical_index = 0;
-									foreach ($item as $chemical) {
-										if(in_array("CHEM1",$item)) {
-											echo array_search("CHEM1", $item);
-										}
-										echo $chemical."<br>";
-										$chemical_index++;
-									}
-								}
-							}
+							if(isset($_POST['date_submit'])) {
+								while($chemical = mysqli_fetch_assoc($r_chemicals)) {
+									$printed_chem_arr = array();
+									//var_dump($chemical['chem']);
+									$q_chit = "select * from spray_chit_table where rec_dt = '{$req_date}' and hz_db = '{$req_hz_db}' and division = '{$req_div}' and chem = '{$chemical['chem']}'";
+									$r_chit = mysqli_query($connection, $q_chit);
+									confirm_query($r_chit);
+									while ($chem_data = mysqli_fetch_assoc($r_chit)) {
+										//var_dump($chem_data);
 						?>
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td><?php if(!in_array($chemical['chem'], $printed_chem_arr)) { echo $chemical['chem']; $printed_chem_arr[] = $chemical['chem']; } ?></td>
+								<td><?php echo $chem_data['short_sec_name']."<br>"; ?></td>
+								<td><?php echo $chem_data['spot_full']."<br>"; ?></td>
+								<td><?php echo $chem_data['pest']."<br>"; ?></td>
+								<td><?php echo $chem_data['area']."<br>"; ?></td>
+								<td><?php echo $chem_data['dose']."<br>"; ?></td>
+								<td><?php echo $chem_data['no_drums']."<br>"; ?></td>
+								<td><?php echo $chem_data['qty_unit']."<br>"; ?></td>
+								<td><?php echo $chem_data['dr_mnds']."<br>"; ?></td>
+								<td><?php echo $chem_data['sup_mnds']."<br>"; ?></td>
 							</tr>
 							<!-- <tr>
 								<td>CHEM1</td>
@@ -129,6 +123,11 @@
 								<td>32, 23.9</td>
 								<td>12.0, 44.1</td>
 							</tr> -->
+						<?php
+									}
+								}
+							}
+						?>
             </tbody>
           </table>
         </form>

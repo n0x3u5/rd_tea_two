@@ -21,14 +21,6 @@
 		$req_date = date('Y-m-d', strtotime($_POST['date_value']));
 		$_SESSION['date'] = $req_date;
 
-		// if($_SESSION["user_div"] == "ALL") {
-		// 	$req_div = $_SESSION["current_div"];
-		// }
-		// else {
-		// 	$req_div = $_SESSION["user_div"];
-		// }
-		// $_SESSION['div_name'] = $req_div;
-
 		$query = "SELECT * FROM cp_table WHERE rec_date='{$req_date}' and division='{$_SESSION['current_div']}'";
 
 		$result = mysqli_query($connection, $query);
@@ -75,7 +67,7 @@
 
 		<?php }
 
-		$_SESSION['date'] = $_SESSION['cp_record'] = NULL;//$_SESSION['div_name'] = NULL;
+		$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
 
  }
 
@@ -109,20 +101,13 @@
 		</div>
 <?php }
 
-	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;// $_SESSION['div_name'] = NULL;
-
+	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
  }
 
  if(isset($_POST['del_entry'])) {
 	$rec_dt = $_SESSION['date'];
 
-	// if(isset($_SESSION['cp_record'])) {
-	// 	$rec_id = $_SESSION['cp_record']['id'];
-	// } else {
-	// 	$rec_id = 0;
-	// }
-
-	$q_del = "DELETE FROM cp_table WHERE rec_date='{$rec_dt}'/*id={$rec_id}*/ and division = '{$_SESSION['current_div']}'";
+	$q_del = "DELETE FROM cp_table WHERE rec_date='{$rec_dt}' and division = '{$_SESSION['current_div']}'";
 
 	$r_del = mysqli_query($connection, $q_del);
   confirm_query($r_del);
@@ -140,7 +125,7 @@
 		</div>
 <?php }
 
-	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;// $_SESSION['div_name'] = NULL;
+	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
 
 }
 
@@ -274,8 +259,6 @@
             </form>
 					</div>
 
-
-
 					<div class="tab-pane" id="tab2">
 						<form class="form-horizontal" action="cash_plucking_entry.php" method="post">
 							<div class="form-group">
@@ -368,8 +351,6 @@
 																$prefix = ',';
 															}
 														}
-
-														// 	echo "'P Men I','P Men II','P Women I','P Women II','P Women III','P Women IV','T Women I','T Women II','T Women III','T Women IV','T Men I','T Men II','Incentive I','Incentive II','Gariwala'";
 													}
 												?> ],
 					    delay: 100

@@ -18,11 +18,7 @@ if(isset($_POST['yr_sec_submit'])) {
 	$req_end_yr = $_POST['end_yr'];
 
 	// var_dump($req_ssn); var_dump($req_start_yr); var_dump($req_end_yr);
-
-	// $_SESSION['ssn'] = $req_ssn;
-	// $_SESSION['yr_1'] = $req_start_yr;
-	// $_SESSION['yr_2'] = $req_end_yr;
-	$q_header = "select * from sections where short_sec_name = '{$req_ssn}' and division = '{$_SESSION['current_div']}'"; //and division = '{$req_div}'";
+	$q_header = "select * from sections where short_sec_name = '{$req_ssn}' and division = '{$_SESSION['current_div']}'";
 	//var_dump($q_header);
 	$r_header = mysqli_query($connection, $q_header);
 	confirm_query($r_header);
@@ -35,16 +31,11 @@ if(isset($_POST['yr_sec_submit'])) {
 	$r_prune = mysqli_query($connection, $q_prune);
 	confirm_query($r_prune);
 
-	//$prune = mysqli_fetch_assoc($r_prune);
-	//var_dump($prune);
 
 	$q_soil = "select * from yearly_soil_manuring where short_sec_name = '{$req_ssn}' and division = '{$req_div}' and year between $req_start_yr and $req_end_yr";
 	//var_dump($q_soil);
 	$r_soil = mysqli_query($connection, $q_soil);
 	confirm_query($r_soil);
-
-	//$soil = mysqli_fetch_assoc($r_soil);
-	//var_dump($soil);
 }
 else {
 	$req_ssn = NULL;

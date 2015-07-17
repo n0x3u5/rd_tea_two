@@ -34,14 +34,9 @@
         <strong>Sorry!</strong> No row affected!
       </div>
 
-
     <?php }
   }
 
-
-
-
-  //an effort to run the update
   if(isset($_POST["edit_submit"])) {
     //var_dump($_POST);
     $req_lcsn = $_SESSION['rnm_lcsn'];
@@ -64,7 +59,6 @@
 
     $r_up = mysqli_query($connection, $q_up);
     //var_dump($q_up);
-    //var_dump($r_up);
 
     confirm_query($r_up);
     if(mysqli_affected_rows($connection) > 0) { ?>
@@ -79,9 +73,6 @@
         <strong>Sorry!</strong> No row affected!
       </div>
 <?php }
-    // mysqli_free_result($req_result);
-    //
-    // mysqli_free_result($result_up);
     $_SESSION['rnm_lcsn'] = NULL;
   }
 
@@ -108,7 +99,6 @@
   else {
     $lcsn = NULL;
   }
-
 ?>
 
 
@@ -209,7 +199,6 @@
                           <?php } ?>
                         </form>
 
-
                     </div>
 
                     <div class="tab-pane" id="tab2">
@@ -272,10 +261,7 @@
 
                           <input type="submit" class="btn btn-primary col-sm-offset-3" name="add_submit" value="Add a Group">
                         </form>
-
-
                     </div>
-
               </div>
             </div>
           </div>
@@ -292,7 +278,6 @@
                 opt.value = tb2.value;
             }
         </script>
-
     </body>
 </html>
 
