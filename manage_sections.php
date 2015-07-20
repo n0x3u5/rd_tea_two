@@ -294,7 +294,22 @@
                                         <label for="status_" class="col-sm-2" style="padding-top:15px;">Prune Style</label>
 
                                           <div class="input-group" class="col-sm-10">
-                                            <input type="text" class="form-control" id="status_" name="status" value="<?php echo $sec['prune_style']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                                            <!-- <input type="text" class="form-control" id="status_" name="status" value="<?php //echo $sec['prune_style']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span> -->
+                                            <select name = "status" id="status_" class = "form-control" required>
+                                              <option>Select prune style</option>
+                                              <?php
+                                                  $q = "SELECT * FROM `prune_style_stats` ORDER BY `prune_style_stats`.`PRUNE_STAT`, `prune_style_stats`.`PRUNE_STYLE` ASC";
+                                                  $r = mysqli_query($connection, $q);
+
+                                                  confirm_query($r);
+                                                  while($prune_styles = mysqli_fetch_assoc($r)) {
+                                              ?>
+                                                    <option value="<?php echo htmlentities($prune_styles['PRUNE_STYLE']); ?>" <?php if($sec['prune_style'] == $prune_styles['PRUNE_STYLE']) {echo "selected";} ?>><?php echo htmlentities($prune_styles['PRUNE_STYLE'])." (".htmlentities($prune_styles['PRUNE_STAT']).")"; ?></option>
+                                              <?php
+                                                  }
+                                              ?>
+
+                                            </select>
                                           </div>
                                       </div>
                                   <div class="form-group">
@@ -480,7 +495,22 @@
                                 <label for="status" class="col-sm-3" style="padding-top:15px">Prune Style</label>
                                 <div class="input-group col-sm-6">
 
-                                  <input type="text" class="form-control" name="status" placeholder="Section Status" required><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                                  <!-- <input type="text" class="form-control" name="status" placeholder="Section Status" required><span class="input-group-addon"><i class="glyphicon glyphicon-chevron-up"></i></span> -->
+                                  <select name = "status" class = "form-control" required>
+                                    <option>Select prune style</option>
+                                    <?php
+                                        $q = "SELECT * FROM `prune_style_stats` ORDER BY `prune_style_stats`.`PRUNE_STAT`, `prune_style_stats`.`PRUNE_STYLE` ASC";
+                                        $r = mysqli_query($connection, $q);
+
+                                        confirm_query($r);
+                                        while($prune_styles = mysqli_fetch_assoc($r)) {
+                                    ?>
+                                          <option value="<?php echo htmlentities($prune_styles['PRUNE_STYLE']); ?>"><?php echo htmlentities($prune_styles['PRUNE_STYLE'])." (".htmlentities($prune_styles['PRUNE_STAT']).")"; ?></option>
+                                    <?php
+                                        }
+                                    ?>
+
+                                  </select>
                                 </div>
                             </div>
                             <div class="form-group">
