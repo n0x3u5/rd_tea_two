@@ -56,7 +56,7 @@
 																	<select class="form-control" name="division" id="hideone" onChange="enable_add1()">
 																		<option>Select Division</option>
 																		<option>All</option>
-																		<option>Balsan</option>
+																		<option>Balasan</option>
 																		<option>Bidhannagar</option>
 																		<option>Hansqua</option>
 																		<option>Kishoribag</option>

@@ -154,7 +154,7 @@ else {
 							<div class="col-sm-2 card_style"><h4>Drain-status</h4><p> <?php echo htmlentities($header['drain_stats']); ?> </p></div>
 						</div>
 						<div class="row">
-							<div class="col-sm-2 card_style"><h4>Frame(in Inch) HEight</h4><p> <?php echo htmlentities($header['frame_height']); ?> </p></div>
+							<div class="col-sm-2 card_style"><h4>Frame(in Inch) Height</h4><p> <?php echo htmlentities($header['frame_height']); ?> </p></div>
 							<div class="col-sm-2 card_style"><h4>Bush(in Inch)<br>Height</h4><p> <?php echo htmlentities($header['bush_height']); ?> </p></div>
 							<div class="col-sm-2 card_style"><h4>Ext./<br>Replant</h4><p> <?php echo htmlentities($header['ext_rplnt']); ?> </p></div>
 							<div class="col-sm-2 card_style"><h4>Soil type and<br>topography</h4><p> <?php echo htmlentities($header['soil_topo']); ?> </p></div>

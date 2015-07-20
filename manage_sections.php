@@ -27,8 +27,8 @@
     $jat = mysqli_real_escape_string($connection, $_POST["jat"]);
     $shd_spcs_tmp = mysqli_real_escape_string($connection, $_POST["shade_species_temp"]);
     $shd_spcs_perm = mysqli_real_escape_string($connection, $_POST["shade_species_perm"]);
-    $frame_ht = (int) mysqli_real_escape_string($connection, $_POST["Frame_Height"]);
-    $bush_ht = (int) mysqli_real_escape_string($connection, $_POST["Bush_Height"]);
+    $frame_ht = mysqli_real_escape_string($connection, $_POST["Frame_Height"]);
+    $bush_ht = mysqli_real_escape_string($connection, $_POST["Bush_Height"]);
     $plntng_yr = mysqli_real_escape_string($connection, $_POST["Planting_year"]);
     $plnt_spcing = mysqli_real_escape_string($connection, $_POST["Plant_Spacing"]);
     $tmp_shd_spcing = mysqli_real_escape_string($connection, $_POST["Temp_Shade_spacing"]);
@@ -45,10 +45,12 @@
     $q_in .= " yr_of_plant, plant_spacing,temp_shd_spcing, perm_shd_spcing,";
     $q_in .= " plant_density, bush_pop, drain_stats, soil_topo, ext_rplnt, prune_style)";
     $q_in .= " VALUES ('{$_SESSION['current_div']}', '{$sec_nm}', '{$sec_shrt_nm}', {$sec_area}, '{$jat}', '{$shd_spcs_tmp}', '{$shd_spcs_perm}',";
-    $q_in .= " {$frame_ht}, {$bush_ht}, {$plntng_yr}, '{$plnt_spcing}', '{$tmp_shd_spcing}', '{$prm_shd_spcing}',";
+    $q_in .= " '{$frame_ht}', '{$bush_ht}', '{$plntng_yr}', '{$plnt_spcing}', '{$tmp_shd_spcing}', '{$prm_shd_spcing}',";
     $q_in .= " {$plnt_dens}, {$bsh_popu}, '{$drn_stats}', '{$soil_topo}', '{$ext_rplnt}', '{$stats}' )";
 
     $result = mysqli_query($connection, $q_in);
+
+    var_dump($q_in);
 
     confirm_query($result);
     if(mysqli_affected_rows($connection) > 0) {
@@ -93,8 +95,8 @@
     $jat = mysqli_real_escape_string($connection, $_POST["jat"]);
     $shd_spcs_tmp = mysqli_real_escape_string($connection, $_POST["shade_species_temp"]);
     $shd_spcs_perm = mysqli_real_escape_string($connection, $_POST["shade_species_perm"]);
-    $frame_ht = (int) mysqli_real_escape_string($connection, $_POST["Frame_Height"]);
-    $bush_ht = (int) mysqli_real_escape_string($connection, $_POST["Bush_Height"]);
+    $frame_ht = mysqli_real_escape_string($connection, $_POST["Frame_Height"]);
+    $bush_ht = mysqli_real_escape_string($connection, $_POST["Bush_Height"]);
     $plntng_yr = mysqli_real_escape_string($connection, $_POST["Planting_year"]);
     $plnt_spcing = mysqli_real_escape_string($connection, $_POST["Plant_Spacing"]);
     $tmp_shd_spcing = mysqli_real_escape_string($connection, $_POST["Temp_Shade_spacing"]);
@@ -108,8 +110,8 @@
     $q_up = "UPDATE sections SET ";
     $q_up .= " division ='{$_SESSION['current_div']}', sec_name = '{$sec_nm}', short_sec_name = '{$sec_shrt_nm}', total_area = {$sec_area} , jat = '{$jat}',";
     $q_up .= " shade_spcs_temp = '{$shd_spcs_tmp}', shade_spcs_perm = '{$shd_spcs_perm}',";
-    $q_up .= " frame_height = {$frame_ht}, bush_height = {$bush_ht},";
-    $q_up .= " yr_of_plant = {$plntng_yr}, plant_spacing = '{$plnt_spcing}',";
+    $q_up .= " frame_height = '{$frame_ht}', bush_height = '{$bush_ht}',";
+    $q_up .= " yr_of_plant = '{$plntng_yr}', plant_spacing = '{$plnt_spcing}',";
     $q_up .= " temp_shd_spcing = '{$tmp_shd_spcing}', perm_shd_spcing = '{$prm_shd_spcing}',";
     $q_up .= " plant_density = {$plnt_dens}, bush_pop = {$bsh_popu}, drain_stats ='{$drn_stats}',";
     $q_up .= " soil_topo = '{$soil_topo}', ext_rplnt = '{$ext_rplnt}', prune_style = '{$stats}'";
@@ -350,7 +352,7 @@
                                     <label for="Planting_year_" class="col-sm-2" style="padding-top:15px;">Year of Planting</label>
 
                                     <div class="input-group" class="col-sm-10">
-                                        <input type="number" id="Planting_year_" class="form-control" name="Planting_year" value="<?php echo $sec['yr_of_plant']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-jpy"></i></span>
+                                        <input type="text" id="Planting_year_" class="form-control" name="Planting_year" value="<?php echo $sec['yr_of_plant']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-jpy"></i></span>
                                     </div>
                                   </div>
 
@@ -528,7 +530,7 @@
                             <div class="form-group">
                                 <label for="Planting_year" class="col-sm-3" style="padding-top:15px">Year of Planting</label>
                                 <div class="input-group col-sm-6">
-                                  <input type="number" class="form-control" name="Planting_year" placeholder="Year of planting" required><span class="input-group-addon"><i class="glyphicon glyphicon-jpy"></i></span>
+                                  <input type="text" class="form-control" name="Planting_year" placeholder="Year of planting" required><span class="input-group-addon"><i class="glyphicon glyphicon-jpy"></i></span>
                                 </div>
                             </div>
                             <div class="form-group">
