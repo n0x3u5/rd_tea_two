@@ -18,7 +18,7 @@
 
 		$from = date('Y-m-d', strtotime($req_start_date));
 	  $to = date('Y-m-d', strtotime($req_end_date));
-	  $query = "select * from daily_weather where division = '$_SESSION['current_div']' and record_date between '$from' and '$to'";
+	  $query = "select * from daily_weather where division = '$_SESSION[current_div]' and record_date between '$from' and '$to'";
 
 
 	  //var_dump($query);

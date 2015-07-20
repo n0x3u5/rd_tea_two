@@ -313,7 +313,7 @@
                                     <label for="Temp_Shade_spacing_" class="col-sm-2" style="padding-top:15px;">Temp. Shade Spacing</label>
 
                                     <div class="input-group" class="col-sm-10">
-                                        <input type="text" class="form-control" id="Temp_Shade_spacing_" name="Temp_Shade_spacing" value="<?php echo $sec['tmp_shd_spcing']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
+                                        <input type="text" class="form-control" id="Temp_Shade_spacing_" name="Temp_Shade_spacing" value="<?php echo $sec['temp_shd_spcing']; ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-align-justify"></i></span>
                                     </div>
                                   </div>
                                   <div class="form-group">
