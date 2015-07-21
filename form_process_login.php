@@ -78,11 +78,15 @@
 				redirect_to("manage_users.php");
 			}
 			else if( $_SESSION["user_lvl"] == 3 ) {
-				redirect_to("sectional_daily_review.php");
+				$_SESSION['entry_flag'] = 1;
+				redirect_to("daily_plucking_entry.php");
 			}
 			else if($_SESSION["user_lvl"] == 101) {
 				echo  session_msg() . "<br>";
 				 redirect_to("login_attempt1.php");
+			}
+			else {
+				$_SESSION['entry_flag'] = 0;
 			}
 
 		?>

@@ -5,12 +5,19 @@
 	if(!isset($_SESSION['user'])) {
 		redirect_to("index.php");
 	}
-
-	if(($_SESSION['user_div'] != "ALL") && ($_SESSION['user_div'] != $_SESSION['current_div'])) {
-		$_SESSION['flag_div_chk'] = 1;
-		redirect_to("update_profile.php");
+  if($_SESSION['entry_flag'] != 1) {
+		if(($_SESSION['user_div'] != "ALL") && ($_SESSION['user_div'] != $_SESSION['current_div'])) {
+			$_SESSION['flag_div_chk'] = 1;
+			redirect_to("update_profile.php");
+			// var_dump($_SESSION['user_div']);echo "user div <br>";
+			// var_dump($_SESSION['current_div']);echo "current div <br>";
+		}
+		else {
+			$_SESSION['flag_div_chk'] = 0;
+		}
 	}
 	else {
+		$_SESSION['entry_flag'] = NULL;
 		$_SESSION['flag_div_chk'] = 0;
 	}
 ?>

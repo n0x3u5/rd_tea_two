@@ -50,8 +50,6 @@
 
     $result = mysqli_query($connection, $q_in);
 
-    var_dump($q_in);
-
     confirm_query($result);
     if(mysqli_affected_rows($connection) > 0) {
       echo "
