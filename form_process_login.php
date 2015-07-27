@@ -69,12 +69,15 @@
 			}
 
 			if( $_SESSION["user_lvl"] == 0) {
+				$_SESSION['entry_flag'] = 0;
 				redirect_to("weather.php");
 			}
 			if( $_SESSION["user_lvl"] == 1 ) {
+				$_SESSION['entry_flag'] = 0;
 				redirect_to("leaf_chit.php");
 			}
 			else if($_SESSION["user_lvl"] == 2 ) {
+				$_SESSION['entry_flag'] = 0;
 				redirect_to("manage_users.php");
 			}
 			else if( $_SESSION["user_lvl"] == 3 ) {
@@ -82,6 +85,7 @@
 				redirect_to("daily_plucking_entry.php");
 			}
 			else if($_SESSION["user_lvl"] == 101) {
+				$_SESSION['entry_flag'] = 0;
 				echo  session_msg() . "<br>";
 				 redirect_to("login_attempt1.php");
 			}

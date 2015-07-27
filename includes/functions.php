@@ -30,6 +30,7 @@
 		if(!$result_set){
 			//failure
 			//$message = " creation error"
+
 			$err="
 							<!DOCTYPE html>
 							<html>
@@ -51,6 +52,8 @@
 							</html>";
 
 			die($err);
+
+			//die("database query failed.". mysqli_error($connection));
 		}
 	}
 

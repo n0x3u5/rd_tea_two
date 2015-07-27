@@ -23,7 +23,7 @@
 ?>
 <?php
 	$connection = make_connection();
-	//var_dump($_POST);echo "<br><hr>";
+	// var_dump($_POST);echo "<br><hr>";
 	if(isset($_POST["dt_sec_submit"])){
 		$req_date = date('Y-m-d', strtotime($_POST["date_value"]));
 		$req_ssn = $_POST["short_sec_name"];
@@ -86,9 +86,17 @@
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close" ><span aria-hidden="true">&times;</span></button>
 				<strong>Sorry!</strong> No row affected!
 			</div>
-
-
 		<?php }
+
+		$q = "select * from plk_change where id = (select max(id) from plk_change)";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+		$plk_chng = mysqli_fetch_assoc($r);
+		//var_dump($plk_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$q = "UPDATE plk_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
 
 		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -133,6 +141,16 @@
 			</div>
 		<?php }
 
+		$q = "select * from plk_change where id = (select max(id) from plk_change)";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+		$plk_chng = mysqli_fetch_assoc($r);
+		//var_dump($plk_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$q = "UPDATE plk_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+
 		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;
 		$_SESSION['date'] = NULL;
@@ -162,6 +180,16 @@
 				<strong>Sorry!</strong> No row affected!
 			</div>
 	<?php }
+
+		$q = "select * from plk_change where id = (select max(id) from plk_change)";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+		$plk_chng = mysqli_fetch_assoc($r);
+		//var_dump($plk_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$q = "UPDATE plk_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$plk_chng['id']})";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
 
 		$_SESSION['blue_bk_plk'] = NULL;
 		$_SESSION['ssn'] = NULL;

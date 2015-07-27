@@ -77,6 +77,16 @@
 
 	<?php }
 
+	$q = "select * from lf_cht_change where id = (select max(id) from lf_cht_change)";
+	$r = mysqli_query($connection, $q);
+	confirm_query($r);
+	$lf_cht_chng = mysqli_fetch_assoc($r);
+	//var_dump($lf_cht_chng);
+	//echo "<br>user_name".$_SESSION['user'];
+	$q = "UPDATE lf_cht_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$lf_cht_chng['id']})";
+	$r = mysqli_query($connection, $q);
+	confirm_query($r);
+
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
 
  }
@@ -116,6 +126,17 @@
 			<strong>Sorry!</strong> No row affected!
 		</div>
 	<?php }
+
+	$q = "select * from lf_cht_change where id = (select max(id) from lf_cht_change)";
+	$r = mysqli_query($connection, $q);
+	confirm_query($r);
+	$lf_cht_chng = mysqli_fetch_assoc($r);
+	//var_dump($lf_cht_chng);
+	//echo "<br>user_name".$_SESSION['user'];
+	$q = "UPDATE lf_cht_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$lf_cht_chng['id']})";
+	$r = mysqli_query($connection, $q);
+	confirm_query($r);
+
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
 
  }
@@ -142,6 +163,16 @@
 			<strong>Sorry!</strong> No row affected!
 		</div>
 <?php }
+
+	$q = "select * from lf_cht_change where id = (select max(id) from lf_cht_change)";
+	$r = mysqli_query($connection, $q);
+	confirm_query($r);
+	$lf_cht_chng = mysqli_fetch_assoc($r);
+	//var_dump($lf_cht_chng);
+	//echo "<br>user_name".$_SESSION['user'];
+	$q = "UPDATE lf_cht_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$lf_cht_chng['id']})";
+	$r = mysqli_query($connection, $q);
+	confirm_query($r);
 
 	$_SESSION['lcsn'] = $_SESSION['prune_stats'] = $_SESSION['date'] = $_SESSION['leaf_chit'] = NULL;
 }

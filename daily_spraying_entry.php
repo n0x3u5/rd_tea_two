@@ -107,7 +107,7 @@
 
 		<?php }
 
-		var_dump($_POST);
+		//var_dump($_POST);
 		$items  = explode("¥", $chem);
 		$doses = explode("¥", $dose);
 		$qtys = explode("¥", $qty_unit);
@@ -115,23 +115,27 @@
 		//var_dump($chemicals);
 		$chemical_index = 0;
 		foreach ($items as $chemical) {
-			var_dump($chemical);
-			var_dump($doses[$chemical_index]);
-			var_dump($qtys[$chemical_index]);
-			var_dump($pests[$chemical_index]);
+			//var_dump($chemical);
+			//var_dump($doses[$chemical_index]);
+			//var_dump($qtys[$chemical_index]);
+			//var_dump($pests[$chemical_index]);
 			$q_chit = "INSERT INTO spray_chit_table (division, chem, rec_dt, short_sec_name, hz_db, spot_full, area, pest, qty_unit, no_drums, dr_mnds, sup_mnds, dose) VALUES ('{$_SESSION['current_div']}', '{$chemical}', '{$rec_dt}', '{$short_sec_name}', '{$hz_db}', '{$spot_full}', {$area}, '{$pests[$chemical_index]}', '{$qtys[$chemical_index]}', {$no_drms}, {$dr_mnds}, {$sup_mnds},'{$doses[$chemical_index]}' )";
 			$r_chit = mysqli_query($connection, $q_chit);
 
 			confirm_query($r_chit);
 
-			if(mysqli_affected_rows($connection) > 0) {
-				echo "Inserted Successfully!";
-			}
-			else {
-				echo "No rows effected!";
-			}
 			$chemical_index++;
 		}
+
+		$q = "select * from spray_change where id = (select max(id) from spray_change)";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+		$spray_chng = mysqli_fetch_assoc($r);
+		//var_dump($spray_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$q = "UPDATE spray_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$spray_chng['id']})";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
 
 		$_SESSION['blue_bk_spray_chit'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -172,7 +176,7 @@
 		$q_up = "UPDATE blue_bk_spray_chit SET";
 		$q_up .= " division='{$_SESSION['current_div']}', short_sec_name='{$short_sec_name}', rec_dt='{$rec_dt}',";
 		$q_up .= " hz_db='{$hz_db}', chem='{$chem}', cocktail='{$cocktail}', spot_full='{$spot_full}',";
-		$q_up .= " pest='{$pest}', intensity='{$intensity}', qty_unit='{$qty_unit}', area={$area}, no_drms={$no_drms}, dr_mnds={$dr_mnds}, sup_mnds={$sup_mnds}, dose='{$dose}', sticker_nm='{$sticker_nm}', sticker_qty='{$sticker_nm}' WHERE id ={$req_id}";
+		$q_up .= " pest='{$pest}', intensity='{$intensity}', qty_unit='{$qty_unit}', area={$area}, no_drms={$no_drms}, dr_mnds={$dr_mnds}, sup_mnds={$sup_mnds}, dose='{$dose}', sticker_nm='{$sticker_nm}', sticker_qty='{$sticker_qty}' WHERE id ={$req_id}";
 
 		//var_dump($q_up);
 		$r_up = mysqli_query($connection, $q_up);
@@ -197,16 +201,15 @@
 		$qtys = explode("¥", $_SESSION['blue_bk_spray_chit']['qty_unit']);
 		$chemical_index = 0;
 		foreach ($items as $chemical) {
-			var_dump($chemical);
-			var_dump($doses[$chemical_index]);
-			var_dump($qtys[$chemical_index]);
-			$q_del_sprychit = "DELETE FROM spray_chit_table WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and hz_db = '{$hz_db}' and division='{$_SESSION['current_div']}' and chem = '{$chemical}' and qty_unit='{$qtys[$chemical_index]}' and no_drums='{$_SESSION['blue_bk_spray_chit']['no_drms']}' and dose={$doses[$chemical_index]}";
+			//var_dump($chemical);
+			//var_dump($doses[$chemical_index]);
+			//var_dump($qtys[$chemical_index]);
+			$q_del_sprychit = "DELETE FROM spray_chit_table WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and hz_db = '{$hz_db}' and division='{$_SESSION['current_div']}' and chem = '{$chemical}' and qty_unit='{$qtys[$chemical_index]}' and no_drums='{$_SESSION['blue_bk_spray_chit']['no_drms']}' and dose='{$doses[$chemical_index]}'";
 
-			var_dump($q_del_sprychit);
+			//var_dump($q_del_sprychit);
 			$r_del_sprychit = mysqli_query($connection, $q_del_sprychit);
 
 			confirm_query($r_del_sprychit);
-
 			$chemical_index++;
 		}
 
@@ -217,23 +220,26 @@
 		//var_dump($chemicals);
 		$chemical_index = 0;
 		foreach ($items as $chemical) {
-			var_dump($chemical);
-			var_dump($doses[$chemical_index]);
-			var_dump($qtys[$chemical_index]);
-			var_dump($pests[$chemical_index]);
+			//var_dump($chemical);
+			//var_dump($doses[$chemical_index]);
+			//var_dump($qtys[$chemical_index]);
+			//var_dump($pests[$chemical_index]);
 			$q_chit = "INSERT INTO spray_chit_table (division, chem, rec_dt, short_sec_name, hz_db, spot_full, area, pest, qty_unit, no_drums, dr_mnds, sup_mnds, dose) VALUES ('{$_SESSION['current_div']}', '{$chemical}', '{$rec_dt}', '{$short_sec_name}', '{$hz_db}', '{$spot_full}', {$area}, '{$pests[$chemical_index]}', '{$qtys[$chemical_index]}', {$no_drms}, {$dr_mnds}, {$sup_mnds},'{$doses[$chemical_index]}' )";
 			$r_chit = mysqli_query($connection, $q_chit);
 
 			confirm_query($r_chit);
-
-			if(mysqli_affected_rows($connection) > 0) {
-				echo "Inserted Successfully!";
-			}
-			else {
-				echo "No rows effected!";
-			}
 			$chemical_index++;
 		}
+
+		$q = "select * from spray_change where id = (select max(id) from spray_change)";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+		$spray_chng = mysqli_fetch_assoc($r);
+		//var_dump($spray_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$q = "UPDATE spray_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$spray_chng['id']})";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
 
 		$_SESSION['blue_bk_spray_chit'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -277,12 +283,12 @@
 	$qtys = explode("¥", $_SESSION['blue_bk_spray_chit']['qty_unit']);
 	$chemical_index = 0;
 	foreach ($items as $chemical) {
-		var_dump($chemical);
-		var_dump($doses[$chemical_index]);
-		var_dump($qtys[$chemical_index]);
-		$q_del_sprychit = "DELETE FROM spray_chit_table WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and hz_db = '{$hz_db}' and division='{$_SESSION['current_div']}' and chem = '{$chemical}' and qty_unit='{$qtys[$chemical_index]}' and no_drums='{$_SESSION['blue_bk_spray_chit']['no_drms']}' and dose={$doses[$chemical_index]}";
+		//var_dump($chemical);
+		//var_dump($doses[$chemical_index]);
+		//var_dump($qtys[$chemical_index]);
+		$q_del_sprychit = "DELETE FROM spray_chit_table WHERE short_sec_name='{$short_sec_name}' and rec_dt='{$rec_dt}' and hz_db = '{$hz_db}' and division='{$_SESSION['current_div']}' and chem = '{$chemical}' and qty_unit='{$qtys[$chemical_index]}' and no_drums='{$_SESSION['blue_bk_spray_chit']['no_drms']}' and dose='{$doses[$chemical_index]}'";
 
-		var_dump($q_del_sprychit);
+		//var_dump($q_del_sprychit);
 		$r_del_sprychit = mysqli_query($connection, $q_del_sprychit);
 
 		confirm_query($r_del_sprychit);
@@ -290,11 +296,21 @@
 		$chemical_index++;
 	}
 
-		$_SESSION['blue_bk_spray_chit'] = NULL;
-		$_SESSION['ssn'] = NULL;
-		$_SESSION['date'] = NULL;
-		$_SESSION['hz_db'] = NULL;
-		//$_SESSION['div_name'] = NULL;
+	$q = "select * from spray_change where id = (select max(id) from spray_change)";
+	$r = mysqli_query($connection, $q);
+	confirm_query($r);
+	$spray_chng = mysqli_fetch_assoc($r);
+	//var_dump($spray_chng);
+	//echo "<br>user_name".$_SESSION['user'];
+	$q = "UPDATE spray_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$spray_chng['id']})";
+	$r = mysqli_query($connection, $q);
+	confirm_query($r);
+
+	$_SESSION['blue_bk_spray_chit'] = NULL;
+	$_SESSION['ssn'] = NULL;
+	$_SESSION['date'] = NULL;
+	$_SESSION['hz_db'] = NULL;
+	//$_SESSION['div_name'] = NULL;
 	}
 
 ?>

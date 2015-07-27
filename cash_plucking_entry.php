@@ -67,6 +67,16 @@
 
 		<?php }
 
+		$q = "select * from cp_change where id = (select max(id) from cp_change)";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+		$cp_chng = mysqli_fetch_assoc($r);
+		//var_dump($cp_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$q = "UPDATE cp_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$cp_chng['id']})";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+
 		$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
 
  }
@@ -101,6 +111,16 @@
 		</div>
 <?php }
 
+		$q = "select * from cp_change where id = (select max(id) from cp_change)";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+		$cp_chng = mysqli_fetch_assoc($r);
+		//var_dump($cp_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$q = "UPDATE cp_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$cp_chng['id']})";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+
 	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
  }
 
@@ -124,6 +144,16 @@
 			<strong>Sorry!</strong> No row affected!
 		</div>
 <?php }
+
+		$q = "select * from cp_change where id = (select max(id) from cp_change)";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
+		$cp_chng = mysqli_fetch_assoc($r);
+		//var_dump($cp_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$q = "UPDATE cp_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$cp_chng['id']})";
+		$r = mysqli_query($connection, $q);
+		confirm_query($r);
 
 	$_SESSION['date'] = $_SESSION['cp_record'] = NULL;
 

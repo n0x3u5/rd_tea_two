@@ -23,16 +23,7 @@
 	//var_dump($_POST);echo "<br><hr>";
 	if(isset($_POST["dt_sec_submit"])){
 		$req_date = date('Y-m-d', strtotime($_POST["date_value"]));
-		// var_dump($_SESSION['user_div']);
-		// if($_SESSION["user_div"] == "ALL") {
-		// 	$req_div = $_SESSION["current_div"];
-		// }
-		// else {
-		// 	$req_div = $_SESSION["user_div"];
-		// }
-		// $_SESSION['div_name'] = $req_div;
 		$_SESSION['date'] = $req_date;
-
 
 		// echo "<br>got date =".$req_date."<br>";
 		// echo "<br>got div_name =" .$req_div_name."<br>";
@@ -140,6 +131,7 @@
 				<strong>Sorry!</strong> No row affected!
 			</div>
 <?php }
+
 		$q = "select * from weather_change where id = (select max(id) from weather_change)";
 		$r = mysqli_query($connection, $q);
 		confirm_query($r);
@@ -175,6 +167,7 @@
 				<strong>Sorry!</strong> No row affected!
 			</div>
 <?php }
+
 		$q = "select * from weather_change where id = (select max(id) from weather_change)";
 		$r = mysqli_query($connection, $q);
 		confirm_query($r);
