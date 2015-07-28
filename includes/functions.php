@@ -53,7 +53,7 @@
 
 			die($err);
 
-			//die("database query failed.". mysqli_error($connection));
+			// die("database query failed.". mysqli_error($connection));
 		}
 	}
 

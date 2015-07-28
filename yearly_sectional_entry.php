@@ -117,6 +117,30 @@
 
 		<?php }
 
+		$qp = "select * from prune_infill_change where id = (select max(id) from prune_infill_change)";
+		//var_dump($qp); echo "prune select q";
+		$rp = mysqli_query($connection, $qp);
+		confirm_query($rp);
+		$prn_chng = mysqli_fetch_assoc($rp);
+		//var_dump($prn_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$qp = "UPDATE prune_infill_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$prn_chng['id']})";
+		//var_dump($qp); echo "prune upd q";
+		$rp = mysqli_query($connection, $qp);
+		confirm_query($rp);
+
+		$qs = "select * from soil_manure_change where id = (select max(id) from soil_manure_change)";
+		//var_dump($qs); echo "soil select q";
+		$rs = mysqli_query($connection, $qs);
+		confirm_query($rs);
+		$sl_chng = mysqli_fetch_assoc($rs);
+		//var_dump($sl_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$qs = "UPDATE soil_manure_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$sl_chng['id']})";
+		//var_dump($qs); echo "soil upd q";
+		$rs = mysqli_query($connection, $qs);
+		confirm_query($rs);
+
 		$_SESSION['soil_manure'] = NULL;
 		$_SESSION['prune_infill'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -190,6 +214,30 @@
 			</div>
 		<?php }
 
+		$qp = "select * from prune_infill_change where id = (select max(id) from prune_infill_change)";
+		//var_dump($qp); echo "prune select q";
+		$rp = mysqli_query($connection, $qp);
+		confirm_query($rp);
+		$prn_chng = mysqli_fetch_assoc($rp);
+		//var_dump($prn_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$qp = "UPDATE prune_infill_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$prn_chng['id']})";
+		//var_dump($qp); echo "prune upd q";
+		$rp = mysqli_query($connection, $qp);
+		confirm_query($rp);
+
+		$qs = "select * from soil_manure_change where id = (select max(id) from soil_manure_change)";
+		//var_dump($qs); echo "soil select q";
+		$rs = mysqli_query($connection, $qs);
+		confirm_query($rs);
+		$sl_chng = mysqli_fetch_assoc($rs);
+		//var_dump($sl_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$qs = "UPDATE soil_manure_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$sl_chng['id']})";
+		//var_dump($qs); echo "soil upd q";
+		$rs = mysqli_query($connection, $qs);
+		confirm_query($rs);
+
 		$_SESSION['soil_manure'] = NULL;
 		$_SESSION['prune_infill'] = NULL;
 		$_SESSION['ssn'] = NULL;
@@ -239,6 +287,30 @@
 				<strong>Sorry!</strong> No row affected!
 			</div>
 		<?php }
+
+		$qp = "select * from prune_infill_change where id = (select max(id) from prune_infill_change)";
+		//var_dump($qp); echo "prune select q";
+		$rp = mysqli_query($connection, $qp);
+		confirm_query($rp);
+		$prn_chng = mysqli_fetch_assoc($rp);
+		//var_dump($prn_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$qp = "UPDATE prune_infill_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$prn_chng['id']})";
+		//var_dump($qp); echo "prune upd q";
+		$rp = mysqli_query($connection, $qp);
+		confirm_query($rp);
+
+		$qs = "select * from soil_manure_change where id = (select max(id) from soil_manure_change)";
+		//var_dump($qs); echo "soil select q";
+		$rs = mysqli_query($connection, $qs);
+		confirm_query($rs);
+		$sl_chng = mysqli_fetch_assoc($rs);
+		//var_dump($sl_chng);
+		//echo "<br>user_name".$_SESSION['user'];
+		$qs = "UPDATE soil_manure_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$sl_chng['id']})";
+		//var_dump($qs); echo "soil upd q";
+		$rs = mysqli_query($connection, $qs);
+		confirm_query($rs);
 
 		$_SESSION['soil_manure'] = NULL;
 		$_SESSION['prune_infill'] = NULL;
