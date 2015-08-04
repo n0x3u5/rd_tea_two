@@ -24,7 +24,7 @@
 		$req_date = date('Y-m-d', strtotime($_POST['date_value']));
 		$_SESSION['date'] = $req_date;
 
-		$query = "SELECT * FROM leaf_chit_table WHERE lab_cat ='{$req_lcsn}' and rec_dt='{$req_date}' and division ='{$_SESSION['current_div']}'";
+		$query = "SELECT * FROM leaf_chit_table WHERE lab_cat ='{$req_lcsn}' and rec_dt='{$req_date}' and prune_stats = '{$_SESSION['prune_stats']}' and division ='{$_SESSION['current_div']}'";
 
 		$result = mysqli_query($connection, $query);
 		confirm_query($result);
@@ -279,7 +279,7 @@
 							</div>
 							<div class="form-group">
 
-								<label for="dt_lst_plkd" class="col-sm-3 control-label">Dates Last Plucked:</label>
+								<label for="dt_lst_plkd" class="col-sm-3 control-label">Dates Last Plucked (dd-mm-yyyy):</label>
 
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="dt_lst_plkd1" name="dt_lst_plkd" <?php if (isset($daily)) { $csv = comma_sep_val($daily['dt_lst_plkd']); ?> value="<?php echo $csv; ?>" <?php } else { ?>placeholder=<?php echo "\"Date (dd-mm-yyyy)\""; ?><?php } //comma separeted value ?> >
@@ -359,7 +359,7 @@
 							</div>
 							<div class="form-group">
 
-								<label for="dt_lst_plkd" class="col-sm-3 control-label">Dates Last Plucked:</label>
+								<label for="dt_lst_plkd" class="col-sm-3 control-label">Dates Last Plucked (dd-mm-yyyy):</label>
 
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="dt_lst_plkd2" name="dt_lst_plkd" required placeholder="dd-mm-yyyy">

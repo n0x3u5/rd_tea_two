@@ -27,7 +27,7 @@
     confirm_query($result);
 
 		$_SESSION['cp_record'] = mysqli_fetch_assoc($result);
-	  //var_dump($_SESSION['cp_record']);
+	  // var_dump($_SESSION['cp_record']);
 		$set = 1;
 	}
 	else {
@@ -168,10 +168,10 @@
         <meta charset="utf-8">
         <title>R.D. Tea | Cash Plucking Entry</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-				<link rel="stylesheet" href="css/bootstrap-tokenfield.css" type="text/css">
 				<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+				<link rel="stylesheet" href="css/bootstrap-tokenfield.css" type="text/css">
 				<link rel="stylesheet" href="css/stylesheet.css">
         <link rel="icon" href="images/logo_rdtea.png"/>
 				<style>
@@ -249,12 +249,14 @@
 									<input type="text" class="form-control" name="cpu_bal1" id="ballo_count_unprune1" name="ballo_count_unprune" <?php if(isset($rec)) {?>value="<?php echo $rec['unprune_bm']; ?>" <?php } else {?>placeholder=<?php  echo "\"Ballometer Count\""?> <?php } ?>>
 								</div>
 							</div>
+							<!-- <?php // var_dump($rec['time_from']); ?> -->
 							<div class="form-group">
 								<label for="cp_hr_from" class="col-sm-3 control-label timepicker">Start Time (CashPlucking):</label>
 								<div class="col-sm-2">
 									<input type="text" class="form-control" name="start_time1" id="cp_hr_from1" name="cp_hr_from1" <?php if(isset($rec)) {?>value="<?php $set2 = 1; echo $rec['time_from']; ?>" <?php } else {?>placeholder=<?php $set2 = 2; echo "\"hh:mm P\""?> <?php } ?> required>
 								</div>
 							</div>
+							<!-- <?php // var_dump($rec['time_to']); ?> -->
 							<div class="form-group">
 								<label for="cp_hr_to" class="col-sm-3 control-label">End Time (CashPlucking):</label>
 								<div class="col-sm-2">
@@ -337,9 +339,8 @@
 			</div>
     </div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment-with-locales.min.js"></script>
+		<script src="scripts/moment-with-locales.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<script src="scripts/bootstrap-tokenfield.min.js"></script>
 		<script src="scripts/bootstrap-datetimepicker.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<script type="text/javascript">
