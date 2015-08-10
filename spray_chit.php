@@ -144,10 +144,12 @@
 			document.getElementById('hide_me').disabled=true;
 			$(document).ready( function () {
 				var table = $('#spray_chit').DataTable( {
-						"scrollX": true,
+						"scrollX": "100%",
 						"order": [],
 						"scrollCollapse": true,
-						"paging": false
+						columnDefs: [
+				            { width: '10%', targets: 0 }
+				        ]
 				} );
 				new $.fn.dataTable.FixedColumns( table );
 				$("#datepicker").datepicker({

@@ -3,6 +3,8 @@
 //connection functions----------------------------------------------------------------
 	function make_connection() {
 		define("DB_SERVER","localhost");
+		// define("DB_USER","rdtealtd_root");
+		// define("DB_PASS","hq123");
 		define("DB_USER","root");
 		define("DB_PASS","joydipnox");
 		define("DB_NAME","rdtealtd_one");
@@ -28,8 +30,8 @@
 	function confirm_query($result_set){
 		global $connection;
 		if(!$result_set){
-			//failure
-			//$message = " creation error"
+			// failure
+			// $message = " creation error"
 
 			$err="
 							<!DOCTYPE html>

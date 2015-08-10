@@ -128,12 +128,14 @@
 	<?php }
 
 	$q = "select * from lf_cht_change where id = (select max(id) from lf_cht_change)";
+	// var_dump($q);
 	$r = mysqli_query($connection, $q);
 	confirm_query($r);
 	$lf_cht_chng = mysqli_fetch_assoc($r);
 	//var_dump($lf_cht_chng);
 	//echo "<br>user_name".$_SESSION['user'];
 	$q = "UPDATE lf_cht_change SET changed_by = '{$_SESSION['user']}' WHERE id = ({$lf_cht_chng['id']})";
+	// var_dump($q);
 	$r = mysqli_query($connection, $q);
 	confirm_query($r);
 

@@ -384,7 +384,7 @@ if(isset($_POST['date_submit'])) {
 				});
 				//$('#leaf_chit_table').DataTable({"scrollX":true });
 				var table = $('#leaf_chit_table').DataTable({
-						"scrollX": true,
+						"scrollX": "100%",
 						"order": [],
 						"aoColumns": [
 								null,
@@ -411,7 +411,10 @@ if(isset($_POST['date_submit'])) {
 								null,
 								null,
 								null
-						]
+						],
+						columnDefs: [
+				            { width: '10%', targets: 0 }
+				        ]
 
 	    	});
 				new $.fn.dataTable.FixedColumns( table );
