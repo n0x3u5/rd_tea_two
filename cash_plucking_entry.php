@@ -47,7 +47,7 @@
 		$cp_hr_from = mysqli_real_escape_string($connection, $_POST['start_time2']);
 		$cp_hr_to = mysqli_real_escape_string($connection, $_POST['end_time2']);
 
-		$q_in = "INSERT INTO cp_table (division, rec_date, prune_cp_qty, unprune_cp_qty, prune_bm, unprune_bm, time_from, time_to) VALUES ('{$_SESSION['current_div']}', '{$rec_dt}', {$cpp_qty}, {$cpp_bal}, {$cpu_qty}, {$cpu_bal}, '{$cp_hr_from}', '{$cp_hr_to}') ";
+		$q_in = "INSERT INTO cp_table (division, rec_date, prune_cp_qty, unprune_cp_qty, prune_bm, unprune_bm, time_from, time_to) VALUES ('{$_SESSION['current_div']}', '{$rec_dt}', {$cpp_qty}, {$cpu_qty}, {$cpp_bal}, {$cpu_bal}, '{$cp_hr_from}', '{$cp_hr_to}') ";
 
 		$r_in = mysqli_query($connection, $q_in);
 		confirm_query($r_in);
